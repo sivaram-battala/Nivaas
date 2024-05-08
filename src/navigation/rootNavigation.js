@@ -8,6 +8,9 @@ import {
   Signin,
   BottomTabBase,
   OTPScreen,
+  AddDetails,
+  SearchCity,
+  SearchApartmentBlock,
 } from '../screens';
 import { createStackNavigator } from '@react-navigation/stack';
 import ApplicationContext from '../utils/context-api/Context';
@@ -23,6 +26,9 @@ const rootNavigation = () => {
       otpScreen,
       signup,
       bottomTab,
+      addDetails,
+      searchCity,
+      searchApartmentBlock
     },
   } = allTexts;
 
@@ -61,6 +67,27 @@ const rootNavigation = () => {
         <Stack.Screen
           name={bottomTab}
           component={BottomTabBase}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={addDetails}
+          component={AddDetails}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={searchCity}
+          component={SearchCity}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={searchApartmentBlock}
+          component={SearchApartmentBlock}
           options={{
             headerShown: false,
           }}

@@ -5,13 +5,20 @@ import { SafeAreaView, View, Text, Image } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { colors, allTexts } from './../../common/index';
 import {
- 
-  UserFeedScreen,
+  BuyAndSell,
+  Community,
+  Home,
+  Homes,
+  Services,
 } from '..';
 import { Loader } from '../../components';
 
 import { styles } from './style';
-import Entypo from 'react-native-vector-icons/Entypo';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 const Tab = createBottomTabNavigator();
 
@@ -47,30 +54,101 @@ export default BottomTabBase = ({ navigation }) => {
           }}>
           <Tab.Screen
             name={allTexts.tabNames.home}
-            component={UserFeedScreen}
+            component={Home}
             options={{
               tabBarStyle: {
-                height: 200,
+                height: 80,
               },
+              headerShown: false,
+              
               tabBarIcon: ({ color, size, focused }) => (
                 <View
                   style={
                     !focused
                       ? styles.container
                       : styles.UserFeedFocusedContainer
-                  }>
-                  {focused && (
-                    <Entypo
-                      name="dot-single"
-                      size={20}
-                      color={colors.orangeColor}
-                      style={styles.dot}
-                    />
-                  )}
-                  <Image
-                    source={{uri:'https://media.istockphoto.com/id/1322575582/photo/exterior-view-of-modern-apartment-building-offering-luxury-rental-units-in-silicon-valley.jpg?s=612x612&w=0&k=20&c=7ipOB2nGt7JB-rln2YM1wxQ2NI4ZZirsxSn8Ko9pk-k='}}
-                    style={focused ? styles.imageFocused : styles.imageNormal}
-                  />
+                  }>  
+                  <AntDesign name='home' size={30} style={focused ? styles.imageFocused : styles.imageNormal}/>
+                </View>
+              ),
+            }}
+          />
+          <Tab.Screen
+            name={allTexts.tabNames.community}
+            component={Community}
+            options={{
+              tabBarStyle: {
+                height: 80,
+              },
+              headerShown: false,
+              tabBarIcon: ({ color, size, focused }) => (
+                <View
+                  style={
+                    !focused
+                      ? styles.container
+                      : styles.UserFeedFocusedContainer
+                  }>  
+                  <MaterialIcons name='apartment' size={30} style={focused ? styles.imageFocused : styles.imageNormal}/>
+                </View>
+              ),
+            }}
+          />
+          <Tab.Screen
+           name={allTexts.tabNames.homes}
+            component={Homes}
+            options={{
+              tabBarStyle: {
+                height: 80,
+              },
+              headerShown: false,
+              tabBarIcon: ({ color, size, focused }) => (
+                <View
+                  style={
+                    !focused
+                      ? styles.container
+                      : styles.UserFeedFocusedContainer
+                  }>  
+                  <MaterialCommunityIcons name='home-search' size={30} style={focused ? styles.imageFocused : styles.imageNormal}/>
+                </View>
+              ),
+            }}
+          />
+          <Tab.Screen
+           name={allTexts.tabNames.buyAndSell}
+            component={BuyAndSell}
+            options={{
+              tabBarStyle: {
+                height: 80,
+              },
+              headerShown: false,
+              tabBarIcon: ({ color, size, focused }) => (
+                <View
+                  style={
+                    !focused
+                      ? styles.container
+                      : styles.UserFeedFocusedContainer
+                  }>  
+                  <FontAwesome name='handshake-o' size={30} style={focused ? styles.imageFocused : styles.imageNormal}/>
+                </View>
+              ),
+            }}
+          />
+          <Tab.Screen
+           name={allTexts.tabNames.services}
+            component={Services}
+            options={{
+              tabBarStyle: {
+                height: 80,
+              },
+              headerShown: false,
+              tabBarIcon: ({ color, size, focused }) => (
+                <View
+                  style={
+                    !focused
+                      ? styles.container
+                      : styles.UserFeedFocusedContainer
+                  }>  
+                  <Ionicons name='settings-outline' size={30} style={focused ? styles.imageFocused : styles.imageNormal}/>
                 </View>
               ),
             }}

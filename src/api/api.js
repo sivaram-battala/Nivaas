@@ -32,6 +32,12 @@ export const TEMPLE_ADDRESS = 'https://fanfun.in/customer/';
 // export const TEMPLE_ADDRESS = 'https://kovela.app/customer/';
 // export const LOCAL_HOST = 'https://kovela.app/shop/';
 // export const BROADLEAF = 'https://kovela.app/shop/';
+
+
+//NIVAAS
+export const NIVAAS_URL = 'https://fanfun.in/nivaascustomer/nivaas/api/'
+
+
 let bearer_token = getAuthTokenDetails();
 export const authAxiousInstance = axios.create({
   baseURL: BASE_URL,
