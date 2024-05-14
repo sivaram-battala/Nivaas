@@ -16,9 +16,12 @@ import {KovelaIcon} from '../sign-up/index.js';
 import ApplicationContext from '../../utils/context-api/Context';
 import Snackbar from 'react-native-snackbar';
 import NetInfo from '@react-native-community/netinfo';
-import { loginAction, userDataAction } from '../../redux/slices/authSlice.ts';
-import { useTriggerOtpMutation } from '../../redux/services/authService.tsx';
-const Signin = ({ navigation }) => {
+import {loginAction, userDataAction} from '../../redux/slices/authSlice.ts';
+import {
+  useNivaastriggerotpMutation,
+  useTriggerOtpMutation,
+} from '../../redux/services/authService.tsx';
+const Signin = ({navigation}) => {
   const [isConnected, setIsConnected] = useState(' ');
   const [mobNum, setMobNum] = useState('');
   const [timer, setTimer] = useState('00');
@@ -26,6 +29,7 @@ const Signin = ({ navigation }) => {
   const [otp, setOtp] = useState('');
   const Ref = useRef(null);
   const [doTriggerOtp] = useTriggerOtpMutation();
+  const [nivaasTriggerOtp] = useNivaastriggerotpMutation();
   var secLeft = 30;
   const getTimeRemaining = e => {
     const total = Date.parse(e) - Date.parse(new Date());
@@ -109,22 +113,33 @@ const Signin = ({ navigation }) => {
       primaryContact: mobNum,
     };
     console.log('payload', otpPayload);
-    if(!mobNum === 10){
-      alert('please enter proper Mobile Number')
-    } else if(mobNum?.length === 10){
-      doTriggerOtp(otpPayload)
-      .unwrap()
-      .then(response => {
-        console.log('otpRes--->', response)
-          if(response){
+    if (!mobNum === 10) {
+      alert('please enter proper Mobile Number');
+    } else if (mobNum?.length === 10) {
+      // doTriggerOtp(otpPayload)
+      // .unwrap()
+      // .then(response => {
+      //   console.log('otpRes--->', response)
+      //     if(response){
+      //       navigation.navigate(allTexts.screenNames.otpScreen, {
+      //         mobNum: mobNum,
+      //         otp: response?.otp,
+      //       })
+      //     }
+      // })
+      nivaasTriggerOtp(otpPayload)
+        .unwrap()
+        .then(response => {
+          console.log('otpRes--->', response);
+          if (response) {
             navigation.navigate(allTexts.screenNames.otpScreen, {
               mobNum: mobNum,
               otp: response?.otp,
-            })
+            });
           }
-      })
+        });
     }
-  }
+  };
   return (
     <SafeAreaView style={styles.wrapper}>
       <StatusBar backgroundColor={'white'} translucent={true} />
@@ -135,17 +150,18 @@ const Signin = ({ navigation }) => {
         keyboardShouldPersistTaps="handled"
         style={styles.keyboardStyle}
         contentContainerStyle={styles.contentStyle}>
-        <KovelaIcon />
+        {/* <KovelaIcon /> */}
         <View style={styles.inputContainer}>
-          <InputField
-            title={'Mobile Number'}
-            isFlag
-            value={mobNum}
-            setState={e => setMobNum(e)}
-            keyboardType={'numeric'}
-            placeholder={'Enter Mobile Number'}
-            maxLength={10}
-          />
+          <View style={styles.inputView}>
+            <InputField
+              isFlag
+              value={mobNum}
+              setState={e => setMobNum(e)}
+              keyboardType={'numeric'}
+              placeholder={'Enter Mobile Number'}
+              maxLength={10}
+            />
+          </View>
           <TouchableOpacity style={styles.button} onPress={() => OtpTrigger()}>
             <Text
               style={{
@@ -154,7 +170,7 @@ const Signin = ({ navigation }) => {
                 fontSize: 20,
               }}>
               {' '}
-              Send OTP
+              TRIGGER OTP
             </Text>
           </TouchableOpacity>
         </View>

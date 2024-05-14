@@ -1,11 +1,15 @@
 import {StyleSheet} from 'react-native';
-import {colors, fontFamily} from '../../common';
+import {colors, fontFamily, window} from '../../common';
 
 export const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     backgroundColor: colors.white,
     // padding: 20,
+  },
+  otpInputAndButtonCon:{
+    height:'100%',
+    marginVertical:'50%'
   },
   heading: {
     color: colors.black,
@@ -43,7 +47,6 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   btnContainer: {
-    flex: 1,
     justifyContent: 'center',
   },
   expectOtp: {

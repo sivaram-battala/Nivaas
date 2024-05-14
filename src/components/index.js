@@ -16,6 +16,7 @@ import {NotificationCard} from './notificationCard';
 import TextInput2 from './TextInput2';
 import {TopBarcard, TopBarCard2} from './topBar1/topBarCard';
 import {NewBackHeader} from './new-back-header';
+import {DropdownComp} from './dropdown';
 export {
   Loader,
   SearchBar,
@@ -36,4 +37,5 @@ export {
   TopBarcard,
   NewBackHeader,
   TopBarCard2,
+  DropdownComp,
 };

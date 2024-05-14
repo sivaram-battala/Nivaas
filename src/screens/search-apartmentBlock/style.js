@@ -6,17 +6,35 @@ export const styles = StyleSheet.create({
         marginTop:window.height*0.025,
         backgroundColor:colors.white,
         height:window.height,
-        flex:1
+        flex:1,
+        paddingHorizontal:window.width * 0.04
+    },
+    nextButton:{
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: colors.orangeColor,
+      },
+    searchCon:{
+        backgroundColor: colors.white,
+        borderBottomColor: 'transparent',
+        borderTopColor: 'transparent',
+    },
+    topDetails:{
+        padding: 10,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     },
     filteredDataCon:{
-        marginHorizontal:window.width*0.03
+        marginHorizontal:window.width*0.05
     },
     filteredDataText:{
-        fontSize:15,
+        fontSize:18,
         color:colors.black,
     },
     onBoardText:{
         color:colors.blue,
+        fontSize:15,
+        fontWeight:'500'
     },
     suggestedData:{
         fontSize:15,
@@ -26,7 +44,7 @@ export const styles = StyleSheet.create({
     suggestionCon:{
         flexDirection:'row',
         justifyContent:'space-between',
-        marginHorizontal:window.width*0.03
+        marginHorizontal:window.width*0.05
     },
     onBoard:{
         color:colors.blue

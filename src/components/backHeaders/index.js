@@ -5,6 +5,7 @@ import {styles} from './styles';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import { style } from '../profilecomp/styles';
+import { colors } from 'react-native-elements';
 
 export const BackHeaderNew = ({
   onPress,
@@ -14,13 +15,13 @@ export const BackHeaderNew = ({
 }) => {
   return (
     <View style={styles.header}>
-      
         <TouchableOpacity style={styles.backheader}  onPress={onPress}>
-          <Fontisto
+          {/* <Fontisto
             name="arrow-left"
            color={'black'}
             size={17}
-          />
+          /> */}
+          <AntDesign name='arrowleft' size={25} color={colors.black}/>
         </TouchableOpacity>
         {txt ? (
           <Text

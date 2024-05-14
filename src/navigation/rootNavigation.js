@@ -11,10 +11,13 @@ import {
   AddDetails,
   SearchCity,
   SearchApartmentBlock,
+  NewApartmentOnBoard,
+  MyAccount,
 } from '../screens';
 import { createStackNavigator } from '@react-navigation/stack';
 import ApplicationContext from '../utils/context-api/Context';
 import {useAppSelector, useAppDispatch} from '../redux/reduxHooks';
+import UserCityDetailsForm from '../screens/city-details-form';
 
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
@@ -28,7 +31,10 @@ const rootNavigation = () => {
       bottomTab,
       addDetails,
       searchCity,
-      searchApartmentBlock
+      searchApartmentBlock,
+      userCityDetailsForm,
+      newApartmentOnBoard,
+      myAccount,
     },
   } = allTexts;
 
@@ -88,6 +94,27 @@ const rootNavigation = () => {
         <Stack.Screen
           name={searchApartmentBlock}
           component={SearchApartmentBlock}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={userCityDetailsForm}
+          component={UserCityDetailsForm}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={newApartmentOnBoard}
+          component={NewApartmentOnBoard}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={myAccount}
+          component={MyAccount}
           options={{
             headerShown: false,
           }}

@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import {BASEURL} from '../../api/api';
+import {BASEURL, NIVAAS_URL} from '../../api/api';
 import {RootState} from '../store';
 import { endpoints } from '../../api';
 
@@ -9,7 +9,7 @@ import { endpoints } from '../../api';
 export const authService = createApi({
   reducerPath: 'authService',
   baseQuery: fetchBaseQuery({
-    baseUrl: BASEURL,
+    baseUrl: NIVAAS_URL,
     prepareHeaders: (headers, {getState, endpoint}) => {
       const token = (getState() as RootState).auth.token;
       if (token && endpoint !== 'refresh') {
@@ -20,6 +20,26 @@ export const authService = createApi({
     },
   }),
   endpoints: builder => ({
+    nivaastriggerotp: builder.mutation<any, {}>({
+      query: payload => ({
+        url: endpoints.NIVAAS_OTP_TRIGGER,
+        method: 'POST',
+        body: payload,
+        header: {
+          'Content-Type': 'application/json',
+        },
+      }),
+    }),
+    nivaasSignin: builder.mutation<any, {}>({
+      query: payload => ({
+        url: endpoints.NIVAAS_SIGN_IN,
+        method: 'POST',
+        body: payload,
+        header: {
+          'Content-Type': 'application/json',
+        },
+      }),
+    }),
     triggerOtp: builder.mutation<any, {}>({
       query: payload => ({
         url: endpoints.NEW_OTP,
@@ -101,4 +121,6 @@ export const {
   useResetPasswordMutation,
   useUpdatePasswordMutation,
   useLazyGetCustomerDataQuery,
+  useNivaastriggerotpMutation,
+  useNivaasSigninMutation,
 } = authService;

@@ -33,11 +33,11 @@ export const InputField = ({
           {isUser && (
             <View style={styles.imgContainer}>
               <PhoneIcon name="user" style={styles.image} size={20} />
-
             </View>
           )}
 
           <TextInput
+            placeholder='Mobile Number'
             value={value}
             placeholderTextColor={colors.gray2}
             onChangeText={val => setState(val)}

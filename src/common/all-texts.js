@@ -104,10 +104,10 @@ export const allTexts = {
     noInternet: 'Network Error!',
   },
   tabNames: {
-    home: 'NIVAAS',
+    home: 'Home',
     community:'Community',
     homes:"Homes",
-    buyAndSell:'BuyAndSell',
+    buyAndSell:'Buy&Sell',
     services:'Services',
     search: 'search',
     ticket: 'ticket',
@@ -129,7 +129,10 @@ export const allTexts = {
     addDetails:'AddDetails',
     home:'Home',
     searchCity:'SearchCity',
-    searchApartmentBlock:'SearchApartmentBlock'
+    searchApartmentBlock:'SearchApartmentBlock',
+    userCityDetailsForm:'UserCityDetailsForm',
+    newApartmentOnBoard:'NewApartmentOnBoard',
+    myAccount:'MyAccount'
     // splashscreen: 'Splash_Screen',
   },
   homeHeader: {

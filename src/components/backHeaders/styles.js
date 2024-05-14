@@ -1,6 +1,5 @@
 import {StyleSheet} from 'react-native';
 import {colors} from '../../common';
-import { color } from 'react-native-reanimated';
 export const styles = StyleSheet.create({
   header: {
     // borderWidth:2,
@@ -9,10 +8,9 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     },
     backheader: {
-      backgroundColor: colors.orangeColor,
-      borderRadius: 100,
-      padding:10,
-
+      // backgroundColor: colors.orangeColor,
+      borderRadius: 5,
+      paddingVertical:8,
     },
   iconContainer: {
     padding:2,
@@ -22,10 +20,10 @@ export const styles = StyleSheet.create({
     backgroundColor:colors.orangeColor,
   },
   notificationText:{
-              fontSize: 20,
-              fontWeight: '500',
-              marginHorizontal: 100,
-              color:'black',
-              justifyContent:'center',     
+    fontSize: 20,
+    fontWeight: '500',
+    marginHorizontal: 100,
+    color:'black',
+    justifyContent:'center',     
   },
 });

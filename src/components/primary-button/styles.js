@@ -5,7 +5,7 @@ export const styles = (bgColor, height, radius, paddidng, width) =>
   StyleSheet.create({
     wrapper: {
       width: width ? width : '100%',
-      borderRadius: radius || 25,
+      borderRadius: radius ? radius : 5,
       backgroundColor: bgColor || colors.blue,
       alignItems: 'center',
       justifyContent: 'center',
@@ -20,6 +20,7 @@ export const textStyles = (textColor, fontSize) =>
       fontSize: fontSize || 14,
       color: textColor ? textColor : colors.white,
       fontFamily: fontFamily.popinBold,
+      fontWeight:'bold'
       
     },
   });

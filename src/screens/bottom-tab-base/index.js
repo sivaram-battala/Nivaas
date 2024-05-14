@@ -63,12 +63,9 @@ export default BottomTabBase = ({ navigation }) => {
               
               tabBarIcon: ({ color, size, focused }) => (
                 <View
-                  style={
-                    !focused
-                      ? styles.container
-                      : styles.UserFeedFocusedContainer
-                  }>  
+                  style={styles.iconTextCon}>  
                   <AntDesign name='home' size={30} style={focused ? styles.imageFocused : styles.imageNormal}/>
+                  <Text style={focused ? styles.textFocused : styles.textNormal}>{allTexts.tabNames.home}</Text>
                 </View>
               ),
             }}
@@ -82,13 +79,9 @@ export default BottomTabBase = ({ navigation }) => {
               },
               headerShown: false,
               tabBarIcon: ({ color, size, focused }) => (
-                <View
-                  style={
-                    !focused
-                      ? styles.container
-                      : styles.UserFeedFocusedContainer
-                  }>  
+                <View style={styles.iconTextCon}>  
                   <MaterialIcons name='apartment' size={30} style={focused ? styles.imageFocused : styles.imageNormal}/>
+                  <Text style={focused ? styles.textFocused : styles.textNormal}>{allTexts.tabNames.community}</Text>
                 </View>
               ),
             }}
@@ -103,12 +96,9 @@ export default BottomTabBase = ({ navigation }) => {
               headerShown: false,
               tabBarIcon: ({ color, size, focused }) => (
                 <View
-                  style={
-                    !focused
-                      ? styles.container
-                      : styles.UserFeedFocusedContainer
-                  }>  
+                  style={styles.iconTextCon}>  
                   <MaterialCommunityIcons name='home-search' size={30} style={focused ? styles.imageFocused : styles.imageNormal}/>
+                  <Text style={focused ? styles.textFocused : styles.textNormal}>{allTexts.tabNames.homes}</Text>
                 </View>
               ),
             }}
@@ -123,12 +113,9 @@ export default BottomTabBase = ({ navigation }) => {
               headerShown: false,
               tabBarIcon: ({ color, size, focused }) => (
                 <View
-                  style={
-                    !focused
-                      ? styles.container
-                      : styles.UserFeedFocusedContainer
-                  }>  
+                  style={styles.iconTextCon}>  
                   <FontAwesome name='handshake-o' size={30} style={focused ? styles.imageFocused : styles.imageNormal}/>
+                  <Text style={focused ? styles.textFocused : styles.textNormal}>{allTexts.tabNames.buyAndSell}</Text>
                 </View>
               ),
             }}
@@ -143,12 +130,9 @@ export default BottomTabBase = ({ navigation }) => {
               headerShown: false,
               tabBarIcon: ({ color, size, focused }) => (
                 <View
-                  style={
-                    !focused
-                      ? styles.container
-                      : styles.UserFeedFocusedContainer
-                  }>  
+                  style={styles.iconTextCon}>  
                   <Ionicons name='settings-outline' size={30} style={focused ? styles.imageFocused : styles.imageNormal}/>
+                  <Text style={focused ? styles.textFocused : styles.textNormal}>{allTexts.tabNames.services}</Text>
                 </View>
               ),
             }}

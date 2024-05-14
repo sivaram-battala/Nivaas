@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {colors, fontFamily} from '../../common';
+import {colors, fontFamily, window} from '../../common';
 
 export const styles = StyleSheet.create({
   wrapper: {
@@ -25,8 +25,16 @@ export const styles = StyleSheet.create({
     textTransform: 'capitalize',
   },
   inputContainer: {
-    width: '90%',
-    paddingBottom: 100,
+    width: '80%',
+    // paddingBottom: 100,
+    marginTop:'50%'
+  },
+  inputView:{
+    borderColor:colors.gray2,
+    borderWidth:1,
+    borderRadius:5,
+    justifyContent:'center',
+    paddingBottom:5
   },
   btnContainer: {marginTop: 15, width: '70%', alignSelf: 'center'},
   navLinkText: {
@@ -91,12 +99,12 @@ export const styles = StyleSheet.create({
     color: colors.black,
   },
   button: {
-    width: '90%',
+    width: '100%',
     alignItems: 'center',
-    marginTop: '30%',
+    marginTop: '10%',
     alignSelf: 'center',
     padding: 10,
-    borderRadius: 20,
+    borderRadius: 5,
     backgroundColor: colors.orangeColor
   },
 });

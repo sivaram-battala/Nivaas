@@ -5,6 +5,7 @@ import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Feather from 'react-native-vector-icons/Feather';
 import FeatherIcon from 'react-native-vector-icons/Feather';
+import AntDesign from 'react-native-vector-icons/AntDesign'
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {allTexts, colors} from '../../common';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -204,6 +205,7 @@ export const TopBarCard2 = ({
                 source={require('../../../assets/images/backarrow.png')}
                 style={{height: 10, width: 10}}
               />
+              {/* <AntDesign name='arrowleft' size={30}/> */}
             </TouchableOpacity>
           )}
           {back && (
@@ -215,7 +217,8 @@ export const TopBarCard2 = ({
                     data: bData,
                   };
               }}>
-              <Ionicons name="arrow-back-circle" size={40} color="orange" />
+              {/* <Ionicons name="arrow-back-circle" size={40} color="orange" /> */}
+              <AntDesign name='arrowleft' size={28} color={colors.black}/>
             </TouchableOpacity>
           )}
         </View>

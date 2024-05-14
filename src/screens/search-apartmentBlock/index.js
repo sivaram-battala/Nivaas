@@ -5,75 +5,68 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {SearchBar} from 'react-native-elements';
 import {BlurView} from '@react-native-community/blur';
 import {FlatList} from 'react-native';
 import {allTexts, colors} from '../../common';
 import {styles} from './style';
-import AntDesign from 'react-native-vector-icons/AntDesign'
+import { BackHeaderNew } from '../../components';
+import { useFocusEffect } from '@react-navigation/native';
 
 const SearchApartmentBlock = ({navigation, route}) => {
-  const selectedCitys = route?.params;
+  const data = route?.params;
+  // console.log(data?.cityData,'kkkkkkkkkkkkkkkk');
   const [searchText, setSearchText] = useState('');
-  const [filteredCities, setFilteredCities] = useState([]);
-  const [selectedCity, setSelectedCity] = useState(null);
-  const [cities, setcities] = useState([
-    {id: 1, name: 'block 1'},
-    {id: 2, name: 'block 2'},
-    {id: 3, name: 'block 3'},
-    {id: 4, name: 'block 4'},
-  ])
+  const [filteredApartments, setFilteredApartments] = useState([]);
+  const [selectedApartment, setSelectedApartment] = useState(null);
+  const [apartments, setapartments] = useState();
+
+  const getData=()=>{
+    setapartments(data?.apartmentsData)
+  }
   const handleSearch = text => {
-    const filtered = cities.filter(city =>
+    const filtered = apartments.filter(city =>
       city.name.toLowerCase().includes(text.toLowerCase()),
     );
-    setFilteredCities(filtered);
+    setFilteredApartments(filtered);
     setSearchText(text);
   };
   const handleClear = () => {
-    setFilteredCities(cities);
+    setFilteredApartments(apartments);
     setSearchText('');
   };
-  const handleCitySelect = city => {
-    setSelectedCity(city.name);
-    setSearchText(city);
+  const handleCitySelect = apartment => {
+    setSelectedApartment(apartment.name);
+    setSearchText(apartment);
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      getData();
+    }, []),
+  );
 
   return (
     <View style={styles.mainCon}>
       {/* <BlurView style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0 }} blurType="light" blurAmount={10} /> */}
       <View style={{marginTop:10,marginLeft:9,flexDirection:'row', alignItems:'center'}}>
-        <TouchableOpacity onPress={()=>navigation.navigate(allTexts.screenNames.searchCity)}>
-          <AntDesign name='arrowleft' size={25} color={colors.black}/>
-        </TouchableOpacity>
-      <Text style={{marginLeft:10, fontSize: 16, color: colors.orangeColor}}>
-            {selectedCitys.selectedCity}
-        </Text>
+          <BackHeaderNew onPress={()=>navigation.goBack()} />
       </View>
-      {selectedCity && (
-        <View
-          style={{
-            padding: 10,
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            marginLeft:23
-          }}>
-          <View>
+      <Text style={{marginLeft:10, fontSize: 16, color: colors.orangeColor}}>
+            {data.selectedCity}
+      </Text>
+      {selectedApartment && (
+        <View style={styles.topDetails}>
             <Text style={{fontSize: 16, color: colors.orangeColor}}>
-              {selectedCity}
+              {selectedApartment}
             </Text>
-          </View>
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate(allTexts.screenNames.searchApartmentBlock)
+              navigation.navigate(allTexts.screenNames.userCityDetailsForm,{selectedCity:data.selectedCity,selectedApartment:selectedApartment})
             }>
             <Text
-              style={{
-                fontSize: 16,
-                fontWeight: 'bold',
-                color: colors.orangeColor,
-              }}>
+              style={styles.nextButton}>
               NEXT
             </Text>
           </TouchableOpacity>
@@ -83,26 +76,22 @@ const SearchApartmentBlock = ({navigation, route}) => {
         placeholder="Search apartments..."
         onChangeText={handleSearch}
         value={searchText}
-        containerStyle={{
-          backgroundColor: colors.white,
-          borderBottomColor: 'transparent',
-          borderTopColor: 'transparent',
-        }}
+        containerStyle={styles.searchCon}
         searchIcon={{size: 24, color: 'black'}}
         clearIcon={{size: 24, onPress: handleClear}}
         inputStyle={{color: colors.black}}
-        inputContainerStyle={{backgroundColor: colors.gray2, borderRadius: 10}}
+        inputContainerStyle={{backgroundColor: colors.gray3, borderRadius: 30}}
       />
-      {filteredCities.length === 0 && searchText.length > 0 && (
+      {filteredApartments.length === 0 && searchText.length > 0 && (
        <View style={styles.suggestionCon}>
          <Text style={styles.filteredDataText}>No Apartments found</Text>
-         <TouchableOpacity>
+         <TouchableOpacity onPress={()=>navigation.navigate(allTexts.screenNames.newApartmentOnBoard,{citydata:data?.cityData})}>
           <Text style={styles.onBoardText}>+ On Board</Text>
          </TouchableOpacity>
        </View>
       )}
       <FlatList
-        data={filteredCities.length === 0  ? cities :filteredCities}
+        data={filteredApartments.length === 0  ? apartments :filteredApartments}
         keyExtractor={item => item.id.toString()}
         vertical
         renderItem={({item}) => (

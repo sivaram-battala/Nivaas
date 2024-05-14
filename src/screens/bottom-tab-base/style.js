@@ -16,9 +16,6 @@ export const styles = StyleSheet.create({
     mainContainer:{
       // borderWidth:10
     },
-    container:{
-      alignItems:'center',
-    },
     focusedContainer: {
       alignItems: 'center',
       borderRadius: 100,
@@ -28,14 +25,21 @@ export const styles = StyleSheet.create({
       marginBottom: 20,
     },
     imageNormal:{
-      color:colors.black
+      color:colors.black,
+      marginBottom:5
     },
     imageFocused:{
-      color:colors.orangeColor
+      color:colors.orangeColor,
+      marginBottom:5
     },
-    UserFeedFocusedContainer:{
-      // borderWidth:1,
-      // borderColor:colors.orangeColor
+    iconTextCon:{
+      alignItems:'center'
+    },
+    textNormal:{
+      color:colors.black,
+    },
+    textFocused:{
+      color:colors.orangeColor,
     },
     imageContainer:{
       elevation:2,

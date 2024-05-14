@@ -12,16 +12,19 @@ import {allTexts} from '../../common';
 import RNRestart from 'react-native-restart';
 
 // ****   production Api base urls   *** //
-export const BASE_URL = 'http://20.235.89.214:8082/api/';
-export const BASEURL = 'https://fanfun.in/customer/api/';
-export const BASE = 'https://fanfun.in/media/';
-export const POPULARURL = 'https://fanfun.in/profile/';
-export const MEMBER_SHIP_URL = 'https://fanfun.in/membership';
-export const EVENTS_URL = 'https://fanfun.in/events/';
-export const DONATION_URL = 'https://fanfun.in/donations/';
-export const TEMPLE_ADDRESS = 'https://fanfun.in/customer/';
-export const LOCAL_HOST = 'https://fanfun.in/shop/';
-export const BROADLEAF = 'https://fanfun.in/shop/';
+// export const BASE_URL = 'http://20.235.89.214:8082/api/';
+// export const BASEURL = 'https://fanfun.in/customer/api/';
+// export const BASE = 'https://fanfun.in/media/';
+// export const POPULARURL = 'https://fanfun.in/profile/';
+// export const MEMBER_SHIP_URL = 'https://fanfun.in/membership';
+// export const EVENTS_URL = 'https://fanfun.in/events/';
+// export const DONATION_URL = 'https://fanfun.in/donations/';
+// export const TEMPLE_ADDRESS = 'https://fanfun.in/customer/';
+// export const LOCAL_HOST = 'https://fanfun.in/shop/';
+// export const BROADLEAF = 'https://fanfun.in/shop/';
+
+//NIVAAS urls
+export const NIVAAS_URL = "https://fanfun.in/nivaascustomer/nivaas/api"
 
 
 // export const BASE_URL = 'http://20.235.89.214:8082/api/';

@@ -11,6 +11,8 @@ import BuyAndSell from './buy-and-sell';
 import Services from './services';
 import SearchCity from './search-city';
 import SearchApartmentBlock from './search-apartmentBlock';
+import NewApartmentOnBoard from './new-apartment-onBoard';
+import MyAccount from './myaccount';
 export {
   Signin,
   Splash,
@@ -24,5 +26,7 @@ export {
   Services,
   AddDetails,
   SearchCity,
-  SearchApartmentBlock
+  SearchApartmentBlock,
+  NewApartmentOnBoard,
+  MyAccount
 };
