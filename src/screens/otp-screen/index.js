@@ -37,8 +37,8 @@ import {loginAction, userDataAction} from '../../redux/slices/authSlice.ts';
 const OTPScreen = ({navigation, route}) => {
   const [timer, setTimer] = useState('00');
   const [loading, setLoading] = useState(false);
-  const [customerDetails] = useLazyGetCustomerDataQuery();
-  const [doLogin] = useSignInMutation();
+  // const [customerDetails] = useLazyGetCustomerDataQuery();
+  // const [doLogin] = useSignInMutation();
   const [nivvasLogin] = useNivaasSigninMutation();
   const dispatch = useAppDispatch();
   const Ref = useRef(null);
@@ -162,7 +162,7 @@ const OTPScreen = ({navigation, route}) => {
               }),
             );
             setLoginDetails(response.accessToken);
-            ApiData();
+            // ApiData();
             saveLoginSessionDetails(response.tokenType, response.accessToken);
             customerDetails()
               .unwrap()

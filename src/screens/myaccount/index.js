@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Image, ScrollView, Text, View} from 'react-native';
 import {styles} from './style';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -11,21 +11,23 @@ import UserServices from '../../components/user-services/UserServices';
 import {TouchableOpacity} from 'react-native';
 import { removeLoginSessionDetails } from '../../utils/preferences/localStorage';
 import { useLazyGetCurrentCustomerQuery } from '../../redux/services/authService';
+import ApplicationContext from '../../utils/context-api/Context';
 
 const MyAccount = ({navigation}) => {
   const isActive = false;
-  const [currentCustomer] = useLazyGetCurrentCustomerQuery();
+  const {userDetails, setLoginDetails} = useContext(ApplicationContext);
+  // const [currentCustomer] = useLazyGetCurrentCustomerQuery();
 
-  const handleCustomerData =()=>{
-    currentCustomer().unwrap().then((responce)=>{
-      // console.log('responce of currentCustoemr',responce)
-    }).catch((error)=>{
-      console.log('error in currentCustomer===>',error)
-    })
-  }
-  useEffect(() => {
-    handleCustomerData();
-  }, [])
+  // const handleCustomerData =()=>{
+  //   currentCustomer().unwrap().then((responce)=>{
+  //     // console.log('responce of currentCustoemr',responce)
+  //   }).catch((error)=>{
+  //     console.log('error in currentCustomer===>',error)
+  //   })
+  // }
+  // useEffect(() => {
+  //   handleCustomerData();
+  // }, [])
   
   return (
     <ScrollView
