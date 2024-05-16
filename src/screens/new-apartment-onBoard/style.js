@@ -33,7 +33,8 @@ export const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     padding: 16,
-    marginTop:20
+    marginTop:20,
+    marginHorizontal:window.width*0.05
   },
   input: {
     height: 40,

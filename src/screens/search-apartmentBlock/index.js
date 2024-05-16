@@ -13,6 +13,7 @@ import {allTexts, colors} from '../../common';
 import {styles} from './style';
 import { BackHeaderNew } from '../../components';
 import { useFocusEffect } from '@react-navigation/native';
+import { useLazyGetFlatsListQuery } from '../../redux/services/cityServices';
 
 const SearchApartmentBlock = ({navigation, route}) => {
   const data = route?.params;
@@ -21,9 +22,22 @@ const SearchApartmentBlock = ({navigation, route}) => {
   const [filteredApartments, setFilteredApartments] = useState([]);
   const [selectedApartment, setSelectedApartment] = useState(null);
   const [apartments, setapartments] = useState();
+  const [flatData, setflatData] = useState()
+  const [getflatdata] = useLazyGetFlatsListQuery();
 
   const getData=()=>{
-    setapartments(data?.apartmentsData)
+    setapartments(data?.apartmentsData);
+    const payload = {
+      flatId:29,
+      pageNo:0,
+      pageSize:100
+    }
+    getflatdata(payload).unwrap().then((responce)=>{
+      // console.log(responce?.data,'rwwwwwwwwwww');
+      setflatData(responce?.data);
+    }).catch((error)=>{
+      console.log('error in flat data==========>',error);
+    })
   }
   const handleSearch = text => {
     const filtered = apartments.filter(city =>
@@ -39,6 +53,7 @@ const SearchApartmentBlock = ({navigation, route}) => {
   const handleCitySelect = apartment => {
     setSelectedApartment(apartment.name);
     setSearchText(apartment);
+    navigation.navigate(allTexts.screenNames.saearchFlatData,{selectedCity:data.selectedCity,selectedApartment:apartment?.name,flatData:flatData})
   };
 
   useFocusEffect(
@@ -56,7 +71,7 @@ const SearchApartmentBlock = ({navigation, route}) => {
       <Text style={{marginLeft:10, fontSize: 16, color: colors.orangeColor}}>
             {data.selectedCity}
       </Text>
-      {selectedApartment && (
+      {/* {selectedApartment && (
         <View style={styles.topDetails}>
             <Text style={{fontSize: 16, color: colors.orangeColor}}>
               {selectedApartment}
@@ -71,7 +86,7 @@ const SearchApartmentBlock = ({navigation, route}) => {
             </Text>
           </TouchableOpacity>
         </View>
-      )}
+      )} */}
       <SearchBar
         placeholder="Search apartments..."
         onChangeText={handleSearch}

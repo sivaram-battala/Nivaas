@@ -182,6 +182,7 @@ export const TopBarCard2 = ({
   onPress,
   txt,
   arrow,
+  accountType,
   children,
   navigation,
   back,
@@ -267,6 +268,11 @@ export const TopBarCard2 = ({
               />
             </TouchableOpacity>
           )}
+          {accountType && (
+            <TouchableOpacity onPress={onPressBag} style={{marginRight: '20%',backgroundColor:'black',alignItems:'center',borderRadius:10}}>
+              <Text style={{color:'white',fontWeight:'500'}}>{accountType}</Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     </View>
@@ -277,7 +283,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     flex: 1,
     height: 60,
-    elevation: 2,
+    // elevation: 2,
     shadowColor: '#000',
     shadowOpacity: 0.5,
     shadowRadius: 2,
@@ -301,6 +307,9 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  accountTypeCon:{
+
   },
   joinText: {
     color: colors.orangeColor,

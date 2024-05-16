@@ -63,13 +63,6 @@ const NewApartmentOnBoard = ({navigation}) => {
             <View style={styles.container}>
               <View style={styles.eachFieledCon}>
                 <Text style={styles.fieldName}>City</Text>
-                {/* <TextInput
-                  style={styles.input}
-                  onChangeText={handleChange('city')}
-                  onBlur={handleBlur('city')}
-                  value={values.city}
-                //   placeholder="City"
-                /> */}
                 <Dropdown
                   style={[
                     styles.dropdown,
@@ -180,7 +173,7 @@ const NewApartmentOnBoard = ({navigation}) => {
                     style={styles.radioButton}
                     onPress={() => handleOptionSelect('option1')}
                   />
-                  <Text style={styles.optionText}>Flat Owner</Text>
+                  <Text style={styles.optionText}>Under Construction</Text>
                 </View>
                 <View style={styles.buttonView}>
                   <FontAwesome
@@ -194,7 +187,7 @@ const NewApartmentOnBoard = ({navigation}) => {
                     style={styles.radioButton}
                     onPress={() => handleOptionSelect('option2')}
                   />
-                  <Text style={styles.optionText}>Renting</Text>
+                  <Text style={styles.optionText}>Positioned</Text>
                 </View>
               </View>
               <View style={{marginTop: window.height * 0.04}}>

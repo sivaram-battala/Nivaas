@@ -19,7 +19,6 @@ import NetInfo from '@react-native-community/netinfo';
 import {loginAction, userDataAction} from '../../redux/slices/authSlice.ts';
 import {
   useNivaastriggerotpMutation,
-  useTriggerOtpMutation,
 } from '../../redux/services/authService.tsx';
 const Signin = ({navigation}) => {
   const [isConnected, setIsConnected] = useState(' ');
@@ -28,7 +27,7 @@ const Signin = ({navigation}) => {
   const [isOtp, setIsOtp] = useState(false);
   const [otp, setOtp] = useState('');
   const Ref = useRef(null);
-  const [doTriggerOtp] = useTriggerOtpMutation();
+  // const [doTriggerOtp] = useTriggerOtpMutation();
   const [nivaasTriggerOtp] = useNivaastriggerotpMutation();
   var secLeft = 30;
   const getTimeRemaining = e => {

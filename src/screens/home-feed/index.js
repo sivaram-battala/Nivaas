@@ -3,81 +3,115 @@ import React, {useContext, useEffect, useState} from 'react';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {allTexts, colors, window} from '../../common';
 import {PrimaryButton} from '../../components';
-import {getAuthTokenDetails, removeLoginSessionDetails} from '../../utils/preferences/localStorage';
+import {
+  getAuthTokenDetails,
+  removeLoginSessionDetails,
+} from '../../utils/preferences/localStorage';
 import ApplicationContext from '../../utils/context-api/Context';
 import {styles} from './styles';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Fontisto from 'react-native-vector-icons/Fontisto';
-import { useLazyGetCityListQuery } from '../../redux/services/cityServices';
-import { useDispatch, useSelector } from 'react-redux';
-import { setcitiesData } from '../../redux/slices/citiesdataSlice';
+import {
+  useLazyGetApartmentListQuery,
+  useLazyGetCityListQuery,
+  useLazyGetFlatsListQuery,
+} from '../../redux/services/cityServices';
+import {useDispatch, useSelector} from 'react-redux';
+import {setcitiesData} from '../../redux/slices/citiesdataSlice';
+import {setapartmentData} from '../../redux/slices/apartmentsSlice';
 
 const Home = ({navigation}) => {
   const {userDetails, setLoginDetails} = useContext(ApplicationContext);
-  const [data, setData] = useState();
+  const [cityData, setCityData] = useState();
+  const [apartmentData, setapartmentsData] = useState();
+  const [flatdata, setflatdata] = useState();
   const [getCityList] = useLazyGetCityListQuery();
+  const [getApartmentsList] = useLazyGetApartmentListQuery();
+  const [getflatdata] = useLazyGetFlatsListQuery();
+
   const dispatch = useDispatch();
-  const handletoken = async () =>{
-   let token = await getAuthTokenDetails();
-   console.log('token', token);
-  }
-  const getData =()=>{
-    let payload = {
-      page:0,
-      pageSize:100
-    }
-    getCityList(payload).unwrap().then((responce)=>{
-      // console.log('resssss===========>>>',responce?.data);
-      setData(responce?.data);
-      dispatch(setcitiesData(responce?.data))
-    }).catch((error)=>{
-      console.log('===========>>>error in getcitydata',error);
-    })
-  }
+  const handletoken = async () => {
+    let token = await getAuthTokenDetails();
+    console.log('token', token);
+  };
+  const getData = () => {
+    let cityPayload = {
+      page: 0,
+      pageSize: 200,
+    };
+    getCityList(cityPayload)
+      .unwrap()
+      .then(responce => {
+        // console.log('citydata===========>>>',responce?.data);
+        setCityData(responce?.data);
+        dispatch(setcitiesData(responce?.data));
+      })
+      .catch(error => {
+        console.log('===========>>>error in getcitydata', error);
+      });
+
+    let apartmentPayload = {
+      cityId: 15,
+    };
+    getApartmentsList(apartmentPayload)
+      .unwrap()
+      .then(responce => {
+        // console.log('apartments data===========>',responce?.data);
+        setapartmentsData(responce?.data);
+        dispatch(setapartmentData(responce?.data));
+      })
+      .catch(error => {
+        console.log('error in apartments data========>', error);
+      });
+
+      const payload = {
+        flatId:29,
+        pageNo:0,
+        pageSize:100
+      }
+      getflatdata(payload).unwrap().then((responce)=>{
+        // console.log(responce?.data,'<==============flatdata');
+        setflatdata(responce?.data);
+      }).catch((error)=>{
+        console.log('error in flat data==========>',error);
+      })
+  };
 
   useEffect(() => {
     getData();
-  }, [])
-  
+  }, []);
 
   return (
     <View style={styles.mainCon}>
-      {/* <TouchableOpacity
-        onPress={()=>handletoken()}>
-        <Text>NIVAAS home</Text>
-      </TouchableOpacity>
-      <View style={{width:'20%'}}>
-        <PrimaryButton
-          onPress={async () => {
-            await removeLoginSessionDetails();
-            setLoginDetails(null);
-          }}
-          bgColor={colors.orangeColor}
-          loading={false}
-          radius={25}
-          text={'Log out'}
-          shadow={true}
-          textColor={colors.white}
-        />
-      </View> */}
       <View style={styles.headerCon}>
         <Text style={styles.username}>Hi, User</Text>
-        <FontAwesome name="user" size={30} color={colors.black} onPress={()=>navigation.navigate(allTexts.screenNames.myAccount)}/>
+        <FontAwesome
+          name="user"
+          size={30}
+          color={colors.black}
+          onPress={() => navigation.navigate(allTexts.screenNames.myAccount)}
+        />
       </View>
       <View style={styles.subConOne}>
         <Image
           source={require('../../../assets/images/peopleImg.png')}
           style={styles.image}
         />
-        <Text style={styles.discoverMore}>Discover more at Nivaas</Text>
+        <Text style={styles.discoverMore}>
+          {allTexts.headings.discoverMore}
+        </Text>
         <Text style={styles.description}>
-          Discover Nivaas for buying,selling and renting homes and apartments,
-          as well as scheduling apartment visits and accessing household
-          services
+          {allTexts.paragraphs.discoverNivaas}
         </Text>
         <View style={{marginTop: 20}}>
           <PrimaryButton
-            onPress={() => navigation.navigate(allTexts.screenNames.searchCity,{data:data})}
+            onPress={() =>
+              navigation.navigate(allTexts.screenNames.selectCityOptions, {
+                cityData: cityData,
+                apartmentData:apartmentData,
+                flatdata:flatdata
+              })
+            }
             bgColor={colors.orangeColor}
             radius={30}
             text={'    + ADD YOUR HOME    '}
@@ -87,13 +121,18 @@ const Home = ({navigation}) => {
         </View>
       </View>
       <View style={styles.subConTwo}>
-        <Fontisto name="commenting" size={25} style={styles.commentIcon}/>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate(allTexts.screenNames.selectCityOptions)
+          }>
+          <Fontisto name="commenting" size={25} style={styles.commentIcon} />
+        </TouchableOpacity>
         <View style={styles.textCon}>
           <Text style={styles.discoverMore}>
-            Access all importent announcements notices and cirulers here{' '}
+            {allTexts.paragraphs.accessAll}
           </Text>
           <Text style={styles.description}>
-            No item published yet from your society
+            {allTexts.paragraphs.itemPublished}
           </Text>
         </View>
       </View>

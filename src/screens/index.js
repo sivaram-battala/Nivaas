@@ -13,6 +13,10 @@ import SearchCity from './search-city';
 import SearchApartmentBlock from './search-apartmentBlock';
 import NewApartmentOnBoard from './new-apartment-onBoard';
 import MyAccount from './myaccount';
+import HouseHold from './house-hold';
+import Orders from './orders';
+import FlatData from './SearchflatsData';
+import SelectCityOptions from './select-options';
 export {
   Signin,
   Splash,
@@ -28,5 +32,9 @@ export {
   SearchCity,
   SearchApartmentBlock,
   NewApartmentOnBoard,
-  MyAccount
+  MyAccount,
+  HouseHold,
+  Orders,
+  FlatData,
+  SelectCityOptions
 };

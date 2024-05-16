@@ -20,8 +20,11 @@ import {
 export const endpoints = {
   NIVAAS_OTP_TRIGGER:'nivaas/api/auth/jtuserotp/trigger',
   NIVAAS_SIGN_IN:'nivaas/api/auth/signin',
-  NIVAAS_CITY:'jtCity/list',
-  NIVAAS_APARTMENT:'jtApartment/nearByApartments'
+  NIVAAS_CITY:'jtcity/list',
+  NIVAAS_APARTMENT:'jtapartment/nearByApartments',
+  NIVAAS_FLAT:'jtflat/flats/available',
+  NIVAAS_ONBOARD : 'onboarding/flat/request',
+  NIVAAS_CURRENT_CUSTOMER:'nivaas/api/auth/currentCustomer'
   // NEW_SIGN_IN: 'auth/signin',
   // NEAR_BY_TEMPLE: 'jtprofile/byTempleClass',
   // NEW_SIGN_UP: 'auth/signup',

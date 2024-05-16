@@ -18,19 +18,30 @@ export const cityService = createApi({
       }
       return headers;
     },
-  }),
+  }), 
   endpoints: builder => ({
     getCityList: builder.query<any, {page:Number,pageSize:Number}>({
       query: ({page,pageSize}) => `${endpoints.NIVAAS_CITY}?page=${page}&pageSize=${pageSize}`,
     }),
-    getApartmentList : builder.query<any,{cityId:Number,pageNo:Number,pageSize:Number}>({
-      query: ({cityId,pageNo,pageSize}) => `${endpoints.NIVAAS_APARTMENT}?cityId=${cityId}&pageNo=${pageNo}&pageSize=${pageSize}`
+    getApartmentList : builder.query<any,{cityId:Number}>({
+      query: ({cityId}) => `${endpoints.NIVAAS_APARTMENT}?cityId=${cityId}`
+    }),
+    getFlatsList : builder.query<any,{flatId:Number,pageNo:Number,pageSize:Number}>({
+      query: ({flatId,pageNo,pageSize}) => `${endpoints.NIVAAS_FLAT}?apartmentId=${flatId}&pageNo=${pageNo}&pageSize=${pageSize}`
+    }),
+    userOnBoarding: builder.mutation<any, {}>({
+      query: (payload) => ({
+        url: endpoints.NIVAAS_ONBOARD,
+        method: 'POST',
+        body: payload,
+      }),
     }),
   }),
-
 });
 
 export const {
   useLazyGetCityListQuery,
-  useLazyGetApartmentListQuery
+  useLazyGetApartmentListQuery,
+  useLazyGetFlatsListQuery,
+  useUserOnBoardingMutation,
 } = cityService;

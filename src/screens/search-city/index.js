@@ -81,11 +81,6 @@ const SearchCity = ({navigation,route}) => {
         inputStyle={{ color: colors.black }}
         inputContainerStyle={{ backgroundColor: colors.gray3, borderRadius: 30 }}
       />
-      {/* <Image
-        source={{uri:'https://previews.123rf.com/images/jgroup/jgroup1005/jgroup100501041/7058000-modern-hi-rise-corporate-office-building-with-glass-exterior-over-a-white-background.jpg'}}
-        style={styles.backgroundImage}
-      />
-      <View style={styles.overlay} /> */}
       {filteredCities.length === 0 && searchText.length > 0 && (
         <Text style={styles.filteredDataText}>
           No cities found

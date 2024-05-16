@@ -19,6 +19,7 @@ export const allTexts = {
 
   headings: {
     // place all your Heading texts here
+    discoverMore:'Discover more at Nivaas',
     verfiyEmail: 'Verify your email Address',
     verfiyPhone: 'Verify your Mobile Number',
     splashTitle: 'Start Explore your Best Temple',
@@ -83,6 +84,9 @@ export const allTexts = {
     username: 'user Name',
   },
   paragraphs: {
+    discoverNivaas:'Discover Nivaas for buying,selling and renting homes and apartments,as well as scheduling apartment visits and accessing householdservices',
+    accessAll:'Access all importent announcements notices and cirulers here',
+    itemPublished:'No item published yet from your society',
     alreadyAccount: 'Already have an account? ',
     dontHaveAccount: 'Don’t have an account?',
     splashDescription:
@@ -129,10 +133,15 @@ export const allTexts = {
     addDetails:'AddDetails',
     home:'Home',
     searchCity:'SearchCity',
+    services:'Services',
     searchApartmentBlock:'SearchApartmentBlock',
     userCityDetailsForm:'UserCityDetailsForm',
     newApartmentOnBoard:'NewApartmentOnBoard',
-    myAccount:'MyAccount'
+    myAccount:'MyAccount',
+    houseHold:'HouseHold',
+    orders:'Orders',
+    saearchFlatData:'saearchFlatData',
+    selectCityOptions:'SelectCityOptions'
     // splashscreen: 'Splash_Screen',
   },
   homeHeader: {

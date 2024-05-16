@@ -13,6 +13,10 @@ import {
   SearchApartmentBlock,
   NewApartmentOnBoard,
   MyAccount,
+  HouseHold,
+  Orders,
+  FlatData,
+  SelectCityOptions,
 } from '../screens';
 import { createStackNavigator } from '@react-navigation/stack';
 import ApplicationContext from '../utils/context-api/Context';
@@ -35,6 +39,10 @@ const rootNavigation = () => {
       userCityDetailsForm,
       newApartmentOnBoard,
       myAccount,
+      houseHold,
+      orders,
+      saearchFlatData,
+      selectCityOptions
     },
   } = allTexts;
 
@@ -105,6 +113,13 @@ const rootNavigation = () => {
             headerShown: false,
           }}
         />
+         <Stack.Screen
+          name={saearchFlatData}
+          component={FlatData}
+          options={{
+            headerShown: false,
+          }}
+        />
         <Stack.Screen
           name={newApartmentOnBoard}
           component={NewApartmentOnBoard}
@@ -115,6 +130,27 @@ const rootNavigation = () => {
         <Stack.Screen
           name={myAccount}
           component={MyAccount}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={houseHold}
+          component={HouseHold}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={orders}
+          component={Orders}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={selectCityOptions}
+          component={SelectCityOptions}
           options={{
             headerShown: false,
           }}
