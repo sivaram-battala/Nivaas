@@ -17,11 +17,13 @@ import {
   Orders,
   FlatData,
   SelectCityOptions,
+  frequentVisitor
 } from '../screens';
 import { createStackNavigator } from '@react-navigation/stack';
 import ApplicationContext from '../utils/context-api/Context';
 import {useAppSelector, useAppDispatch} from '../redux/reduxHooks';
 import UserCityDetailsForm from '../screens/city-details-form';
+import FrequentVisitor from '../screens/frequent-visitor';
 
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
@@ -151,6 +153,13 @@ const rootNavigation = () => {
         <Stack.Screen
           name={selectCityOptions}
           component={SelectCityOptions}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={frequentVisitor}
+          component={FrequentVisitor}
           options={{
             headerShown: false,
           }}
