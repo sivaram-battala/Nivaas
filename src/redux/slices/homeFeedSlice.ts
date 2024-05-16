@@ -1,26 +1,26 @@
-import { createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
+// import { createSlice } from '@reduxjs/toolkit';
+// import type { PayloadAction } from '@reduxjs/toolkit';
 
 
-export interface HomeFeedState {
-  homeFeedData: null;
-}
+// export interface HomeFeedState {
+//   homeFeedData: null;
+// }
 
-const initialState: HomeFeedState = {
-  homeFeedData: null,
-};
+// const initialState: HomeFeedState = {
+//   homeFeedData: null,
+// };
 
-export const homeFeedSlice = createSlice({
-  name: 'homeFeed',
-  initialState,
-  reducers: {
-    homeFeedAction: (state, action: PayloadAction<any>) => {
-      state.homeFeedData = action.payload;;
-    }
-  },
-});
+// export const homeFeedSlice = createSlice({
+//   name: 'homeFeed',
+//   initialState,
+//   reducers: {
+//     homeFeedAction: (state, action: PayloadAction<any>) => {
+//       state.homeFeedData = action.payload;;
+//     }
+//   },
+// });
 
-export const { homeFeedAction} =
-homeFeedSlice.actions;
+// export const { homeFeedAction} =
+// homeFeedSlice.actions;
 
-export default homeFeedSlice.reducer;
+// export default homeFeedSlice.reducer;

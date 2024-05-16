@@ -8,10 +8,20 @@ import {
   Signin,
   BottomTabBase,
   OTPScreen,
+  AddDetails,
+  SearchCity,
+  SearchApartmentBlock,
+  NewApartmentOnBoard,
+  MyAccount,
+  HouseHold,
+  Orders,
+  FlatData,
+  SelectCityOptions,
 } from '../screens';
 import { createStackNavigator } from '@react-navigation/stack';
 import ApplicationContext from '../utils/context-api/Context';
 import {useAppSelector, useAppDispatch} from '../redux/reduxHooks';
+import UserCityDetailsForm from '../screens/city-details-form';
 
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
@@ -23,6 +33,16 @@ const rootNavigation = () => {
       otpScreen,
       signup,
       bottomTab,
+      addDetails,
+      searchCity,
+      searchApartmentBlock,
+      userCityDetailsForm,
+      newApartmentOnBoard,
+      myAccount,
+      houseHold,
+      orders,
+      saearchFlatData,
+      selectCityOptions
     },
   } = allTexts;
 
@@ -61,6 +81,76 @@ const rootNavigation = () => {
         <Stack.Screen
           name={bottomTab}
           component={BottomTabBase}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={addDetails}
+          component={AddDetails}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={searchCity}
+          component={SearchCity}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={searchApartmentBlock}
+          component={SearchApartmentBlock}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={userCityDetailsForm}
+          component={UserCityDetailsForm}
+          options={{
+            headerShown: false,
+          }}
+        />
+         <Stack.Screen
+          name={saearchFlatData}
+          component={FlatData}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={newApartmentOnBoard}
+          component={NewApartmentOnBoard}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={myAccount}
+          component={MyAccount}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={houseHold}
+          component={HouseHold}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={orders}
+          component={Orders}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={selectCityOptions}
+          component={SelectCityOptions}
           options={{
             headerShown: false,
           }}

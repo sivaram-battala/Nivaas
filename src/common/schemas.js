@@ -1,5 +1,15 @@
 import * as Yup from 'yup';
 
+export const onboardValidationSchema = Yup.object().shape({
+  city: Yup.string().required('City is required'),
+  apartment: Yup.string().required('Apartment is required'),
+  numBlocks: Yup.number().required('Number of blocks is required'),
+  numFlatsPerBlock: Yup
+    .number()
+    .required('Number of flats per block is required'),
+  addressLine1: Yup.string().required('Address line 1 is required'),
+});
+
 export const RegisterValidationSchema = Yup.object({
   firstName: Yup.string()
     .trim()

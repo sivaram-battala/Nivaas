@@ -5,6 +5,7 @@ import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Feather from 'react-native-vector-icons/Feather';
 import FeatherIcon from 'react-native-vector-icons/Feather';
+import AntDesign from 'react-native-vector-icons/AntDesign'
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {allTexts, colors} from '../../common';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -181,6 +182,7 @@ export const TopBarCard2 = ({
   onPress,
   txt,
   arrow,
+  accountType,
   children,
   navigation,
   back,
@@ -204,6 +206,7 @@ export const TopBarCard2 = ({
                 source={require('../../../assets/images/backarrow.png')}
                 style={{height: 10, width: 10}}
               />
+              {/* <AntDesign name='arrowleft' size={30}/> */}
             </TouchableOpacity>
           )}
           {back && (
@@ -215,7 +218,8 @@ export const TopBarCard2 = ({
                     data: bData,
                   };
               }}>
-              <Ionicons name="arrow-back-circle" size={40} color="orange" />
+              {/* <Ionicons name="arrow-back-circle" size={40} color="orange" /> */}
+              <AntDesign name='arrowleft' size={28} color={colors.black}/>
             </TouchableOpacity>
           )}
         </View>
@@ -264,6 +268,11 @@ export const TopBarCard2 = ({
               />
             </TouchableOpacity>
           )}
+          {accountType && (
+            <TouchableOpacity onPress={onPressBag} style={{marginRight: '20%',backgroundColor:'black',alignItems:'center',borderRadius:10}}>
+              <Text style={{color:'white',fontWeight:'500'}}>{accountType}</Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     </View>
@@ -274,7 +283,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     flex: 1,
     height: 60,
-    elevation: 2,
+    // elevation: 2,
     shadowColor: '#000',
     shadowOpacity: 0.5,
     shadowRadius: 2,
@@ -298,6 +307,9 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  accountTypeCon:{
+
   },
   joinText: {
     color: colors.orangeColor,

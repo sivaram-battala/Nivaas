@@ -16,63 +16,35 @@ export const styles = StyleSheet.create({
     mainContainer:{
       // borderWidth:10
     },
-    container:{
-      // borderWidth:1,
-      alignItems:'center',
-      justifyContent:'center',
-      // paddingVertical:5,
-      // marginVertical:10,
-    },
     focusedContainer: {
-      height: 80,
-      width:80,
       alignItems: 'center',
       borderRadius: 100,
       justifyContent: 'center',
       backgroundColor: 'white', 
       padding: 10,
       marginBottom: 20,
-      
-      
     },
-    UserFeedFocusedContainer:{
-      height: 80,
-      width:80,
-      alignItems: 'center',
-      borderRadius: 100,
-      justifyContent: 'center',
-      backgroundColor: 'white', 
-      padding: 10,
-      marginBottom: 20,
-      borderWidth:0.5,
-      borderColor:'orange'
-      
+    imageNormal:{
+      color:colors.black,
+      marginBottom:5
     },
-    mainContainer1:{
-      // borderWidth:2
+    imageFocused:{
+      color:colors.orangeColor,
+      marginBottom:5
+    },
+    iconTextCon:{
+      alignItems:'center'
+    },
+    textNormal:{
+      color:colors.black,
+    },
+    textFocused:{
+      color:colors.orangeColor,
     },
     imageContainer:{
-      borderRadius:50,
       elevation:2,
       shadowColor: colors.black,
-      backgroundColor:'white',
       borderWidth:1,
       borderColor:colors.orangeColor,
-      marginBottom:15,
     },
-    Image:{
-      height:50,
-      width:50,
-    },
-    // dot: { backgroundColor: colors.gray3},
-    imageNormal:  {
-      height: 50,
-      width: 50,
-    },
-    imageFocused: {
-      height: 80,
-      width: 80,
-      marginLeft:'1%',
-      borderRadius:50
-    }
   });

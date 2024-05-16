@@ -1,11 +1,11 @@
 import {StyleSheet} from 'react-native';
-import {colors, fontFamily} from '../../common';
+import {colors, fontFamily, window} from '../../common';
 
 export const styles = StyleSheet.create({
   wrapper: {
-    marginVertical: 5,
-    borderBottomWidth: 1,
-    marginBottom: 10,
+    // marginVertical: 5,
+    // borderBottomWidth: 1,
+    // marginBottom: 10,
   },
   title: {
     fontFamily: fontFamily.popinMedium,
@@ -13,13 +13,11 @@ export const styles = StyleSheet.create({
     // textTransform: 'capitalize',
   },
   inputText: {
-    padding: 8,
     paddingVertical: 0,
     margin: 0,
-    marginBottom: -5,
-    paddingHorizontal: 5,
+    paddingHorizontal: window.width/4,
     borderColor: colors.gray,
-    fontSize: 12,
+    fontSize: 17,
     color: colors.black,
     fontFamily: fontFamily.popinRegular,
     width: '100%',
@@ -34,6 +32,7 @@ export const styles = StyleSheet.create({
   fieldContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent:'center'
   },
   image: {
     height: undefined,
