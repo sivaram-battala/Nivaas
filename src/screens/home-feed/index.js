@@ -21,7 +21,7 @@ import {setcitiesData} from '../../redux/slices/citiesdataSlice';
 import {setapartmentData} from '../../redux/slices/apartmentsSlice';
 
 const Home = ({navigation}) => {
-  const {userDetails, setLoginDetails} = useContext(ApplicationContext);
+  // const {userDetails, setLoginDetails} = useContext(ApplicationContext);
   const [cityData, setCityData] = useState();
   const [apartmentData, setapartmentsData] = useState();
   const [flatdata, setflatdata] = useState();
@@ -42,12 +42,12 @@ const Home = ({navigation}) => {
     getCityList(cityPayload)
       .unwrap()
       .then(responce => {
-        // console.log('citydata===========>>>',responce?.data);
+        console.log('citydata===========>>>',responce?.data);
         setCityData(responce?.data);
         dispatch(setcitiesData(responce?.data));
       })
       .catch(error => {
-        console.log('===========>>>error in getcitydata', error);
+        console.log('error in getcitydata==========>', error);
       });
 
     let apartmentPayload = {
@@ -121,10 +121,7 @@ const Home = ({navigation}) => {
         </View>
       </View>
       <View style={styles.subConTwo}>
-        <TouchableOpacity
-          onPress={() =>
-            navigation.navigate(allTexts.screenNames.selectCityOptions)
-          }>
+        <TouchableOpacity>
           <Fontisto name="commenting" size={25} style={styles.commentIcon} />
         </TouchableOpacity>
         <View style={styles.textCon}>

@@ -17,4 +17,13 @@ export const styles = StyleSheet.create({
     buttonContainer: {
       marginTop: 20,
     },
+    apartmentsErrorHandlerCon:{
+      flexDirection:'row',
+      justifyContent:'space-between',
+      marginHorizontal:2
+    },
+    errorMessage: {
+      fontSize: 13,
+      color: colors.red1
+    },
   });

@@ -1,37 +1,30 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import { Image } from 'react-native'
-import { colors, window } from '../../common'
+import {Image, StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+import { window } from '../../common';
 
-const ServiceCard = ({path,text}) => {
+const ServiceCard = ({uri,name}) => {
+  console.log(uri,'uri');
   return (
-    <View style={styles.servicesCon}>
-      <View style={styles.eachServiceCon}>
-            <Image
-              source={require('../../utils/assets/images/Electrician.png')}
-              height={50}
-              width={50}
-            />
-            <Text>Electrician</Text>
-          </View>
+    <View style={styles.eachServiceCon}>
+      <Image
+        source={uri}
+        height={50}
+        width={50}
+      />
+      <Text>{name}</Text>
     </View>
-  )
-}
+  );
+};
 
-export default ServiceCard
+export default ServiceCard;
 
 const styles = StyleSheet.create({
-    servicesCon:{
-        marginHorizontal:window.width*0.1,
-        marginVertical:window.height*0.08,
-        flexDirection:"row",
-        // flexWrap:'wrap',
-        backgroundColor:colors.gray3,
-        elevation:5
-    },
-    eachServiceCon:{
-        alignItems:'center',
-        marginHorizontal:20,
-        marginVertical:20
-    }
-})
+  eachServiceCon:{
+    alignItems:'center',
+    marginHorizontal:'auto',
+    marginVertical:10,
+    height:window.height*0.08,
+    width:window.width*0.18,
+    justifyContent:'center',
+}
+});

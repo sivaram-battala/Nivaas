@@ -162,7 +162,7 @@ const OTPScreen = ({navigation, route}) => {
               }),
             );
             setLoginDetails(response.accessToken);
-            // ApiData();
+            ApiData();
             saveLoginSessionDetails(response.tokenType, response.accessToken);
             customerDetails()
               .unwrap()

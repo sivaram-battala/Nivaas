@@ -24,8 +24,15 @@ import RNRestart from 'react-native-restart';
 // export const BROADLEAF = 'https://fanfun.in/shop/';
 
 //NIVAAS urls
-export const NIVAAS_URL = "https://fanfun.in/nivaascustomer/nivaas/api"
+export const NIVAAS_URL = "https://4.240.68.49:8443/nivaascustomer/"
 
+
+export const axiosNivaas = axios.create({
+  baseURL: NIVAAS_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
 
 // export const BASE_URL = 'http://20.235.89.214:8082/api/';
 // export const BASEURL = 'https://kovela.app/customer/api/';

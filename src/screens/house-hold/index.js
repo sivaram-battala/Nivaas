@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { styles } from './style'
 import { TopBarCard2 } from '../../components'
@@ -6,7 +6,7 @@ import { statusBarHeight } from '../../utils/config/config'
 import { Image } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
-import { colors } from '../../common'
+import { allTexts, colors } from '../../common'
 
 const HouseHold = ({navigation}) => {
   return (
@@ -26,6 +26,7 @@ const HouseHold = ({navigation}) => {
           <Text style={styles.manageFlatsConAddText}>Add vechile</Text>
         </View>
       </View>
+      <TouchableOpacity onPress={()=>navigation.navigate(allTexts.screenNames.maid)}>
       <View style={styles.manageFlatsCon}>
         <Text style={styles.headingText}>Daily Help</Text>
         <View style={styles.manageFlatsConHome}>
@@ -36,6 +37,8 @@ const HouseHold = ({navigation}) => {
           <Text style={styles.manageFlatsConAddText}>Add Your Maid or Driver etc</Text>
         </View>
       </View>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={()=>navigation.navigate(allTexts.screenNames.addPets)}>
       <View style={styles.manageFlatsCon}>
         <Text style={styles.headingText}>My Pets</Text>
         <View style={styles.manageFlatsConHome}>
@@ -46,6 +49,7 @@ const HouseHold = ({navigation}) => {
           <Text style={styles.manageFlatsConAddText}>Add Your Maid or Driver etc</Text>
         </View>
       </View>
+      </TouchableOpacity>
       <View style={styles.manageFlatsCon}>
         <Text style={styles.headingText}>Frequent Visitors</Text>
         <View style={styles.manageFlatsConHome}>        

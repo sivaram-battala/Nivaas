@@ -141,7 +141,9 @@ export const allTexts = {
     houseHold:'HouseHold',
     orders:'Orders',
     saearchFlatData:'saearchFlatData',
-    selectCityOptions:'SelectCityOptions'
+    selectCityOptions:'SelectCityOptions',
+    addPets:'AddPets',
+    maid:'Maid'
     // splashscreen: 'Splash_Screen',
   },
   homeHeader: {

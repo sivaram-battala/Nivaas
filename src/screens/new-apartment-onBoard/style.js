@@ -31,14 +31,13 @@ export const styles = StyleSheet.create({
     marginBottom: 5,
   },
   container: {
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     padding: 16,
-    marginTop:20,
     marginHorizontal:window.width*0.05
   },
   input: {
     height: 40,
-    borderColor: 'gray',
+    borderColor: colors.gray,
     borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 8,
@@ -49,14 +48,14 @@ export const styles = StyleSheet.create({
   },
   dropdown: {
     height: 40,
-    borderColor: 'gray',
+    borderColor: colors.gray,
     borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 8,
   },
   label: {
     position: 'absolute',
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     left: 22,
     top: 8,
     zIndex: 999,
