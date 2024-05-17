@@ -17,9 +17,8 @@ import ApplicationContext from '../../utils/context-api/Context';
 import Snackbar from 'react-native-snackbar';
 import NetInfo from '@react-native-community/netinfo';
 import {loginAction, userDataAction} from '../../redux/slices/authSlice.ts';
-import {
-  useNivaastriggerotpMutation,
-} from '../../redux/services/authService.tsx';
+import {useNivaastriggerotpMutation} from '../../redux/services/authService.tsx';
+import {otpTrigger} from '../../utils/api/index.js';
 const Signin = ({navigation}) => {
   const [isConnected, setIsConnected] = useState(' ');
   const [mobNum, setMobNum] = useState('');
@@ -112,20 +111,10 @@ const Signin = ({navigation}) => {
       primaryContact: mobNum,
     };
     console.log('payload', otpPayload);
-    if (!mobNum === 10) {
+    if (mobNum?.length !== 10) {
       alert('please enter proper Mobile Number');
     } else if (mobNum?.length === 10) {
-      // doTriggerOtp(otpPayload)
-      // .unwrap()
-      // .then(response => {
-      //   console.log('otpRes--->', response)
-      //     if(response){
-      //       navigation.navigate(allTexts.screenNames.otpScreen, {
-      //         mobNum: mobNum,
-      //         otp: response?.otp,
-      //       })
-      //     }
-      // })
+      console.log('====')
       nivaasTriggerOtp(otpPayload)
         .unwrap()
         .then(response => {
@@ -136,15 +125,43 @@ const Signin = ({navigation}) => {
               otp: response?.otp,
             });
           }
-        });
+        })
+        .catch(error => console.log('error in trigger otp', error))
     }
+
+    
+    // otpTrigger(otpPayload).then((responce)=>{
+    //   console.log('res of otp trigger axios',responce);
+    // }).catch((error)=>{
+    //   console.log('error in axios otp trigger',error);
+    // })
+
+
+    // const myHeaders = new Headers();
+    // myHeaders.append('Content-Type', 'application/json');
+
+    // const raw = JSON.stringify({
+    //   otpType: 'SIGNIN',
+    //   primaryContact: '9491839431',
+    // });
+
+    // const requestOptions = {
+    //   method: 'POST',
+    //   headers: myHeaders,
+    //   body: raw,
+    //   redirect: 'follow',
+    // };
+
+    // fetch(
+    //   'https://4.240.68.49:8443/nivaascustomer/nivaas/api/auth/jtuserotp/trigger',
+    //   requestOptions,
+    // )
+    //   .then(response => response.json())
+    //   .then(result => console.log('fetch results',result))
+    //   .catch(error => console.error('error in fetch req',error));
   };
   return (
     <SafeAreaView style={styles.wrapper}>
-      <StatusBar backgroundColor={'white'} translucent={true} />
-      <View style={styles.signinTextContainer}>
-        {/* <Text style={styles.signinText}>{login}</Text> */}
-      </View>
       <KeyboardAwareScrollView
         keyboardShouldPersistTaps="handled"
         style={styles.keyboardStyle}

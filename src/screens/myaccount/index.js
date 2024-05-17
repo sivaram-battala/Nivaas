@@ -9,26 +9,33 @@ import {statusBarHeight} from '../../utils/config/config';
 import {colors} from 'react-native-elements';
 import UserServices from '../../components/user-services/UserServices';
 import {TouchableOpacity} from 'react-native';
-import { removeLoginSessionDetails } from '../../utils/preferences/localStorage';
-import { useLazyGetCurrentCustomerQuery } from '../../redux/services/authService';
+import {removeLoginSessionDetails} from '../../utils/preferences/localStorage';
+import {useLazyGetCurrentCustomerQuery} from '../../redux/services/authService';
 import ApplicationContext from '../../utils/context-api/Context';
 
 const MyAccount = ({navigation}) => {
   const isActive = false;
+  const isFlatAdded = true;
   const {userDetails, setLoginDetails} = useContext(ApplicationContext);
-  // const [currentCustomer] = useLazyGetCurrentCustomerQuery();
+  const [customerData, setCustomerData] = useState(null);
+  const [active, setActive] = useState(false);
+  const [currentCustomer] = useLazyGetCurrentCustomerQuery();
+  const handleCustomerData = () => {
+    currentCustomer()
+      .unwrap()
+      .then(responce => {
+        console.log('responce of currentCustoemr', responce);
+        setCustomerData(responce);
+        setActive(responce);
+      })
+      .catch(error => {
+        console.log('error in currentCustomer===>', error);
+      });
+  };
+  useEffect(() => {
+    handleCustomerData();
+  }, []);
 
-  // const handleCustomerData =()=>{
-  //   currentCustomer().unwrap().then((responce)=>{
-  //     // console.log('responce of currentCustoemr',responce)
-  //   }).catch((error)=>{
-  //     console.log('error in currentCustomer===>',error)
-  //   })
-  // }
-  // useEffect(() => {
-  //   handleCustomerData();
-  // }, [])
-  
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
@@ -53,13 +60,11 @@ const MyAccount = ({navigation}) => {
                 borderRadius: 10,
                 alignItems: 'center',
               }}>
-              {
-                isActive && (
-                  <Text style={{color: colors.white, fontWeight: '500'}}>
-                    Nivaas ID : 12345
-                  </Text>
-                )
-              }
+              {isActive && (
+                <Text style={{color: colors.white, fontWeight: '500'}}>
+                  Nivaas ID : 12345
+                </Text>
+              )}
             </View>
           )}
         </View>
@@ -67,10 +72,12 @@ const MyAccount = ({navigation}) => {
       <View style={styles.manageFlatsCon}>
         <Text style={styles.manageFlatsConText}>Manage flats</Text>
         <View style={styles.manageFlatsSubCon}>
-          <View style={styles.flatCon}>
-            <Text style={styles.manageFlatsSubConText1}>+</Text>
-            <Text style={styles.manageFlatsSubConText2}>Flat</Text>
-          </View>
+          {!isFlatAdded && (
+            <View style={styles.flatCon}>
+              <Text style={styles.manageFlatsSubConText1}>+</Text>
+              <Text style={styles.manageFlatsSubConText2}>Flat</Text>
+            </View>
+          )}
           <View>
             <View style={styles.manageFlatsConHome}>
               <Foundation
@@ -121,10 +128,11 @@ const MyAccount = ({navigation}) => {
               Account information
             </Text>
           </View>
-          <TouchableOpacity onPress={async () => {
-            await removeLoginSessionDetails();
-            setLoginDetails(null);
-          }}>
+          <TouchableOpacity
+            onPress={async () => {
+              await removeLoginSessionDetails();
+              setLoginDetails(null);
+            }}>
             <View style={styles.settingsubConOne}>
               <AntDesign name="poweroff" size={23} color="black" />
               <Text style={styles.generalSettingsOptionText}>Logout</Text>

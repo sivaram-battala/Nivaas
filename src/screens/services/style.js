@@ -9,15 +9,26 @@ export const styles = StyleSheet.create({
     },
     servicesCon:{
         marginHorizontal:window.width*0.1,
-        marginVertical:window.height*0.08,
-        flexDirection:"row",
-        // flexWrap:'wrap',
+        marginTop:window.height*0.06,
         backgroundColor:colors.gray3,
-        elevation:5
+        elevation:5,
     },
     eachServiceCon:{
         alignItems:'center',
-        marginHorizontal:20,
-        marginVertical:20
+        marginHorizontal:'auto',
+        marginVertical:10,
+        height:window.height*0.08,
+        width:window.width*0.18,
+        justifyContent:'center',
+    },
+    AutoBikeServicesCon:{
+        // marginHorizontal:window.width*0.01,
+        marginTop:window.height*0.04,
+    },
+    headingText:{
+        color:colors.gray,
+        fontSize:16,
+        fontWeight:'500',
+        marginHorizontal:window.width*0.1,
     }
 })

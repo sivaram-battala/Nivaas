@@ -7,7 +7,7 @@ import {
   ScrollView,
 } from 'react-native';
 import React, {useState} from 'react';
-import {PrimaryButton, TopBarCard2} from '../../components';
+import {CustomDropdown, PrimaryButton, TopBarCard2} from '../../components';
 import {statusBarHeight} from '../../utils/config/config';
 import {styles} from './style';
 import {Formik} from 'formik';
@@ -22,6 +22,7 @@ const NewApartmentOnBoard = ({navigation}) => {
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
   const [cityData, setCityData] = useState([]);
+  const [cityValue, setCityValue] = useState({id: null, name: null});
   const [selectedOption, setSelectedOption] = useState(null);
   const handleOptionSelect = option => {
     setSelectedOption(option);
@@ -62,8 +63,8 @@ const NewApartmentOnBoard = ({navigation}) => {
           }) => (
             <View style={styles.container}>
               <View style={styles.eachFieledCon}>
-                <Text style={styles.fieldName}>City</Text>
-                <Dropdown
+                {/* <Text style={styles.fieldName}>City</Text> */}
+                {/* <Dropdown
                   style={[
                     styles.dropdown,
                     isFocus && {borderColor: colors.orangeColor},
@@ -92,6 +93,17 @@ const NewApartmentOnBoard = ({navigation}) => {
                 />
                 {errors.city && touched.city && (
                   <Text style={styles.errorText}>{errors.city}</Text>
+                )} */}
+                <CustomDropdown
+                  label="City"
+                  data={citiesData}
+                  value={cityValue.id}
+                  onChange={(id, name) => setCityValue({id, name})}
+                  labelField="name"
+                  valueField="id"
+                />
+                {!citiesData && (
+                    <Text style={styles.errorText}>{'No Cities Here'}</Text>
                 )}
               </View>
               <Text style={styles.fieldName}>Apartment</Text>

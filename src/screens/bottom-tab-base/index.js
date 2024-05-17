@@ -81,12 +81,12 @@ export default BottomTabBase = ({ navigation }) => {
               tabBarIcon: ({ color, size, focused }) => (
                 <View style={styles.iconTextCon}>  
                   <MaterialIcons name='apartment' size={30} style={focused ? styles.imageFocused : styles.imageNormal}/>
-                  <Text style={focused ? styles.textFocused : styles.textNormal}>{allTexts.tabNames.community}</Text>
+                  <Text style={focused ? styles.textFocused : styles.textNormal}>Apartments</Text>
                 </View>
               ),
             }}
           />
-          <Tab.Screen
+          {/* <Tab.Screen
            name={allTexts.tabNames.homes}
             component={Homes}
             options={{
@@ -102,8 +102,8 @@ export default BottomTabBase = ({ navigation }) => {
                 </View>
               ),
             }}
-          />
-          <Tab.Screen
+          /> */}
+          {/* <Tab.Screen
            name={allTexts.tabNames.buyAndSell}
             component={BuyAndSell}
             options={{
@@ -119,7 +119,7 @@ export default BottomTabBase = ({ navigation }) => {
                 </View>
               ),
             }}
-          />
+          /> */}
           <Tab.Screen
            name={allTexts.tabNames.services}
             component={Services}

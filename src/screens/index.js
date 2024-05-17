@@ -17,6 +17,8 @@ import HouseHold from './house-hold';
 import Orders from './orders';
 import FlatData from './SearchflatsData';
 import SelectCityOptions from './select-options';
+import AddPets from './add-pet';
+import Maid from './maid-screen';
 export {
   Signin,
   Splash,
@@ -36,5 +38,7 @@ export {
   HouseHold,
   Orders,
   FlatData,
-  SelectCityOptions
+  SelectCityOptions,
+  AddPets,
+  Maid
 };

@@ -17,7 +17,9 @@ import {
   Orders,
   FlatData,
   SelectCityOptions,
-  frequentVisitor
+  frequentVisitor,
+  AddPets,
+  Maid,
 } from '../screens';
 import { createStackNavigator } from '@react-navigation/stack';
 import ApplicationContext from '../utils/context-api/Context';
@@ -44,7 +46,9 @@ const rootNavigation = () => {
       houseHold,
       orders,
       saearchFlatData,
-      selectCityOptions
+      selectCityOptions,
+      addPets,
+      maid
     },
   } = allTexts;
 
@@ -160,6 +164,15 @@ const rootNavigation = () => {
         <Stack.Screen
           name={frequentVisitor}
           component={FrequentVisitor}
+          name={addPets}
+          component={AddPets}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={maid}
+          component={Maid}
           options={{
             headerShown: false,
           }}
@@ -199,19 +212,20 @@ const getLoginDetails = () => {
   }, []);
   
   return (
-        <ApplicationContext.Provider
-          value={{
-            loginDetails,
-            setLoginDetails,
-            userDetails,
-            setUserDetails,
-          }}>
-              {loginDetails === null || loginDetails === '' ? (
-                <AuthStack />
-              ) : (
-                <HomeStack />
-              )}
-        </ApplicationContext.Provider>
+        // <ApplicationContext.Provider
+        //   value={{
+        //     loginDetails,
+        //     setLoginDetails,
+        //     userDetails,
+        //     setUserDetails,
+        //   }}>
+        //       {loginDetails === null || loginDetails === '' ? (
+        //         <AuthStack />
+        //       ) : (
+        //         <HomeStack />
+        //       )}
+        // </ApplicationContext.Provider>
+        <HomeStack />
   );
 };
 
