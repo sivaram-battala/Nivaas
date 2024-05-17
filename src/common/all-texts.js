@@ -142,8 +142,9 @@ export const allTexts = {
     orders:'Orders',
     saearchFlatData:'saearchFlatData',
     selectCityOptions:'SelectCityOptions',
+    frequentVisitor:"FrequentVisitor",
     addPets:'AddPets',
-    maid:'Maid'
+    maid:'Maid',
     // splashscreen: 'Splash_Screen',
   },
   homeHeader: {
