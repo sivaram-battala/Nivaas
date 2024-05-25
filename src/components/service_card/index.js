@@ -1,18 +1,18 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
-import { window } from '../../common';
+import { allTexts, window } from '../../common';
 
-const ServiceCard = ({uri,name}) => {
+const ServiceCard = ({uri,name,navigation}) => {
   console.log(uri,'uri');
   return (
-    <View style={styles.eachServiceCon}>
+    <TouchableOpacity style={styles.eachServiceCon} onPress={()=>navigation.navigate(allTexts.screenNames.eachService)}>
       <Image
         source={uri}
         height={50}
         width={50}
       />
       <Text>{name}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 

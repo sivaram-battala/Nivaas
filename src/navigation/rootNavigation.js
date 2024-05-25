@@ -17,15 +17,24 @@ import {
   Orders,
   FlatData,
   SelectCityOptions,
-  frequentVisitor,
   AddPets,
   Maid,
+  MaidProfile,
+  PrepaidMeter,
+  MaintainenceSettings,
+  SocietyDues,
+  AddPrepaidMeter,
+  UserOnBoardingForm,
 } from '../screens';
 import { createStackNavigator } from '@react-navigation/stack';
 import ApplicationContext from '../utils/context-api/Context';
 import {useAppSelector, useAppDispatch} from '../redux/reduxHooks';
-import UserCityDetailsForm from '../screens/city-details-form';
 import FrequentVisitor from '../screens/frequent-visitor';
+import { AddVehicle } from '../screens/add-vechile';
+import MainProfile from '../screens/maidprofile';
+import Dailyhelp from '../screens/daily-help';
+import EachService from '../screens/each-service';
+import AdminSociety from '../screens/admin-society';
 
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
@@ -40,7 +49,7 @@ const rootNavigation = () => {
       addDetails,
       searchCity,
       searchApartmentBlock,
-      userCityDetailsForm,
+      userOnBoardingForm,
       newApartmentOnBoard,
       myAccount,
       houseHold,
@@ -48,7 +57,17 @@ const rootNavigation = () => {
       saearchFlatData,
       selectCityOptions,
       addPets,
-      maid
+      maid,
+      frequentVisitor,
+      dailyHelp,
+      addVehicle,
+      maidProfile,
+      eachService,
+      adminSociety,
+      maintainenceSettings,
+      prepaidMeter,
+      addPrepaidMeter,
+      societyDues,
     },
   } = allTexts;
 
@@ -113,8 +132,8 @@ const rootNavigation = () => {
           }}
         />
         <Stack.Screen
-          name={userCityDetailsForm}
-          component={UserCityDetailsForm}
+          name={userOnBoardingForm}
+          component={UserOnBoardingForm}
           options={{
             headerShown: false,
           }}
@@ -164,6 +183,11 @@ const rootNavigation = () => {
         <Stack.Screen
           name={frequentVisitor}
           component={FrequentVisitor}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
           name={addPets}
           component={AddPets}
           options={{
@@ -173,6 +197,69 @@ const rootNavigation = () => {
         <Stack.Screen
           name={maid}
           component={Maid}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={dailyHelp}
+          component={Dailyhelp}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={maidProfile}
+          component={MaidProfile}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={addVehicle}
+          component={AddVehicle}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={eachService}
+          component={EachService}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={adminSociety}
+          component={AdminSociety}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={prepaidMeter}
+          component={PrepaidMeter}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={maintainenceSettings}
+          component={MaintainenceSettings}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={societyDues}
+          component={SocietyDues}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={addPrepaidMeter}
+          component={AddPrepaidMeter}
           options={{
             headerShown: false,
           }}

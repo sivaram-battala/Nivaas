@@ -18,6 +18,8 @@ import {TopBarcard, TopBarCard2} from './topBar1/topBarCard';
 import {NewBackHeader} from './new-back-header';
 import ServiceCard from './service_card';
 import CustomDropdown from './custom-dropdown';
+import DpImage from './dp-image';
+import NumericTextInput from './numeric-textInput';
 export {
   Loader,
   SearchBar,
@@ -39,5 +41,7 @@ export {
   NewBackHeader,
   TopBarCard2,
   ServiceCard,
-  CustomDropdown
+  CustomDropdown,
+  DpImage,
+  NumericTextInput
 };

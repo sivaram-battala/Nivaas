@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
     textTransform: 'capitalize',
   },
   detail: {
-    color: colors.orangeColor,
+    color: colors.primaryRedColor,
     fontFamily: fontFamily.popinLight,
     fontSize: 12,
     textAlign: 'center',
@@ -50,7 +50,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   expectOtp: {
-    color: colors.orangeColor,
+    color: colors.primaryRedColor,
     fontFamily: fontFamily.popinRegular,
     fontSize: 10,
     alignSelf: 'center',

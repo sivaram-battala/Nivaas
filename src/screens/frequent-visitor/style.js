@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { window } from "../../common";
+import { colors, window } from "../../common";
 
 export const styles = StyleSheet.create({
     containerOne: {
@@ -29,4 +29,26 @@ export const styles = StyleSheet.create({
         width: window.width * 0.8,
         height: 40,
     },
+    inputContainer: {
+        marginHorizontal:window.width*0.1,
+        marginVertical:window.height*0.03
+      },
+      label: {
+        marginBottom: 10,
+        color: colors.gray,
+        fontSize:15,
+        fontWeight:'500'
+      },
+      input: {
+        backgroundColor: '#f0f0f0',
+        borderRadius: 5,
+        paddingHorizontal: 10,
+        paddingVertical: 8,
+        color: '#333',
+        fontSize: 16,
+      },
+      buttonCon:{
+        marginHorizontal:window.width*0.1,
+        marginVertical:window.height*0.03
+     }
 })

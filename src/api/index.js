@@ -21,10 +21,12 @@ export const endpoints = {
   NIVAAS_OTP_TRIGGER:'nivaas/api/auth/jtuserotp/trigger',
   NIVAAS_SIGN_IN:'nivaas/api/auth/signin',
   NIVAAS_CURRENT_CUSTOMER:'nivaas/api/auth/currentCustomer',
+  NIVAAS_PROFILE_PIC:'api/customer/upload',
   NIVAAS_CITY:'jtcity/list',
   NIVAAS_APARTMENT:'jtapartment/nearByApartments',
   NIVAAS_FLAT:'jtflat/flats/available',
   NIVAAS_ONBOARD : 'onboarding/flat/request',
+  NIVAAS_NEW_APARTMENT_ONBOARD:'jtapartment/save'
 };
 export const getInitialToken = async () => {
   try {

@@ -4,7 +4,7 @@ import { colors, window } from "../../common";
 
 export const styles = StyleSheet.create({
     mainCon:{
-        height:window.height,
+        height:'100%',
         width:window.width,
         backgroundColor:colors.white
     },

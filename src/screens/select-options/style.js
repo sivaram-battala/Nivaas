@@ -4,7 +4,7 @@ import { colors, window } from "../../common";
 export const styles = StyleSheet.create({
     mainCon: {
       backgroundColor: colors.white,
-      height:window.height
+      height:'100%'
     },
     container: {
       flex: 1,
@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
        marginVertical:10
     },
     buttonContainer: {
-      marginTop: 20,
+      marginTop: '60%',
     },
     apartmentsErrorHandlerCon:{
       flexDirection:'row',

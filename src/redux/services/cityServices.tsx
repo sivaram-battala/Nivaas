@@ -36,6 +36,13 @@ export const cityService = createApi({
         body: payload,
       }),
     }),
+    newApartmentOnboarding: builder.mutation<any, {}>({
+      query: (payload) => ({
+        url: endpoints.NIVAAS_NEW_APARTMENT_ONBOARD,
+        method: 'POST',
+        body: payload,
+      }),
+    }),
   }),
 });
 
@@ -44,4 +51,20 @@ export const {
   useLazyGetApartmentListQuery,
   useLazyGetFlatsListQuery,
   useUserOnBoardingMutation,
+  useNewApartmentOnboardingMutation,
 } = cityService;
+
+// const flatPayload = {
+    //   flatId: apartmentValue?.id,
+    //   pageNo: 0,
+    //   pageSize: 100,
+    // };
+    // getflatdata(flatPayload)
+    //   .unwrap()
+    //   .then(responce => {
+    //     // console.log(responce?.data,'<==============flatdata');
+    //     setflatdata(responce?.data);
+    //   })
+    //   .catch(error => {
+    //     console.log('error in flat data==========>', error);
+    //   });

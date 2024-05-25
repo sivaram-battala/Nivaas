@@ -46,7 +46,7 @@ export const styles = StyleSheet.create({
   },
   login: {
     fontFamily: fontFamily.popinBold,
-    color: colors.orangeColor,
+    color: colors.primaryRedColor,
     paddingLeft: 50,
   },
   signinTextContainer: {
@@ -105,6 +105,6 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     padding: 10,
     borderRadius: 5,
-    backgroundColor: colors.orangeColor
+    backgroundColor: colors.primaryRedColor
   },
 });

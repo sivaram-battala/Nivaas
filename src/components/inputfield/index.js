@@ -141,7 +141,7 @@ export const PasswordField = ({
               <MaterialCommunityIcon
                 name={!isShowPassword ? 'eye' : 'eye-off'}
                 style={{ fontSize: 22, }}
-                color={colors.orangeColor}
+                color={colors.primaryRedColor}
               />
             </TouchableOpacity>
           )}

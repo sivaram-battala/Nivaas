@@ -263,13 +263,13 @@ const Signup = ({navigation}) => {
                     size={30}
                     style={{
                       ...styles.checkIcon,
-                      color: isChecked ? colors.orangeColor : '#7a98fa',
+                      color: isChecked ? colors.primaryRedColor : '#7a98fa',
                     }}
                   />
                   <Text
                     style={{
                       ...styles.tc,
-                      color: isChecked ? colors.orangeColor : '#7a98fa',
+                      color: isChecked ? colors.primaryRedColor : '#7a98fa',
                     }}>
                     Terms & Conditions{' '}
                   </Text>
@@ -277,7 +277,7 @@ const Signup = ({navigation}) => {
                 <View style={styles.buttonContainer}>
                   {isChecked ? (
                     <PrimaryButton
-                      bgColor={colors.orangeColor}
+                      bgColor={colors.primaryRedColor}
                       loading={isSubmitting}
                       onPress={handleSubmit}
                       text={sigup}

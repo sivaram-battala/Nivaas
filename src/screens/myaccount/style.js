@@ -16,13 +16,6 @@ export const styles = StyleSheet.create({
         marginHorizontal:window.width*0.05,
         marginVertical:20
     },
-    profileImage: {
-        height: 50,
-        width: 50,
-        backgroundColor: "#ccc",
-        borderRadius: 30,
-        marginHorizontal: 20
-    },
     profieText: {
         color: "black",
         fontSize: 17
@@ -41,7 +34,8 @@ export const styles = StyleSheet.create({
     manageFlatsConText: {
         marginBottom: "5%",
         fontSize: 17,
-        fontWeight:'500'
+        fontWeight:'500',
+        color:colors.black
     },
     manageFlatsSubCon: {
         // flexDirection: "row"
@@ -51,7 +45,7 @@ export const styles = StyleSheet.create({
         flexDirection: "row"
     },
     manageFlatsSubConText1: {
-        color: colors.orangeColor,
+        color: colors.primaryRedColor,
         fontSize: 17
     },
     manageFlatsSubConText2: {
@@ -64,7 +58,7 @@ export const styles = StyleSheet.create({
     },
     manageFlatsConHomeTextOne: {
         paddingLeft:"10%",
-        color:colors.gray,
+        color:colors.black,
         fontSize:17
     },
     statusPendingText: {
@@ -87,7 +81,7 @@ export const styles = StyleSheet.create({
     manageFlatsConAddText:{
         paddingLeft:window.width*0.07,
         fontSize:17,
-        color:colors.gray
+        color:colors.black
     },
     householdSubCon:{
         flexDirection:'row',
@@ -117,17 +111,18 @@ export const styles = StyleSheet.create({
        
     },
     setting: {
-        paddingLeft:window.width*0.12,
+        paddingHorizontal:window.width*0.13,
         paddingBottom: '10%',
         borderBottomWidth: 2,
         borderBottomColor: colors.gray2,
-        borderTopWidth: 2,
-        borderTopColor: colors.gray2
+        // borderTopWidth: 2,
+        // borderTopColor: colors.gray2
     },
     settingHeader: {
         marginVertical: 20,
         fontSize: 18,
-        fontWeight:'500'
+        fontWeight:'500',
+        color:colors.black
     },
     generalSettingsOptions: {
         // marginTop: 10,
@@ -144,7 +139,7 @@ export const styles = StyleSheet.create({
     generalSettingsOptionText: {
         paddingLeft:window.width*0.07,
         fontSize: 18,
-        color:colors.gray
+        color:colors.black
     },
     nivas: {
         marginTop: "15%",
@@ -152,7 +147,7 @@ export const styles = StyleSheet.create({
     },
     nivasText: {
         fontSize: 20,
-        color: "black",
+        color: colors.black,
         fontWeight: "bold",
         marginBottom: "5%"
     },
@@ -160,9 +155,11 @@ export const styles = StyleSheet.create({
         alignItems: "center",
         flexDirection: "row",
         justifyContent: "space-evenly",
-        marginBottom:50
+        marginBottom:50,
+        marginRight:'5%'
     },
     footerText: {
-        color: "black",
+        color: colors.black,
+        fontSize:13
     }
 })

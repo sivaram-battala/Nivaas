@@ -6,7 +6,7 @@ import { colors, fontSize } from '../../common'
 export const styles = StyleSheet.create({
     container:{
         borderWidth: 1,
-        borderColor:colors.orangeColor,
+        borderColor:colors.primaryRedColor,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 50,
@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
         marginVertical:'1%'
     },
     btnText:{
-        color:colors.orangeColor,
+        color:colors.primaryRedColor,
         textAlign:'center',
         fontWeight:'400',
         fontSize:fontSize.small

@@ -23,7 +23,7 @@ export const styles = StyleSheet.create({
     width: '100%',
   },
   error: {
-    color: colors.orangeColor,
+    color: colors.primaryRedColor,
     textTransform: 'capitalize',
     fontFamily: fontFamily.popinRegular,
     fontSize: 12,
@@ -39,7 +39,7 @@ export const styles = StyleSheet.create({
     width: undefined,
     flex: 1,
     borderRadius: 3,
-    color:colors.orangeColor
+    color:colors.primaryRedColor
   },
   imgContainer: {
     width: 57,

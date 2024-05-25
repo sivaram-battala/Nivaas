@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
       marginBottom:5
     },
     imageFocused:{
-      color:colors.orangeColor,
+      color:colors.primaryRedColor,
       marginBottom:5
     },
     iconTextCon:{
@@ -39,12 +39,12 @@ export const styles = StyleSheet.create({
       color:colors.black,
     },
     textFocused:{
-      color:colors.orangeColor,
+      color:colors.primaryRedColor,
     },
     imageContainer:{
       elevation:2,
       shadowColor: colors.black,
       borderWidth:1,
-      borderColor:colors.orangeColor,
+      borderColor:colors.primaryRedColor,
     },
   });

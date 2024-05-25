@@ -4,36 +4,40 @@ import {styles} from './style';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Foundation from 'react-native-vector-icons/Foundation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {TopBarCard2} from '../../components';
+import {DpImage, TopBarCard2} from '../../components';
 import {statusBarHeight} from '../../utils/config/config';
 import {colors} from 'react-native-elements';
 import UserServices from '../../components/user-services/UserServices';
 import {TouchableOpacity} from 'react-native';
 import {removeLoginSessionDetails} from '../../utils/preferences/localStorage';
-import {useLazyGetCurrentCustomerQuery} from '../../redux/services/authService';
 import ApplicationContext from '../../utils/context-api/Context';
+import { useLazyGetCurrentCustomerQuery } from '../../redux/services/myAccountService';
 
-const MyAccount = ({navigation}) => {
-  const isActive = false;
+const MyAccount = ({navigation,dispatch}) => {
+  // const active = false;
   const isFlatAdded = true;
   const {userDetails, setLoginDetails} = useContext(ApplicationContext);
-  const [customerData, setCustomerData] = useState(null);
+  const [currentCustomerData, setCurrentCustomerData] = useState(null);
   const [active, setActive] = useState(false);
   const [currentCustomer] = useLazyGetCurrentCustomerQuery();
-  const handleCustomerData = () => {
+  const handleCurrentCustomerData = () => {
     currentCustomer()
       .unwrap()
       .then(responce => {
         console.log('responce of currentCustoemr', responce);
-        setCustomerData(responce);
-        setActive(responce);
+        setCurrentCustomerData(responce);
+        try {
+          responce?.apartmentDTOs?.id || responce?.apartmentDTOs?.id && setActive(true)
+        } catch (error) {
+          console.log('error in currentCustomerData=======>',error);
+        }
       })
       .catch(error => {
         console.log('error in currentCustomer===>', error);
       });
   };
   useEffect(() => {
-    handleCustomerData();
+    handleCurrentCustomerData();
   }, []);
 
   return (
@@ -44,23 +48,23 @@ const MyAccount = ({navigation}) => {
         style={{height: 50, marginTop: statusBarHeight, flexDirection: 'row'}}>
         <TopBarCard2
           back={true}
-          txt={'Account'}
+          txt={'My Account'}
           navigation={navigation}
-          accountType={isActive ? 'Basic' : ''}
+          accountType={active ? 'Basic' : ''}
         />
       </View>
       <View style={styles.profie}>
-        <Image style={styles.profileImage} />
+        <DpImage dispatch={dispatch}/>
         <View>
           <Text style={styles.profieText}>Vamsi Chadharam</Text>
-          {isActive && (
+          {active && (
             <View
               style={{
                 backgroundColor: colors.black,
                 borderRadius: 10,
                 alignItems: 'center',
               }}>
-              {isActive && (
+              {active && (
                 <Text style={{color: colors.white, fontWeight: '500'}}>
                   Nivaas ID : 12345
                 </Text>
@@ -89,7 +93,7 @@ const MyAccount = ({navigation}) => {
               <Text style={styles.manageFlatsConHomeTextOne}>
                 A-Block 101,Green Hills
               </Text>
-              {isActive ? (
+              {active ? (
                 <Text style={styles.statusactiveText}>Active</Text>
               ) : (
                 <Text style={styles.statusPendingText}>Pending</Text>
@@ -108,33 +112,35 @@ const MyAccount = ({navigation}) => {
           </View>
         </View>
       </View>
-      <UserServices navigation={navigation} />
+      {active && <UserServices navigation={navigation} />}
       <View style={styles.setting}>
         <Text style={styles.settingHeader}>General settings</Text>
         <View style={styles.generalSettingsOptions}>
           <View style={styles.settingsubConOne}>
-            <AntDesign name="mail" size={25} color="black" />
+            <AntDesign name="mail" size={25} color={colors.black} />
             <Text style={styles.generalSettingsOptionText}>support</Text>
           </View>
           <View style={styles.settingsubConOne}>
-            <AntDesign name="sharealt" size={25} color="black" />
+            <AntDesign name="sharealt" size={25} color={colors.black} />
             <Text style={styles.generalSettingsOptionText}>
               Help your friend with Nivas
             </Text>
           </View>
+          <TouchableOpacity>
           <View style={styles.settingsubConOne}>
-            <AntDesign name="user" size={25} color="black" />
+            <AntDesign name="user" size={25} color={colors.black} />
             <Text style={styles.generalSettingsOptionText}>
               Account information
             </Text>
           </View>
+          </TouchableOpacity>
           <TouchableOpacity
             onPress={async () => {
               await removeLoginSessionDetails();
               setLoginDetails(null);
             }}>
             <View style={styles.settingsubConOne}>
-              <AntDesign name="poweroff" size={23} color="black" />
+              <AntDesign name="poweroff" size={23} color={colors.black} />
               <Text style={styles.generalSettingsOptionText}>Logout</Text>
             </View>
           </TouchableOpacity>

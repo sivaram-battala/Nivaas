@@ -2,8 +2,9 @@ import {Image, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {colors} from 'react-native-elements';
 import {window} from '../../common';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 
-const DailyHelpCard = () => {
+const DailyHelpCard = ({isDailyHelp}) => {
   return (
     <View style={styles.mainCon}>
       <View style={styles.subCon}>
@@ -16,10 +17,22 @@ const DailyHelpCard = () => {
             width={70}
           />
         </View>
-        <View style={styles.textCon}>
-          <Text style={styles.texts}>Ramalakshmi</Text>
-          <Text style={styles.texts}>10AM - 8PM</Text>
-        </View>
+        {
+          isDailyHelp ? (
+            <View style={styles.textCon}>
+              <Text style={styles.texts}>Ramalakshmi</Text>
+              <Text style={styles.texts}>10AM - 8PM</Text>
+            </View>
+          ) : (
+            <View style={styles.textCon}>
+              <Text style={styles.texts}>Ramalakshmi</Text>
+              <View style={{flexDirection:'row',alignItems:'center'}}>
+                <MaterialIcons name='star-rate' size={25} color={'yellow'}/>
+                <Text style={styles.texts}>3.5</Text>
+              </View>
+            </View>
+          )
+        }
       </View>
     </View>
   );
@@ -33,12 +46,12 @@ const styles = StyleSheet.create({
   },
   subCon:{
     flexDirection: 'row',
-    paddingVertical:window.height*0.04,
+    paddingVertical:window.height*0.02,
     paddingHorizontal:window.width*0.2,
-    borderTopColor:colors.grey0,
-    borderTopWidth:1,
-    // borderBottomColor:colors.grey0,
-    // borderBottomWidth:1
+    // borderTopColor:colors.grey0,
+    // borderTopWidth:1,
+    borderBottomColor:colors.grey0,
+    borderBottomWidth:1
   },
   textCon:{
     justifyContent:'center',

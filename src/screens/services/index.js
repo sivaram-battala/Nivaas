@@ -8,28 +8,28 @@ const Services = ({navigation}) => {
   return (
     <ScrollView style={styles.mainCon} showsVerticalScrollIndicator={false}>
       <View style={{height: 50, marginTop: statusBarHeight}}>
-        <TopBarCard2 txt={'Services'} navigation={navigation} />
+        <TopBarCard2  txt={'Services'} />
       </View>
       <View style={styles.servicesCon}>
         <View style={{flexDirection: 'row'}}>
-          <ServiceCard uri={require('../../utils/assets/images/Electrician.png')} name='Electrician'/>
-          <ServiceCard uri={require('../../utils/assets/images/Plumber.png')} name='Plumber'/>
-          <ServiceCard uri={require('../../utils/assets/images/Carpenter.png')} name='Carpenter'/>
+          <ServiceCard uri={require('../../utils/assets/images/Electrician.png')} name='Electrician' navigation={navigation}/>
+          <ServiceCard uri={require('../../utils/assets/images/Plumber.png')} name='Plumber' navigation={navigation}/>
+          <ServiceCard uri={require('../../utils/assets/images/Carpenter.png')} name='Carpenter' navigation={navigation}/>
         </View>
         <View style={{flexDirection: 'row'}}>
-          <ServiceCard uri={require('../../utils/assets/images/Cleaner.png')} name='Cleaner'/>
-          <ServiceCard uri={require('../../utils/assets/images/Chef.png')} name='Chef'/>
-          <ServiceCard uri={require('../../utils/assets/images/Maid.png')} name='Maid'/>
+          <ServiceCard uri={require('../../utils/assets/images/Cleaner.png')} name='Cleaner' navigation={navigation}/>
+          <ServiceCard uri={require('../../utils/assets/images/Chef.png')} name='Chef' navigation={navigation}/>
+          <ServiceCard uri={require('../../utils/assets/images/Maid.png')} name='Maid' navigation={navigation}/>
         </View>
         <View style={{flexDirection: 'row'}}>
-          <ServiceCard uri={require('../../utils/assets/images/BloodTest.png')} name='BloodTest'/>
-          <ServiceCard uri={require('../../utils/assets/images/Doctor.png')} name='Doctor'/>
-          <ServiceCard uri={require('../../utils/assets/images/Cab.png')} name='Cab'/>
+          <ServiceCard uri={require('../../utils/assets/images/BloodTest.png')} name='BloodTest' navigation={navigation}/>
+          <ServiceCard uri={require('../../utils/assets/images/Doctor.png')} name='Doctor' navigation={navigation}/>
+          <ServiceCard uri={require('../../utils/assets/images/Cab.png')} name='Cab' navigation={navigation}/>
         </View>
         <View style={{flexDirection:'row'}}>
-        <ServiceCard uri={require('../../utils/assets/images/Hairdresser.png')} name='Hairdresser'/>
-        <ServiceCard uri={require('../../utils/assets/images/Hospitals.png')} name='Hospitals'/>
-        <ServiceCard uri={require('../../utils/assets/images/AcRepair.png')} name='AcRepair'/>
+        <ServiceCard uri={require('../../utils/assets/images/Hairdresser.png')} name='Hairdresser' navigation={navigation}/>
+        <ServiceCard uri={require('../../utils/assets/images/Hospitals.png')} name='Hospitals' navigation={navigation}/>
+        <ServiceCard uri={require('../../utils/assets/images/AcRepair.png')} name='AcRepair' navigation={navigation}/>
         </View>
       </View>
       <View style={styles.AutoBikeServicesCon}>

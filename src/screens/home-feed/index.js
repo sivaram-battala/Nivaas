@@ -7,9 +7,9 @@ import {
   getAuthTokenDetails,
   removeLoginSessionDetails,
 } from '../../utils/preferences/localStorage';
-import ApplicationContext from '../../utils/context-api/Context';
 import {styles} from './styles';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import {
   useLazyGetApartmentListQuery,
@@ -42,7 +42,7 @@ const Home = ({navigation}) => {
     getCityList(cityPayload)
       .unwrap()
       .then(responce => {
-        console.log('citydata===========>>>',responce?.data);
+        console.log('citydata===========>>>', responce?.data);
         setCityData(responce?.data);
         dispatch(setcitiesData(responce?.data));
       })
@@ -64,33 +64,32 @@ const Home = ({navigation}) => {
         console.log('error in apartments data========>', error);
       });
 
-      const payload = {
-        flatId:29,
-        pageNo:0,
-        pageSize:100
-      }
-      getflatdata(payload).unwrap().then((responce)=>{
+    const payload = {
+      flatId: 29,
+      pageNo: 0,
+      pageSize: 100,
+    };
+    getflatdata(payload)
+      .unwrap()
+      .then(responce => {
         // console.log(responce?.data,'<==============flatdata');
         setflatdata(responce?.data);
-      }).catch((error)=>{
-        console.log('error in flat data==========>',error);
       })
+      .catch(error => {
+        console.log('error in flat data==========>', error);
+      });
   };
 
-  useEffect(() => {
-    getData();
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <View style={styles.mainCon}>
       <View style={styles.headerCon}>
         <Text style={styles.username}>Hi, User</Text>
-        <FontAwesome
-          name="user"
-          size={30}
-          color={colors.black}
-          onPress={() => navigation.navigate(allTexts.screenNames.myAccount)}
-        />
+        <View style={styles.iconsCon}>
+          <Ionicons name="notifications" size={30} style={styles.icons} />
+          <MaterialIcons name="account-circle" size={30} style={styles.icons} onPress={()=>navigation.navigate(allTexts.screenNames.myAccount)}/>
+        </View>
       </View>
       <View style={styles.subConOne}>
         <Image
@@ -107,12 +106,12 @@ const Home = ({navigation}) => {
           <PrimaryButton
             onPress={() =>
               navigation.navigate(allTexts.screenNames.selectCityOptions, {
-                cityData: cityData,
-                apartmentData:apartmentData,
-                flatdata:flatdata
+                // cityData: cityData,
+                // apartmentData:apartmentData,
+                // flatdata:flatdata
               })
             }
-            bgColor={colors.orangeColor}
+            bgColor={colors.primaryRedColor}
             radius={30}
             text={'    + ADD YOUR HOME    '}
             shadow={true}
@@ -123,6 +122,7 @@ const Home = ({navigation}) => {
       <View style={styles.subConTwo}>
         <TouchableOpacity>
           <Fontisto name="commenting" size={25} style={styles.commentIcon} />
+          {/* <Image source={require('../../utils/assets/images/Notice.png')} style={styles.commentIcon}/> */}
         </TouchableOpacity>
         <View style={styles.textCon}>
           <Text style={styles.discoverMore}>

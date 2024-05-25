@@ -15,7 +15,7 @@ const CustomDropdown = ({ label, data, value, onChange, labelField, valueField,e
       <Text style={styles.label}>{label}</Text>
       <View style={styles.dropdown}>
         <Dropdown
-          data={data || []}
+          data={data && data.length > 0 ? data : [{ [labelField]: errorMessage || 'No results found', [valueField]: null }]}
           labelField={labelField}
           valueField={valueField}
           value={selectedValue}

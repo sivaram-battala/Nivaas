@@ -220,7 +220,7 @@ const OTPScreen = ({navigation, route}) => {
         <OTPTextInput
           ref={otpInput}
           inputCount={6}
-          tintColor={colors.orangeColor}
+          tintColor={colors.primaryRedColor}
           textInputStyle={styles.textInput}
           containerStyle={{
             marginTop: 1,
@@ -237,7 +237,7 @@ const OTPScreen = ({navigation, route}) => {
             <PrimaryButton
               text={'Continue'}
               loading={loading}
-              bgColor={colors.orangeColor}
+              bgColor={colors.primaryRedColor}
               onPress={() => {
                 let otpOutPut = otpInput?.current?.state?.otpText
                   ?.toString()

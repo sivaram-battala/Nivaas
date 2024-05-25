@@ -19,6 +19,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import Apartments from '../Apartments';
 
 const Tab = createBottomTabNavigator();
 
@@ -31,7 +32,7 @@ export default BottomTabBase = ({ navigation }) => {
       showsVerticalScrollIndicator={false}>
       {loader ? (
         <View style={{ flex: 1, marginTop: '3%' }}>
-          <Loader size={'large'} color={colors.orangeColor} />
+          <Loader size={'large'} color={colors.primaryRedColor} />
         </View>
       ) : (
         <Tab.Navigator
@@ -48,7 +49,7 @@ export default BottomTabBase = ({ navigation }) => {
               flexDirection: 'row',
               alignSelf: 'center',
             },
-            activeTintColor: colors.orangeColor,
+            activeTintColor: colors.primaryRedColor,
             keyboardHidesTabBar: true,
             showLabel: false,
           }}>
@@ -71,8 +72,8 @@ export default BottomTabBase = ({ navigation }) => {
             }}
           />
           <Tab.Screen
-            name={allTexts.tabNames.community}
-            component={Community}
+            name={allTexts.tabNames.apartments}
+            component={Apartments}
             options={{
               tabBarStyle: {
                 height: 80,
@@ -80,7 +81,7 @@ export default BottomTabBase = ({ navigation }) => {
               headerShown: false,
               tabBarIcon: ({ color, size, focused }) => (
                 <View style={styles.iconTextCon}>  
-                  <MaterialIcons name='apartment' size={30} style={focused ? styles.imageFocused : styles.imageNormal}/>
+                  <FontAwesome name='building-o' size={27} style={focused ? styles.imageFocused : styles.imageNormal}/>
                   <Text style={focused ? styles.textFocused : styles.textNormal}>Apartments</Text>
                 </View>
               ),
@@ -120,7 +121,7 @@ export default BottomTabBase = ({ navigation }) => {
               ),
             }}
           /> */}
-          <Tab.Screen
+          {/* <Tab.Screen
            name={allTexts.tabNames.services}
             component={Services}
             options={{
@@ -136,7 +137,7 @@ export default BottomTabBase = ({ navigation }) => {
                 </View>
               ),
             }}
-          />
+          /> */}
         </Tab.Navigator>
       )}
     </SafeAreaView>

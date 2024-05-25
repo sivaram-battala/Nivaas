@@ -4,7 +4,7 @@ import { colors, window } from "../../common";
 export const styles = StyleSheet.create({
     mainCon:{
         backgroundColor:colors.white,
-        height:window.height
+        height:'100%'
     },
     iconsCon:{
         flexDirection:'row',
@@ -23,8 +23,10 @@ export const styles = StyleSheet.create({
         marginVertical:window.height*0.03
       },
       label: {
-        marginBottom: 5,
-        color: '#333',
+        marginBottom: 10,
+        color: colors.gray,
+        fontSize:15,
+        fontWeight:'500'
       },
       input: {
         backgroundColor: '#f0f0f0',
