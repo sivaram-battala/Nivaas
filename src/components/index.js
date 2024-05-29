@@ -9,7 +9,6 @@ import {InputField1} from './inputfield';
 import {RadioButton} from './RadioButton';
 import {PageHeader} from './PageHeader';
 import {TempleInput} from './InputText';
-import {DotsNation} from './dotsNation';
 import {BackHeaderNew} from './backHeaders';
 import {Terms_And_Conditions} from './terms-and-conditions';
 import {NotificationCard} from './notificationCard';
@@ -32,7 +31,6 @@ export {
   RadioButton,
   PageHeader,
   TempleInput,
-  DotsNation,
   BackHeaderNew,
   Terms_And_Conditions,
   NotificationCard,

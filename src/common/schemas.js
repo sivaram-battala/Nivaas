@@ -14,18 +14,18 @@ export const onBoardNewApartmentSchema = (formData) => {
   let valid = true;
   const errors = {};
 
-  if (!formData.city.id) {
-    valid = false;
-    errors.city = 'City is required';
-  }
+  // if (!formData.city.id) {
+  //   valid = false;
+  //   errors.city = 'City is required';
+  // }
   if (!formData.apartment) {
     valid = false;
     errors.apartment = 'Apartment is required';
   }
-  if (!formData.numBlocks) {
-    valid = false;
-    errors.numBlocks = 'Number of blocks is required';
-  }
+  // if (!formData.numBlocks) {
+  //   valid = false;
+  //   errors.numBlocks = 'Number of blocks is required';
+  // }
   if (!formData.numFlatsPerBlock) {
     valid = false;
     errors.numFlatsPerBlock = 'Number of flats per block is required';

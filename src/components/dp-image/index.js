@@ -63,7 +63,7 @@ const DpImage = () => {
       dispatch(setProfilePicture(response.imageUrl));
     } catch (error) {
       console.error('Error uploading image', error);
-      Alert.alert('Upload Error', 'There was an error uploading the image.');
+      // Alert.alert('Upload Error', 'There was an error uploading the image.');
     }
   };
 

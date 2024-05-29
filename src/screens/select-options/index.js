@@ -20,13 +20,17 @@ import {setapartmentData} from '../../redux/slices/apartmentsSlice';
 const SelectCityOptions = ({navigation, route}) => {
   // const data = route?.params || '';
   // console.log('route data in city details form ============>', data);
-  const [cityValue, setCityValue] = useState({id: 1, name: null});
-  const [apartmentValue, setApartmentValue] = useState({id: 4, name: null});
-  const [flatValue, setFlatValue] = useState({id: 8, name: null});
+  const [cityValue, setCityValue] = useState({id: null, name: null});
+  const [apartmentValue, setApartmentValue] = useState({id: null, name: null});
+  const [flatValue, setFlatValue] = useState({id: null, name: null});
 
   const [cityData, setCityData] = useState();
   const [apartmentData, setapartmentsData] = useState();
   const [flatdata, setflatdata] = useState();
+  // const dataWithStringIDs = flatdata.map(item => ({
+  //   ...item,
+  //   flatNo: String(item.flatNo),  // or id: item.id.toString()
+  // }));
   const [getCityList] = useLazyGetCityListQuery();
   const [getApartmentsList] = useLazyGetApartmentListQuery();
   const [getflatdata] = useLazyGetFlatsListQuery();
@@ -44,7 +48,7 @@ const SelectCityOptions = ({navigation, route}) => {
     getCityList(cityPayload)
       .unwrap()
       .then(responce => {
-        console.log('citydata===========>>>', responce?.data);
+        // console.log('citydata===========>>>', responce?.data);
         setCityData(responce?.data);
         dispatch(setcitiesData(responce?.data));
       })
@@ -61,7 +65,7 @@ const SelectCityOptions = ({navigation, route}) => {
     getApartmentsList(apartmentPayload)
       .unwrap()
       .then(responce => {
-        console.log('apartments data===========>',responce?.data);
+        // console.log('apartments data===========>',responce?.data);
         setapartmentsData(responce?.data);
         dispatch(setapartmentData(responce?.data));
       })
@@ -73,15 +77,20 @@ const SelectCityOptions = ({navigation, route}) => {
   const handleFlatData =(id)=>{
     // console.log(id,'FLATDATAAA');
     const flatPayload = {
-      flatId:id,
+      flatId:85,
       pageNo: 0,
       pageSize: 100,
     };
     getflatdata(flatPayload)
       .unwrap()
       .then(responce => {
-        console.log(responce?.data,'<==============flatdata');
-        setflatdata(responce?.data);
+        // console.log('flatData=============>',responce?.data);
+        const processedFlatData = responce?.data.map(item => ({
+          ...item,
+          flatNo: String(item.flatNo),
+        }));
+        setflatdata(processedFlatData);
+        // setflatdata(responce?.data);
       })
       .catch(error => {
         console.log('error in flat data==========>', error);
@@ -145,11 +154,11 @@ const SelectCityOptions = ({navigation, route}) => {
               labelField="name"
               valueField="id"
             />
-            {!cityData && (
+            {/* {!cityData && (
               <View>
                 <Text style={styles.errorMessage}>{'No Cities Here'}</Text>
               </View>
-            )}
+            )} */}
           </View>
           {cityValue?.id && (
             <View style={styles.eachDropdownCon}>
@@ -161,11 +170,11 @@ const SelectCityOptions = ({navigation, route}) => {
                 labelField="name"
                 valueField="id"
               />
-              {!apartmentData && (
+              {apartmentData && (
                 <View style={styles.apartmentsErrorHandlerCon}>
-                  <Text style={styles.errorMessage}>
+                  {/* <Text style={styles.errorMessage}>
                     {'No Apartments Here'}
-                  </Text>
+                  </Text> */}
                   <TouchableOpacity
                     onPress={() =>
                       navigation.navigate(

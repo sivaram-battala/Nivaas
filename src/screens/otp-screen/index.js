@@ -169,13 +169,14 @@ const OTPScreen = ({navigation, route}) => {
               .then(response => {
                 dispatch(userDataAction(response));
               })
-              .catch(() => {
-                alert('otp is not matched');
+              .catch((error) => {
+                console.log('error--->', error);
+                // alert('otp is not matched');
               });
           })
           .catch(error => {
             console.log('error--->', error?.data?.message);
-            alert(error?.data?.message);
+            // alert(error?.data?.message);
           });
       } catch (error) {
         // actions.setSubmitting(false);

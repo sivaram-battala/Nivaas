@@ -19,24 +19,21 @@ const UserOnBoardingForm = ({navigation, route}) => {
     setSelectedOption(option);
     console.log('Selected option:', option);
   };
-  const handleOnBoarding = id => {
-    if (!id) {
-      Alert.alert('Validation Error', 'Id Not Mentioned');
-      return;
-    }
+  const handleOnBoarding = userData => {
     const payload = {
-      id: id,
+      flatId: userData?.flatId,
+      type:"FLAT"
     };
-    console.log(payload, 'payloaddddddddddd');
+    // console.log(payload, 'payloaddddddddddd');
     userOnboarding(payload)
       .unwrap()
       .then(responce => {
         console.log(responce, 'onboarding responce');
       })
       .catch(error => {
-        console.log('error in post req', error);
+        console.log('error in OnBoarding request', error);
       });
-    navigation.navigate(allTexts.screenNames.myAccount);
+    navigation.navigate(allTexts.screenNames.home,{city:userData?.cityValue,apartment:userData?.apartmentValue,flat:userData?.flatValue,flatId: userData?.flatId});
   };
   const radioButtons = useMemo(
     () => [
@@ -93,7 +90,7 @@ const UserOnBoardingForm = ({navigation, route}) => {
         </View>
         <View style={{marginTop: window.height * 0.15}}>
           <PrimaryButton
-            onPress={() => handleOnBoarding(userData?.flatId)}
+            onPress={() => handleOnBoarding(userData)}
             bgColor={colors.primaryRedColor}
             radius={30}
             text={'   On Board     '}

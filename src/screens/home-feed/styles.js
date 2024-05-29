@@ -26,7 +26,7 @@ icons:{
     marginLeft:10
 },
   subConOne:{
-    marginTop:window.height*0.08,
+    marginTop:window.height*0.06,
     alignItems:'center',
     backgroundColor:'#FFF2E2',
     marginHorizontal:window.width*0.06,

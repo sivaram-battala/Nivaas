@@ -26,7 +26,8 @@ export const endpoints = {
   NIVAAS_APARTMENT:'jtapartment/nearByApartments',
   NIVAAS_FLAT:'jtflat/flats/available',
   NIVAAS_ONBOARD : 'onboarding/flat/request',
-  NIVAAS_NEW_APARTMENT_ONBOARD:'jtapartment/save'
+  NIVAAS_NEW_APARTMENT_ONBOARD:'jtapartment/save',
+  ADD_PREPAIDMETER:'/prepaidmeter/save',
 };
 export const getInitialToken = async () => {
   try {

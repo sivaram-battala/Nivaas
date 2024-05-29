@@ -24,7 +24,6 @@ export const styles = StyleSheet.create({
   //   paddingHorizontal: 10,
   //   borderRadius: 5,
   //   backgroundColor:colors.gray3
-
   // },
   errorText: {
     color: 'red',
@@ -42,10 +41,14 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
     paddingHorizontal: 8,
     marginBottom: 10,
+    fontSize:17
   },
   dropdownContainer: {
     position: 'relative',
   },
+  radioButtonContainer: {
+    marginBottom: 20,
+},
   dropdown: {
     height: 40,
     borderColor: colors.gray,
@@ -79,7 +82,7 @@ export const styles = StyleSheet.create({
     marginBottom: 10,
   },
   radioButtonCon:{
-    marginHorizontal:window.width*0.02
+    marginVertical:'2%'
   },
   buttonView:{
     flexDirection:'row',

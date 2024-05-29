@@ -53,18 +53,3 @@ export const {
   useUserOnBoardingMutation,
   useNewApartmentOnboardingMutation,
 } = cityService;
-
-// const flatPayload = {
-    //   flatId: apartmentValue?.id,
-    //   pageNo: 0,
-    //   pageSize: 100,
-    // };
-    // getflatdata(flatPayload)
-    //   .unwrap()
-    //   .then(responce => {
-    //     // console.log(responce?.data,'<==============flatdata');
-    //     setflatdata(responce?.data);
-    //   })
-    //   .catch(error => {
-    //     console.log('error in flat data==========>', error);
-    //   });

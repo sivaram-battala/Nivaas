@@ -1,13 +1,22 @@
 import React, {useState, useMemo} from 'react';
-import {View, Text, StyleSheet, FlatList,TextInput, ScrollView} from 'react-native';
-import RadioGroup from 'react-native-radio-buttons-group';
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  TextInput,
+  ScrollView,
+} from 'react-native';
 import {colors} from '../../common';
 import {statusBarHeight} from '../../utils/config/config';
 import {PrimaryButton, TopBarCard2} from '../../components';
 import {useSelector} from 'react-redux';
-import {CheckBox} from 'react-native-elements';
+import {Button, CheckBox} from 'react-native-elements';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 const MaintainenceSettings = ({navigation}) => {
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [value, setvalue] = useState();
   const backendData = [
     {id: 1, name: 'Water Meter', field1: '555555', field2: '500000'},
     {id: 2, name: 'Apartment Size Meter', field1: '200000', field2: '222222'},
@@ -19,13 +28,25 @@ const MaintainenceSettings = ({navigation}) => {
   const [data, setData] = useState(
     backendData?.map(item => ({...item, checked: false})),
   );
-  const [value, setvalue] = useState();
+
   const handleCheckboxToggle = id => {
     const updatedData = data.map(item =>
       item.id === id ? {...item, checked: !item.checked} : item,
     );
     setData(updatedData);
     // console.log(updatedData,'updateddataa');
+  };
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = date => {
+    console.warn('A date has been picked: ', date);
+    hideDatePicker();
   };
   const renderItem = ({item}) => (
     <View style={styles.checkboxContainer}>
@@ -37,67 +58,35 @@ const MaintainenceSettings = ({navigation}) => {
       />
     </View>
   );
-  // const radioButtons = useMemo(
-  //   () => [
-  //     {
-  //       id: '1',
-  //       label: 'Static',
-  //       value: 'static',
-  //     },
-  //     {
-  //       id: '2',
-  //       label: 'Dynamic',
-  //       value: 'dynamic',
-  //     },
-  //   ],
-  //   [],
-  // );
 
-  const [selectedId, setSelectedId] = useState();
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.mainCon}>
       <View style={{height: 50, marginTop: statusBarHeight}}>
         <TopBarCard2 back={true} navigation={navigation} txt={'Maintainence'} />
       </View>
-      {/* <View style={styles.radioContainer}>
-        {radioButtons.map(button => (
-          <View key={button.id} style={styles.radioButtonContainer}>
-            <RadioGroup
-              radioButtons={[button]}
-              onPress={setSelectedId}
-              selectedId={selectedId}
-              layout="row"
-            />
-            {selectedId === button.id && (
-              <View style={styles.viewContainer}>
-                <Text style={styles.viewText}>
-                  {button.label === 'Static' ? (
-                    <View>
-                      <Text>static</Text>
-                    </View>
-                  ) : (
-                    <View>
-                      <FlatList
-                        data={data}
-                        renderItem={renderItem}
-                        keyExtractor={item => item.id.toString()}
-                        contentContainerStyle={styles.container}
-                      />
-                    </View>
-                  )}
-                </Text>
-              </View>
-            )}
-          </View>
-        ))}
-      </View> */}
+      <View>
+        <View style={styles.datePicker}>
+          <PrimaryButton
+            text={'Notify On'}
+            bgColor={colors.primaryRedColor}
+            onPress={showDatePicker}
+          />
+        </View>
+        <DateTimePickerModal
+          isVisible={isDatePickerVisible}
+          mode="date"
+          onConfirm={handleConfirm}
+          onCancel={hideDatePicker}
+          isDarkModeEnabled={true}
+        />
+      </View>
       <View style={styles.flatlistCon}>
         <TextInput
           style={styles.input}
           placeholder="Enter maintainence Charge"
           value={value}
           onChangeText={setvalue}
-          keyboardType='numeric'
+          keyboardType="numeric"
         />
         <FlatList
           data={data}
@@ -120,34 +109,20 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     height: '100%',
   },
-  radioContainer: {
-    marginTop: 20,
-    paddingHorizontal: 20,
-  },
-  radioButtonContainer: {
-    marginBottom: 20,
-  },
-  viewContainer: {
-    marginTop: 10,
-    padding: 20,
-    backgroundColor: colors.lightGray,
-    borderRadius: 10,
-  },
-  viewText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: colors.black,
+  datePicker:{
+    marginHorizontal: '10%',
+    marginVertical: '10%',
+    width:'20%'
   },
   flatlistCon: {
     marginHorizontal: '5%',
-    marginVertical: '10%',
   },
   buttonCon: {
     marginHorizontal: '3%',
     marginVertical: '10%',
   },
-  checkboxContainer:{
-    marginHorizontal:'2%',
+  checkboxContainer: {
+    marginHorizontal: '2%',
   },
   input: {
     borderWidth: 1,
@@ -156,7 +131,6 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 5,
     backgroundColor: '#f9f9f9',
-    marginHorizontal:'4.5%',
-    marginVertical:'5%'
+    marginHorizontal: '4.5%',
   },
 });

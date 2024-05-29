@@ -3,8 +3,10 @@ import { FlatList, StyleSheet, Text, View, Button } from 'react-native';
 import { colors } from '../../common';
 import { TopBarCard2, CustomDropdown } from '../../components';
 import { statusBarHeight } from '../../utils/config/config';
+import { useSelector } from 'react-redux';
 
 const SocietyDues = ({ navigation }) => {
+  const currentCustomer = useSelector(state=>state.currentCustomer);
   const dummyData = [
     {
       flatId: '1',
@@ -99,6 +101,7 @@ const SocietyDues = ({ navigation }) => {
           />
         )}
         <Text style={styles.textCon}>{selectedFlat.flatNo} :</Text>
+        <Text style={styles.textCon}>Status : </Text>
       </View>
       <View style={styles.container}>
         <View style={styles.header}>
@@ -132,7 +135,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: '500',
     color: colors.black,
-    marginVertical: '5%',
+    marginVertical: '2%',
   },
   container: {
     marginHorizontal: '5%',
@@ -143,7 +146,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.gray3,
     paddingVertical: 10,
     borderBottomWidth: 1,
-    borderBottomColor: '#ddd',
+    borderBottomColor: colors.gray2,
   },
   headerCell: {
     flex: 1,
@@ -154,7 +157,7 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     borderBottomWidth: 1,
-    borderBottomColor: '#ddd',
+    borderBottomColor: colors.gray2,
     paddingVertical: 10,
   },
   cell: {

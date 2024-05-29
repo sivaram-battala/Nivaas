@@ -3,19 +3,21 @@ import {
   Image,
   Pressable,
   Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import React from 'react';
 import {styles} from './styles';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {allTexts, colors} from '../../common';
+import {allTexts} from '../../common';
+import { useSelector } from 'react-redux';
 
 const Apartments = ({navigation}) => {
-  const isAdmin = true;
+  const customerDetails = useSelector(state=>state.currentCustomer);
   const handleAdmin = () => {
-    isAdmin
+    // customerDetails?.currentCustomerData?.apartmentDTOs?.some(
+    //   (apartment) => apartment.adminApproved)
+    true
       ? navigation.navigate(allTexts.screenNames.adminSociety)
       : Alert.alert('Alert', 'Assessed Only For Admins');
   };
@@ -23,10 +25,10 @@ const Apartments = ({navigation}) => {
     <View style={styles.mainCon}>
       <View style={styles.topHeader}>
         <Text style={styles.apartmentName}>Green Hills..</Text>
-        <View style={styles.iconsCon}>
+        {/* <View style={styles.iconsCon}>
           <Ionicons name="notifications" size={30} style={styles.icons} />
           <MaterialIcons name="account-circle" size={30} style={styles.icons} />
-        </View>
+        </View> */}
       </View>
       <View>
         <Text style={styles.payText}>Pay..</Text>
