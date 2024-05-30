@@ -24,39 +24,41 @@ export const styles = StyleSheet.create({
   //   paddingHorizontal: 10,
   //   borderRadius: 5,
   //   backgroundColor:colors.gray3
-
   // },
   errorText: {
     color: 'red',
     marginBottom: 5,
   },
   container: {
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     padding: 16,
-    marginTop:20,
     marginHorizontal:window.width*0.05
   },
   input: {
     height: 40,
-    borderColor: 'gray',
+    borderColor: colors.gray,
     borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 8,
     marginBottom: 10,
+    fontSize:17
   },
   dropdownContainer: {
     position: 'relative',
   },
+  radioButtonContainer: {
+    marginBottom: 20,
+},
   dropdown: {
     height: 40,
-    borderColor: 'gray',
+    borderColor: colors.gray,
     borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 8,
   },
   label: {
     position: 'absolute',
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     left: 22,
     top: 8,
     zIndex: 999,
@@ -80,7 +82,7 @@ export const styles = StyleSheet.create({
     marginBottom: 10,
   },
   radioButtonCon:{
-    marginHorizontal:window.width*0.02
+    marginVertical:'2%'
   },
   buttonView:{
     flexDirection:'row',

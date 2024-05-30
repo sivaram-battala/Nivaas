@@ -51,7 +51,7 @@ export const styles = StyleSheet.create({
   },
   isLogin: {
     fontFamily: fontFamily.popinBold,
-    color: colors.orangeColor,
+    color: colors.primaryRedColor,
     paddingLeft: 50,
   },
   alreadyAcc: {

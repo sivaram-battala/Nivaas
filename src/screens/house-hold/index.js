@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { styles } from './style'
 import { TopBarCard2 } from '../../components'
@@ -6,13 +6,13 @@ import { statusBarHeight } from '../../utils/config/config'
 import { Image } from 'react-native'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
-import { colors } from '../../common'
+import { allTexts, colors } from '../../common'
 
 const HouseHold = ({navigation}) => {
   return (
     <View style={styles.mainCon}>
       <View
-        style={{height: 50, marginTop: statusBarHeight, flexDirection: 'row'}}>
+        style={{height: 50, marginTop: statusBarHeight}}>
         <TopBarCard2 back={true} txt={'HouseHold'} navigation={navigation} />
       </View>
       <View style={styles.profie}>
@@ -21,11 +21,15 @@ const HouseHold = ({navigation}) => {
       </View>
       <View style={styles.manageFlatsCon}>
         <Text style={styles.headingText}>Purchages</Text>
+        <TouchableOpacity onPress={()=>navigation.navigate(allTexts.screenNames.addVehicle)}>
         <View style={styles.manageFlatsConHome}>
           <MaterialCommunityIcons name="car-hatchback" size={30} color={colors.black} />
           <Text style={styles.manageFlatsConAddText}>Add vechile</Text>
         </View>
+        </TouchableOpacity>
       </View>
+      <TouchableOpacity onPress={()=>navigation.navigate(allTexts.screenNames.maid)}>
+      <TouchableOpacity onPress={()=>navigation.navigate(allTexts.screenNames.dailyHelp)}>
       <View style={styles.manageFlatsCon}>
         <Text style={styles.headingText}>Daily Help</Text>
         <View style={styles.manageFlatsConHome}>
@@ -36,6 +40,9 @@ const HouseHold = ({navigation}) => {
           <Text style={styles.manageFlatsConAddText}>Add Your Maid or Driver etc</Text>
         </View>
       </View>
+      </TouchableOpacity>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={()=>navigation.navigate(allTexts.screenNames.addPets)}>
       <View style={styles.manageFlatsCon}>
         <Text style={styles.headingText}>My Pets</Text>
         <View style={styles.manageFlatsConHome}>
@@ -43,9 +50,11 @@ const HouseHold = ({navigation}) => {
             <MaterialCommunityIcons name="dog" size={25} color={colors.black} />
             <Text>Pets</Text>
           </View>
-          <Text style={styles.manageFlatsConAddText}>Add Your Maid or Driver etc</Text>
+          <Text style={styles.manageFlatsConAddText}>Add Your Pets</Text>
         </View>
       </View>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={()=>navigation.navigate(allTexts.screenNames.frequentVisitor)}>
       <View style={styles.manageFlatsCon}>
         <Text style={styles.headingText}>Frequent Visitors</Text>
         <View style={styles.manageFlatsConHome}>        
@@ -53,9 +62,10 @@ const HouseHold = ({navigation}) => {
             <FontAwesome6 name="user-gear" size={25} color={colors.black} />
             <Text>Visitors</Text>
           </View>
-          <Text style={styles.manageFlatsConAddText}>Add Your Maid or Driver etc</Text>
+          <Text style={styles.manageFlatsConAddText}>Add Your Visitors</Text>
         </View>
       </View>
+      </TouchableOpacity>
     </View>
   )
 }

@@ -36,6 +36,13 @@ export const cityService = createApi({
         body: payload,
       }),
     }),
+    newApartmentOnboarding: builder.mutation<any, {}>({
+      query: (payload) => ({
+        url: endpoints.NIVAAS_NEW_APARTMENT_ONBOARD,
+        method: 'POST',
+        body: payload,
+      }),
+    }),
   }),
 });
 
@@ -44,4 +51,5 @@ export const {
   useLazyGetApartmentListQuery,
   useLazyGetFlatsListQuery,
   useUserOnBoardingMutation,
+  useNewApartmentOnboardingMutation,
 } = cityService;

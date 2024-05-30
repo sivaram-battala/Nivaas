@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
     nextButton:{
         fontSize: 16,
         fontWeight: 'bold',
-        color: colors.orangeColor,
+        color: colors.primaryRedColor,
       },
     searchCon:{
         backgroundColor: colors.white,

@@ -26,15 +26,15 @@ export const styles = StyleSheet.create({
   },
   inputContainer: {
     width: '80%',
-    // paddingBottom: 100,
-    marginTop:'50%'
+    paddingBottom: 100,
+    marginTop:'60%',
   },
   inputView:{
-    borderColor:colors.gray2,
+    borderColor:colors.gray,
     borderWidth:1,
     borderRadius:5,
     justifyContent:'center',
-    paddingBottom:5
+    paddingBottom:15,
   },
   btnContainer: {marginTop: 15, width: '70%', alignSelf: 'center'},
   navLinkText: {
@@ -46,7 +46,7 @@ export const styles = StyleSheet.create({
   },
   login: {
     fontFamily: fontFamily.popinBold,
-    color: colors.orangeColor,
+    color: colors.primaryRedColor,
     paddingLeft: 50,
   },
   signinTextContainer: {
@@ -105,6 +105,6 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     padding: 10,
     borderRadius: 5,
-    backgroundColor: colors.orangeColor
+    backgroundColor: colors.primaryRedColor
   },
 });

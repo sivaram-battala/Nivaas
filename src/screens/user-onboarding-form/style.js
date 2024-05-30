@@ -1,13 +1,11 @@
 import { StyleSheet } from "react-native";
 import { colors, window } from "../../common";
-import { color } from "react-native-elements/dist/helpers";
-import { windowHeight } from "../../utils/config/config";
 
 
 export const styles = StyleSheet.create({
     mainContainer:{
         width:window.width,
-        height:window.height,
+        height:'100%',
         backgroundColor:colors.white,
         paddingTop:window.height * 0.0001
     },
@@ -16,7 +14,8 @@ export const styles = StyleSheet.create({
         margin:window.width*0.1,
         marginTop:window.height*0.1,
         padding:30,
-        borderRadius:5
+        borderRadius:5,
+        elevation:5
     },
     eachDetailsCon:{
         flexDirection:'row',
@@ -55,7 +54,9 @@ export const styles = StyleSheet.create({
         fontSize:16
     },
     buttonView:{
-        flexDirection:'row',
         marginVertical:13,
-    }
+    },
+    radioButtonContainer: {
+        marginBottom: 20,
+    },
 })

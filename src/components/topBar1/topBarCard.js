@@ -84,7 +84,7 @@ export const TopBarcard = ({
               {img ? (
                 <Image source={{uri: img?.url}} height={40} width={40} />
               ) : (
-                <EvilIcons name="user" size={45} color={colors.orangeColor} />
+                <EvilIcons name="user" size={45} color={colors.primaryRedColor} />
               )}
             </TouchableOpacity>
           )}
@@ -111,7 +111,7 @@ export const TopBarcard = ({
               <MaterialIcons
                 name="cancel"
                 size={20}
-                color={colors.orangeColor}
+                color={colors.primaryRedColor}
               />
             </TouchableOpacity>
           )}
@@ -145,7 +145,7 @@ export const TopBarcard = ({
                 navigation.navigate(allTexts.screenNames.notification)
               }>
               <View>
-                <Feather name="bell" size={30} color={colors.orangeColor} />
+                <Feather name="bell" size={30} color={colors.primaryRedColor} />
                 {notificationsCount !== 0 && (
                   <>
                     <View style={styles.notificationsCount}>
@@ -163,7 +163,7 @@ export const TopBarcard = ({
               <Feather
                 name="shopping-bag"
                 size={30}
-                color={colors.orangeColor}
+                color={colors.primaryRedColor}
               />
             </TouchableOpacity>
           )}
@@ -229,7 +229,7 @@ export const TopBarCard2 = ({
               style={{
                 fontSize: 20,
                 fontWeight: 'bold',
-                color: 'orange',
+                color: colors.primaryRedColor,
                 textAlign: 'center',
                 fontFamily: 'Poppins-Medium',
                 fontWeight: 'Normal',
@@ -264,7 +264,7 @@ export const TopBarCard2 = ({
               <Feather
                 name="shopping-bag"
                 size={30}
-                color={colors.orangeColor}
+                color={colors.primaryRedColor}
               />
             </TouchableOpacity>
           )}
@@ -312,7 +312,7 @@ const styles = StyleSheet.create({
 
   },
   joinText: {
-    color: colors.orangeColor,
+    color: colors.primaryRedColor,
     fontWeight: 'bold',
     fontSize: 18,
   },
@@ -349,7 +349,7 @@ const styles = StyleSheet.create({
   },
   notificationsCount: {
     borderWidth: 1,
-    borderColor: colors.orangeColor,
+    borderColor: colors.primaryRedColor,
     backgroundColor: 'white',
     borderRadius: 10,
     height: 18,
@@ -361,7 +361,7 @@ const styles = StyleSheet.create({
     left: 15,
   },
   notificationCountNumber: {
-    color: colors.orangeColor,
+    color: colors.primaryRedColor,
     fontSize: 10,
   },
 });

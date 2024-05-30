@@ -9,6 +9,38 @@ export const onboardValidationSchema = Yup.object().shape({
     .required('Number of flats per block is required'),
   addressLine1: Yup.string().required('Address line 1 is required'),
 });
+// validation.js
+export const onBoardNewApartmentSchema = (formData) => {
+  let valid = true;
+  const errors = {};
+
+  // if (!formData.city.id) {
+  //   valid = false;
+  //   errors.city = 'City is required';
+  // }
+  if (!formData.apartment) {
+    valid = false;
+    errors.apartment = 'Apartment is required';
+  }
+  // if (!formData.numBlocks) {
+  //   valid = false;
+  //   errors.numBlocks = 'Number of blocks is required';
+  // }
+  if (!formData.numFlatsPerBlock) {
+    valid = false;
+    errors.numFlatsPerBlock = 'Number of flats per block is required';
+  }
+  if (!formData.addressLine1) {
+    valid = false;
+    errors.addressLine1 = 'Address Line 1 is required';
+  }
+  if (!formData.selectedOption) {
+    valid = false;
+    errors.selectedOption = 'You must select an option';
+  }
+
+  return { valid, errors };
+};
 
 export const RegisterValidationSchema = Yup.object({
   firstName: Yup.string()

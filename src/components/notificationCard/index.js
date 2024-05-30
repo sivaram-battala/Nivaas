@@ -63,12 +63,12 @@ const styles = StyleSheet.create({
     width: 70,
     borderRadius: 70 / 2,
     borderWidth: 1,
-    borderColor: colors.orangeColor,
+    borderColor: colors.primaryRedColor,
     alignItems: 'center',
     justifyContent: 'center'
   },
   type: { 
-    color: colors.orangeColor, 
+    color: colors.primaryRedColor, 
     textTransform: 'capitalize',
     color: 'white'
   },
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     padding: 5,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colors.orangeColor,
+    backgroundColor: colors.primaryRedColor,
     borderRadius: 10
   },
   description: {

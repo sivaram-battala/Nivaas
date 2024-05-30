@@ -37,8 +37,8 @@ import {loginAction, userDataAction} from '../../redux/slices/authSlice.ts';
 const OTPScreen = ({navigation, route}) => {
   const [timer, setTimer] = useState('00');
   const [loading, setLoading] = useState(false);
-  const [customerDetails] = useLazyGetCustomerDataQuery();
-  const [doLogin] = useSignInMutation();
+  // const [customerDetails] = useLazyGetCustomerDataQuery();
+  // const [doLogin] = useSignInMutation();
   const [nivvasLogin] = useNivaasSigninMutation();
   const dispatch = useAppDispatch();
   const Ref = useRef(null);
@@ -169,13 +169,14 @@ const OTPScreen = ({navigation, route}) => {
               .then(response => {
                 dispatch(userDataAction(response));
               })
-              .catch(() => {
-                alert('otp is not matched');
+              .catch((error) => {
+                console.log('error--->', error);
+                // alert('otp is not matched');
               });
           })
           .catch(error => {
             console.log('error--->', error?.data?.message);
-            alert(error?.data?.message);
+            // alert(error?.data?.message);
           });
       } catch (error) {
         // actions.setSubmitting(false);
@@ -220,7 +221,7 @@ const OTPScreen = ({navigation, route}) => {
         <OTPTextInput
           ref={otpInput}
           inputCount={6}
-          tintColor={colors.orangeColor}
+          tintColor={colors.primaryRedColor}
           textInputStyle={styles.textInput}
           containerStyle={{
             marginTop: 1,
@@ -237,7 +238,7 @@ const OTPScreen = ({navigation, route}) => {
             <PrimaryButton
               text={'Continue'}
               loading={loading}
-              bgColor={colors.orangeColor}
+              bgColor={colors.primaryRedColor}
               onPress={() => {
                 let otpOutPut = otpInput?.current?.state?.otpText
                   ?.toString()

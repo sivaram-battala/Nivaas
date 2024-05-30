@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     },
     householdCon:{
         flexDirection:'row',
-        paddingLeft:window.width*0.12,
+        paddingLeft:window.width*0.13,
         marginVertical:window.height*0.03,
         paddingVertical:10,
         // borderColor:colors.gray2,
@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
         justifyContent:'space-between',
         backgroundColor:colors.gray3,
         padding:10,
-        marginRight:10
+        marginRight:'6%'
         
     },
     householdSubCon:{

@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: colors.orangeColor,
+    color: colors.primaryRedColor,
   },
   peragraph: {
     fontSize: 14,
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
   button: {
     height: 50,
     width: 90,
-    backgroundColor: colors.orangeColor,
+    backgroundColor: colors.primaryRedColor,
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center',

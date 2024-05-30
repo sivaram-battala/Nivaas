@@ -35,7 +35,8 @@ export const BROADLEAF = 's://kovela.app/shop/';
 
 
 //NIVAAS
-export const NIVAAS_URL = 'https://fanfun.in/nivaascustomer/'
+export const NIVAAS_URL = 'https://nivaas.homes/nivaascustomer/'
+// 'https://4.240.68.49:8443/nivaascustomer/'
 
 // let bearer_token = getAuthTokenDetails();
 // export const authAxiousInstance = axios.create({

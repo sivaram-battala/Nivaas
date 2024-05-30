@@ -5,27 +5,35 @@ export const styles = StyleSheet.create({
   mainCon:{
     marginTop:window.width*0.06,
     backgroundColor:colors.white,
-    height:window.height
+    height:'100%'
   },
   headerCon:{
     flexDirection:'row',
     justifyContent:'space-between',
     alignItems:'center',
-    marginTop:window.width*0.06,
+    marginTop:window.height*0.06,
     marginHorizontal:window.width*0.08,
   },
   username:{
     color:colors.black,
     fontSize:17
   },
+  iconsCon:{
+    flexDirection:'row',
+},
+icons:{
+    color:colors.black,
+    marginLeft:10
+},
   subConOne:{
-    marginTop:30,
+    marginTop:window.height*0.06,
     alignItems:'center',
     backgroundColor:'#FFF2E2',
     marginHorizontal:window.width*0.06,
     paddingVertical:50,
     paddingHorizontal:30,
-    borderRadius:10
+    borderRadius:10,
+    elevation:3
   },
   textCon:{
     backgroundColor:colors.white,
@@ -50,7 +58,8 @@ export const styles = StyleSheet.create({
     marginHorizontal:window.width*0.06,
     paddingVertical:20,
     paddingHorizontal:20,
-    borderRadius:10
+    borderRadius:10,
+    elevation:3
   },
   commentIcon:{
     marginRight:window.width*0.68,

@@ -9,7 +9,6 @@ import {InputField1} from './inputfield';
 import {RadioButton} from './RadioButton';
 import {PageHeader} from './PageHeader';
 import {TempleInput} from './InputText';
-import {DotsNation} from './dotsNation';
 import {BackHeaderNew} from './backHeaders';
 import {Terms_And_Conditions} from './terms-and-conditions';
 import {NotificationCard} from './notificationCard';
@@ -18,6 +17,8 @@ import {TopBarcard, TopBarCard2} from './topBar1/topBarCard';
 import {NewBackHeader} from './new-back-header';
 import ServiceCard from './service_card';
 import CustomDropdown from './custom-dropdown';
+import DpImage from './dp-image';
+import NumericTextInput from './numeric-textInput';
 export {
   Loader,
   SearchBar,
@@ -30,7 +31,6 @@ export {
   RadioButton,
   PageHeader,
   TempleInput,
-  DotsNation,
   BackHeaderNew,
   Terms_And_Conditions,
   NotificationCard,
@@ -39,5 +39,7 @@ export {
   NewBackHeader,
   TopBarCard2,
   ServiceCard,
-  CustomDropdown
+  CustomDropdown,
+  DpImage,
+  NumericTextInput
 };

@@ -40,9 +40,6 @@ export const authService = createApi({
         },
       }),
     }),
-    getCurrentCustomer : builder.query<any,{}>({
-      query: () => `${endpoints.NIVAAS_CURRENT_CUSTOMER}`
-    }),
     // triggerOtp: builder.mutation<any, {}>({
     //   query: payload => ({
     //     url: endpoints.NEW_OTP,
@@ -118,5 +115,4 @@ export const authService = createApi({
 export const {
   useNivaastriggerotpMutation,
   useNivaasSigninMutation,
-  useLazyGetCurrentCustomerQuery
 } = authService;
