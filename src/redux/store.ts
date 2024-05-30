@@ -14,6 +14,7 @@ import prepaidMetersSlice from './slices/prepaidMetersSlice';
 import { myAccountService } from './services/myAccountService';
 import currentCustomerSlice from './slices/currentCustomerSlice';
 import { maintainenceService } from './services/maintainenceService';
+import apartmentPrepaidMetersList from './slices/apartmentPrepaidMetersList';
 
 
 const rootReducers = combineReducers({
@@ -24,6 +25,7 @@ const rootReducers = combineReducers({
   profilepicture:profileSlice,
   prepaidMeter:prepaidMetersSlice,
   currentCustomer:currentCustomerSlice,
+  apartmentPrepaidMeter:apartmentPrepaidMetersList,
   [authService.reducerPath]: authService.reducer,
   [cityService.reducerPath]: cityService.reducer,
   [myAccountService.reducerPath]:myAccountService.reducer,

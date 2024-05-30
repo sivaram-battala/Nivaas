@@ -28,6 +28,7 @@ export const endpoints = {
   NIVAAS_ONBOARD : 'onboarding/flat/request',
   NIVAAS_NEW_APARTMENT_ONBOARD:'jtapartment/save',
   ADD_PREPAIDMETER:'/prepaidmeter/save',
+  GET_APARTMENT_PREPAID_METERS:'prepaidmeter/list',
 };
 export const getInitialToken = async () => {
   try {

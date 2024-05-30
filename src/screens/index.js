@@ -22,10 +22,10 @@ import AddPets from './add-pet';
 import Maid from './maid-screen';
 import FrequentVisitor from './frequent-visitor';
 import MaidProfile from './maidprofile';
-import PrepaidMeter from './prepaid-meter';
 import MaintainenceSettings from './maintainence-settings';
 import SocietyDues from './society-dues';
-import AddPrepaidMeter from './add-prepaid-meter';
+import PrepaidMeter from './prepaid-meter';
+import AddPrepaidMeter from './add-prepaidmeter';
 export {
   Signin,
   Splash,

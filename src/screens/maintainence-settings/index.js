@@ -15,6 +15,8 @@ import {Button, CheckBox} from 'react-native-elements';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 const MaintainenceSettings = ({navigation}) => {
+  const apatmentMetersData = useSelector(state=>state.apartmentPrepaidMeter);
+  console.log(apatmentMetersData,'KHYTXKFHGVHB');
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [value, setvalue] = useState();
   const backendData = [

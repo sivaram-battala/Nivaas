@@ -14,9 +14,9 @@ import { useSelector } from 'react-redux';
 
 const MyAccount = ({navigation, dispatch, route}) => {
   const data = route.params;
-  // console.log(data.currentCustomerData,'HEKOOOOOO');
+  // console.log(data.currentCustomerData,'ROUTEDATA');
   const custDetails = useSelector(state=>state.currentCustomer);
-  console.log(custDetails?.currentCustomerData,"CUSTDETAILS");
+  // console.log(custDetails?.currentCustomerData,"CUSTDETAILS");
   const {userDetails, setLoginDetails} = useContext(ApplicationContext);
   const [flatModalVisible, setFlatModalVisible] = useState(false);
   const [apartmentModalVisible, setApartmentModalVisible] = useState(false);

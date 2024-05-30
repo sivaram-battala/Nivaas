@@ -30,10 +30,14 @@ export const maintainenceService = createApi({
         },
       }),
     }),
+    getAparmentPrepaidMeters : builder.query<any,{apartmentId:Number,pageNo:Number,pageSize:Number}>({
+      query: ({apartmentId,pageNo,pageSize}) => `${endpoints.GET_APARTMENT_PREPAID_METERS}?apartmentId=${apartmentId}&pageNo=${pageNo}&pageSize=${pageSize}`
+    }),
   }),
 
 });
 
 export const {
     useAddPrepaidMeterMutation,
+    useLazyGetAparmentPrepaidMetersQuery,
 } = maintainenceService;

@@ -13,7 +13,7 @@ const AdminSociety = ({navigation}) => {
       </View>
       <View>
         <View style={styles.apartmentServicesCon}>
-          <Pressable onPress={()=>navigation.navigate(allTexts.screenNames.addPrepaidMeter)}>
+          <Pressable onPress={()=>navigation.navigate(allTexts.screenNames.prepaidMeter)}>
           <View style={styles.eachService}>
             <Text style={styles.eachText}>
               Prepaid Meter
