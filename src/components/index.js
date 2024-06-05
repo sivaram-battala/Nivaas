@@ -19,6 +19,7 @@ import ServiceCard from './service_card';
 import CustomDropdown from './custom-dropdown';
 import DpImage from './dp-image';
 import NumericTextInput from './numeric-textInput';
+import CompleteProfileModal from './completeProfile-modal';
 export {
   Loader,
   SearchBar,
@@ -41,5 +42,6 @@ export {
   ServiceCard,
   CustomDropdown,
   DpImage,
-  NumericTextInput
+  NumericTextInput,
+  CompleteProfileModal,
 };

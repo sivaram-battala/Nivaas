@@ -6,7 +6,9 @@ import { statusBarHeight } from '../../utils/config/config';
 import { useSelector } from 'react-redux';
 
 const SocietyDues = ({ navigation }) => {
-  const currentCustomer = useSelector(state=>state.currentCustomer);
+  const customerDetails = useSelector(state => state.currentCustomer);
+  const [apartmentData, setApartmentData] = useState([]);
+  const [selectedApartment, setSelectedApartment] = useState({id: '',name: ''});
   const dummyData = [
     {
       flatId: '1',
@@ -63,14 +65,28 @@ const SocietyDues = ({ navigation }) => {
       ],
     },
   ];
-
   const [selectedFlat, setSelectedFlat] = useState(dummyData[0]);
-
   useEffect(() => {
     if (dummyData.length === 1) {
-      setSelectedFlat(dummyData[0]);
+      setSelectedFlat(dummyData);
     }
   }, [dummyData]);
+
+  useEffect(() => {
+    if (customerDetails?.currentCustomerData?.apartmentDTOs) {
+      const approvedApartments =
+        customerDetails.currentCustomerData.apartmentDTOs
+          .filter(apartment => apartment.adminApproved)
+          .map(apartment => ({
+            id: apartment.jtApartmentDTO.id,
+            name: apartment.jtApartmentDTO.name,
+          }));
+      setApartmentData(approvedApartments);
+      if (apartmentData.length === 1) {
+        setSelectedFlat(approvedApartments[0]);
+      }
+    }
+  }, [customerDetails]);
 
   const renderItem = ({ item }) => (
     <View style={styles.row}>
@@ -87,6 +103,15 @@ const SocietyDues = ({ navigation }) => {
         <TopBarCard2 back={true} txt={'Society Dues'} navigation={navigation} />
       </View>
       <View style={styles.dropdownContainer}>
+        <CustomDropdown
+          label="Apartment"
+          showLabel={false}
+          data={apartmentData}
+          value={selectedApartment.id}
+          onChange={(id, name) => setSelectedApartment({id, name})}
+          labelField="name"
+          valueField="id"
+        />
         {dummyData.length > 1 && (
           <CustomDropdown
             label="Select Flat"

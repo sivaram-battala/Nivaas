@@ -13,7 +13,7 @@ import profileSlice from './slices/profileSlice';
 import prepaidMetersSlice from './slices/prepaidMetersSlice';
 import { myAccountService } from './services/myAccountService';
 import currentCustomerSlice from './slices/currentCustomerSlice';
-import { maintainenceService } from './services/maintainenceService';
+import { prepaidMeterService } from './services/prepaidMeterService';
 import apartmentPrepaidMetersList from './slices/apartmentPrepaidMetersList';
 
 
@@ -29,7 +29,7 @@ const rootReducers = combineReducers({
   [authService.reducerPath]: authService.reducer,
   [cityService.reducerPath]: cityService.reducer,
   [myAccountService.reducerPath]:myAccountService.reducer,
-  [maintainenceService.reducerPath]:maintainenceService.reducer,
+  [prepaidMeterService.reducerPath]:prepaidMeterService.reducer,
 });
 const persistConfig = {
   key: 'root',
@@ -48,7 +48,7 @@ export const store = configureStore({
       authService.middleware,
       cityService.middleware,
       myAccountService.middleware,
-      maintainenceService.middleware,
+      prepaidMeterService.middleware,
     ),
 });
 

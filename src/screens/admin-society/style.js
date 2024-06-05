@@ -36,6 +36,7 @@ export const styles = StyleSheet.create({
         marginVertical:window.height*0.03,
     },
     eachService:{
+        flexDirection:'row',
         width:'93%',
         backgroundColor:colors.gray3,
         borderColor:colors.primaryRedColor,
@@ -49,6 +50,7 @@ export const styles = StyleSheet.create({
     eachText:{
         fontSize:16,
         fontWeight:'500',
-        color:colors.black
+        color:colors.black,
+        marginLeft:10
     }
 })

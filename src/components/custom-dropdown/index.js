@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import { colors } from '../../common';
 
-const CustomDropdown = ({ label, data, value, onChange, labelField, valueField,errorMessage }) => {
+const CustomDropdown = ({showLabel, label, data, value, onChange, labelField, valueField,errorMessage }) => {
   const [selectedValue, setSelectedValue] = useState(value);
 
   const handleDropdownChange = item => {
@@ -12,7 +12,7 @@ const CustomDropdown = ({ label, data, value, onChange, labelField, valueField,e
   };
   return (
     <View style={styles.dropdownContainer}>
-      <Text style={styles.label}>{label}</Text>
+      <Text style={styles.label}>{showLabel ? label : ''}</Text>
       <View style={styles.dropdown}>
         <Dropdown
           data={data && data.length > 0 ? data : [{ [labelField]: errorMessage || 'No results found', [valueField]: null }]}
@@ -22,7 +22,7 @@ const CustomDropdown = ({ label, data, value, onChange, labelField, valueField,e
           onChange={handleDropdownChange}
           search
           maxHeight={300}
-          placeholder={`Select ${label.toLowerCase()}`}
+          placeholder={`  Select ${label}`}
           searchPlaceholder="Search..."
           containerStyle={styles.dropdown}
         />
@@ -33,7 +33,7 @@ const CustomDropdown = ({ label, data, value, onChange, labelField, valueField,e
 
 const styles = StyleSheet.create({
   dropdownContainer: {
-    marginVertical: 10,
+    // marginVertical: 10,
   },
   label: {
     fontSize: 16,

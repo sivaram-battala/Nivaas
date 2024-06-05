@@ -22,14 +22,14 @@ export const onBoardNewApartmentSchema = (formData) => {
     valid = false;
     errors.apartment = 'Apartment is required';
   }
-  // if (!formData.numBlocks) {
-  //   valid = false;
-  //   errors.numBlocks = 'Number of blocks is required';
-  // }
-  if (!formData.numFlatsPerBlock) {
+  if (!formData.numBlocks) {
     valid = false;
-    errors.numFlatsPerBlock = 'Number of flats per block is required';
+    errors.numBlocks = 'Number of blocks is required';
   }
+  // if (!formData.numFlatsPerBlock) {
+  //   valid = false;
+  //   errors.numFlatsPerBlock = 'Number of flats per block is required';
+  // }
   if (!formData.addressLine1) {
     valid = false;
     errors.addressLine1 = 'Address Line 1 is required';
@@ -37,6 +37,31 @@ export const onBoardNewApartmentSchema = (formData) => {
   if (!formData.selectedOption) {
     valid = false;
     errors.selectedOption = 'You must select an option';
+  }
+
+  return { valid, errors };
+};
+
+export const validatePrepaidMeterFields = (meterName, description, costPerUnit) => {
+  let valid = true;
+  let errors = {};
+
+  if (!meterName.trim()) {
+    errors.meterName = 'Meter Name is required';
+    valid = false;
+  }
+
+  if (!description.trim()) {
+    errors.description = 'Description is required';
+    valid = false;
+  }
+
+  if (!costPerUnit.trim()) {
+    errors.costPerUnit = 'Cost Per Unit is required';
+    valid = false;
+  } else if (isNaN(costPerUnit) || parseFloat(costPerUnit) <= 0) {
+    errors.costPerUnit = 'Cost Per Unit must be a positive number';
+    valid = false;
   }
 
   return { valid, errors };

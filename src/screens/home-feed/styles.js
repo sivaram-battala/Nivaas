@@ -16,7 +16,8 @@ export const styles = StyleSheet.create({
   },
   username:{
     color:colors.black,
-    fontSize:17
+    fontSize:20,
+    fontFamily:'PlayfairDisplay-SemiBold'
   },
   iconsCon:{
     flexDirection:'row',
@@ -28,7 +29,7 @@ icons:{
   subConOne:{
     marginTop:window.height*0.06,
     alignItems:'center',
-    backgroundColor:'#FFF2E2',
+    backgroundColor:colors.yellowOne,
     marginHorizontal:window.width*0.06,
     paddingVertical:50,
     paddingHorizontal:30,
@@ -54,7 +55,7 @@ icons:{
   subConTwo:{
     marginTop:30,
     alignItems:'center',
-    backgroundColor:'#FFF2E2',
+    backgroundColor:colors.yellowOne,
     marginHorizontal:window.width*0.06,
     paddingVertical:20,
     paddingHorizontal:20,
@@ -70,6 +71,49 @@ icons:{
   description:{
     marginHorizontal:window.width*0.04,
     marginTop:10,
+    marginLeft:'10%'
   },
+  descriptionTwo:{
+    marginHorizontal:window.width*0.04,
+    marginTop:10,
+  },
+  // centeredView: {
+  //   flex: 1,
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  //   backgroundColor: 'rgba(0,0,0,0.5)',
+  // },
+  // modalView: {
+  //   marginHorizontal: 20,
+  //   backgroundColor: 'white',
+  //   borderRadius: 5,
+  //   padding: 30,
+  //   alignItems: 'left',
+  //   shadowColor: '#000',
+  //   shadowOffset: {
+  //     width: 0,
+  //     height: 2,
+  //   },
+  //   shadowOpacity: 0.25,
+  //   shadowRadius: 4,
+  //   elevation: 5,
+  // },
+  // modalTitle: {
+  //   fontSize: 18,
+  //   color:colors.black,
+  //   fontWeight:'500'
+  // },
+  // input: {
+  //   width: 250,
+  //   borderColor: 'gray',
+  //   borderWidth: 1,
+  //   borderRadius: 5,
+  //   padding: 10,
+  //   marginTop: 20,
+  // },
+  // errorText: {
+  //   color: 'red',
+  //   marginBottom: 20,
+  // },
 
 })

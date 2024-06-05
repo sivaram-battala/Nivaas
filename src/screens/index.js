@@ -17,7 +17,6 @@ import HouseHold from './house-hold';
 import Orders from './orders';
 import FlatData from './SearchflatsData';
 import UserOnBoardingForm from './user-onboarding-form';
-import SelectCityOptions from './select-options';
 import AddPets from './add-pet';
 import Maid from './maid-screen';
 import FrequentVisitor from './frequent-visitor';
@@ -26,6 +25,11 @@ import MaintainenceSettings from './maintainence-settings';
 import SocietyDues from './society-dues';
 import PrepaidMeter from './prepaid-meter';
 import AddPrepaidMeter from './add-prepaidmeter';
+import FlatsOnboarding from './flats-onboarding';
+import EditOnboardedFlatDetails from './edit-OnboardedFlat-details';
+import Notification from './notification';
+import SelectCityOptions from './select-options';
+import AdminFlatSettings from './admin-flats-settings';
 export {
   Signin,
   Splash,
@@ -46,7 +50,6 @@ export {
   UserOnBoardingForm,
   Orders,
   FlatData,
-  SelectCityOptions,
   AddPets,
   Maid,
   FrequentVisitor,
@@ -55,4 +58,9 @@ export {
   PrepaidMeter,
   SocietyDues,
   AddPrepaidMeter,
+  FlatsOnboarding,
+  EditOnboardedFlatDetails,
+  Notification,
+  SelectCityOptions,
+  AdminFlatSettings,
 };

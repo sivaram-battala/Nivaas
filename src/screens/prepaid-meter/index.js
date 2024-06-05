@@ -7,32 +7,33 @@ import {
   Modal,
   Pressable,
   FlatList,
+  TextInput,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {statusBarHeight} from '../../utils/config/config';
 import {CustomDropdown, NumericTextInput, PrimaryButton, TopBarCard2} from '../../components';
 import {allTexts, colors} from '../../common';
 import {useDispatch, useSelector} from 'react-redux';
-import {useLazyGetAparmentPrepaidMetersQuery} from '../../redux/services/maintainenceService';
+import {useLazyGetAparmentPrepaidMetersQuery, useUpdatePrepaidMeterMutation} from '../../redux/services/prepaidMeterService';
 import { setapartmentPrepaidMeters } from '../../redux/slices/apartmentPrepaidMetersList';
+import { useLazyGetFlatsListQuery } from '../../redux/services/cityServices';
+import Feather from 'react-native-vector-icons/Feather';
+import { useFocusEffect } from '@react-navigation/native';
 
 const PrepaidMeter = ({navigation}) => {
   const dispatch = useDispatch();
   const customerDetails = useSelector(state => state.currentCustomer);
   const [apartmentData, setApartmentData] = useState([]);
-  const [selectedApartment, setSelectedApartment] = useState({
-    id: '',
-    name: '',
-  });
-  const [prepaidMeters, setPrepaidMeters] = useState([]);
+  const [selectedApartment, setSelectedApartment] = useState({id: '',name: ''});
   const [prepaidMetersData, setprepaidMetersData] = useState();
   const [modalVisible, setModalVisible] = useState(false);
   const [addModalVisible, setAddModalVisible] = useState(false);
+  const [editModalVisible, setEditModalVisible] = useState(false);
   const [selectedMeter, setSelectedMeter] = useState(null);
-  console.log(selectedMeter, 'selMet');
-  const [getApartmentPrepaidMetersList] =
-    useLazyGetAparmentPrepaidMetersQuery();
+  const [editedMeter, setEditedMeter] = useState(null);
+  const [getApartmentPrepaidMetersList] = useLazyGetAparmentPrepaidMetersQuery();
+  const [updatePrepaidMeterDetails] = useUpdatePrepaidMeterMutation();
 
   const handleprepaidmetersList = () => {
     if (selectedApartment?.id) {
@@ -44,10 +45,9 @@ const PrepaidMeter = ({navigation}) => {
       console.log(payload);
       getApartmentPrepaidMetersList(payload)
         .unwrap()
-        .then(responce => {
-          // console.log(' Apartment PrepaidMetersList========>',responce?.data);
-          setprepaidMetersData(responce?.data);
-          dispatch(setapartmentPrepaidMeters(responce?.data))
+        .then(response => {
+          setprepaidMetersData(response?.data);
+          dispatch(setapartmentPrepaidMeters(response?.data));
         })
         .catch(error => {
           console.log('error in Apartment PrepaidMetersList=====>', error);
@@ -55,22 +55,53 @@ const PrepaidMeter = ({navigation}) => {
     }
   };
 
+  const handleUpdatePrepaidMetersDetails = () => {
+    const payload = {
+      id: editedMeter.id,
+      description: editedMeter.description,
+      costPerUnit: editedMeter.costPerUnit,
+      name: editedMeter.name,
+    };
+    updatePrepaidMeterDetails(payload)
+      .unwrap()
+      .then((response) => {
+        console.log('update prepaid meter responce =====>',response);
+        handleprepaidmetersList();
+        setEditModalVisible(false);
+      })
+      .catch(error => {
+        console.log('error in updating prepaid meter details:', error);
+      });
+    navigation.navigate(allTexts.screenNames.prepaidMeter)
+  };
+
   const handleMeterPress = item => {
     setSelectedMeter(item);
     setModalVisible(true);
   };
 
+  const handleEditPress = item => {
+    setEditedMeter(item);
+    setEditModalVisible(true);
+  };
+
   const handleAddPress = item => {
-    console.log(item, 'KUYEFVKDWIYEVF');
     setAddModalVisible(true);
   };
 
-  useEffect(() => {
-    if (selectedApartment?.id) {
-      handleprepaidmetersList();
-    }
-  }, [selectedApartment]);
+  // useEffect(() => {
+  //   if (selectedApartment?.id) {
+  //     handleprepaidmetersList();
+  //   }
+  // }, [selectedApartment]);
 
+  useFocusEffect(
+    useCallback(() => {
+      if (selectedApartment?.id) {
+        handleprepaidmetersList();
+      }
+    }, [selectedApartment]),
+  );
   useEffect(() => {
     if (customerDetails?.currentCustomerData?.apartmentDTOs) {
       const approvedApartments =
@@ -106,16 +137,13 @@ const PrepaidMeter = ({navigation}) => {
     </View>
   );
 
-
-
   const data = [
     { id: '1', flatNo: '100', units: 28 },
     { id: '2', flatNo: '200', units: 22 },
     { id: '3', flatNo: '207', units: 32 },
-    // Add more data as needed
   ];
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({item}) => (
     <View style={styles.row}>
       <Text style={styles.cell}>{item.flatNo}</Text>
       <NumericTextInput />
@@ -133,7 +161,8 @@ const PrepaidMeter = ({navigation}) => {
       </View>
       <View style={styles.dropDownView}>
         <CustomDropdown
-          label=""
+          label="Apartment"
+          showLabel={false}
           data={apartmentData}
           value={selectedApartment.id}
           onChange={(id, name) => setSelectedApartment({id, name})}
@@ -165,7 +194,7 @@ const PrepaidMeter = ({navigation}) => {
           text={'Add Prepaid Meter'}
           bgColor={colors.primaryRedColor}
           onPress={() =>
-            navigation.navigate(allTexts.screenNames.addPrepaidMeter)
+            navigation.navigate(allTexts.screenNames.addPrepaidMeter,{selectedApartmentId:selectedApartment?.id})
           }
         />
       </View>
@@ -181,7 +210,13 @@ const PrepaidMeter = ({navigation}) => {
             <Pressable style={styles.modalContainer} onPress={() => {}}>
               <View style={styles.modalHeader}>
                 <Text style={styles.modalTitle}>
-                  {selectedMeter?.name} Details
+                  {selectedMeter?.name} {'Details '}
+                  <Feather
+                    name="edit"
+                    size={20}
+                    color={colors.primaryRedColor}
+                    onPress={() => handleEditPress(selectedMeter)}
+                  />
                 </Text>
                 <TouchableOpacity onPress={() => setModalVisible(false)}>
                   <Icon name="close" size={24} color={colors.black} />
@@ -199,6 +234,51 @@ const PrepaidMeter = ({navigation}) => {
                 ListEmptyComponent={() => (
                   <Text style={styles.noDataText}>No data available</Text>
                 )}
+              />
+            </Pressable>
+          </Pressable>
+        </Modal>
+      )}
+      {editedMeter && (
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={editModalVisible}
+          onRequestClose={() => setEditModalVisible(false)}>
+          <Pressable
+            style={styles.modalOverlay}
+            onPress={() => setEditModalVisible(false)}>
+            <Pressable style={styles.updateModalContainer} onPress={() => {}}>
+              <View style={styles.modalHeader}>
+                <Text style={styles.modalTitle}>Edit Meter Details</Text>
+                <TouchableOpacity onPress={() => setEditModalVisible(false)}>
+                  <Icon name="close" size={24} color={colors.black} />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.inputContainer}>
+                <Text style={styles.label}>Meter Name</Text>
+                <TextInput
+                  style={styles.input}
+                  value={editedMeter.name}
+                  onChangeText={text => setEditedMeter({...editedMeter, name: text})}
+                />
+                <Text style={styles.label}>Description</Text>
+                <TextInput
+                  style={styles.input}
+                  value={editedMeter.description}
+                  onChangeText={text => setEditedMeter({...editedMeter, description: text})}
+                />
+                <Text style={styles.label}>Cost Per Unit</Text>
+                <TextInput
+                  style={styles.input}
+                  value={editedMeter.costPerUnit}
+                  onChangeText={text => setEditedMeter({...editedMeter, costPerUnit: text})}
+                />
+              </View>
+              <PrimaryButton
+                text={'Save Changes'}
+                bgColor={colors.primaryRedColor}
+                onPress={handleUpdatePrepaidMetersDetails}
               />
             </Pressable>
           </Pressable>
@@ -255,7 +335,7 @@ const styles = StyleSheet.create({
     color: 'red',
   },
   dropDownView: {
-    width: '60%',
+    width: '100%',
     paddingHorizontal: '6%',
   },
   container2: {
@@ -293,8 +373,9 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.gray2,
   },
   itemText: {
-    fontSize: 14,
+    fontSize: 15,
     color: colors.black,
+    fontWeight:'500'
   },
   buttonCon: {
     marginHorizontal: '6%',
@@ -330,6 +411,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: colors.black,
   },
+  updateModalContainer:{
+    width: '100%',
+    height:'100%',
+    backgroundColor: 'white',
+    padding:'5%'
+  },
   tableHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -357,5 +444,20 @@ const styles = StyleSheet.create({
   },
   flatListContainer: {
     paddingBottom: 10,
+  },
+  inputContainer: {
+    marginVertical: 20,
+  },
+  label: {
+    fontSize: 16,
+    color: colors.black,
+    marginBottom: 10,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: colors.gray2,
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 20,
   },
 });

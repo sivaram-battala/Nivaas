@@ -68,6 +68,7 @@ const colors = {
   red6: '#D30000',
   red5: 'rgba(211, 0, 0, 0.08)',
   yellowColor: '#FFE600',
+  yellowOne:'#FFF2E2',
   gold: '#FC9605',
   black: '#000',
   black2: '#686869',

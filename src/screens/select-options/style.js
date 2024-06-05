@@ -8,14 +8,14 @@ export const styles = StyleSheet.create({
     },
     container: {
       flex: 1,
-      paddingHorizontal: 20,
-      marginVertical:50
+      paddingHorizontal: '5%',
+      marginVertical:20
     },
     eachDropdownCon:{
-       marginVertical:10
+       marginVertical:20
     },
     buttonContainer: {
-      marginTop: '60%',
+      marginTop: '90%',
     },
     apartmentsErrorHandlerCon:{
       flexDirection:'row',

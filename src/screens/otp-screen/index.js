@@ -156,14 +156,14 @@ const OTPScreen = ({navigation, route}) => {
             console.log('res of nivaas otp', response);
             dispatch(
               loginAction({
-                token: response.accessToken,
+                token: response.token,
                 role: response.roles?.[0],
                 tokenType: response.tokenType,
               }),
             );
-            setLoginDetails(response.accessToken);
+            setLoginDetails(response.token);
             ApiData();
-            saveLoginSessionDetails(response.tokenType, response.accessToken);
+            saveLoginSessionDetails(response.tokenType, response.token);
             customerDetails()
               .unwrap()
               .then(response => {

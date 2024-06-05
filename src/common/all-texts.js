@@ -115,5 +115,9 @@ export const allTexts = {
     addPrepaidMeter:'AddPrepaidMeter',
     maintainenceSettings:'MaintainenceSettings',
     societyDues:'SocietyDues',
+    flatsOnboarding:'FlatsOnboarding',
+    editOnboardedFlatDetails:'EditOnboardedFlatDetails',
+    notification:"Notification",
+    adminFlatSettings:'AdminFlatSettings'
   },
 };

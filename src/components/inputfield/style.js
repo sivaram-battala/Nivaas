@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
   inputText: {
     paddingVertical: 0,
     margin: 0,
-    paddingHorizontal: window.width/4,
+    paddingLeft: window.width/4,
     borderColor: colors.gray,
     fontSize: 17,
     color: colors.black,

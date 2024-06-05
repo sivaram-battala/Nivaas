@@ -39,20 +39,28 @@ export default BottomTabBase = ({ navigation }) => {
           backBehavior={'history'}
           screenOptions={{
             tabBarStyle: { innerHeight: '5%' },
+            tabBarHideOnKeyboard: true,
+            tabBarActiveTintColor:colors.primaryRedColor,
+            tabBarShowLabel: false, 
+            tabBarStyle: [ 
+                { display: "flex" },
+                null,
+              ],
           }}
           initialRouteName={
               allTexts.tabNames.home
           }
-          tabBarOptions={{
-            style: {
-              height: '8%',
-              flexDirection: 'row',
-              alignSelf: 'center',
-            },
-            activeTintColor: colors.primaryRedColor,
-            keyboardHidesTabBar: true,
-            showLabel: false,
-          }}>
+          // tabBarOptions={{
+          //   style: {
+          //     height: '8%',
+          //     flexDirection: 'row',
+          //     alignSelf: 'center',
+          //   },
+          //   activeTintColor: colors.primaryRedColor,
+          //   keyboardHidesTabBar: true,
+          //   showLabel: false,
+          // }}
+          >
           <Tab.Screen
             name={allTexts.tabNames.home}
             component={Home}

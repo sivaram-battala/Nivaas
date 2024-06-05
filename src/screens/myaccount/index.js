@@ -14,7 +14,6 @@ import { useSelector } from 'react-redux';
 
 const MyAccount = ({navigation, dispatch, route}) => {
   const data = route.params;
-  // console.log(data.currentCustomerData,'ROUTEDATA');
   const custDetails = useSelector(state=>state.currentCustomer);
   // console.log(custDetails?.currentCustomerData,"CUSTDETAILS");
   const {userDetails, setLoginDetails} = useContext(ApplicationContext);
@@ -65,8 +64,8 @@ const MyAccount = ({navigation, dispatch, route}) => {
       </View>
       <View style={styles.profie}>
         <DpImage dispatch={dispatch} />
-        <View>
-          <Text style={styles.profieText}>Vamsi Chadharam</Text>
+        <View style={{marginHorizontal:-10}}>
+          <Text style={styles.profieText}>{(custDetails?.currentCustomerData?.fullName).charAt(0).toUpperCase() + (custDetails?.currentCustomerData?.fullName).slice(1)}</Text>
           {data?.isOneFlatOnboarded && (
             <View
               style={{

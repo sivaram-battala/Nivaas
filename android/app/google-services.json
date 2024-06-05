@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "401391965583",
+    "project_id": "nivaas-9804a",
+    "storage_bucket": "nivaas-9804a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:401391965583:android:3d623588661dc7d6a1a7fa",
+        "android_client_info": {
+          "package_name": "com.nivas"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7aCEsSziOpuDA8Y3LuYa7Vr4D5MSt4WA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
