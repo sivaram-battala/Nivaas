@@ -10,7 +10,6 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {allTexts, colors} from '../../common';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {getNotifications} from '../../utils/api';
-import { useLazyGetNotificationDataQuery } from '../../redux/services/notificationService';
 
 export const TopBarcard = ({
   txtColor,
@@ -38,7 +37,6 @@ export const TopBarcard = ({
 }) => {
   const [img, setImg] = useState(null);
     const [notificationsCount, setNotificationCount] = useState(0);
-    const [getNotification] = useLazyGetNotificationDataQuery()
     const GetNotificationsCount = async () => {
       getNotification()
       .unwrap()

@@ -68,6 +68,7 @@ const AddPrepaidMeter = ({ navigation, route }) => {
               placeholder="Enter meter name"
               value={meterName}
               onChangeText={setMeterName}
+              autoFocus
             />
             {errors.meterName && <Text style={styles.error}>{errors.meterName}</Text>}
             

@@ -43,6 +43,7 @@ const Notification = ({ navigation }) => {
             placeholder="Search..."
             value={searchQuery}
             onChangeText={setSearchQuery}
+            autoFocus
           />
           <TouchableOpacity onPress={() => setSearchQuery('')}>
             <Feather name='x' size={25} color={colors.black} />
@@ -80,6 +81,7 @@ const styles = StyleSheet.create({
     bottom: 5,
   },
   searchBar: {
+    height: 50,
     flexDirection: 'row',
     alignItems: 'center',
     marginHorizontal: '4%',

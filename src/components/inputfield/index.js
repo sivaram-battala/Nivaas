@@ -37,7 +37,6 @@ export const InputField = ({
           )}
 
           <TextInput
-            // placeholder='Enter Mobile Number'
             value={value}
             placeholderTextColor={colors.gray2}
             onChangeText={val => setState(val)}

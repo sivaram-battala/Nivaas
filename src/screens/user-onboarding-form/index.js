@@ -6,7 +6,7 @@ import {statusBarHeight} from '../../utils/config/config';
 import {allTexts, colors, window} from '../../common';
 import Foundation from 'react-native-vector-icons/Foundation';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useUserOnBoardingMutation} from '../../redux/services/cityServices';
 import RadioGroup from 'react-native-radio-buttons-group';
 
@@ -56,19 +56,19 @@ const UserOnBoardingForm = ({navigation, route}) => {
         <TopBarCard2 back={true} txt={'Confirm'} navigation={navigation} />
       </View>
       <View style={styles.detailsCon}>
-        <Text style={{color: colors.gray, fontSize: 16, fontWeight: '500'}}>
+        <Text style={{color: colors.black, fontSize: 16, fontWeight: '500'}}>
           Apartment
         </Text>
         <View style={styles.eachDetailsCon}>
-          <Foundation name="home" size={25} color={colors.black} />
+          <SimpleLineIcons name="location-pin" size={18} color={colors.black} />
           <Text style={styles.detailText}>{userData.cityValue}</Text>
         </View>
         <View style={styles.eachDetailsCon}>
-          <SimpleLineIcons name="location-pin" size={18} color={colors.black} />
+          <MaterialCommunityIcons name="office-building-outline" size={18} color={colors.black} />
           <Text style={styles.detailText}>{userData.apartmentValue}</Text>
         </View>
         <View style={styles.eachDetailsCon}>
-          <Foundation name="home" size={25} color={colors.black} />
+          <MaterialCommunityIcons name="home-outline" size={24} color={colors.black} />
           <Text style={styles.detailText}>Flat No : {userData.flatValue}</Text>
         </View>
       </View>

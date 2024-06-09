@@ -9,25 +9,35 @@ import {
 } from 'react-native';
 import {colors} from '../../common';
 import {statusBarHeight} from '../../utils/config/config';
-import {CustomDropdown, PrimaryButton, TopBarCard2} from '../../components';
+import {
+  CustomDropdown,
+  Loader,
+  PrimaryButton,
+  TopBarCard2,
+} from '../../components';
 import {useSelector} from 'react-redux';
 import {CheckBox} from 'react-native-elements';
 import {useLazyGetAparmentPrepaidMetersQuery} from '../../redux/services/prepaidMeterService';
 import SelectDropdown from 'react-native-select-dropdown';
+import {useNotifyOnMutation} from '../../redux/services/maintainenceService';
 
 const MaintainenceSettings = ({navigation}) => {
   const customerDetails = useSelector(state => state.currentCustomer);
+  const [loader, setloader] = useState();
   const [apartmentData, setApartmentData] = useState([]);
-  const [selectedApartment, setSelectedApartment] = useState({id: '', name: ''});
+  const [selectedApartment, setSelectedApartment] = useState({id: '',name: ''});
   const [prepaidMetersData, setPrepaidMetersData] = useState([]);
   const [checkedMeters, setCheckedMeters] = useState([]);
+  const prepaidIdArray = checkedMeters.map(item => item.id);
+  console.log(checkedMeters);
   const [selectedDate, setSelectedDate] = useState(null);
   const [value, setValue] = useState('');
   const [getApartmentPrepaidMetersList] = useLazyGetAparmentPrepaidMetersQuery();
+  const [maintainenceSave] = useNotifyOnMutation();
 
-  const handleCheckboxToggle = (id) => {
+  const handleCheckboxToggle = id => {
     const updatedData = prepaidMetersData.map(item =>
-      item.id === id ? {...item, checked: !item.checked} : item
+      item.id === id ? {...item, checked: !item.checked} : item,
     );
     setPrepaidMetersData(updatedData);
 
@@ -50,12 +60,13 @@ const MaintainenceSettings = ({navigation}) => {
 
   useEffect(() => {
     if (customerDetails?.currentCustomerData?.apartmentDTOs) {
-      const approvedApartments = customerDetails.currentCustomerData.apartmentDTOs
-        .filter(apartment => apartment.adminApproved)
-        .map(apartment => ({
-          id: apartment.jtApartmentDTO.id,
-          name: apartment.jtApartmentDTO.name,
-        }));
+      const approvedApartments =
+        customerDetails.currentCustomerData.apartmentDTOs
+          .filter(apartment => apartment.adminApproved)
+          .map(apartment => ({
+            id: apartment.jtApartmentDTO.id,
+            name: apartment.jtApartmentDTO.name,
+          }));
       setApartmentData(approvedApartments);
     }
   }, [customerDetails]);
@@ -77,7 +88,8 @@ const MaintainenceSettings = ({navigation}) => {
     </View>
   );
 
-  const handlePrepaidMetersList = (apartmentId) => {
+  const handlePrepaidMetersList = apartmentId => {
+    setloader(true);
     const payload = {
       apartmentId,
       pageNo: 0,
@@ -86,13 +98,34 @@ const MaintainenceSettings = ({navigation}) => {
     getApartmentPrepaidMetersList(payload)
       .unwrap()
       .then(response => {
-        setPrepaidMetersData(response?.data.map(meter => ({
-          ...meter,
-          checked: false,
-        })));
+        setloader(false);
+        setPrepaidMetersData(
+          response?.data.map(meter => ({
+            ...meter,
+            checked: false,
+          })),
+        );
       })
       .catch(error => {
         console.log('error in Apartment PrepaidMetersList=====>', error);
+      });
+  };
+
+  const handlesave = () => {
+    const maintainencePayload = {
+      notifyOn: selectedDate?.date,
+      cost: value,
+      apartmentId: selectedApartment?.id,
+      prepaidId: prepaidIdArray,
+    };
+    // console.log(maintainencePayload);
+    maintainenceSave(maintainencePayload)
+      .unwrap()
+      .then(responce => {
+        console.log('RESPONCE OF MAINTAINENCE SAVE====>', responce);
+      })
+      .catch(error => {
+        console.log('ERROR IN MAINTAINENCE SAVE====>', error);
       });
   };
 
@@ -141,7 +174,7 @@ const MaintainenceSettings = ({navigation}) => {
                 </View>
               );
             }}
-            showsVerticalScrollIndicator={true}
+            showsVerticalScrollIndicator={false}
             dropdownStyle={styles.dropdownMenuStyle}
           />
         </View>
@@ -154,15 +187,27 @@ const MaintainenceSettings = ({navigation}) => {
           onChangeText={setValue}
           keyboardType="numeric"
         />
-        <FlatList
-          data={prepaidMetersData}
-          renderItem={renderItem}
-          keyExtractor={item => item.id.toString()}
-          contentContainerStyle={styles.container}
-        />
-        <View style={styles.buttonCon}>
-          <PrimaryButton text={'SAVE'} bgColor={colors.primaryRedColor} />
-        </View>
+        {loader ? (
+          <View>
+            <Loader color={colors.primaryRedColor} size={'large'} />
+          </View>
+        ) : (
+          <FlatList
+            data={prepaidMetersData}
+            renderItem={renderItem}
+            keyExtractor={item => item.id.toString()}
+            contentContainerStyle={styles.container}
+          />
+        )}
+        {loader ? ('') : (
+          <View style={styles.buttonCon}>
+            <PrimaryButton
+              text={'SAVE'}
+              bgColor={colors.primaryRedColor}
+              onPress={handlesave}
+            />
+          </View>
+        )}
       </View>
     </ScrollView>
   );

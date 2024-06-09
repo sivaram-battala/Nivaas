@@ -54,7 +54,7 @@ export const styles = StyleSheet.create({
   },
   flatText: {
     fontSize: 16,
-    marginLeft: 15,
+    marginLeft: 20,
     color: colors.black,
   },
   apartmentModalText: {
@@ -71,6 +71,7 @@ export const styles = StyleSheet.create({
   },
   renderCon: {
     flexDirection: 'row',
+    marginLeft:15
   },
   statusactiveText: {
     color: colors.green,

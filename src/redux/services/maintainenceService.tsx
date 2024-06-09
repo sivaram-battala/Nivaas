@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import {BASEURL, NIVAAS_URL} from '../../api/api';
+import { NIVAAS_URL} from '../../api/api';
 import {RootState} from '../store';
 import { endpoints } from '../../api';
 
@@ -18,11 +18,14 @@ export const maintainenceService = createApi({
       }
       return headers;
     },
-  }),
+  }), 
   endpoints: builder => ({
-    addPrepaidMeter: builder.mutation<any, {}>({
+    getSocietyDues : builder.query<any,{pageNo:Number,pageSize:Number}>({
+      query: ({pageNo,pageSize}) => `${endpoints.SOCIETY_DUES}?pageNo=${pageNo}&pageSize=${pageSize}`
+    }),
+    notifyOn: builder.mutation<any, {}>({
       query: payload => ({
-        url: endpoints.ADD_PREPAIDMETER,
+        url: endpoints.MAINTAINENCE_SAVE,
         method: 'POST',
         body: payload,
         header: {
@@ -30,14 +33,32 @@ export const maintainenceService = createApi({
         },
       }),
     }),
-    getAparmentPrepaidMeters : builder.query<any,{apartmentId:Number,pageNo:Number,pageSize:Number}>({
-      query: ({apartmentId,pageNo,pageSize}) => `${endpoints.GET_APARTMENT_PREPAID_METERS}?apartmentId=${apartmentId}&pageNo=${pageNo}&pageSize=${pageSize}`
+    createFlatByaptOwn: builder.mutation<any, {}>({
+        query: payload => ({
+          url: endpoints.ONBOARD_NEW_FLATS,
+          method: 'POST',
+          body: payload,
+          header: {
+            'Content-Type': 'application/json',
+          },
+        }),
+    }),
+    updateFlatDetails: builder.mutation<any, {apartmentId:Number,flatId:Number,payload:any}>({
+      query: ({payload,apartmentId,flatId}) => ({
+        url:  `${endpoints.UPDATE_ONBOARDED_FLATS_DETAILS}/${apartmentId}/flat/${flatId}/update`,
+        method: 'POST',
+        body: payload,
+        header: {
+          'Content-Type': 'application/json',
+        },
+      }),
     }),
   }),
-
 });
 
 export const {
-    useAddPrepaidMeterMutation,
-    useLazyGetAparmentPrepaidMetersQuery,
+  useLazyGetSocietyDuesQuery,
+  useNotifyOnMutation,
+  useCreateFlatByaptOwnMutation,
+  useUpdateFlatDetailsMutation,
 } = maintainenceService;

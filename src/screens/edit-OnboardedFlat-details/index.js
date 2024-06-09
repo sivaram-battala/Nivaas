@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -10,50 +10,89 @@ import {
   Text,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { CustomDropdown, PrimaryButton, TopBarCard2 } from '../../components';
-import { colors } from '../../common';
-import { statusBarHeight } from '../../utils/config/config';
-import { useSelector } from 'react-redux';
+import {
+  CustomDropdown,
+  Loader,
+  PrimaryButton,
+  TopBarCard2,
+} from '../../components';
+import {colors} from '../../common';
+import {statusBarHeight} from '../../utils/config/config';
+import {useSelector} from 'react-redux';
+import {useLazyGetFlatsListQuery} from '../../redux/services/cityServices';
+import {useUpdateFlatDetailsMutation} from '../../redux/services/maintainenceService';
 
-// Sample flat data for different apartments
-const sampleFlatData = {
-  126: [
-    { flatNo: 101, ownerPhoneNo: '0123456789', ownerName: 'Ravali' },
-    { flatNo: 102, ownerPhoneNo: '0987654321', ownerName: 'Sai' },
-  ],
-  145: [
-    { flatNo: 201, ownerPhoneNo: '1123456789', ownerName: 'John' },
-    { flatNo: 202, ownerPhoneNo: '1987654321', ownerName: 'Doe' },
-  ],
-  3: [
-    { flatNo: 301, ownerPhoneNo: '2123456789', ownerName: 'Jane' },
-    { flatNo: 302, ownerPhoneNo: '2987654321', ownerName: 'Smith' },
-  ],
-};
-
-const EditOnboardedFlatDetails = ({ navigation }) => {
+const EditOnboardedFlatDetails = ({navigation}) => {
   const customerDetails = useSelector(state => state.currentCustomer);
+  const [loader, setLoader] = useState(false);
   const [apartmentData, setApartmentData] = useState([]);
-  const [selectedApartment, setSelectedApartment] = useState({ id: '', name: '' });
-  const [flatData, setFlatData] = useState([]);
-  const [selectedFlat, setSelectedFlat] = useState(null);
+  const [selectedApartment, setSelectedApartment] = useState({id: '',name: ''});
+  const [flatID, setFlatID] = useState();
+  const [flatdata, setflatdata] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
+  const [formData, setFormData] = useState({flatNo: '',ownerPhoneNo: '',ownerName: ''});
 
-  const handleApartmentChange = (id) => {
-    setSelectedApartment(id);
-    setFlatData(sampleFlatData[id] || []);
+  const [getflatdata] = useLazyGetFlatsListQuery();
+  const [updateOnboardedFlatDetails] = useUpdateFlatDetailsMutation();
+
+  const handleApartmentChange = (id, name) => {
+    setSelectedApartment({id, name});
   };
 
-  const handleUpdate = () => {
-    const newFlatData = [...flatData];
-    newFlatData[selectedFlat.index] = selectedFlat;
-    setFlatData(newFlatData);
-    setModalVisible(false);
+  const handleFlatData = id => {
+    setLoader(true);
+    const flatPayload = {
+      flatId: id,
+      pageNo: 0,
+      pageSize: 100,
+    };
+    getflatdata(flatPayload)
+      .unwrap()
+      .then(response => {
+        setLoader(false);
+        console.log(response?.data, 'RESPONCE OF FLAT DATA');
+        const processedFlatData = response?.data.map(item => ({
+          ...item,
+          flatNo: String(item.flatNo),
+        }));
+        setflatdata(processedFlatData);
+      })
+      .catch(error => {
+        console.log('error in flat data==========>', error);
+      });
   };
 
-  const openModal = (index) => {
-    setSelectedFlat({ ...flatData[index], index });
+  const handleRowPress = item => {
+    setFlatID(item?.id);
+    setFormData({
+      flatNo: item?.flatNo,
+      ownerPhoneNo: item?.ownerDTO?.primaryContact,
+      ownerName: item?.ownerDTO?.fullName,
+    });
     setModalVisible(true);
+  };
+
+  const handleFormSubmit = () => {
+    console.log('Updated FormData:', formData);
+    const flatPayload = {
+      apartmentId: selectedApartment?.id,
+      flatId: flatID,
+      payload: {
+        flatNo: formData?.flatNo,
+        ownerPhoneNo: formData?.ownerName,
+        ownerName: formData?.ownerPhoneNo,
+      },
+    };
+    updateOnboardedFlatDetails(flatPayload)
+      .unwrap()
+      .then(responce => {
+        console.log('RESPONCE updateOnboardedFlatDetails', responce);
+        handleFlatData(selectedApartment?.id);
+      })
+      .catch(error => {
+        console.log('ERROR IN updateOnboardedFlatDetails', error);
+      });
+    setModalVisible(false);
   };
 
   useEffect(() => {
@@ -69,25 +108,14 @@ const EditOnboardedFlatDetails = ({ navigation }) => {
     }
   }, [customerDetails]);
 
-  const renderFlatItem = ({ item, index }) => (
-    <View style={styles.tableRow}>
-      <TouchableOpacity style={styles.tableCell} onPress={() => openModal(index)}>
-        <Text style={styles.dataText}>{item.flatNo}</Text>
-      </TouchableOpacity>
-      <View style={styles.verticalLine} />
-      <TouchableOpacity style={styles.tableCell} onPress={() => openModal(index)}>
-        <Text style={styles.dataText}>{item.ownerPhoneNo}</Text>
-      </TouchableOpacity>
-      <View style={styles.verticalLine} />
-      <TouchableOpacity style={styles.tableCell} onPress={() => openModal(index)}>
-        <Text style={styles.dataText}>{item.ownerName}</Text>
-      </TouchableOpacity>
-    </View>
-  );
-
+  useEffect(() => {
+    if (selectedApartment?.id) {
+      handleFlatData(selectedApartment?.id);
+    }
+  }, [selectedApartment?.id]);
   return (
     <View style={styles.mainCon}>
-      <View style={{ height: 50, marginTop: statusBarHeight }}>
+      <View style={{height: 50, marginTop: statusBarHeight}}>
         <TopBarCard2
           back={true}
           txt={'Edit Flat Details'}
@@ -99,7 +127,7 @@ const EditOnboardedFlatDetails = ({ navigation }) => {
           label="Apartment"
           data={apartmentData}
           value={selectedApartment}
-          onChange={(id) => handleApartmentChange(id)}
+          onChange={(id, name) => handleApartmentChange(id, name)}
           labelField="name"
           valueField="id"
         />
@@ -111,51 +139,81 @@ const EditOnboardedFlatDetails = ({ navigation }) => {
             <View style={styles.verticalLine} />
             <Text style={styles.tableHeaderCell}>Owner Name</Text>
           </View>
-          <FlatList
-            data={flatData}
-            renderItem={renderFlatItem}
-            keyExtractor={(item, index) => index.toString()}
-          />
+          {loader ? (
+            <View>
+              <Loader color={colors.primaryRedColor} size={'large'} />
+            </View>
+          ) : (
+            <FlatList
+              data={flatdata}
+              keyExtractor={(item, index) => index.toString()}
+              style={{marginBottom:'30%'}}
+              showsVerticalScrollIndicator={false}
+              renderItem={({item, index}) => (
+                <TouchableOpacity
+                  onPress={() => handleRowPress(item)}
+                  style={styles.tableRow}>
+                  <View style={styles.tableCell}>
+                    <Text style={styles.dataText}>{item?.flatNo}</Text>
+                  </View>
+                  <View style={styles.verticalLine} />
+                  <View style={styles.tableCell}>
+                    <Text style={styles.dataText}>
+                      {item?.ownerDTO?.primaryContact}
+                    </Text>
+                  </View>
+                  <View style={styles.verticalLine} />
+                  <View style={styles.tableCell}>
+                    <Text style={styles.dataText}>
+                      {item?.ownerDTO?.fullName}
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              )}
+            />
+          )}
         </View>
       </View>
       <Modal
-        animationType="fade"
         transparent={true}
         visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}>
+        onRequestClose={() => setModalVisible(false)}>
         <View style={styles.modalOverlay}>
-          <View style={styles.modalView}>
+          <View style={styles.modalContainer}>
             <TouchableOpacity
               style={styles.closeButton}
-              onPress={() => setModalVisible(false)}
-            >
+              onPress={() => setModalVisible(false)}>
               <Ionicons name="close" size={24} color={colors.black} />
             </TouchableOpacity>
-            {selectedFlat && (
-              <>
-                <TextInput
-                  style={styles.modalTextInput}
-                  value={selectedFlat.flatNo.toString()}
-                  onChangeText={(text) => setSelectedFlat({ ...selectedFlat, flatNo: text })}
-                  placeholder="Flat No"
-                />
-                <TextInput
-                  style={styles.modalTextInput}
-                  value={selectedFlat.ownerPhoneNo}
-                  onChangeText={(text) => setSelectedFlat({ ...selectedFlat, ownerPhoneNo: text })}
-                  placeholder="Owner Phone No"
-                />
-                <TextInput
-                  style={styles.modalTextInput}
-                  value={selectedFlat.ownerName}
-                  onChangeText={(text) => setSelectedFlat({ ...selectedFlat, ownerName: text })}
-                  placeholder="Owner Name"
-                />
-                <PrimaryButton text={'UPDATE'} bgColor={colors.primaryRedColor} onPress={handleUpdate} />
-              </>
-            )}
+            <Text style={styles.modalTitle}>Update Flat Details</Text>
+            <TextInput
+              style={styles.input}
+              value={formData.flatNo}
+              onChangeText={text => setFormData({...formData, flatNo: text})}
+              placeholder="Flat No"
+            />
+            <TextInput
+              style={styles.input}
+              value={formData.ownerPhoneNo}
+              onChangeText={text =>
+                setFormData({...formData, ownerPhoneNo: text})
+              }
+              placeholder="Owner Phone No"
+              keyboardType="phone-pad"
+            />
+            <TextInput
+              style={styles.input}
+              value={formData.ownerName}
+              onChangeText={text => setFormData({...formData, ownerName: text})}
+              placeholder="Owner Name"
+            />
+            <View>
+              <PrimaryButton
+                text={'UPDATE'}
+                bgColor={colors.primaryRedColor}
+                onPress={handleFormSubmit}
+              />
+            </View>
           </View>
         </View>
       </Modal>
@@ -182,16 +240,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 10,
     borderBottomWidth: 1,
-    borderBottomColor:colors.gray2,
+    borderBottomColor: colors.gray2,
   },
   tableCell: {
     flex: 1,
     padding: 8,
     alignItems: 'center',
   },
-  dataText:{
-    color:colors.black,
-    fontSize:15
+  dataText: {
+    color: colors.black,
+    fontSize: 15,
   },
   tableHeader: {
     backgroundColor: colors.gray3,
@@ -201,7 +259,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     padding: 5,
     textAlign: 'center',
-    color:colors.black
+    color: colors.black,
   },
   verticalLine: {
     width: 1,
@@ -212,28 +270,31 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(0,0,0,0.5)',
   },
-  modalView: {
+  modalContainer: {
     width: '80%',
-    backgroundColor: 'white',
-    borderRadius: 10,
     padding: 20,
-    alignItems: 'center',
+    backgroundColor: colors.white,
+    borderRadius: 10,
   },
   closeButton: {
-    position: 'absolute',
-    top: 10,
-    right: 10,
+    alignSelf: 'flex-end',
   },
-  modalTextInput: {
-    width: '100%',
-    padding: 10,
-    fontSize:15,
-    backgroundColor: colors.gray3,
-    borderRadius: 5,
+  modalTitle: {
+    fontSize: 20,
     marginBottom: 20,
-    marginTop: 20,
+    textAlign: 'center',
+    color: colors.black,
+    fontWeight: '500',
+  },
+  input: {
+    height: 40,
+    borderColor: colors.gray2,
+    borderWidth: 1,
+    marginVertical: 10,
+    paddingHorizontal: 10,
+    color: colors.black,
   },
 });
 

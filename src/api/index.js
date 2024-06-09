@@ -32,6 +32,10 @@ export const endpoints = {
   GET_APARTMENT_PREPAID_METERS:'prepaidmeter/list',
   UPDATE_PREPAID_METER:'prepaidmeter/update',
   ONBOARD_NEW_FLATS:'jtflat/bulk/onboard',
+  UPDATE_ONBOARDED_FLATS_DETAILS:'jtflat/apartment',
   USER_DETAILS:'api/customer/userDetails',
+  MAINTAINENCE_SAVE:'jtmaintanance/save',
+  UPDATE_CONSUMED_UNITS:'prepaidmeter/updateConsumed',
+  SOCIETY_DUES:'society/dues',
 };
 

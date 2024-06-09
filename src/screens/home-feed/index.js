@@ -5,13 +5,14 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import { allTexts, colors } from '../../common';
-import { CompleteProfileModal, PrimaryButton } from '../../components';
+import { CompleteProfileModal, Loader, PrimaryButton } from '../../components';
 import { useLazyGetCurrentCustomerQuery } from '../../redux/services/myAccountService';
 import { setcurrentCustomerData } from '../../redux/slices/currentCustomerSlice';
 import { styles } from './styles';
 
 const Home = ({ navigation }) => {
   const dispatch = useDispatch();
+  const [loder, setLoder] = useState(false);
   const [currentCustomerData, setCurrentCustomerData] = useState(null);
   const [isOneFlatOnboarded, SetIsOneFlatOnboarded] = useState(false);
   const [isNewUser, setIsNewUser] = useState(false);
@@ -19,10 +20,12 @@ const Home = ({ navigation }) => {
   const [currentCustomer] = useLazyGetCurrentCustomerQuery();
 
   const handleCurrentCustomerData = () => {
+    setLoder(true);
     currentCustomer()
       .unwrap()
       .then(response => {
         // console.log("CURRENT CUSTOMER ===>",response);
+        setLoder(false);
         setCurrentCustomerData(response);
         dispatch(setcurrentCustomerData(response));
         const hasFlat = response?.flatDTO && response.flatDTO.length > 0;
@@ -60,8 +63,15 @@ const Home = ({ navigation }) => {
         onSave={handleSave}
         id={currentCustomerData?.id}
       />
-      <View style={styles.headerCon}>
-        <Text style={styles.username}>Hi, User</Text>
+      {
+        loder ? (
+          <View>
+            <Loader color={colors.primaryRedColor} size={'large'} />
+          </View>
+        ) : (
+          <View>
+            <View style={styles.headerCon}>
+        <Text style={styles.username}>Hi, {currentCustomerData?.fullName}</Text>
         <View style={styles.iconsCon}>
           <Ionicons name="notifications" size={30} style={styles.icons} onPress={() => navigation.navigate(allTexts.screenNames.notification)} />
           <MaterialIcons name="account-circle" size={30} style={styles.icons} onPress={() => navigation.navigate(allTexts.screenNames.myAccount, { isOneFlatOnboarded: isOneFlatOnboarded })} />
@@ -100,6 +110,9 @@ const Home = ({ navigation }) => {
           </Text>
         </View>
       </View>
+          </View>
+        )
+      }
     </View>
   );
 };

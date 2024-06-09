@@ -166,7 +166,7 @@ const SelectCityOptions = ({ navigation, route }) => {
                 labelField="name"
                 valueField="id"
               />
-              {apartmentData && (
+              {(apartmentData || !apartmentData) && (
                 <View style={styles.apartmentsErrorHandlerCon}>
                   <TouchableOpacity
                     onPress={() =>

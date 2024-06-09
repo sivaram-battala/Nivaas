@@ -4,6 +4,7 @@ import {statusBarHeight} from '../../utils/config/config';
 import {CustomDropdown, PrimaryButton, TopBarCard2} from '../../components';
 import {colors} from '../../common';
 import {useSelector} from 'react-redux';
+import { useCreateFlatByaptOwnMutation } from '../../redux/services/maintainenceService';
 
 const PrepaidMeter = ({navigation}) => {
   const customerDetails = useSelector(state => state.currentCustomer);
@@ -23,11 +24,12 @@ const PrepaidMeter = ({navigation}) => {
   });
   const [errors, setErrors] = useState({});
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [createFlatByAptOwn] = useCreateFlatByaptOwnMutation();
 
   const handleNumFlatsChange = value => {
     setNumFlats(value);
     const newFlatsDetails = Array.from({length: Number(value)}, () => ({
-      flatNo: '',
+      flatNo: null,
       ownerPhoneNo: '',
       ownerName: '',
     }));
@@ -75,7 +77,7 @@ const PrepaidMeter = ({navigation}) => {
     setFlatsDetails(updatedFlatsDetails);
     setFlatDetails(
       updatedFlatsDetails[currentFlatIndex - 1] || {
-        flatNo: '',
+        flatNo: null,
         ownerPhoneNo: '',
         ownerName: '',
       },
@@ -92,9 +94,16 @@ const PrepaidMeter = ({navigation}) => {
         apartmentId: selectedApartment?.id,
         flats: updatedFlatsDetails,
       };
-      console.log('Payload:', payload);
-    }
+      console.log(payload);
+    createFlatByAptOwn(payload)
+      .unwrap()
+      .then((responce)=>{
+        console.log('RESPONCE OF NEW FLAT CREATION======>',responce);
+      }).catch((error)=>{
+        console.log('ERROR IN NEW FLAT CREATION=====>',error);
+      })
     setHasSubmitted(true);
+   }
   };
 
   useEffect(() => {
