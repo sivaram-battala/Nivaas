@@ -3,8 +3,9 @@ import React from 'react'
 import { styles } from './style'
 import { TopBarCard2 } from '../../components'
 import { statusBarHeight } from '../../utils/config/config'
-import { allTexts } from '../../common'
-
+import { allTexts, colors } from '../../common'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 const AdminSociety = ({navigation}) => {
   return (
     <View style={styles.mainCon}>
@@ -15,14 +16,22 @@ const AdminSociety = ({navigation}) => {
         <View style={styles.apartmentServicesCon}>
           <Pressable onPress={()=>navigation.navigate(allTexts.screenNames.prepaidMeter)}>
           <View style={styles.eachService}>
+            <MaterialCommunityIcons name='speedometer' size={25} color={colors.primaryRedColor}/>
             <Text style={styles.eachText}>
-              Prepaid Meter
+              Prepaid Meters
             </Text>
           </View>
           </Pressable>
           <Pressable onPress={()=>navigation.navigate(allTexts.screenNames.maintainenceSettings)}>
             <View style={styles.eachService}>
+              <MaterialIcons name='settings-applications' size={25} color={colors.primaryRedColor}/>
               <Text style={styles.eachText}>Maintainence Settings</Text>
+            </View>
+          </Pressable>
+          <Pressable onPress={()=>navigation.navigate(allTexts.screenNames.adminFlatSettings)}>
+            <View style={styles.eachService}>
+              <MaterialCommunityIcons name='office-building-cog' size={25} color={colors.primaryRedColor}/>
+              <Text style={styles.eachText}>Manage Flats</Text>
             </View>
           </Pressable>
         </View>

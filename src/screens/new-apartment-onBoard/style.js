@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     padding: 20,
   },
   eachFieledCon:{
-    marginVertical:window.height*0.005
+    marginVertical:window.height*0.01,
   },
   fieldName:{
     color:colors.black,
@@ -35,13 +35,13 @@ export const styles = StyleSheet.create({
     marginHorizontal:window.width*0.05
   },
   input: {
-    height: 40,
+    height: 50,
     borderColor: colors.gray,
     borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 8,
     marginBottom: 10,
-    fontSize:17
+    fontSize:16
   },
   dropdownContainer: {
     position: 'relative',

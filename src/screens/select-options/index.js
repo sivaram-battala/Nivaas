@@ -1,45 +1,41 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import {
   StyleSheet,
   View,
-  ScrollView,
   TouchableOpacity,
-  Alert,
+  Animated,
 } from 'react-native';
-import {CustomDropdown, PrimaryButton, TopBarCard2} from '../../components';
-import {statusBarHeight} from '../../utils/config/config';
-import {allTexts, colors} from '../../common';
-import {styles} from './style';
-import {Text} from 'react-native';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {useDispatch} from 'react-redux';
-import {useLazyGetApartmentListQuery,useLazyGetCityListQuery,useLazyGetFlatsListQuery} from '../../redux/services/cityServices';
-import {setcitiesData} from '../../redux/slices/citiesdataSlice';
-import {setapartmentData} from '../../redux/slices/apartmentsSlice';
+import { CustomDropdown, PrimaryButton, TopBarCard2 } from '../../components';
+import { statusBarHeight } from '../../utils/config/config';
+import { allTexts, colors } from '../../common';
+import { styles } from './style';
+import { Text } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { useDispatch } from 'react-redux';
+import { useLazyGetApartmentListQuery, useLazyGetCityListQuery, useLazyGetFlatsListQuery } from '../../redux/services/cityServices';
+import { setcitiesData } from '../../redux/slices/citiesdataSlice';
+import { setapartmentData } from '../../redux/slices/apartmentsSlice';
 
-const SelectCityOptions = ({navigation, route}) => {
-  // const data = route?.params || '';
-  // console.log('route data in city details form ============>', data);
-  const [cityValue, setCityValue] = useState({id: null, name: null});
-  const [apartmentValue, setApartmentValue] = useState({id: null, name: null});
-  const [flatValue, setFlatValue] = useState({id: null, name: null});
+const SelectCityOptions = ({ navigation, route }) => {
+  const [cityValue, setCityValue] = useState({ id: null, name: null });
+  const [apartmentValue, setApartmentValue] = useState({ id: null, name: null });
+  const [flatValue, setFlatValue] = useState({ id: null, name: null });
 
   const [cityData, setCityData] = useState();
   const [apartmentData, setapartmentsData] = useState();
   const [flatdata, setflatdata] = useState();
-  // const dataWithStringIDs = flatdata.map(item => ({
-  //   ...item,
-  //   flatNo: String(item.flatNo),  // or id: item.id.toString()
-  // }));
+
   const [getCityList] = useLazyGetCityListQuery();
   const [getApartmentsList] = useLazyGetApartmentListQuery();
   const [getflatdata] = useLazyGetFlatsListQuery();
-  
+
   const dispatch = useDispatch();
-  const handletoken = async () => {
-    let token = await getAuthTokenDetails();
-    console.log('token', token);
-  };
+
+  const cityOpacity = useRef(new Animated.Value(0)).current;
+  const apartmentOpacity = useRef(new Animated.Value(0)).current;
+  const flatOpacity = useRef(new Animated.Value(0)).current;
+  const buttonOpacity = useRef(new Animated.Value(0)).current;
+
   const handleCityData = () => {
     let cityPayload = {
       page: 0,
@@ -47,89 +43,66 @@ const SelectCityOptions = ({navigation, route}) => {
     };
     getCityList(cityPayload)
       .unwrap()
-      .then(responce => {
-        // console.log('citydata===========>>>', responce?.data);
-        setCityData(responce?.data);
-        dispatch(setcitiesData(responce?.data));
+      .then(response => {
+        setCityData(response?.data);
+        dispatch(setcitiesData(response?.data));
+        Animated.timing(cityOpacity, {
+          toValue: 1,
+          duration: 200,
+          useNativeDriver: true,
+        }).start();
       })
       .catch(error => {
         console.log('error in getcitydata==========>', error);
       });
   };
 
-  const handleApartmentData =(id)=>{
-    // console.log(id,'APARTMENTDATA');
+  const handleApartmentData = (id) => {
     let apartmentPayload = {
-      cityId:id,
+      cityId: id,
     };
+    Animated.timing(apartmentOpacity, {
+      toValue: 1,
+      duration: 200,
+      useNativeDriver: true,
+    }).start();
     getApartmentsList(apartmentPayload)
       .unwrap()
-      .then(responce => {
-        // console.log('apartments data===========>',responce?.data);
-        setapartmentsData(responce?.data);
-        dispatch(setapartmentData(responce?.data));
+      .then(response => {
+        setapartmentsData(response?.data);
+        dispatch(setapartmentData(response?.data));
       })
       .catch(error => {
         console.log('error in apartments data========>', error);
       });
   }
 
-  const handleFlatData =(id)=>{
-    // console.log(id,'FLATDATAAA');
+  const handleFlatData = (id) => {
     const flatPayload = {
-      flatId:85,
+      flatId: id,
       pageNo: 0,
       pageSize: 100,
     };
+    Animated.timing(flatOpacity, {
+      toValue: 1,
+      duration: 200,
+      useNativeDriver: true,
+    }).start();
     getflatdata(flatPayload)
       .unwrap()
-      .then(responce => {
-        // console.log('flatData=============>',responce?.data);
-        const processedFlatData = responce?.data.map(item => ({
+      .then(response => {
+        const processedFlatData = response?.data.map(item => ({
           ...item,
           flatNo: String(item.flatNo),
         }));
         setflatdata(processedFlatData);
-        // setflatdata(responce?.data);
       })
       .catch(error => {
         console.log('error in flat data==========>', error);
       });
   }
 
-  useEffect(() => {
-    handleCityData();
-  }, []);
-  useEffect(() => {
-    if (cityValue.id) {
-      handleApartmentData(cityValue.id);
-    }
-  }, [cityValue.id]);
-  useEffect(() => {
-    if (apartmentValue.id) {
-      handleFlatData(apartmentValue.id);
-    }
-  }, [apartmentValue.id]);
-
-  const flatNumbersData = [
-    {flatNo: '3897', id: '36'},
-    {flatNo: '4536', id: '37'},
-  ];
-
   const handleData = () => {
-    // console.log({ cityValue, apartmentValue, flatValue });
-    // if (!cityValue.id) {
-    //   Alert.alert('Validation Error', 'Please select a city.');
-    //   return;
-    // }
-    // if (!apartmentValue.id) {
-    //   Alert.alert('Validation Error', 'Please select an apartment.');
-    //   return;
-    // }
-    // if (!flatValue.id) {
-    //   Alert.alert('Validation Error', 'Please select a flat number.');
-    //   return;
-    // }
     navigation.navigate(allTexts.screenNames.userOnBoardingForm, {
       cityValue: cityValue?.name,
       apartmentValue: apartmentValue?.name,
@@ -138,77 +111,95 @@ const SelectCityOptions = ({navigation, route}) => {
     });
   };
 
+  useEffect(() => {
+    handleCityData();
+  }, []);
+
+  useEffect(() => {
+    if (cityValue.id) {
+      handleApartmentData(cityValue.id);
+    }
+  }, [cityValue.id]);
+
+  useEffect(() => {
+    if (apartmentValue.id) {
+      handleFlatData(apartmentValue.id);
+    }
+  }, [apartmentValue.id]);
+
+  useEffect(() => {
+    if (flatValue.id) {
+      Animated.timing(buttonOpacity, {
+        toValue: 1,
+        duration: 200,
+        useNativeDriver: true,
+      }).start();
+    }
+  }, [flatValue.id]);
+
   return (
     <View style={styles.mainCon}>
-      <View style={{height: 50, marginTop: statusBarHeight}}>
-        <TopBarCard2 back={true} txt={'On Boarding'} navigation={navigation} />
+      <View style={{ height: 50, marginTop: statusBarHeight }}>
+        <TopBarCard2 back={true} txt={'Flat OnBoarding'} navigation={navigation} />
       </View>
       <KeyboardAwareScrollView>
         <View style={styles.container}>
-          <View style={styles.eachDropdownCon}>
+          <Animated.View style={{ ...styles.eachDropdownCon, opacity: cityOpacity }}>
             <CustomDropdown
               label="City"
+              showLabel={true}
               data={cityData}
               value={cityValue.id}
-              onChange={(id, name) => setCityValue({id, name})}
+              onChange={(id, name) => setCityValue({ id, name })}
               labelField="name"
               valueField="id"
             />
-            {/* {!cityData && (
-              <View>
-                <Text style={styles.errorMessage}>{'No Cities Here'}</Text>
-              </View>
-            )} */}
-          </View>
+          </Animated.View>
           {cityValue?.id && (
-            <View style={styles.eachDropdownCon}>
+            <Animated.View style={{ ...styles.eachDropdownCon, opacity: apartmentOpacity }}>
               <CustomDropdown
                 label="Apartment"
+                showLabel={true}
                 data={apartmentData}
                 value={apartmentValue.id}
-                onChange={(id, name) => setApartmentValue({id, name})}
+                onChange={(id, name) => setApartmentValue({ id, name })}
                 labelField="name"
                 valueField="id"
               />
-              {apartmentData && (
+              {(apartmentData || !apartmentData) && (
                 <View style={styles.apartmentsErrorHandlerCon}>
-                  {/* <Text style={styles.errorMessage}>
-                    {'No Apartments Here'}
-                  </Text> */}
                   <TouchableOpacity
                     onPress={() =>
-                      navigation.navigate(
-                        allTexts.screenNames.newApartmentOnBoard,
-                      )
+                      navigation.navigate(allTexts.screenNames.newApartmentOnBoard)
                     }>
-                    <Text style={{color: colors.blue, fontWeight: '500'}}>
+                    <Text style={{ color: colors.blue, fontWeight: '500' }}>
                       +On Board
                     </Text>
                   </TouchableOpacity>
                 </View>
               )}
-            </View>
+            </Animated.View>
           )}
           {apartmentValue?.id && (
-            <View style={styles.eachDropdownCon}>
+            <Animated.View style={{ ...styles.eachDropdownCon, opacity: flatOpacity }}>
               <CustomDropdown
                 label="Flat Number"
+                showLabel={true}
                 data={flatdata}
                 value={flatValue}
-                onChange={(id, name) => setFlatValue({id, name})}
+                onChange={(id, name) => setFlatValue({ id, name })}
                 labelField="flatNo"
                 valueField="id"
               />
-              {!flatdata ||
-                (flatdata.length === 0 && (
-                  <View>
-                    <Text style={styles.errorMessage}>{'No Flats Here'}</Text>
-                  </View>
-                ))}
-            </View>
+              {!flatdata || (flatdata.length === 0 && (
+                <View>
+                  <Text style={styles.errorMessage}>{'No Flats Here'}</Text>
+                </View>
+              ))}
+            </Animated.View>
           )}
           {flatValue?.id && (
-            <View style={styles.buttonContainer}>
+            <Animated.View style={{ ...styles.buttonContainer, opacity: buttonOpacity }}>
               <PrimaryButton
                 onPress={() => handleData()}
                 bgColor={colors.primaryRedColor}
@@ -217,7 +208,7 @@ const SelectCityOptions = ({navigation, route}) => {
                 shadow={true}
                 textColor={colors.white}
               />
-            </View>
+            </Animated.View>
           )}
         </View>
       </KeyboardAwareScrollView>

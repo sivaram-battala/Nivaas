@@ -29,6 +29,9 @@ export const cityService = createApi({
     getFlatsList : builder.query<any,{flatId:Number,pageNo:Number,pageSize:Number}>({
       query: ({flatId,pageNo,pageSize}) => `${endpoints.NIVAAS_FLAT}?apartmentId=${flatId}&pageNo=${pageNo}&pageSize=${pageSize}`
     }),
+    getPostalCodeList : builder.query<any,{pageNo:Number,pageSize:Number}>({
+      query: ({pageNo,pageSize}) => `${endpoints.GET_POSTALCODES}?pageNo=${pageNo}&pageSize=${pageSize}`
+    }),
     userOnBoarding: builder.mutation<any, {}>({
       query: (payload) => ({
         url: endpoints.NIVAAS_ONBOARD,
@@ -50,6 +53,7 @@ export const {
   useLazyGetCityListQuery,
   useLazyGetApartmentListQuery,
   useLazyGetFlatsListQuery,
+  useLazyGetPostalCodeListQuery,
   useUserOnBoardingMutation,
   useNewApartmentOnboardingMutation,
 } = cityService;

@@ -1,70 +1,54 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
   TextInput,
   StyleSheet,
   ScrollView,
-  FlatList,
   TouchableOpacity,
 } from 'react-native';
-import { CustomDropdown, NumericTextInput, PrimaryButton, TopBarCard2 } from '../../components';
+import { NumericTextInput, PrimaryButton, TopBarCard2 } from '../../components';
 import { statusBarHeight } from '../../utils/config/config';
 import { allTexts, colors } from '../../common';
 import { useSelector } from 'react-redux';
-import { useAddPrepaidMeterMutation } from '../../redux/services/maintainenceService';
+import { useAddPrepaidMeterMutation } from '../../redux/services/prepaidMeterService';
+import { validatePrepaidMeterFields } from '../../common/schemas';
 
-const AddPrepaidMeter = ({ navigation }) => {
+const AddPrepaidMeter = ({ navigation, route }) => {
+  const routeData = route?.params || {};
   const customerDetails = useSelector(state => state.currentCustomer);
-  const [apartmentData, setApartmentData] = useState([]);
-  const [selectedApartment, setSelectedApartment] = useState({ id: '', name: '' });
   const [meterName, setMeterName] = useState('');
   const [description, setDescription] = useState('');
   const [costPerUnit, setCostPerUnit] = useState('');
+  const [errors, setErrors] = useState({});
   const [addPrepaidMeter] = useAddPrepaidMeterMutation();
 
-  useEffect(() => {
-    if (customerDetails?.currentCustomerData?.apartmentDTOs) {
-      const approvedApartments = customerDetails.currentCustomerData.apartmentDTOs
-        .filter(apartment => apartment.adminApproved)
-        .map(apartment => ({
-          id: apartment.jtApartmentDTO.id,
-          name: apartment.jtApartmentDTO.name,
-        }));
-      setApartmentData(approvedApartments);
-    }
-  }, [customerDetails]);
-
   const handleAddPrepaidMeter = () => {
+    const { valid, errors } = validatePrepaidMeterFields(meterName, description, costPerUnit);
+    if (!valid) {
+      setErrors(errors);
+      return;
+    }
+
     const prepaidMeterPayload = {
-      apartmentId: selectedApartment.id,
+      apartmentId: routeData?.selectedApartmentId,
       name: meterName,
       description: description,
       costPerUnit: costPerUnit,
     };
+
+    console.log(prepaidMeterPayload);
     addPrepaidMeter(prepaidMeterPayload)
       .unwrap()
       .then(response => {
         console.log('ADD PREPAID METER RESPONSE======>', response);
-        navigation.navigate(allTexts.screenNames.apartment)
-      }).catch((error)=>{
-        console.log('ERROR IN add Prepaid Meter',error);
+        navigation.navigate(allTexts.screenNames.apartment);
       })
+      .catch(error => {
+        console.log('ERROR IN add Prepaid Meter', error);
+      });
+    navigation.navigate(allTexts.screenNames.prepaidMeter);
   };
-
-  const data = [
-    { id: '1', flatNo: '100', units: 28 },
-    { id: '2', flatNo: '200', units: 22 },
-    { id: '3', flatNo: '207', units: 32 },
-    // Add more data as needed
-  ];
-
-  const renderItem = ({ item }) => (
-    <View style={styles.row}>
-      <Text style={styles.cell}>{item.flatNo}</Text>
-      <NumericTextInput />
-    </View>
-  );
 
   return (
     <View style={styles.mainCon}>
@@ -78,21 +62,16 @@ const AddPrepaidMeter = ({ navigation }) => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.container}>
           <View style={styles.inputCard}>
-            <CustomDropdown
-              label="Apartment"
-              data={apartmentData}
-              value={selectedApartment.id}
-              onChange={(id, name) => setSelectedApartment({ id, name })}
-              labelField="name"
-              valueField="id"
-            />
             <Text style={styles.label}>Meter Name:</Text>
             <TextInput
               style={styles.input}
               placeholder="Enter meter name"
               value={meterName}
               onChangeText={setMeterName}
+              autoFocus
             />
+            {errors.meterName && <Text style={styles.error}>{errors.meterName}</Text>}
+            
             <Text style={styles.label}>Description:</Text>
             <TextInput
               style={styles.input}
@@ -100,28 +79,21 @@ const AddPrepaidMeter = ({ navigation }) => {
               value={description}
               onChangeText={setDescription}
             />
+            {errors.description && <Text style={styles.error}>{errors.description}</Text>}
+            
             <Text style={styles.label}>Cost Per Unit:</Text>
             <TextInput
               style={styles.input}
               placeholder="Enter cost per unit"
               value={costPerUnit}
               onChangeText={setCostPerUnit}
+              keyboardType="numeric"
             />
+            {errors.costPerUnit && <Text style={styles.error}>{errors.costPerUnit}</Text>}
           </View>
         </View>
-        {/* <View style={styles.container2}>
-          <View style={styles.header}>
-            <Text style={styles.headerCell}>Flat Number</Text>
-            <Text style={styles.headerCell}>Consumption(Units)</Text>
-          </View>
-          <FlatList
-            data={data}
-            renderItem={renderItem}
-            keyExtractor={item => item.id}
-          />
-        </View> */}
         <TouchableOpacity style={styles.buttonCon}>
-          <PrimaryButton text={'SAVE'} bgColor={colors.primaryRedColor} onPress={handleAddPrepaidMeter}/>
+          <PrimaryButton text={'SAVE'} bgColor={colors.primaryRedColor} onPress={handleAddPrepaidMeter} />
         </TouchableOpacity>
       </ScrollView>
     </View>
@@ -151,7 +123,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 16,
-    marginBottom: 5,
+    marginVertical: 5,
   },
   input: {
     borderWidth: 1,
@@ -159,40 +131,16 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     marginBottom: 5,
-    backgroundColor: '#f9f9f9',
+    backgroundColor: colors.gray4,
     color: colors.black,
   },
   error: {
     color: 'red',
     marginBottom: 10,
   },
-  container2: {
-    marginHorizontal: '5%',
-    marginVertical: '10%',
-  },
-  header: {
-    flexDirection: 'row',
-    backgroundColor: '#f4f4f4',
-    padding: 10,
-  },
-  headerCell: {
-    flex: 1,
-    fontWeight: 'bold',
-  },
-  row: {
-    flexDirection: 'row',
-    padding: 10,
-    paddingRight: 80,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.gray2,
-  },
-  cell: {
-    flex: 1,
-    color: colors.black,
-  },
   buttonCon: {
     marginHorizontal: '5%',
-    marginVertical:'40%'
+    marginBottom: '10%',
   },
 });
 

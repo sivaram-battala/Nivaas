@@ -33,10 +33,21 @@ export const myAccountService = createApi({
         },
       }),
     }),
+    userDetails: builder.mutation<any, {}>({
+      query: payload => ({
+        url: endpoints.USER_DETAILS,
+        method: 'PUT',
+        body: payload,
+        header: {
+          'Content-Type': 'application/json',
+        },
+      }),
+    }),
   }),
 });
 
 export const {
   useLazyGetCurrentCustomerQuery,
   usePostProfilePicMutation,
+  useUserDetailsMutation
 } = myAccountService;

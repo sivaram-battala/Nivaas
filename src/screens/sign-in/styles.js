@@ -34,7 +34,7 @@ export const styles = StyleSheet.create({
     borderWidth:1,
     borderRadius:5,
     justifyContent:'center',
-    paddingBottom:15,
+    paddingBottom:10,
   },
   btnContainer: {marginTop: 15, width: '70%', alignSelf: 'center'},
   navLinkText: {

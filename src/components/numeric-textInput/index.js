@@ -11,7 +11,6 @@ import {colors} from 'react-native-elements';
 
 const NumericTextInput = () => {
   const [value, setValue] = useState(0);
-
   const handleIncrement = () => {
     setValue(prevValue => prevValue + 1);
   };

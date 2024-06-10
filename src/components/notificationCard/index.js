@@ -13,7 +13,7 @@ export const NotificationCard = ({ data, name }) => {
             source={{
               uri: data?.jtProfileDTO?.logo
                 ? data?.jtProfileDTO?.logo
-                : 'https://juvaryacloud.s3.ap-south-1.amazonaws.com/16956203647841695620364843.jpg',
+                : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0KGdeR1W1eupo1bL3aoyo7N6bm4UP1GUP-Q&s',
             }}
             style={styles.img}
           />
@@ -21,20 +21,20 @@ export const NotificationCard = ({ data, name }) => {
         <View style={{ width: '90%', marginLeft: '5%' }}>
           <Text style={{
             color: colors.black,
-            textTransform: 'uppercase',
+            // textTransform: 'uppercase',
             fontWeight: 'bold',
-          }}>{data?.jtCustomer?.firstName} </Text>
-          <Text style={{...styles.description, color: isDarkMode ? 'black' : 'black'}}>{data?.jtProfileDTO?.description} </Text>
+          }}>{data?.jtCustomer?.firstName || 'Hello'}</Text>
+          <Text style={{...styles.description, color: isDarkMode ? 'black' : 'black'}}>{data?.jtProfileDTO?.description || 'Due Amount'} </Text>
           <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
-          <View style={styles.typeView}>
+          {/* <View style={styles.typeView}>
           <Text
             style={styles.type}>
-            {data?.type}
+            {data?.type || 'due'}
           </Text>
-          </View>
-          <Text style={styles.date}>
-            {data?.jtProfileDTO?.creationTime.slice('0', '10')}
-          </Text>
+          </View> */}
+          {/* <Text style={styles.date}>
+            {data?.jtProfileDTO?.creationTime.slice('0', '10') || 'ukyagru'}
+          </Text> */}
           </View>
         </View>
       </View>

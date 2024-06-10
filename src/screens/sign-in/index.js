@@ -174,7 +174,7 @@ const Signin = ({navigation}) => {
               value={mobNum}
               setState={e => setMobNum(e)}
               keyboardType={'numeric'}
-              placeholder={'Enter Mobile Number'}
+              placeholder={'Mobile Number'}
               maxLength={10}
             />
           </View>

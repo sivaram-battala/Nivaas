@@ -10,7 +10,6 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import {allTexts, colors} from '../../common';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {getNotifications} from '../../utils/api';
-import { useLazyGetNotificationDataQuery } from '../../redux/services/notificationService';
 
 export const TopBarcard = ({
   txtColor,
@@ -38,7 +37,6 @@ export const TopBarcard = ({
 }) => {
   const [img, setImg] = useState(null);
     const [notificationsCount, setNotificationCount] = useState(0);
-    const [getNotification] = useLazyGetNotificationDataQuery()
     const GetNotificationsCount = async () => {
       getNotification()
       .unwrap()
@@ -189,6 +187,7 @@ export const TopBarCard2 = ({
   roleId,
   roleType,
   navCreate,
+  searchBar,
   height,
   bData,
   marginLeft,
@@ -206,7 +205,6 @@ export const TopBarCard2 = ({
                 source={require('../../../assets/images/backarrow.png')}
                 style={{height: 10, width: 10}}
               />
-              {/* <AntDesign name='arrowleft' size={30}/> */}
             </TouchableOpacity>
           )}
           {back && (
@@ -218,7 +216,6 @@ export const TopBarCard2 = ({
                     data: bData,
                   };
               }}>
-              {/* <Ionicons name="arrow-back-circle" size={40} color="orange" /> */}
               <AntDesign name='arrowleft' size={28} color={colors.black}/>
             </TouchableOpacity>
           )}
@@ -271,6 +268,11 @@ export const TopBarCard2 = ({
           {accountType && (
             <TouchableOpacity onPress={onPressBag} style={{marginRight: '20%',backgroundColor:'black',alignItems:'center',borderRadius:10}}>
               <Text style={{color:'white',fontWeight:'500'}}>{accountType}</Text>
+            </TouchableOpacity>
+          )}
+          {searchBar && (
+            <TouchableOpacity onPress={onPressBag} style={{marginRight: '20%',alignItems:'center',borderRadius:10}}>
+              <Feather name='search' size={25} color={colors.black}/>
             </TouchableOpacity>
           )}
         </View>

@@ -14,9 +14,7 @@ import { useSelector } from 'react-redux';
 
 const MyAccount = ({navigation, dispatch, route}) => {
   const data = route.params;
-  // console.log(data.currentCustomerData,'ROUTEDATA');
   const custDetails = useSelector(state=>state.currentCustomer);
-  // console.log(custDetails?.currentCustomerData,"CUSTDETAILS");
   const {userDetails, setLoginDetails} = useContext(ApplicationContext);
   const [flatModalVisible, setFlatModalVisible] = useState(false);
   const [apartmentModalVisible, setApartmentModalVisible] = useState(false);
@@ -65,8 +63,8 @@ const MyAccount = ({navigation, dispatch, route}) => {
       </View>
       <View style={styles.profie}>
         <DpImage dispatch={dispatch} />
-        <View>
-          <Text style={styles.profieText}>Vamsi Chadharam</Text>
+        <View style={{marginHorizontal:-10}}>
+          <Text style={styles.profieText}>{custDetails ? (custDetails?.currentCustomerData?.fullName).charAt(0).toUpperCase() + (custDetails?.currentCustomerData?.fullName).slice(1)  : 'Your Name'}</Text>
           {data?.isOneFlatOnboarded && (
             <View
               style={{
@@ -87,11 +85,11 @@ const MyAccount = ({navigation, dispatch, route}) => {
         <Text style={styles.manageFlatsConText}>Manage flats</Text>
         <View style={styles.manageFlatsSubCon}>
           <View>
-            {data?.isOneFlatOnboarded ? (
+            {custDetails?.currentCustomerData?.flatDTO.length != 0 ? (
               <View style={styles.manageFlatsConHome}>
                 <Foundation
                   name="home"
-                  size={30}
+                  size={28}
                   color={colors.black}
                   style={{marginLeft: 3}}
                 />
@@ -135,7 +133,7 @@ const MyAccount = ({navigation, dispatch, route}) => {
         <Text style={styles.manageFlatsConText}>Manage Apartments</Text>
         <View style={styles.manageFlatsSubCon}>
           <View>
-            {data?.isOneFlatOnboarded ? (
+            {custDetails?.currentCustomerData?.apartmentDTOs.length != 0 ? (
               <View style={styles.manageFlatsConHome}>
                 <FontAwesome
                   name="building-o"

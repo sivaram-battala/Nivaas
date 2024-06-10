@@ -37,14 +37,13 @@ export const InputField = ({
           )}
 
           <TextInput
-            placeholder='Mobile Number'
             value={value}
             placeholderTextColor={colors.gray2}
             onChangeText={val => setState(val)}
             style={styles.inputText}
             multiline={true}
             autoCapitalize='none'
-            // placeholder={placeholder}
+            placeholder={placeholder}
             {...props}
           />
         </View>

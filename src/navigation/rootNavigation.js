@@ -25,6 +25,10 @@ import {
   SocietyDues,
   AddPrepaidMeter,
   UserOnBoardingForm,
+  FlatsOnboarding,
+  EditOnboardedFlatDetails,
+  Notification,
+  AdminFlatSettings,
 } from '../screens';
 import { createStackNavigator } from '@react-navigation/stack';
 import ApplicationContext from '../utils/context-api/Context';
@@ -68,6 +72,10 @@ const rootNavigation = () => {
       prepaidMeter,
       addPrepaidMeter,
       societyDues,
+      flatsOnboarding,
+      editOnboardedFlatDetails,
+      notification,
+      adminFlatSettings,
     },
   } = allTexts;
 
@@ -260,6 +268,34 @@ const rootNavigation = () => {
         <Stack.Screen
           name={addPrepaidMeter}
           component={AddPrepaidMeter}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={flatsOnboarding}
+          component={FlatsOnboarding}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={editOnboardedFlatDetails}
+          component={EditOnboardedFlatDetails}
+          options={{
+            headerShown: false,
+          }}
+        />
+         <Stack.Screen
+          name={notification}
+          component={Notification}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name={adminFlatSettings}
+          component={AdminFlatSettings}
           options={{
             headerShown: false,
           }}

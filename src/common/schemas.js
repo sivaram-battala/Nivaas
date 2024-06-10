@@ -9,34 +9,57 @@ export const onboardValidationSchema = Yup.object().shape({
     .required('Number of flats per block is required'),
   addressLine1: Yup.string().required('Address line 1 is required'),
 });
-// validation.js
-export const onBoardNewApartmentSchema = (formData) => {
-  let valid = true;
+export const  onBoardNewApartmentSchema = (values) => {
   const errors = {};
 
-  // if (!formData.city.id) {
-  //   valid = false;
-  //   errors.city = 'City is required';
-  // }
-  if (!formData.apartment) {
-    valid = false;
-    errors.apartment = 'Apartment is required';
+  if (!values.name) {
+    errors.name = 'Apartment name is required';
   }
-  // if (!formData.numBlocks) {
-  //   valid = false;
-  //   errors.numBlocks = 'Number of blocks is required';
-  // }
-  if (!formData.numFlatsPerBlock) {
-    valid = false;
-    errors.numFlatsPerBlock = 'Number of flats per block is required';
+  if (!values.totalBlocks || values.totalBlocks <= 0) {
+    errors.totalBlocks = 'Total number of blocks is required and must be at least 1';
   }
-  if (!formData.addressLine1) {
-    valid = false;
-    errors.addressLine1 = 'Address Line 1 is required';
+  if (typeof values.isUnderConstruction === 'undefined') {
+    errors.isUnderConstruction = 'Construction status is required';
   }
-  if (!formData.selectedOption) {
+  if (!values.line1) {
+    errors.line1 = 'Address Line 1 is required';
+  }
+  if (!values.line2) {
+    errors.line2 = 'Address Line 2 is required';
+  }
+  if (!values.postalCode) {
+    errors.postalCode = 'Postal code is required';
+  }
+  if (!values.locality) {
+    errors.locality = 'City is required';
+  }
+  if (!values.status) {
+    errors.status = 'Status is required';
+  }
+  return errors;
+};
+
+
+export const validatePrepaidMeterFields = (meterName, description, costPerUnit) => {
+  let valid = true;
+  let errors = {};
+
+  if (!meterName.trim()) {
+    errors.meterName = 'Meter Name is required';
     valid = false;
-    errors.selectedOption = 'You must select an option';
+  }
+
+  if (!description.trim()) {
+    errors.description = 'Description is required';
+    valid = false;
+  }
+
+  if (!costPerUnit.trim()) {
+    errors.costPerUnit = 'Cost Per Unit is required';
+    valid = false;
+  } else if (isNaN(costPerUnit) || parseFloat(costPerUnit) <= 0) {
+    errors.costPerUnit = 'Cost Per Unit must be a positive number';
+    valid = false;
   }
 
   return { valid, errors };
