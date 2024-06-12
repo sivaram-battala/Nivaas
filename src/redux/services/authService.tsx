@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import {BASEURL, NIVAAS_URL} from '../../api/api';
+import { NIVAAS_URL} from '../../api/api';
 import {RootState} from '../store';
 import { endpoints } from '../../api';
 
