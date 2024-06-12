@@ -6,6 +6,7 @@ import { statusBarHeight } from '../../utils/config/config'
 import { allTexts, colors } from '../../common'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 const AdminSociety = ({navigation}) => {
   return (
     <View style={styles.mainCon}>
@@ -32,6 +33,12 @@ const AdminSociety = ({navigation}) => {
             <View style={styles.eachService}>
               <MaterialCommunityIcons name='office-building-cog' size={25} color={colors.primaryRedColor}/>
               <Text style={styles.eachText}>Manage Flats</Text>
+            </View>
+          </Pressable>
+          <Pressable onPress={()=>navigation.navigate(allTexts.screenNames.expences)}>
+            <View style={styles.eachService}>
+              <MaterialIcons name='local-atm' size={25} color={colors.primaryRedColor}/>
+              <Text style={styles.eachText}>Expenses</Text>
             </View>
           </Pressable>
         </View>

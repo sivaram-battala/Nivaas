@@ -65,6 +65,30 @@ export const validatePrepaidMeterFields = (meterName, description, costPerUnit) 
   return { valid, errors };
 };
 
+
+export const ExpancesValidation = (date, transactionType, description, amount) => {
+  const errors = {};
+
+  if (!date) {
+    errors.date = 'Please select a date.';
+  }
+
+  if (!transactionType) {
+    errors.transactionType = 'select transaction type.';
+  }
+
+  if (!description) {
+    errors.description = 'Please enter a description.';
+  }
+
+  if (!amount || isNaN(amount)) {
+    errors.amount = 'Please enter a valid amount.';
+  }
+
+  return errors;
+};
+
+
 export const RegisterValidationSchema = Yup.object({
   firstName: Yup.string()
     .trim()

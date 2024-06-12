@@ -50,7 +50,7 @@ const EditOnboardedFlatDetails = ({navigation}) => {
       .unwrap()
       .then(response => {
         setLoader(false);
-        console.log(response?.data, 'RESPONCE OF FLAT DATA');
+        // console.log(response?.data, 'RESPONCE OF FLAT DATA');
         const processedFlatData = response?.data.map(item => ({
           ...item,
           flatNo: String(item.flatNo),

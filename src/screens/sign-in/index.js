@@ -12,7 +12,7 @@ import {InputField} from '../../components';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {allTexts, colors} from '../../common';
 import {styles} from './styles.js';
-import {KovelaIcon} from '../sign-up/index.js';
+import {KovelaIcon, NivaasIcon} from '../sign-up/index.js';
 import ApplicationContext from '../../utils/context-api/Context';
 import Snackbar from 'react-native-snackbar';
 import NetInfo from '@react-native-community/netinfo';
@@ -166,7 +166,7 @@ const Signin = ({navigation}) => {
         keyboardShouldPersistTaps="handled"
         style={styles.keyboardStyle}
         contentContainerStyle={styles.contentStyle}>
-        {/* <KovelaIcon /> */}
+        <NivaasIcon />
         <View style={styles.inputContainer}>
           <View style={styles.inputView}>
             <InputField

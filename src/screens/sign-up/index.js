@@ -22,7 +22,7 @@ import {NewVerifyOTP, loginUser1} from '../../utils/api';
 import {PasswordField} from '../../components/inputfield';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Terms_And_Conditions} from '../../components';
-export const KovelaIcon = () => (
+export const NivaasIcon = () => (
   <View style={styles.imageContainer}>
     <Image
       resizeMode="contain"

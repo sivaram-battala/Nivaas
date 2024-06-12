@@ -20,6 +20,7 @@ import CustomDropdown from './custom-dropdown';
 import DpImage from './dp-image';
 import NumericTextInput from './numeric-textInput';
 import CompleteProfileModal from './completeProfile-modal';
+import CustomSelectDropdown from './Custom-SelectDropDown';
 export {
   Loader,
   SearchBar,
@@ -44,4 +45,5 @@ export {
   DpImage,
   NumericTextInput,
   CompleteProfileModal,
+  CustomSelectDropdown
 };

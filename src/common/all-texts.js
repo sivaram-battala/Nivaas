@@ -118,6 +118,8 @@ export const allTexts = {
     flatsOnboarding:'FlatsOnboarding',
     editOnboardedFlatDetails:'EditOnboardedFlatDetails',
     notification:"Notification",
-    adminFlatSettings:'AdminFlatSettings'
+    adminFlatSettings:'AdminFlatSettings',
+    expences:'Expences',
+    addNewExpances:'AddNewExpances'
   },
 };
