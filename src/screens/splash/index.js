@@ -37,7 +37,7 @@ const Splash = ({navigation}) => {
     <ImageBackground
       resizeMode="cover"
       style={styles.imgBackGround}
-      source={require('../../utils/assets/images/newsplash.png')}>
+      source={require('../../utils/assets/images/Nivaas-logo.jpg')}>
       <TouchableOpacity
         style={{
           flex: 1,
@@ -47,7 +47,7 @@ const Splash = ({navigation}) => {
         }}
         onPress={() => navigation.replace(signin)}>
         <Image
-          source={require('../../utils/assets/images/splashButton.png')}
+          source={require('../../utils/assets/images/Nivaas-logo.jpg')}
           style={{
             height: 60,
             width: 60,

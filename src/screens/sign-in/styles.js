@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
   inputContainer: {
     width: '80%',
     paddingBottom: 100,
-    marginTop:'60%',
+    marginTop:'10%',
   },
   inputView:{
     borderColor:colors.gray,

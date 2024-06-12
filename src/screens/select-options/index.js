@@ -172,7 +172,7 @@ const SelectCityOptions = ({ navigation, route }) => {
                     onPress={() =>
                       navigation.navigate(allTexts.screenNames.newApartmentOnBoard)
                     }>
-                    <Text style={{ color: colors.blue, fontWeight: '500' }}>
+                    <Text style={{ color: colors.primaryRedColor, fontWeight: '500' }}>
                       +On Board
                     </Text>
                   </TouchableOpacity>

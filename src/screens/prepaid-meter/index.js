@@ -37,10 +37,7 @@ const PrepaidMeter = ({navigation}) => {
   const customerDetails = useSelector(state => state.currentCustomer);
   const [loader, setLoader] = useState(false);
   const [apartmentData, setApartmentData] = useState([]);
-  const [selectedApartment, setSelectedApartment] = useState({
-    id: '',
-    name: '',
-  });
+  const [selectedApartment, setSelectedApartment] = useState({id: '',name: ''});
   const [prepaidMetersData, setprepaidMetersData] = useState();
   const [modalVisible, setModalVisible] = useState(false);
   const [addModalVisible, setAddModalVisible] = useState(false);
@@ -48,11 +45,11 @@ const PrepaidMeter = ({navigation}) => {
   const [selectedMeter, setSelectedMeter] = useState(null);
   const [editedMeter, setEditedMeter] = useState(null);
   const [flatdata, setflatdata] = useState();
-  const [unitsConsumed, setunits] = useState(0);
+  const [unitsConsumed, setUnitsConsumed] = useState();
   const [textInputData, setTextInputData] = useState([]);
+  // console.log(textInputData);
 
-  const [getApartmentPrepaidMetersList] =
-    useLazyGetAparmentPrepaidMetersQuery();
+  const [getApartmentPrepaidMetersList] = useLazyGetAparmentPrepaidMetersQuery();
   const [updatePrepaidMeterDetails] = useUpdatePrepaidMeterMutation();
   const [updateConsumtionUnits] = useUpdateConsumedUnitsMutation();
   const [getflatdata] = useLazyGetFlatsListQuery();
@@ -110,13 +107,13 @@ const PrepaidMeter = ({navigation}) => {
     setSelectedMeter(item);
     setAddModalVisible(true);
   };
-  const handleconsumptionUnits = (flatId, units) => {
+  const handleconsumptionUnits = (flatId, unitsConsumed) => {
     const updatedData = [...textInputData];
     const index = updatedData.findIndex(item => item.flatId === flatId);
     if (index !== -1) {
-      updatedData[index] = {flatId, units};
+      updatedData[index] = {flatId, unitsConsumed};
     } else {
-      updatedData.push({flatId, units});
+      updatedData.push({flatId, unitsConsumed});
     }
     setTextInputData(updatedData);
   };
@@ -145,12 +142,7 @@ const PrepaidMeter = ({navigation}) => {
     const payload = {
       prepaidId: selectedMeter?.id,
       apartmentId: selectedApartment?.id,
-      flatConsumption: [
-        {
-          unitsConsumed: textInputData[0]?.units,
-          flatId: textInputData[0]?.flatId,
-        },
-      ],
+      flatConsumption: textInputData
     };
     console.log(payload);
     updateConsumtionUnits(payload)
@@ -393,7 +385,7 @@ const PrepaidMeter = ({navigation}) => {
                 />
                 <View style={styles.updateButton}>
                   <PrimaryButton
-                    text={'UPDATE'}
+                    text={'ADD'}
                     onPress={handleUpdateConsumptionUnits}
                     bgColor={colors.primaryRedColor}
                   />

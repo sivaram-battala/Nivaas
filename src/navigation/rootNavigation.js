@@ -29,6 +29,8 @@ import {
   EditOnboardedFlatDetails,
   Notification,
   AdminFlatSettings,
+  Expences,
+  AddNewExpances,
 } from '../screens';
 import { createStackNavigator } from '@react-navigation/stack';
 import ApplicationContext from '../utils/context-api/Context';
@@ -76,6 +78,8 @@ const rootNavigation = () => {
       editOnboardedFlatDetails,
       notification,
       adminFlatSettings,
+      expences,
+      addNewExpances,
     },
   } = allTexts;
 
@@ -300,6 +304,20 @@ const rootNavigation = () => {
             headerShown: false,
           }}
         />
+        <Stack.Screen
+          name={expences}
+          component={Expences}
+          options={{
+            headerShown: false,
+          }}
+        />
+         <Stack.Screen
+          name={addNewExpances}
+          component={AddNewExpances}
+          options={{
+            headerShown: false,
+          }}
+        />
       </Stack.Navigator>
     );
   };
@@ -307,7 +325,7 @@ const rootNavigation = () => {
   useEffect(() => {
     async function prepare() {
       try {
-        new Promise(resolve => setTimeout(resolve, 2000));
+        new Promise(resolve => setTimeout(resolve, 1000));
       } catch (e) {
         console.warn(e);
       } finally {

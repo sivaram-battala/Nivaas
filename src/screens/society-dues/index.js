@@ -67,11 +67,13 @@ const SocietyDues = ({navigation}) => {
   ]);
 
   const [selectedFlatDues, setSelectedFlatDues] = useState([]);
-  const duedata = (selectedFlatDues?.jsonData) ? JSON.parse(selectedFlatDues?.jsonData) : null
+  const duedata = selectedFlatDues?.jsonData
+    ? JSON.parse(selectedFlatDues?.jsonData)
+    : null;
   const [getSocietyDues] = useLazyGetSocietyDuesQuery();
 
   const handleSocietydues = () => {
-    setLoader(true)
+    setLoader(true);
     const payload = {
       pageNo: 0,
       pageSize: 20,
@@ -79,7 +81,7 @@ const SocietyDues = ({navigation}) => {
     getSocietyDues(payload)
       .unwrap()
       .then(responce => {
-        setLoader(false)
+        setLoader(false);
         console.log('SOCIETY DUES=====>', responce);
         // setSocietyDuesData(responce?.societies);
       })
@@ -210,27 +212,35 @@ const SocietyDues = ({navigation}) => {
       ) : (
         <View>
           <View style={styles.dropdownContainer}>
-            <CustomDropdown
-              label="Apartment"
-              showLabel={false}
-              data={apartmentData}
-              value={selectedApartment.id}
-              onChange={(id, name) => setSelectedApartment({id, name})}
-              labelField="name"
-              valueField="id"
-            />
-            <CustomDropdown
-              label="Flat"
-              data={flatData}
-              value={selectedFlat?.flatNo}
-              onChange={(id, flatNo) => {
-                const flat = societyDuesData.find(flat => flat.flatId === id);
-                setSelectedFlatDues(flat);
-                setSelectedFlat({id, flatNo});
-              }}
-              labelField="flatNo"
-              valueField="id"
-            />
+            <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+              <View style={{width:'45%'}}>
+                <CustomDropdown
+                  label="Apartment"
+                  showLabel={false}
+                  data={apartmentData}
+                  value={selectedApartment.id}
+                  onChange={(id, name) => setSelectedApartment({id, name})}
+                  labelField="name"
+                  valueField="id"
+                />
+              </View>
+              <View style={{width:'45%',height:100}}>
+                <CustomDropdown
+                  label="Flat"
+                  data={flatData}
+                  value={selectedFlat?.flatNo}
+                  onChange={(id, flatNo) => {
+                    const flat = societyDuesData.find(
+                      flat => flat.flatId === id,
+                    );
+                    setSelectedFlatDues(flat);
+                    setSelectedFlat({id, flatNo});
+                  }}
+                  labelField="flatNo"
+                  valueField="id"
+                />
+              </View>
+            </View>
             <Text style={styles.textCon}>{selectedFlat?.flatNo}</Text>
           </View>
           <View style={styles.container}>
@@ -287,7 +297,8 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: '500',
     color: colors.black,
-    marginTop: '3%',
+    marginTop: '1%',
+    marginHorizontal:'1%'
   },
   container: {
     marginHorizontal: '5%',

@@ -7,7 +7,7 @@ import {
   TextInput,
   ScrollView,
 } from 'react-native';
-import {colors} from '../../common';
+import {allTexts, colors} from '../../common';
 import {statusBarHeight} from '../../utils/config/config';
 import {
   CustomDropdown,
@@ -123,6 +123,7 @@ const MaintainenceSettings = ({navigation}) => {
       .unwrap()
       .then(responce => {
         console.log('RESPONCE OF MAINTAINENCE SAVE====>', responce);
+        navigation.navigate(allTexts.screenNames.adminSociety)
       })
       .catch(error => {
         console.log('ERROR IN MAINTAINENCE SAVE====>', error);

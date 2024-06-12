@@ -17,13 +17,12 @@ export const styles = StyleSheet.create({
     marginTop: 20,
   },
   imageContainer: {
-    padding: 8,
-    paddingTop: -10,
     height: 170,
     width: 180,
-    borderRadius:50
+    borderRadius:50,
+    alignItems:'center'
   },
-  templeLogo: {height: undefined, width: undefined, flex: 1,borderRadius:50},
+  templeLogo: {height: 200, width: 200, flex: 1,borderRadius:50},
   description: {
     marginVertical: 4,
     textAlign: 'center',

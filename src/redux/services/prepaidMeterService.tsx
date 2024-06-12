@@ -55,7 +55,7 @@ export const prepaidMeterService = createApi({
     }),
     updateConsumedUnits: builder.mutation<any, {}>({
       query: payload => ({
-        url: endpoints.UPDATE_CONSUMED_UNITS,
+        url: endpoints.ADD_CONSUMED_UNITS,
         method: 'POST',
         body: payload,
         header: {

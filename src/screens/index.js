@@ -30,6 +30,8 @@ import EditOnboardedFlatDetails from './edit-OnboardedFlat-details';
 import Notification from './notification';
 import SelectCityOptions from './select-options';
 import AdminFlatSettings from './admin-flats-settings';
+import Expences from './expences';
+import AddNewExpances from './add-new-expances';
 export {
   Signin,
   Splash,
@@ -63,4 +65,6 @@ export {
   Notification,
   SelectCityOptions,
   AdminFlatSettings,
+  Expences,
+  AddNewExpances,
 };
