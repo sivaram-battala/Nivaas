@@ -117,9 +117,9 @@ dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
     implementation project(':react-native-vector-icons')
-    implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
-    implementation("com.google.firebase:firebase-analytics")
-    implementation('com.google.firebase:firebase-messaging:23.0.0')
+    // implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
+    // implementation("com.google.firebase:firebase-analytics")
+    implementation 'com.google.firebase:firebase-messaging:23.0.0'
     implementation project(':react-native-splash-screen')
 
     if (hermesEnabled.toBoolean()) {
@@ -149,4 +149,5 @@ project.ext.vectoricons = [
         'Foundation.ttf']
 ]
 apply from: file("../../node_modules/react-native-vector-icons/fonts.gradle")
+apply plugin: 'com.google.gms.google-services'
 

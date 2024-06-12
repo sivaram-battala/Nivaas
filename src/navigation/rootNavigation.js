@@ -41,6 +41,15 @@ import MainProfile from '../screens/maidprofile';
 import Dailyhelp from '../screens/daily-help';
 import EachService from '../screens/each-service';
 import AdminSociety from '../screens/admin-society';
+import { createNavigationContainerRef } from '@react-navigation/native';
+
+export const navigationRef = createNavigationContainerRef();
+
+export function navigate(name, params) {
+  if (navigationRef.isReady()) {
+    navigationRef.navigate(name, params);
+  }
+}
 
 LogBox.ignoreAllLogs();
 LogBox.ignoreLogs(['Warning: ...']);
@@ -338,7 +347,6 @@ const rootNavigation = () => {
   const Stack = createStackNavigator();
   const [loginDetails, setLoginDetails] = useState(null);
   const [userDetails, setUserDetails] = useState({});
-
 //Redux hooks
 const authState = useAppSelector(state => state.auth);
 
