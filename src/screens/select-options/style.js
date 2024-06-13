@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
        marginVertical:20
     },
     buttonContainer: {
-      marginTop: '90%',
+      marginTop: window.height*0.35,
     },
     apartmentsErrorHandlerCon:{
       flexDirection:'row',

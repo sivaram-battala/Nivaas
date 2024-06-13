@@ -1,21 +1,3 @@
-import {
-  authAxiousInstance,
-  axiousInstance,
-  axiosMultiPartFormData,
-  authAxiousInstance1,
-  axiousInstanceNew,
-  axiousInstanceNewSignIn,
-  axiousInstanceFeed,
-  axiosMultiPartFormData1,
-  axiosNewData,
-  axiosNewData1,
-  axiosNewDataSave,
-  axiosMultiPartFormDataMem,
-  axiousInstanceNew1,
-  axiosEventsData1,
-  axiosNotifications,
-  axiosDonation,
-} from './api';
 
 export const endpoints = {
   NIVAAS_OTP_TRIGGER:'nivaas/api/auth/jtuserotp/trigger',
@@ -37,5 +19,11 @@ export const endpoints = {
   MAINTAINENCE_SAVE:'jtmaintanance/save',
   ADD_CONSUMED_UNITS:'/prepaid-usage/flat/update-consumed',
   SOCIETY_DUES:'society/dues',
+  GET_EXPANCES:'apartment/debit-history/apartment',
+  GET_EXPANCES_BY_ID:'apartment/debit-history',
+  GET_EXPANCES_PDF:'report/apartment',
+  ADD_DEBIT_HISTORY:'apartment/debit-history',
+  DELETE_EXPANCES:'apartment/debit-history/apartment',
+  UPDATE_DEBIT_HISTORY:'apartment/debit-history'
 };
 

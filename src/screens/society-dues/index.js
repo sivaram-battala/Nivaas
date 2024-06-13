@@ -153,7 +153,7 @@ const SocietyDues = ({navigation}) => {
         <TopBarCard2 back={true} txt={'Society Dues'} navigation={navigation} />
       </View>
       {customerDetails?.currentCustomerData?.roles?.some(
-        role => role === 'ROLE_APARTMENT_ADMIN.',
+        role => role === 'ROLE_APARTMENT_ADMIN',
       ) ? (
         <View>
           <View style={styles.dropdownContainer}>

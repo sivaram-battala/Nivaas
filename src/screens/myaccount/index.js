@@ -64,7 +64,8 @@ const MyAccount = ({navigation, dispatch, route}) => {
       <View style={styles.profie}>
         <DpImage dispatch={dispatch} />
         <View style={{marginHorizontal:-10}}>
-          <Text style={styles.profieText}>{custDetails ? (custDetails?.currentCustomerData?.fullName).charAt(0).toUpperCase() + (custDetails?.currentCustomerData?.fullName).slice(1)  : 'Your Name'}</Text>
+          {/* <Text style={styles.profieText}>{custDetails ? (custDetails?.currentCustomerData?.fullName).charAt(0).toUpperCase() + (custDetails?.currentCustomerData?.fullName).slice(1)  : 'Your Name'}</Text> */}
+          <Text style={styles.profieText}>{custDetails?.currentCustomerData?.fullName}</Text>
           {data?.isOneFlatOnboarded && (
             <View
               style={{
