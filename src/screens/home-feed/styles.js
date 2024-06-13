@@ -38,8 +38,9 @@ icons:{
   },
   textCon:{
     backgroundColor:colors.white,
-    padding:10,
-    borderRadius:10
+    padding:5,
+    borderRadius:10,
+    height:'68%'
   },
   image:{
     height:80,
@@ -53,14 +54,15 @@ icons:{
     marginHorizontal:window.width*0.04,
   },
   subConTwo:{
-    height:'25%',
+    height:'28%',
     marginTop:30,
     alignItems:'center',
     backgroundColor:colors.yellowOne,
     marginHorizontal:window.width*0.06,
     padding:'4%',
     borderRadius:10,
-    elevation:3
+    elevation:3,
+    overflow:'hidden'
   },
   commentIcon:{
     marginRight:window.width*0.68,
