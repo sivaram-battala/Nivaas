@@ -61,9 +61,13 @@ export const styles = StyleSheet.create({
     fontSize: 17,
     marginLeft: 5,
     color: colors.black,
-    width:'55%'
+    width:'55%',
   },
-  flatModalCon:{width:'67%',flexDirection:'row'},
+  flatModalCon:{
+    width:'67%',
+    flexDirection:'row',
+    overflow:'hidden'
+  },
   flatModalText:{
     fontSize: 17,
     marginLeft: 5,
@@ -71,7 +75,7 @@ export const styles = StyleSheet.create({
   },
   renderCon: {
     flexDirection: 'row',
-    marginLeft:15
+    marginLeft:'5%'
   },
   statusactiveText: {
     color: colors.green,
@@ -127,7 +131,8 @@ export const styles = StyleSheet.create({
   footer: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    marginHorizontal: 20,
+    marginHorizontal: '10%',
+    marginRight:'16%'
   },
   footerText: {
     fontSize: 14,

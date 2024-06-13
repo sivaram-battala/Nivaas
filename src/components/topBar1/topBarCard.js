@@ -266,7 +266,7 @@ export const TopBarCard2 = ({
             </TouchableOpacity>
           )}
           {accountType && (
-            <TouchableOpacity onPress={onPressBag} style={{marginRight: '20%',backgroundColor:'black',alignItems:'center',borderRadius:10}}>
+            <TouchableOpacity onPress={onPressBag} style={{marginRight: '25%',backgroundColor:'black',alignItems:'center',borderRadius:10}}>
               <Text style={{color:'white',fontWeight:'500'}}>{accountType}</Text>
             </TouchableOpacity>
           )}

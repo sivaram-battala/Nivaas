@@ -27,12 +27,12 @@ icons:{
     marginLeft:10
 },
   subConOne:{
-    marginTop:window.height*0.06,
+    marginTop:window.height*0.08,
+    height:'45%',
     alignItems:'center',
     backgroundColor:colors.yellowOne,
     marginHorizontal:window.width*0.06,
-    paddingVertical:50,
-    paddingHorizontal:30,
+    padding:'6%',
     borderRadius:10,
     elevation:3
   },
@@ -42,7 +42,7 @@ icons:{
     borderRadius:10
   },
   image:{
-    height:90,
+    height:80,
     width:170
   },
   discoverMore:{
@@ -53,12 +53,12 @@ icons:{
     marginHorizontal:window.width*0.04,
   },
   subConTwo:{
+    height:'25%',
     marginTop:30,
     alignItems:'center',
     backgroundColor:colors.yellowOne,
     marginHorizontal:window.width*0.06,
-    paddingVertical:20,
-    paddingHorizontal:20,
+    padding:'4%',
     borderRadius:10,
     elevation:3
   },
