@@ -24,6 +24,6 @@ export const endpoints = {
   GET_EXPANCES_PDF:'report/apartment',
   ADD_DEBIT_HISTORY:'apartment/debit-history',
   DELETE_EXPANCES:'apartment/debit-history/apartment',
-  UPDATE_DEBIT_HISTORY:'apartment/debit-history'
+  UPDATE_DEBIT_HISTORY:'apartment/debit-history',
 };
 

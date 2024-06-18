@@ -16,6 +16,7 @@ import currentCustomerSlice from './slices/currentCustomerSlice';
 import { prepaidMeterService } from './services/prepaidMeterService';
 import apartmentPrepaidMetersList from './slices/apartmentPrepaidMetersList';
 import { maintainenceService } from './services/maintainenceService';
+import { expancesService } from './services/expansesServices';
 
 
 const rootReducers = combineReducers({
@@ -32,6 +33,7 @@ const rootReducers = combineReducers({
   [myAccountService.reducerPath]:myAccountService.reducer,
   [prepaidMeterService.reducerPath]:prepaidMeterService.reducer,
   [maintainenceService.reducerPath]:maintainenceService.reducer,
+  [expancesService.reducerPath]:expancesService.reducer,
 });
 const persistConfig = {
   key: 'root',
@@ -52,6 +54,7 @@ export const store = configureStore({
       myAccountService.middleware,
       prepaidMeterService.middleware,
       maintainenceService.middleware,
+      expancesService.middleware,
     ),
 });
 

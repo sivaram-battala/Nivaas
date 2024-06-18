@@ -38,7 +38,7 @@ const Splash = ({navigation}) => {
       resizeMode="cover"
       style={styles.imgBackGround}
       source={require('../../utils/assets/images/Nivaas-logo.jpg')}>
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={{
           flex: 1,
           marginTop: '155%',
@@ -53,7 +53,7 @@ const Splash = ({navigation}) => {
             width: 60,
           }}
         />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </ImageBackground>
   );
 };

@@ -58,25 +58,6 @@ const MaintainenceSettings = ({navigation}) => {
   const currentYear = new Date().getFullYear();
   const dropDownData = generateDates(currentMonth, currentYear);
 
-  useEffect(() => {
-    if (customerDetails?.currentCustomerData?.apartmentDTOs) {
-      const approvedApartments =
-        customerDetails.currentCustomerData.apartmentDTOs
-          .filter(apartment => apartment.adminApproved)
-          .map(apartment => ({
-            id: apartment.jtApartmentDTO.id,
-            name: apartment.jtApartmentDTO.name,
-          }));
-      setApartmentData(approvedApartments);
-    }
-  }, [customerDetails]);
-
-  useEffect(() => {
-    if (selectedApartment?.id) {
-      handlePrepaidMetersList(selectedApartment?.id);
-    }
-  }, [selectedApartment?.id]);
-
   const renderItem = ({item}) => (
     <View style={styles.checkboxContainer}>
       <CheckBox
@@ -129,6 +110,25 @@ const MaintainenceSettings = ({navigation}) => {
         console.log('ERROR IN MAINTAINENCE SAVE====>', error);
       });
   };
+
+  useEffect(() => {
+    if (customerDetails?.currentCustomerData?.apartmentDTOs) {
+      const approvedApartments =
+        customerDetails.currentCustomerData.apartmentDTOs
+          .filter(apartment => apartment.adminApproved)
+          .map(apartment => ({
+            id: apartment.jtApartmentDTO.id,
+            name: apartment.jtApartmentDTO.name,
+          }));
+      setApartmentData(approvedApartments);
+    }
+  }, [customerDetails]);
+
+  useEffect(() => {
+    if (selectedApartment?.id) {
+      handlePrepaidMetersList(selectedApartment?.id);
+    }
+  }, [selectedApartment?.id]);
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.mainCon}>
@@ -239,15 +239,15 @@ const styles = StyleSheet.create({
     marginVertical: '10%',
   },
   buttonCon: {
-    marginHorizontal: '3%',
-    marginVertical: '10%',
+    marginHorizontal: '4%',
+    marginVertical: '5%',
   },
   checkboxContainer: {
     marginHorizontal: '2%',
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: colors.gray3,
     borderRadius: 5,
     padding: 10,
     marginBottom: 5,

@@ -42,12 +42,11 @@ const AddPrepaidMeter = ({ navigation, route }) => {
       .unwrap()
       .then(response => {
         console.log('ADD PREPAID METER RESPONSE======>', response);
-        navigation.navigate(allTexts.screenNames.apartment);
+        navigation.navigate(allTexts.screenNames.prepaidMeter);
       })
       .catch(error => {
         console.log('ERROR IN add Prepaid Meter', error);
       });
-    navigation.navigate(allTexts.screenNames.prepaidMeter);
   };
 
   return (

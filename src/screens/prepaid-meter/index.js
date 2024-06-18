@@ -78,6 +78,7 @@ const PrepaidMeter = ({navigation}) => {
   const handleUpdatePrepaidMetersDetails = () => {
     const payload = {
       id: editedMeter?.id,
+      apartmentId:selectedApartment?.id,
       description: editedMeter?.description,
       costPerUnit: editedMeter?.costPerUnit,
       name: editedMeter?.name,
@@ -252,7 +253,6 @@ const PrepaidMeter = ({navigation}) => {
           />
         )}
       </View>
-      {loader ? ('') : (
         <View style={styles.buttonCon}>
           <PrimaryButton
             text={'Add Prepaid Meter'}
@@ -266,7 +266,6 @@ const PrepaidMeter = ({navigation}) => {
             }
           />
         </View>
-      )}
       {selectedMeter && (
         <Modal
           animationType="fade"
@@ -474,7 +473,7 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     width: '90%',
-    marginVertical: '20%',
+    marginVertical: '50%',
     backgroundColor: colors.white,
     borderRadius: 10,
     padding: 20,

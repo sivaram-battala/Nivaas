@@ -58,7 +58,7 @@ export const allTexts = {
     emailPlace: 'Enter Your email',
   },
   paragraphs: {
-    discoverNivaas:'Discover Nivaas for buying,selling and renting homes and apartments,as well as scheduling apartment visits and accessing householdservices',
+    discoverNivaas:'Discover Nivaas for comprehensive apartment management with features like maintenance management, and a centralized dashboard for real-time monitoring. ',
     accessAll:'Access all importent announcements notices and cirulers here',
     itemPublished:'No item published yet from your society',
   },

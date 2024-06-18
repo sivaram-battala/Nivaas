@@ -1,10 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import {ScrollView, StyleSheet, Text, TextInput, View} from 'react-native';
+import {
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {statusBarHeight} from '../../utils/config/config';
 import {CustomDropdown, PrimaryButton, TopBarCard2} from '../../components';
-import {colors} from '../../common';
+import {allTexts, colors} from '../../common';
 import {useSelector} from 'react-redux';
-import { useCreateFlatByaptOwnMutation } from '../../redux/services/maintainenceService';
+import {useCreateFlatByaptOwnMutation} from '../../redux/services/maintainenceService';
 
 const PrepaidMeter = ({navigation}) => {
   const customerDetails = useSelector(state => state.currentCustomer);
@@ -24,6 +32,8 @@ const PrepaidMeter = ({navigation}) => {
   });
   const [errors, setErrors] = useState({});
   const [hasSubmitted, setHasSubmitted] = useState(false);
+  const [isTextFieldEnabled, setIsTextFieldEnabled] = useState(false);
+  const [apartmentError, setApartmentError] = useState(false);
   const [createFlatByAptOwn] = useCreateFlatByaptOwnMutation();
 
   const handleNumFlatsChange = value => {
@@ -86,6 +96,15 @@ const PrepaidMeter = ({navigation}) => {
     setErrors({});
   };
 
+  const handleEditText = () => {
+    if (selectedApartment?.id) {
+      console.log(apartmentError);
+    } else {
+      setApartmentError(true);
+      console.log(apartmentError);
+    }
+  };
+
   const handleSubmit = () => {
     if (validateFields()) {
       const updatedFlatsDetails = [...flatsDetails];
@@ -95,15 +114,17 @@ const PrepaidMeter = ({navigation}) => {
         flats: updatedFlatsDetails,
       };
       console.log(payload);
-    createFlatByAptOwn(payload)
-      .unwrap()
-      .then((responce)=>{
-        console.log('RESPONCE OF NEW FLAT CREATION======>',responce);
-      }).catch((error)=>{
-        console.log('ERROR IN NEW FLAT CREATION=====>',error);
-      })
-    setHasSubmitted(true);
-   }
+      createFlatByAptOwn(payload)
+        .unwrap()
+        .then(responce => {
+          console.log('RESPONCE OF NEW FLAT CREATION======>', responce);
+          navigation.navigate(allTexts.screenNames.adminFlatSettings);
+        })
+        .catch(error => {
+          console.log('ERROR IN NEW FLAT CREATION=====>', error);
+        });
+      setHasSubmitted(true);
+    }
   };
 
   useEffect(() => {
@@ -118,6 +139,12 @@ const PrepaidMeter = ({navigation}) => {
       setApartmentData(approvedApartments);
     }
   }, [customerDetails]);
+
+  useEffect(() => {
+    if (selectedApartment?.id) {
+      setIsTextFieldEnabled(true);
+    }
+  }, [selectedApartment?.id]);
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.mainCon}>
@@ -141,16 +168,24 @@ const PrepaidMeter = ({navigation}) => {
                 labelField="name"
                 valueField="id"
               />
+              {apartmentError && (
+                <Text style={styles.errorText}>
+                 Select Any Apartment Here
+                </Text>
+              )}
             </View>
-            <View style={styles.inputContainerOne}>
+            <Pressable
+              onPress={handleEditText}
+              style={styles.inputContainerOne}>
               <TextInput
                 style={styles.input}
                 value={numFlats}
                 onChangeText={handleNumFlatsChange}
                 keyboardType="numeric"
                 placeholder="Enter Number Of Flats"
+                editable={isTextFieldEnabled}
               />
-            </View>
+            </Pressable>
           </View>
         ) : null}
         {currentFlatIndex < numFlats && (
@@ -208,7 +243,13 @@ const PrepaidMeter = ({navigation}) => {
               <View
                 style={currentFlatIndex < 1 ? {width: '100%'} : {width: '45%'}}>
                 <PrimaryButton
-                  text={currentFlatIndex === numFlats - 1 ? 'Submit' : <Text>OnBoard Flat {currentFlatIndex + 2}</Text>}
+                  text={
+                    currentFlatIndex === numFlats - 1 ? (
+                      'Submit'
+                    ) : (
+                      <Text>OnBoard Flat {currentFlatIndex + 2}</Text>
+                    )
+                  }
                   bgColor={colors.primaryRedColor}
                   onPress={
                     currentFlatIndex === numFlats - 1
@@ -261,17 +302,17 @@ const styles = StyleSheet.create({
     paddingVertical: '5%',
     justifyContent: 'space-around',
   },
-  fieldsCon:{
-    flexDirection:'row',
+  fieldsCon: {
+    flexDirection: 'row',
     justifyContent: 'space-between',
-    margin:0
+    margin: 0,
   },
-  dropdown:{
-    width:'45%',
+  dropdown: {
+    width: '45%',
   },
   inputContainerOne: {
-    width:'45%',
-    marginTop:25
+    width: '45%',
+    marginTop: 25,
   },
   inputContainer: {
     marginBottom: 20,
