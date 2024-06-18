@@ -11,17 +11,17 @@ import { allTexts, colors } from '../../common';
 import { styles } from './style';
 import { Text } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLazyGetApartmentListQuery, useLazyGetCityListQuery, useLazyGetFlatsListQuery } from '../../redux/services/cityServices';
 import { setcitiesData } from '../../redux/slices/citiesdataSlice';
 import { setapartmentData } from '../../redux/slices/apartmentsSlice';
 
-const SelectCityOptions = ({ navigation, route }) => {
+const SelectCityOptions = ({ navigation }) => {
   const [cityValue, setCityValue] = useState({ id: null, name: null });
   const [apartmentValue, setApartmentValue] = useState({ id: null, name: null });
   const [flatValue, setFlatValue] = useState({ id: null, name: null });
 
-  const [cityData, setCityData] = useState();
+  // const [cityData, setCityData] = useState();
   const [apartmentData, setapartmentsData] = useState();
   const [flatdata, setflatdata] = useState();
 
@@ -36,26 +36,12 @@ const SelectCityOptions = ({ navigation, route }) => {
   const flatOpacity = useRef(new Animated.Value(0)).current;
   const buttonOpacity = useRef(new Animated.Value(0)).current;
 
-  const handleCityData = () => {
-    let cityPayload = {
-      page: 0,
-      pageSize: 200,
-    };
-    getCityList(cityPayload)
-      .unwrap()
-      .then(response => {
-        setCityData(response?.data);
-        dispatch(setcitiesData(response?.data));
-        Animated.timing(cityOpacity, {
-          toValue: 1,
-          duration: 200,
-          useNativeDriver: true,
-        }).start();
-      })
-      .catch(error => {
-        console.log('error in getcitydata==========>', error);
-      });
-  };
+  const {citiesData} = useSelector(state=>state.cityData);
+    Animated.timing(cityOpacity, {
+            toValue: 1,
+            duration: 200,
+            useNativeDriver: true,
+    }).start();
 
   const handleApartmentData = (id) => {
     let apartmentPayload = {
@@ -111,9 +97,9 @@ const SelectCityOptions = ({ navigation, route }) => {
     });
   };
 
-  useEffect(() => {
-    handleCityData();
-  }, []);
+  // useEffect(() => {
+  //   handleCityData();
+  // }, []);
 
   useEffect(() => {
     if (cityValue.id) {
@@ -140,7 +126,7 @@ const SelectCityOptions = ({ navigation, route }) => {
   return (
     <View style={styles.mainCon}>
       <View style={{ height: 50, marginTop: statusBarHeight }}>
-        <TopBarCard2 back={true} txt={'Flat OnBoarding'} navigation={navigation} />
+        <TopBarCard2 back={true} txt={'Add Your Home'} navigation={navigation} />
       </View>
       <KeyboardAwareScrollView>
         <View style={styles.container}>
@@ -148,7 +134,7 @@ const SelectCityOptions = ({ navigation, route }) => {
             <CustomDropdown
               label="City"
               showLabel={true}
-              data={cityData}
+              data={citiesData}
               value={cityValue.id}
               onChange={(id, name) => setCityValue({ id, name })}
               labelField="name"

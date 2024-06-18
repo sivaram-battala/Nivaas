@@ -52,7 +52,7 @@ const Signup = ({navigation}) => {
       Snackbar.show({
         text: 'No Internet Connection',
         duration: Snackbar.LENGTH_INDEFINITE,
-        backgroundColor: 'grey',
+        backgroundColor: colors.primaryRedColor,
         action: {
           text: 'Reload',
           textColor: 'White',
@@ -71,7 +71,7 @@ const Signup = ({navigation}) => {
   };
 
   useEffect(() => {
-    // netWorkChecking();
+    netWorkChecking();
   });
   const {
     buttonTexts: {login, sigup},

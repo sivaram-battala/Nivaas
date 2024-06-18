@@ -7,12 +7,23 @@ export const styles = StyleSheet.create({
     backgroundColor:colors.white,
     height:'100%'
   },
+  scrollView: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   headerCon:{
     flexDirection:'row',
     justifyContent:'space-between',
     alignItems:'center',
     marginTop:window.height*0.06,
     marginHorizontal:window.width*0.08,
+  },
+  usernameCon:{
+    width:'78%',
+    justifyContent:'center',
+    height:30,
+    overflow:'hidden'
+    
   },
   username:{
     color:colors.black,
@@ -78,6 +89,17 @@ icons:{
   descriptionTwo:{
     marginHorizontal:window.width*0.04,
     marginTop:10,
+  },
+  refreshButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop:'5%'
+  },
+  refreshText: {
+    marginLeft: 5,
+    color: colors.primaryRedColor,
+    fontWeight:'bold'
   },
   // centeredView: {
   //   flex: 1,

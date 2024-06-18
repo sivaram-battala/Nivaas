@@ -1,7 +1,8 @@
-import React, {useEffect, useState} from 'react';
-import {Image, StyleSheet, Text, View, Alert} from 'react-native';
+import React, {useCallback, useEffect, useState} from 'react';
+import {Image, StyleSheet, Text, View,TouchableOpacity, Alert,ScrollView,RefreshControl,SafeAreaView} from 'react-native';
 import {useDispatch} from 'react-redux';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import {allTexts, colors} from '../../common';
@@ -10,15 +11,23 @@ import {useLazyGetCurrentCustomerQuery} from '../../redux/services/myAccountServ
 import {setcurrentCustomerData} from '../../redux/slices/currentCustomerSlice';
 import {styles} from './styles';
 import Carousel from 'react-native-reanimated-carousel';
+import { useFocusEffect } from '@react-navigation/native';
+import { setcitiesData } from '../../redux/slices/citiesdataSlice';
+import { useLazyGetCityListQuery } from '../../redux/services/cityServices';
 
 const Home = ({navigation}) => {
   const dispatch = useDispatch();
   const [loder, setLoder] = useState(false);
+  const [refresh, setRefresh] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
   const [currentCustomerData, setCurrentCustomerData] = useState(null);
   const [isOneFlatOnboarded, SetIsOneFlatOnboarded] = useState(false);
+  const [cityData, setCityData] = useState();
   const [isNewUser, setIsNewUser] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [currentCustomer] = useLazyGetCurrentCustomerQuery();
+  const [getCityList] = useLazyGetCityListQuery();
+
 
   const handleCurrentCustomerData = () => {
     setLoder(true);
@@ -47,34 +56,100 @@ const Home = ({navigation}) => {
       });
   };
 
-  useEffect(() => {
-    // requestUserPermission();
+  const handleCityData = () => {
+    let cityPayload = {
+      page: 0,
+      pageSize: 200,
+    };
+    getCityList(cityPayload)
+      .unwrap()
+      .then(response => {
+        setCityData(response?.data);
+        dispatch(setcitiesData(response?.data));
+      })
+      .catch(error => {
+        console.log('error in getcitydata==========>', error);
+      });
+  };
+
+
+  const handleRefresh = () => {
+    setRefresh(false);
     handleCurrentCustomerData();
+  };
+
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
   }, []);
 
   const handleSave = (name, email) => {
     console.log('Saving user data:', {name, email});
     setModalVisible(false);
+    handleCurrentCustomerData();
   };
 
+  // useFocusEffect(
+  //   useCallback(() => {
+  //     handleCurrentCustomerData();
+  //     handleCityData();
+  //   }, []),
+  // );
+  useEffect(() => {
+    handleCurrentCustomerData();
+    handleCityData();
+  }, [])
+  
+  useEffect(() => {
+    let timer;
+    if (loder) {
+      timer = setTimeout(() => {
+        setRefresh(true);
+        setLoder(false);
+      }, 10000);
+    }
+    return () => clearTimeout(timer);
+  }, [loder]);
+
   return (
-    <View style={styles.mainCon}>
+    <SafeAreaView style={styles.mainCon}>
+      <ScrollView
+        contentContainerStyle={styles.scrollView}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
       <CompleteProfileModal
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
         onSave={handleSave}
         id={currentCustomerData?.id}
       />
-      {loder ? (
+      {loder || refresh ? (
         <View>
-          <Loader color={colors.primaryRedColor} size={'large'} />
+          {loder && <Loader color={colors.primaryRedColor} size={'large'} />}
+          {refresh && (
+            <TouchableOpacity
+              style={styles.refreshButton}
+              onPress={handleRefresh}>
+              <FontAwesome
+                name="refresh"
+                size={20}
+                color={colors.primaryRedColor}
+              />
+              <Text style={styles.refreshText}>Refresh</Text>
+            </TouchableOpacity>
+          )}
         </View>
       ) : (
         <View>
           <View style={styles.headerCon}>
-            <Text style={styles.username}>
-              Hi, {currentCustomerData?.fullName}
-            </Text>
+            <View style={styles.usernameCon}>
+              <Text style={styles.username}>
+                Hi, {currentCustomerData?.fullName}
+              </Text>
+            </View>
             <View style={styles.iconsCon}>
               <Ionicons
                 name="notifications"
@@ -157,7 +232,8 @@ const Home = ({navigation}) => {
           </View>
         </View>
       )}
-    </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
