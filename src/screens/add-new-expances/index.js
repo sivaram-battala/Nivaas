@@ -18,7 +18,8 @@ import moment from 'moment';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {ExpancesValidation} from '../../common/schemas';
 
-const AddNewExpances = ({navigation}) => {
+const AddNewExpances = ({navigation,route}) => {
+  const routeData=route?.params;
   const [selectedDate, setSelectedDate] = useState('');
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [transactionType, setTransactionType] = useState();

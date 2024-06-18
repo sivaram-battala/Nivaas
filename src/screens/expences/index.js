@@ -55,7 +55,7 @@ const Expences = ({ navigation }) => {
 
   const handleNavigation = () => {
     if (selectedApartment?.id) {
-      navigation.navigate(allTexts.screenNames.addNewExpances);
+      navigation.navigate(allTexts.screenNames.addNewExpances,{selectedApartment:selectedApartment?.id});
       setError(false);
     } else {
       setError('Select One Apartment From The Above Dropdown')
