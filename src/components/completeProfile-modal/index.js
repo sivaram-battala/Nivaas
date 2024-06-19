@@ -11,7 +11,7 @@ import {PrimaryButton} from '../../components';
 import {colors} from '../../common';
 import {useUserDetailsMutation} from '../../redux/services/myAccountService';
 
-const CompleteProfileModal = ({modalVisible, setModalVisible, onSave,id}) => {
+const CompleteProfileModal = ({modalVisible, setModalVisible, onSave,id,fcmToken}) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [nameError, setNameError] = useState('');
@@ -27,7 +27,8 @@ const CompleteProfileModal = ({modalVisible, setModalVisible, onSave,id}) => {
       const payload = {
         id: id,
         fullName: name,
-        email:email ,
+        email:email,
+        token:fcmToken
       };
       postUserDetails(payload)
         .unwrap()

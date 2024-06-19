@@ -11,6 +11,7 @@ import {allTexts, colors} from '../../common';
 import {statusBarHeight} from '../../utils/config/config';
 import {
   CustomDropdown,
+  CustomSelectDropdown,
   Loader,
   PrimaryButton,
   TopBarCard2,
@@ -20,6 +21,7 @@ import {CheckBox} from 'react-native-elements';
 import {useLazyGetAparmentPrepaidMetersQuery} from '../../redux/services/prepaidMeterService';
 import SelectDropdown from 'react-native-select-dropdown';
 import {useNotifyOnMutation} from '../../redux/services/maintainenceService';
+import { SnackbarComponent } from '../../common/customFunctions';
 
 const MaintainenceSettings = ({navigation}) => {
   const customerDetails = useSelector(state => state.currentCustomer);
@@ -51,7 +53,7 @@ const MaintainenceSettings = ({navigation}) => {
     const date = new Date(year, month, 0).getDate();
     return Array.from({length: date}, (_, i) => ({
       id: i + 1,
-      date: (i + 1).toString().padStart(2, '0'),
+      name: (i + 1).toString().padStart(2, '0'),
     }));
   };
   const currentMonth = new Date().getMonth() + 1;
@@ -94,20 +96,22 @@ const MaintainenceSettings = ({navigation}) => {
 
   const handlesave = () => {
     const maintainencePayload = {
-      notifyOn: selectedDate?.date,
+      notifyOn: selectedDate,
       cost: value,
       apartmentId: selectedApartment?.id,
       prepaidId: prepaidIdArray,
     };
-    // console.log(maintainencePayload);
+    console.log(maintainencePayload);
     maintainenceSave(maintainencePayload)
       .unwrap()
       .then(responce => {
         console.log('RESPONCE OF MAINTAINENCE SAVE====>', responce);
-        navigation.navigate(allTexts.screenNames.adminSociety)
+        SnackbarComponent({text: responce?.message || 'Saved Successfully',backgroundColor:colors.green});
+        navigation.navigate(allTexts.screenNames.adminSociety);
       })
       .catch(error => {
         console.log('ERROR IN MAINTAINENCE SAVE====>', error);
+        SnackbarComponent({text: error?.data?.error || 'Error In Saving Maintainence',backgroundColor:colors.red1});
       });
   };
 
@@ -148,35 +152,11 @@ const MaintainenceSettings = ({navigation}) => {
           />
         </View>
         <View style={styles.datePicker}>
-          <SelectDropdown
+          <CustomSelectDropdown
             data={dropDownData}
-            onSelect={(selectedItem, index) => {
-              setSelectedDate(selectedItem);
-            }}
-            renderButton={selectedItem => {
-              return (
-                <ScrollView style={styles.dropdownButtonStyle}>
-                  <Text style={styles.dropdownButtonTxtStyle}>
-                    {(selectedItem && selectedItem.date) || 'NOTIFY ON'}
-                  </Text>
-                </ScrollView>
-              );
-            }}
-            renderItem={(item, index, isSelected) => {
-              return (
-                <View
-                  style={{
-                    ...styles.dropdownItemStyle,
-                    ...(isSelected && {
-                      backgroundColor: colors.primaryRedColor,
-                    }),
-                  }}>
-                  <Text style={styles.dropdownItemTxtStyle}>{item.date}</Text>
-                </View>
-              );
-            }}
-            showsVerticalScrollIndicator={false}
-            dropdownStyle={styles.dropdownMenuStyle}
+            onSelect={(selectedItem) => setSelectedDate(selectedItem?.name)}
+            selectedItem={{name: selectedDate}}
+            placeholder={'NOTIFY ON'}
           />
         </View>
       </View>
@@ -227,7 +207,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   datePicker: {
-    marginTop: 25,
+    marginTop: 30,
     width: '30%',
   },
   dropDown: {
@@ -251,7 +231,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     marginBottom: 5,
-    backgroundColor: '#f9f9f9',
+    backgroundColor: colors.gray3,
     marginHorizontal: '4.5%',
   },
   dropdownButtonStyle: {

@@ -8,6 +8,8 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { useLazyGetCityListQuery, useNewApartmentOnboardingMutation } from '../../redux/services/cityServices';
 import { onBoardNewApartmentSchema } from '../../common/schemas';
 import { useSelector } from 'react-redux';
+import { SnackbarComponent } from '../../common/customFunctions';
+
 
 const NewApartmentOnBoard = ({ navigation }) => {
   // const [citiesData, setCitiesData] = useState([]);
@@ -45,9 +47,11 @@ const NewApartmentOnBoard = ({ navigation }) => {
         .unwrap()
         .then(response => {
           console.log('New Apartment onboarding', response);
+          SnackbarComponent({text:response,backgroundColor:colors.green})
         })
         .catch(error => {
           console.log('Error in New Apartment onboarding', error);
+          SnackbarComponent({text:error,backgroundColor:colors.red1})
         });
       navigation.navigate(allTexts.screenNames.home);
     } else {

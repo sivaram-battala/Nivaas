@@ -45,5 +45,5 @@ export {
   DpImage,
   NumericTextInput,
   CompleteProfileModal,
-  CustomSelectDropdown
+  CustomSelectDropdown,
 };

@@ -6,14 +6,15 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import {allTexts, colors} from '../../common';
-import {CompleteProfileModal, Loader, PrimaryButton} from '../../components';
+import {CompleteProfileModal, CustomSneakBar, Loader, PrimaryButton} from '../../components';
 import {useLazyGetCurrentCustomerQuery} from '../../redux/services/myAccountService';
 import {setcurrentCustomerData} from '../../redux/slices/currentCustomerSlice';
 import {styles} from './styles';
 import Carousel from 'react-native-reanimated-carousel';
-import { useFocusEffect } from '@react-navigation/native';
 import { setcitiesData } from '../../redux/slices/citiesdataSlice';
 import { useLazyGetCityListQuery } from '../../redux/services/cityServices';
+import { SnackbarComponent } from '../../common/customFunctions';
+import messaging from '@react-native-firebase/messaging';
 
 const Home = ({navigation}) => {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const Home = ({navigation}) => {
   const [cityData, setCityData] = useState();
   const [isNewUser, setIsNewUser] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [fcmToken, setFcmToken] = useState(null);
   const [currentCustomer] = useLazyGetCurrentCustomerQuery();
   const [getCityList] = useLazyGetCityListQuery();
 
@@ -72,6 +74,13 @@ const Home = ({navigation}) => {
       });
   };
 
+  const checkToken = async () => {
+    await messaging().requestPermission();
+    const token = await messaging().getToken();
+    setFcmToken(token);
+    // console.log('Device Token:', token);
+  }
+  checkToken();
 
   const handleRefresh = () => {
     setRefresh(false);
@@ -91,19 +100,14 @@ const Home = ({navigation}) => {
     handleCurrentCustomerData();
   };
 
-  // useFocusEffect(
-  //   useCallback(() => {
-  //     handleCurrentCustomerData();
-  //     handleCityData();
-  //   }, []),
-  // );
   useEffect(() => {
     handleCurrentCustomerData();
     handleCityData();
+    SnackbarComponent({text:'Refresh the page to get the latest updates',backgroundColor:colors.primaryRedColor})
   }, [])
   
   useEffect(() => {
-    let timer;
+    let timer=null;
     if (loder) {
       timer = setTimeout(() => {
         setRefresh(true);
@@ -125,6 +129,7 @@ const Home = ({navigation}) => {
         setModalVisible={setModalVisible}
         onSave={handleSave}
         id={currentCustomerData?.id}
+        fcmToken={fcmToken}
       />
       {loder || refresh ? (
         <View>
@@ -171,7 +176,7 @@ const Home = ({navigation}) => {
               />
             </View>
           </View>
-          {/* <View style={{ flex: 1 }}>
+          <View style={{ flex: 1 }}>
             <Carousel
                 loop
                 width={'90%'}
@@ -194,7 +199,7 @@ const Home = ({navigation}) => {
                     </View>
                 )}
             />
-        </View> */}
+        </View>
           <View style={styles.subConOne}>
             <Image
               source={require('../../../assets/images/peopleImg.png')}
@@ -219,7 +224,7 @@ const Home = ({navigation}) => {
               />
             </View>
           </View>
-          <View style={styles.subConTwo}>
+          {/* <View style={styles.subConTwo}>
             <Fontisto name="commenting" size={25} style={styles.commentIcon} />
             <View style={styles.textCon}>
               <Text style={styles.discoverMore}>
@@ -229,7 +234,7 @@ const Home = ({navigation}) => {
                 {allTexts.paragraphs.itemPublished}
               </Text>
             </View>
-          </View>
+          </View> */}
         </View>
       )}
       </ScrollView>
