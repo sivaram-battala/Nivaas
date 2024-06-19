@@ -86,7 +86,7 @@ const MyAccount = ({navigation, dispatch, route}) => {
         <Text style={styles.manageFlatsConText}>Manage flats</Text>
         <View style={styles.manageFlatsSubCon}>
           <View>
-            {(custDetails?.currentCustomerData?.flatDTO === null) && (
+            {(custDetails?.currentCustomerData?.flatDTO != [] || custDetails?.currentCustomerData?.flatDTO) && (
               <View style={styles.manageFlatsConHome}>
                 <Foundation
                   name="home"

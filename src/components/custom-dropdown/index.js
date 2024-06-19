@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import { colors } from '../../common';
 
-const CustomDropdown = ({showLabel, label, data, value, onChange, labelField, valueField,errorMessage }) => {
+const CustomDropdown = ({showLabel=true, label='select', data=[], value, onChange = ()=>{}, labelField='label', valueField='value',errorMessage='error' }) => {
   const [selectedValue, setSelectedValue] = useState(value);
 
   const handleDropdownChange = item => {

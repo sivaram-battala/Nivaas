@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import {FlatList, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {FlatList, StyleSheet, Text, View} from 'react-native';
+import { ScrollView } from 'react-native-virtualized-view'
 import {colors} from '../../common';
 import {TopBarCard2, CustomDropdown, PrimaryButton} from '../../components';
 import {statusBarHeight} from '../../utils/config/config';

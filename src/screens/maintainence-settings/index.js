@@ -5,8 +5,8 @@ import {
   StyleSheet,
   FlatList,
   TextInput,
-  ScrollView,
 } from 'react-native';
+import { ScrollView } from 'react-native-virtualized-view'
 import {allTexts, colors} from '../../common';
 import {statusBarHeight} from '../../utils/config/config';
 import {
@@ -21,7 +21,7 @@ import {CheckBox} from 'react-native-elements';
 import {useLazyGetAparmentPrepaidMetersQuery} from '../../redux/services/prepaidMeterService';
 import SelectDropdown from 'react-native-select-dropdown';
 import {useNotifyOnMutation} from '../../redux/services/maintainenceService';
-import { SnackbarComponent } from '../../common/customFunctions';
+import { ApprovedApartments, SnackbarComponent } from '../../common/customFunctions';
 
 const MaintainenceSettings = ({navigation}) => {
   const customerDetails = useSelector(state => state.currentCustomer);
@@ -116,16 +116,7 @@ const MaintainenceSettings = ({navigation}) => {
   };
 
   useEffect(() => {
-    if (customerDetails?.currentCustomerData?.apartmentDTOs) {
-      const approvedApartments =
-        customerDetails.currentCustomerData.apartmentDTOs
-          .filter(apartment => apartment.adminApproved)
-          .map(apartment => ({
-            id: apartment.jtApartmentDTO.id,
-            name: apartment.jtApartmentDTO.name,
-          }));
-      setApartmentData(approvedApartments);
-    }
+    ApprovedApartments({customerDetails:customerDetails,setApartmentData:setApartmentData})
   }, [customerDetails]);
 
   useEffect(() => {

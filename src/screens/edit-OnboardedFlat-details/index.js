@@ -3,15 +3,13 @@ import {
   StyleSheet,
   View,
   TouchableOpacity,
-  TextInput,
-  Button,
-  Modal,
   FlatList,
   Text,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {
   CustomDropdown,
+  EditOnBoarderFlatDetailsModal,
   Loader,
   PrimaryButton,
   TopBarCard2,
@@ -21,7 +19,7 @@ import {statusBarHeight} from '../../utils/config/config';
 import {useSelector} from 'react-redux';
 import {useLazyGetFlatsListQuery} from '../../redux/services/cityServices';
 import {useUpdateFlatDetailsMutation} from '../../redux/services/maintainenceService';
-import { SnackbarComponent } from '../../common/customFunctions';
+import { ApprovedApartments, SnackbarComponent } from '../../common/customFunctions';
 
 const EditOnboardedFlatDetails = ({navigation}) => {
   const customerDetails = useSelector(state => state.currentCustomer);
@@ -76,7 +74,7 @@ const EditOnboardedFlatDetails = ({navigation}) => {
   const handleFormSubmit = () => {
     console.log('Updated FormData:', formData);
     const flatPayload = {
-      // apartmentId: selectedApartment?.id,
+      apartmentId: selectedApartment?.id,
       flatId: flatID,
       payload: {
         flatNo: formData?.flatNo,
@@ -99,16 +97,7 @@ const EditOnboardedFlatDetails = ({navigation}) => {
   };
 
   useEffect(() => {
-    if (customerDetails?.currentCustomerData?.apartmentDTOs) {
-      const approvedApartments =
-        customerDetails.currentCustomerData.apartmentDTOs
-          .filter(apartment => apartment.adminApproved)
-          .map(apartment => ({
-            id: apartment.jtApartmentDTO.id,
-            name: apartment.jtApartmentDTO.name,
-          }));
-      setApartmentData(approvedApartments);
-    }
+    ApprovedApartments({customerDetails:customerDetails,setApartmentData:setApartmentData})
   }, [customerDetails]);
 
   useEffect(() => {
@@ -177,49 +166,7 @@ const EditOnboardedFlatDetails = ({navigation}) => {
           )}
         </View>
       </View>
-      <Modal
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}>
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContainer}>
-            <TouchableOpacity
-              style={styles.closeButton}
-              onPress={() => setModalVisible(false)}>
-              <Ionicons name="close" size={24} color={colors.black} />
-            </TouchableOpacity>
-            <Text style={styles.modalTitle}>Update Flat Details</Text>
-            <TextInput
-              style={styles.input}
-              value={formData.flatNo}
-              onChangeText={text => setFormData({...formData, flatNo: text})}
-              placeholder="Flat No"
-            />
-            <TextInput
-              style={styles.input}
-              value={formData.ownerPhoneNo}
-              onChangeText={text =>
-                setFormData({...formData, ownerPhoneNo: text})
-              }
-              placeholder="Owner Phone No"
-              keyboardType="phone-pad"
-            />
-            <TextInput
-              style={styles.input}
-              value={formData.ownerName}
-              onChangeText={text => setFormData({...formData, ownerName: text})}
-              placeholder="Owner Name"
-            />
-            <View>
-              <PrimaryButton
-                text={'UPDATE'}
-                bgColor={colors.primaryRedColor}
-                onPress={handleFormSubmit}
-              />
-            </View>
-          </View>
-        </View>
-      </Modal>
+      <EditOnBoarderFlatDetailsModal modalVisible={modalVisible} setModalVisible={setModalVisible} setFormData={setFormData} formData={formData} handleFormSubmit={handleFormSubmit}/>
     </View>
   );
 };

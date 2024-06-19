@@ -1,19 +1,15 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {Image, StyleSheet, Text, View,TouchableOpacity, Alert,ScrollView,RefreshControl,SafeAreaView} from 'react-native';
 import {useDispatch} from 'react-redux';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Fontisto from 'react-native-vector-icons/Fontisto';
 import {allTexts, colors} from '../../common';
-import {CompleteProfileModal, CustomSneakBar, Loader, PrimaryButton} from '../../components';
-import {useLazyGetCurrentCustomerQuery} from '../../redux/services/myAccountService';
+import {CompleteProfileModal, CustomSneakBar, HomeComponent, Loader, PrimaryButton} from '../../components';
+import {useLazyGetCurrentCustomerQuery, useUserDetailsMutation} from '../../redux/services/myAccountService';
 import {setcurrentCustomerData} from '../../redux/slices/currentCustomerSlice';
 import {styles} from './styles';
-import Carousel from 'react-native-reanimated-carousel';
 import { setcitiesData } from '../../redux/slices/citiesdataSlice';
 import { useLazyGetCityListQuery } from '../../redux/services/cityServices';
-import { SnackbarComponent } from '../../common/customFunctions';
+import { NetworkInfo, SnackbarComponent } from '../../common/customFunctions';
 import messaging from '@react-native-firebase/messaging';
 
 const Home = ({navigation}) => {
@@ -27,9 +23,10 @@ const Home = ({navigation}) => {
   const [isNewUser, setIsNewUser] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [fcmToken, setFcmToken] = useState(null);
+  const [isInitialRender, setIsInitialRender] = useState();
   const [currentCustomer] = useLazyGetCurrentCustomerQuery();
   const [getCityList] = useLazyGetCityListQuery();
-
+  const [postUserDetails] = useUserDetailsMutation();
 
   const handleCurrentCustomerData = () => {
     setLoder(true);
@@ -51,11 +48,33 @@ const Home = ({navigation}) => {
         if (response?.newUser) {
           setIsNewUser(true);
           setModalVisible(true);
+        }else{
+          setModalVisible(false);
         }
       })
       .catch(error => {
         console.log('error in currentCustomer===>', error);
       });
+  };
+
+  const handlefcmCall = () => {
+      if (currentCustomerData?.newUser === true) {
+        console.log('function called');
+        const payload = {
+        id: currentCustomerData?.id,
+        fullName: currentCustomerData?.fullName || null,
+        email:currentCustomerData?.email || null,
+        token:fcmToken
+      };
+      postUserDetails(payload)
+        .unwrap()
+        .then((responce) => {
+          console.log("postUserDetails RESPONCE ======>",responce);
+        })
+        .catch(error => {
+          console.log('ERROR In POSTING USERDETAILS===>', error);
+        });
+      }
   };
 
   const handleCityData = () => {
@@ -103,8 +122,17 @@ const Home = ({navigation}) => {
   useEffect(() => {
     handleCurrentCustomerData();
     handleCityData();
+    NetworkInfo();
     SnackbarComponent({text:'Refresh the page to get the latest updates',backgroundColor:colors.primaryRedColor})
   }, [])
+  
+  useEffect(() => {
+    if (isInitialRender) {
+      handlefcmCall();
+    } else {
+      setIsInitialRender(false);
+    }
+  }, [fcmToken])
   
   useEffect(() => {
     let timer=null;
@@ -122,7 +150,7 @@ const Home = ({navigation}) => {
       <ScrollView
         contentContainerStyle={styles.scrollView}
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={[colors.primaryRedColor]}/>
         }>
       <CompleteProfileModal
         modalVisible={modalVisible}
@@ -148,94 +176,7 @@ const Home = ({navigation}) => {
           )}
         </View>
       ) : (
-        <View>
-          <View style={styles.headerCon}>
-            <View style={styles.usernameCon}>
-              <Text style={styles.username}>
-                Hi, {currentCustomerData?.fullName}
-              </Text>
-            </View>
-            <View style={styles.iconsCon}>
-              <Ionicons
-                name="notifications"
-                size={30}
-                style={styles.icons}
-                onPress={() =>
-                  navigation.navigate(allTexts.screenNames.notification)
-                }
-              />
-              <MaterialIcons
-                name="account-circle"
-                size={30}
-                style={styles.icons}
-                onPress={() =>
-                  navigation.navigate(allTexts.screenNames.myAccount, {
-                    isOneFlatOnboarded: isOneFlatOnboarded,
-                  })
-                }
-              />
-            </View>
-          </View>
-          <View style={{ flex: 1 }}>
-            <Carousel
-                loop
-                width={'90%'}
-                height={'40%'}
-                autoPlay={true}
-                data={[...new Array(6).keys()]}
-                scrollAnimationDuration={3000}
-                onSnapToItem={(index) => console.log('current index:', index)}
-                renderItem={({ index }) => (
-                    <View
-                        style={{
-                            flex: 1,
-                            borderWidth: 1,
-                            justifyContent: 'center',
-                        }}
-                    >
-                        <Text style={{ textAlign: 'center', fontSize: 30 }}>
-                            {index}
-                        </Text>
-                    </View>
-                )}
-            />
-        </View>
-          <View style={styles.subConOne}>
-            <Image
-              source={require('../../../assets/images/peopleImg.png')}
-              style={styles.image}
-            />
-            <Text style={styles.discoverMore}>
-              {allTexts.headings.discoverMore}
-            </Text>
-            <Text style={styles.description}>
-              {allTexts.paragraphs.discoverNivaas}
-            </Text>
-            <View style={{marginTop: 20}}>
-              <PrimaryButton
-                onPress={() =>
-                  navigation.navigate(allTexts.screenNames.selectCityOptions)
-                }
-                bgColor={colors.primaryRedColor}
-                radius={30}
-                text={'    + ADD YOUR HOME    '}
-                shadow={true}
-                textColor={colors.white}
-              />
-            </View>
-          </View>
-          {/* <View style={styles.subConTwo}>
-            <Fontisto name="commenting" size={25} style={styles.commentIcon} />
-            <View style={styles.textCon}>
-              <Text style={styles.discoverMore}>
-                {allTexts.paragraphs.accessAll}
-              </Text>
-              <Text style={styles.descriptionTwo}>
-                {allTexts.paragraphs.itemPublished}
-              </Text>
-            </View>
-          </View> */}
-        </View>
+        <HomeComponent currentCustomerData={currentCustomerData} navigation={navigation} isOneFlatOnboarded={isOneFlatOnboarded}/>
       )}
       </ScrollView>
     </SafeAreaView>

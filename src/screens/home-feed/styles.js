@@ -3,7 +3,7 @@ import { colors, window } from "../../common";
 
 export const styles = StyleSheet.create({
   mainCon:{
-    marginTop:window.width*0.06,
+    paddingTop:window.height*0.06,
     backgroundColor:colors.white,
     height:'100%'
   },
@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
     flexDirection:'row',
     justifyContent:'space-between',
     alignItems:'center',
-    marginTop:window.height*0.06,
+    marginTop:'5%',
     marginHorizontal:window.width*0.08,
   },
   usernameCon:{
@@ -23,7 +23,6 @@ export const styles = StyleSheet.create({
     justifyContent:'center',
     height:30,
     overflow:'hidden'
-    
   },
   username:{
     color:colors.black,
@@ -38,8 +37,8 @@ icons:{
     marginLeft:10
 },
   subConOne:{
-    marginTop:window.height*0.08,
-    height:'45%',
+    marginTop:'20%',
+    height:'50%',
     alignItems:'center',
     backgroundColor:colors.yellowOne,
     marginHorizontal:window.width*0.06,
@@ -51,7 +50,7 @@ icons:{
     backgroundColor:colors.white,
     padding:5,
     borderRadius:10,
-    height:'68%'
+    height:'60%'
   },
   image:{
     height:80,
@@ -66,21 +65,20 @@ icons:{
   },
   subConTwo:{
     height:'28%',
-    marginTop:30,
+    marginTop:'5%',
     alignItems:'center',
     backgroundColor:colors.yellowOne,
     marginHorizontal:window.width*0.06,
     padding:'4%',
     borderRadius:10,
     elevation:3,
-    overflow:'hidden'
+    overflow:'hidden',
   },
   commentIcon:{
     marginRight:window.width*0.68,
     color:colors.black,
     marginBottom:20
-  }
-  ,
+  },
   description:{
     marginHorizontal:window.width*0.04,
     marginTop:10,
@@ -101,43 +99,4 @@ icons:{
     color: colors.primaryRedColor,
     fontWeight:'bold'
   },
-  // centeredView: {
-  //   flex: 1,
-  //   justifyContent: 'center',
-  //   alignItems: 'center',
-  //   backgroundColor: 'rgba(0,0,0,0.5)',
-  // },
-  // modalView: {
-  //   marginHorizontal: 20,
-  //   backgroundColor: 'white',
-  //   borderRadius: 5,
-  //   padding: 30,
-  //   alignItems: 'left',
-  //   shadowColor: '#000',
-  //   shadowOffset: {
-  //     width: 0,
-  //     height: 2,
-  //   },
-  //   shadowOpacity: 0.25,
-  //   shadowRadius: 4,
-  //   elevation: 5,
-  // },
-  // modalTitle: {
-  //   fontSize: 18,
-  //   color:colors.black,
-  //   fontWeight:'500'
-  // },
-  // input: {
-  //   width: 250,
-  //   borderColor: 'gray',
-  //   borderWidth: 1,
-  //   borderRadius: 5,
-  //   padding: 10,
-  //   marginTop: 20,
-  // },
-  // errorText: {
-  //   color: 'red',
-  //   marginBottom: 20,
-  // },
-
 })

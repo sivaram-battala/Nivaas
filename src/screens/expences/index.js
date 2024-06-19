@@ -21,8 +21,6 @@ import {
 import {statusBarHeight} from '../../utils/config/config';
 import {useSelector} from 'react-redux';
 import {SwipeListView} from 'react-native-swipe-list-view';
-import {TextInput} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons'; // Import an icon library
 import {
   useDeleteExpancesMutation,
   useLazyGetAllExpancesQuery,
@@ -30,7 +28,8 @@ import {
   useLazyGetExpancesPDFQuery,
 } from '../../redux/services/expansesServices';
 import RNFS from 'react-native-fs';
-import { SnackbarComponent } from '../../common/customFunctions';
+import { ApprovedApartments, SnackbarComponent } from '../../common/customFunctions';
+import { styles } from './style';
 
 const Expences = ({navigation}) => {
   const customerDetails = useSelector(state => state.currentCustomer);
@@ -57,22 +56,7 @@ const Expences = ({navigation}) => {
   for (let year = 2023; year <= currentYear; year++) {
     years.push({name: year});
   }
-
-  const months = [
-    {name: 'January', index: 0},
-    {name: 'February', index: 1},
-    {name: 'March', index: 2},
-    {name: 'April', index: 3},
-    {name: 'May', index: 4},
-    {name: 'June', index: 5},
-    {name: 'July', index: 6},
-    {name: 'August', index: 7},
-    {name: 'September', index: 8},
-    {name: 'October', index: 9},
-    {name: 'November', index: 10},
-    {name: 'December', index: 11},
-  ];
-
+  const months = allTexts.months;
   const handleNavigation = () => {
     if (selectedApartment?.id) {
       navigation.navigate(allTexts.screenNames.addNewExpances, {
@@ -134,7 +118,7 @@ const Expences = ({navigation}) => {
         RNFS.writeFile(filePath, base64data, 'base64')
           .then(() => {
             // Alert.alert('Success', 'File downloaded successfully!', [{ text: 'OK' }]);
-            SnackbarComponent({text:'PDF Successfully Downloaded',backgroundColor:colors.green})
+            SnackbarComponent({text:'PDF Downloaded Successfully',backgroundColor:colors.green})
           })
           .catch((err) => {
             console.error('Download error:', err);
@@ -159,7 +143,7 @@ const Expences = ({navigation}) => {
     deleteExpances(payload)
       .unwrap()
       .then(responce => {
-        console.log('RESPONCE OF DELETE EXPANSIONS', responce);
+        // console.log('RESPONCE OF DELETE EXPANSIONS', responce);
         SnackbarComponent({text:'Deleted Successfully',backgroundColor:colors.red1})
         handlegetAllExpances(selectedApartment?.id);
       })
@@ -195,16 +179,7 @@ const Expences = ({navigation}) => {
   }, []);
 
   useEffect(() => {
-    if (customerDetails?.currentCustomerData?.apartmentDTOs) {
-      const approvedApartments =
-        customerDetails?.currentCustomerData?.apartmentDTOs
-          .filter(apartment => apartment.adminApproved)
-          .map(apartment => ({
-            id: apartment.jtApartmentDTO.id,
-            name: apartment.jtApartmentDTO.name,
-          }));
-      setApartmentData(approvedApartments);
-    }
+    ApprovedApartments({customerDetails:customerDetails,setApartmentData:setApartmentData})
   }, [customerDetails]);
 
   useEffect(() => {
@@ -225,7 +200,6 @@ const Expences = ({navigation}) => {
           <Text style={styles.dataCell}>{data?.item?.amount}</Text>
         </View>
       </Pressable>
-
   const renderHiddenItem = (data, rowMap) => (
     <View style={styles.rowBack}>
       <Button
@@ -307,8 +281,8 @@ const Expences = ({navigation}) => {
                 previewOpenValue={-40}
                 previewOpenDelay={3000}
               />
-              <View style={{marginHorizontal:'5%'}}>
-                <PrimaryButton text={'DOWNLOAD'} bgColor={colors.primaryRedColor} onPress={handlegetExpancePDF}/>
+              <View style={styles.downloadButton}>
+                <PrimaryButton text={'DOWNLOAD PDF'} bgColor={colors.primaryRedColor} onPress={handlegetExpancePDF}/>
               </View>
             </View>
           ) : (
@@ -328,7 +302,7 @@ const Expences = ({navigation}) => {
         />
         {error && <Text style={styles.errorText}>{error}</Text>}
       </View>
-      <Modal
+      {/* <Modal
         animationType="fade"
         transparent={true}
         visible={modalVisible}
@@ -353,123 +327,9 @@ const Expences = ({navigation}) => {
             </View>
           </View>
         </Pressable>
-      </Modal>
+      </Modal> */}
     </View>
   );
 };
 
 export default Expences;
-
-const styles = StyleSheet.create({
-  mainCon: {
-    height: '100%',
-    backgroundColor: colors.white,
-  },
-  dropDown: {
-    marginHorizontal: '5%',
-  },
-  datePickerContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginHorizontal: '4%',
-    marginTop: '5%',
-  },
-  addButton: {
-    marginHorizontal: '5%',
-    marginBottom: '5%',
-  },
-  rowFront: {
-    flexDirection: 'row',
-    backgroundColor: colors.white,
-    borderBottomColor: colors.gray2,
-    borderBottomWidth: 1,
-    alignItems: 'center',
-    // paddingHorizontal: '10%',
-    marginHorizontal: '5%',
-  },
-  header: {
-    flexDirection: 'row',
-    backgroundColor: colors.gray3,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.gray2,
-    marginHorizontal: '5%',
-    marginTop: '5%',
-  },
-  eachHeader: {
-    width: '31%',
-    height: 40,
-    paddingVertical: 10,
-    marginHorizontal: '1%',
-    alignItems: 'center',
-    overflow: 'hidden',
-  },
-  headerCell: {
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: colors.black,
-  },
-  dataCell: {
-    flex: 1,
-    alignItems: 'flex-start',
-    color: colors.black,
-  },
-  rowBack: {
-    alignItems: 'center',
-    backgroundColor: colors.white,
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    paddingRight: '6%',
-  },
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: 'white',
-    borderRadius: 10,
-    padding: '8%',
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  modalText: {
-    marginBottom: '5%',
-    textAlign: 'center',
-    fontSize: 16,
-    fontWeight: '500',
-    color: colors.black,
-  },
-  input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    width: window.width * 0.6,
-    padding: 10,
-    marginBottom: '5%',
-    borderRadius: 5,
-  },
-  modalButtonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: window.width * 0.6,
-  },
-  closeIcon: {
-    position: 'absolute',
-    top: 10,
-    right: 10,
-  },
-  errorText: {
-    color: colors.red1,
-    fontSize: 15,
-  },
-});

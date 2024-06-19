@@ -1,16 +1,15 @@
 import {
-  ScrollView,
   Text,
   TouchableOpacity,
   View,
   FlatList,
 } from 'react-native';
+import { ScrollView } from 'react-native-virtualized-view'
 import React, {useCallback, useEffect, useState} from 'react';
 import {statusBarHeight} from '../../utils/config/config';
 import {
   CustomDropdown,
   Loader,
-  NumericTextInput,
   PrimaryButton,
   TopBarCard2,
 } from '../../components';
@@ -29,6 +28,7 @@ import MeterDetailsModal from '../../components/MeterDetailsModal';
 import EditMeterModal from '../../components/EditMeterModal';
 import AddConsumptionUnitsModal from '../../components/AddConsumptionModal';
 import { styles } from './style';
+import { ApprovedApartments } from '../../common/customFunctions';
 
 const PrepaidMeter = ({navigation}) => {
   const dispatch = useDispatch();
@@ -164,16 +164,7 @@ const PrepaidMeter = ({navigation}) => {
   );
 
   useEffect(() => {
-    if (customerDetails?.currentCustomerData?.apartmentDTOs) {
-      const approvedApartments =
-        customerDetails.currentCustomerData.apartmentDTOs
-          .filter(apartment => apartment.adminApproved)
-          .map(apartment => ({
-            id: apartment.jtApartmentDTO.id,
-            name: apartment.jtApartmentDTO.name,
-          }));
-      setApartmentData(approvedApartments);
-    }
+    ApprovedApartments({customerDetails:customerDetails,setApartmentData:setApartmentData})
   }, [customerDetails]);
 
   useEffect(() => {

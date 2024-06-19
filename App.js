@@ -15,7 +15,6 @@ const App = () => {
   useEffect(() => {
     requestUserPermission();
     Notificationhandlers();
-   
     return () => {
       Notificationhandlers();
     };

@@ -13,7 +13,7 @@ import {CustomDropdown, PrimaryButton, TopBarCard2} from '../../components';
 import {allTexts, colors} from '../../common';
 import {useSelector} from 'react-redux';
 import {useCreateFlatByaptOwnMutation} from '../../redux/services/maintainenceService';
-import { SnackbarComponent } from '../../common/customFunctions';
+import { ApprovedApartments, SnackbarComponent } from '../../common/customFunctions';
 
 const PrepaidMeter = ({navigation}) => {
   const customerDetails = useSelector(state => state.currentCustomer);
@@ -38,13 +38,17 @@ const PrepaidMeter = ({navigation}) => {
   const [createFlatByAptOwn] = useCreateFlatByaptOwnMutation();
 
   const handleNumFlatsChange = value => {
-    setNumFlats(value);
-    const newFlatsDetails = Array.from({length: Number(value)}, () => ({
+    if (value > 1) {
+      setNumFlats(value);
+      const newFlatsDetails = Array.from({length: Number(value)}, () => ({
       flatNo: null,
       ownerPhoneNo: '',
       ownerName: '',
     }));
     setFlatsDetails(newFlatsDetails);
+    } else {
+      SnackbarComponent({text:'Number Of Flats Must GraterThan 1',backgroundColor:colors.red1})
+    }
   };
 
   const validateFields = () => {
@@ -132,16 +136,7 @@ const PrepaidMeter = ({navigation}) => {
   };
 
   useEffect(() => {
-    if (customerDetails?.currentCustomerData?.apartmentDTOs) {
-      const approvedApartments =
-        customerDetails.currentCustomerData.apartmentDTOs
-          .filter(apartment => apartment.adminApproved)
-          .map(apartment => ({
-            id: apartment.jtApartmentDTO.id,
-            name: apartment.jtApartmentDTO.name,
-          }));
-      setApartmentData(approvedApartments);
-    }
+    ApprovedApartments({customerDetails:customerDetails,setApartmentData:setApartmentData})
   }, [customerDetails]);
 
   useEffect(() => {

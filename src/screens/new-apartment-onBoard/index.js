@@ -25,7 +25,7 @@ const NewApartmentOnBoard = ({ navigation }) => {
   // const [getCityList] = useLazyGetCityListQuery();
 
   const {citiesData} = useSelector(state=>state.cityData);
-  console.log(citiesData);
+  // console.log(citiesData);
   const handleSubmit = () => {
     const payload = {
       name:apartment,
