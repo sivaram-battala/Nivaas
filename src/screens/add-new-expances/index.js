@@ -18,6 +18,7 @@ import moment from 'moment';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {ExpancesValidation} from '../../common/schemas';
 import { useAddDebitHistoryMutation, useUpdateDebitHistoryMutation } from '../../redux/services/expansesServices';
+import { SnackbarComponent } from '../../common/customFunctions';
 
 const AddNewExpances = ({navigation,route}) => {
   const {id,mode}=route?.params;
@@ -85,8 +86,11 @@ const AddNewExpances = ({navigation,route}) => {
           .unwrap()
           .then((responce)=>{
             console.log('ADD DEBIT HISTORY RESPONCE',responce);
+            SnackbarComponent({text:responce?.message || 'Expances Added',backgroundColor:colors.green})
+            navigation.navigate(allTexts.screenNames.expences)
           }).catch((error)=>{
             console.log('ERROR in adding History',error);
+            SnackbarComponent({text:error?.data?.error || 'Failed To Add Expances',backgroundColor:colors.red1})
           })
       }
     } else {
@@ -114,9 +118,11 @@ const AddNewExpances = ({navigation,route}) => {
         .unwrap()
         .then((responce)=>{
           console.log('RESPONCE OF UPDATE HISTORY',responce);
+          SnackbarComponent({text:responce?.message || 'Expances Updated',backgroundColor:colors.green})
           navigation.navigate(allTexts.screenNames.expences)
         }).catch((error)=>{
           console.log('ERROR IN UPDATING DEBIT HISTORY',error);
+          SnackbarComponent({text:error?.data?.error || 'failed To Update Expances',backgroundColor:colors.red1})
         })
       }
     }

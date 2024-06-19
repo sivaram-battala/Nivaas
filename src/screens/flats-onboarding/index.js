@@ -13,6 +13,7 @@ import {CustomDropdown, PrimaryButton, TopBarCard2} from '../../components';
 import {allTexts, colors} from '../../common';
 import {useSelector} from 'react-redux';
 import {useCreateFlatByaptOwnMutation} from '../../redux/services/maintainenceService';
+import { SnackbarComponent } from '../../common/customFunctions';
 
 const PrepaidMeter = ({navigation}) => {
   const customerDetails = useSelector(state => state.currentCustomer);
@@ -118,10 +119,13 @@ const PrepaidMeter = ({navigation}) => {
         .unwrap()
         .then(responce => {
           console.log('RESPONCE OF NEW FLAT CREATION======>', responce);
+          SnackbarComponent({text:'New Flats Created Successfully',backgroundColor:colors.green})
           navigation.navigate(allTexts.screenNames.adminFlatSettings);
         })
         .catch(error => {
           console.log('ERROR IN NEW FLAT CREATION=====>', error);
+          SnackbarComponent({text:'Error In Flats Creation',backgroundColor:colors.red1})
+
         });
       setHasSubmitted(true);
     }

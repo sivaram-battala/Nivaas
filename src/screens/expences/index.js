@@ -30,6 +30,7 @@ import {
   useLazyGetExpancesPDFQuery,
 } from '../../redux/services/expansesServices';
 import RNFS from 'react-native-fs';
+import { SnackbarComponent } from '../../common/customFunctions';
 
 const Expences = ({navigation}) => {
   const customerDetails = useSelector(state => state.currentCustomer);
@@ -132,16 +133,19 @@ const Expences = ({navigation}) => {
         const base64data = reader.result.split(',')[1];
         RNFS.writeFile(filePath, base64data, 'base64')
           .then(() => {
-            Alert.alert('Success', 'File downloaded successfully!', [{ text: 'OK' }]);
+            // Alert.alert('Success', 'File downloaded successfully!', [{ text: 'OK' }]);
+            SnackbarComponent({text:'PDF Successfully Downloaded',backgroundColor:colors.green})
           })
           .catch((err) => {
             console.error('Download error:', err);
-            Alert.alert('Error', 'File download failed.', [{ text: 'OK' }]);
+            // Alert.alert('Error', 'File download failed.', [{ text: 'OK' }]);
+            SnackbarComponent({text:'Failed To Download PDF',backgroundColor:colors.red1})
           });
       };
     } catch (err) {
       console.error('Download error:', err);
-      Alert.alert('Error', 'File download failed.', [{ text: 'OK' }]);
+      // Alert.alert('Error', 'File download failed.', [{ text: 'OK' }]);
+      SnackbarComponent({text:'Failed To Download PDF',backgroundColor:colors.red1})
     }
   };
   
@@ -156,10 +160,12 @@ const Expences = ({navigation}) => {
       .unwrap()
       .then(responce => {
         console.log('RESPONCE OF DELETE EXPANSIONS', responce);
+        SnackbarComponent({text:'Deleted Successfully',backgroundColor:colors.red1})
         handlegetAllExpances(selectedApartment?.id);
       })
       .catch(error => {
         console.log('ERROR IN DELETE EXPANSIONS', error);
+        SnackbarComponent({text:'Failed to Delete',backgroundColor:colors.red1})
       });
   };
 
@@ -219,26 +225,6 @@ const Expences = ({navigation}) => {
           <Text style={styles.dataCell}>{data?.item?.amount}</Text>
         </View>
       </Pressable>
-  
-    // (data) ? (
-    //   <Pressable onPress={() => handleEdit(data.item)} style={styles.rowFront}>
-    //     <View style={styles.eachHeader}>
-    //       <Text style={styles.dataCell}>{data?.item?.type}</Text>
-    //     </View>
-    //     <View style={styles.eachHeader}>
-    //       <Text style={styles.dataCell}>{data?.item?.description}</Text>
-    //     </View>
-    //     <View style={styles.eachHeader}>
-    //       <Text style={styles.dataCell}>{data?.item?.amount}</Text>
-    //     </View>
-    //   </Pressable>
-    // ) : (
-    //   <View style={{alignItems: 'center', marginVertical: '5%'}}>
-    //     <Text style={styles.errorText}>
-    //       Expances Data Not Available Add Your Expances Below
-    //     </Text> 
-    //   </View>
-    // );
 
   const renderHiddenItem = (data, rowMap) => (
     <View style={styles.rowBack}>

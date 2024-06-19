@@ -21,6 +21,7 @@ import {statusBarHeight} from '../../utils/config/config';
 import {useSelector} from 'react-redux';
 import {useLazyGetFlatsListQuery} from '../../redux/services/cityServices';
 import {useUpdateFlatDetailsMutation} from '../../redux/services/maintainenceService';
+import { SnackbarComponent } from '../../common/customFunctions';
 
 const EditOnboardedFlatDetails = ({navigation}) => {
   const customerDetails = useSelector(state => state.currentCustomer);
@@ -75,7 +76,7 @@ const EditOnboardedFlatDetails = ({navigation}) => {
   const handleFormSubmit = () => {
     console.log('Updated FormData:', formData);
     const flatPayload = {
-      apartmentId: selectedApartment?.id,
+      // apartmentId: selectedApartment?.id,
       flatId: flatID,
       payload: {
         flatNo: formData?.flatNo,
@@ -87,10 +88,12 @@ const EditOnboardedFlatDetails = ({navigation}) => {
       .unwrap()
       .then(responce => {
         console.log('RESPONCE updateOnboardedFlatDetails', responce);
+        SnackbarComponent({text:responce?.message || 'Flats data Updated',backgroundColor:colors.green})
         handleFlatData(selectedApartment?.id);
       })
       .catch(error => {
         console.log('ERROR IN updateOnboardedFlatDetails', error);
+        SnackbarComponent({text:error?.data?.error || 'Failed To Update',backgroundColor:colors.red1})
       });
     setModalVisible(false);
   };
