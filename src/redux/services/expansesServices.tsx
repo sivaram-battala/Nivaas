@@ -6,8 +6,8 @@ import { endpoints } from '../../api';
 
 // Define a service using a base URL and expected endpoints
 
-export const ExpancesService = createApi({
-  reducerPath: 'ExpancesService',
+export const expancesService = createApi({
+  reducerPath: 'expancesService',
   baseQuery: fetchBaseQuery({
     baseUrl: NIVAAS_URL,
     prepareHeaders: (headers, {getState, endpoint}) => {
@@ -20,17 +20,21 @@ export const ExpancesService = createApi({
     },
   }), 
   endpoints: builder => ({
-    getAllExpances: builder.query<any, {page:Number,pageSize:Number}>({
-        query: ({page,pageSize}) => `${endpoints.GET_EXPANCES}/6/year/2024/month/5`,
+    getAllExpances: builder.query<any, {apartmentID:Number,year:Number,month:Number}>({
+        query: ({apartmentID,year,month}) => `${endpoints.GET_EXPANCES}/${apartmentID}/year/${year}/month/${month}`,
     }),
-    getExpancesById: builder.query<any, {page:Number,pageSize:Number}>({
-        query: ({page,pageSize}) => `${endpoints.GET_EXPANCES_BY_ID}/6`,
+    getExpancesById: builder.query<any, {id:Number}>({
+        query: ({id}) => `${endpoints.GET_EXPANCES_BY_ID}/${id}`,
     }),
-    getExpancesPDF: builder.query<any, {page:Number,pageSize:Number}>({
-        query: ({page,pageSize}) => `${endpoints.GET_EXPANCES_PDF}/6/year/2024/month/5`,
+    getExpancesPDF: builder.query<Blob, { apartmentID: number, year: number, month: number }>({
+      query: ({ apartmentID, year, month }) => ({
+        url: `${endpoints.GET_EXPANCES_PDF}/${apartmentID}/year/${year}/month/${month}`,
+        method: 'GET',
+        responseHandler: (response) => response.blob(),
+      }),
     }),
-    addDebitHistory: builder.mutation<any, {apartmentId:Number,flatId:Number,payload:any}>({
-        query: ({payload,apartmentId,flatId}) => ({
+    addDebitHistory: builder.mutation<any, {}>({
+        query: payload => ({
           url:  `${endpoints.ADD_DEBIT_HISTORY}`,
           method: 'POST',
           body: payload,
@@ -39,16 +43,16 @@ export const ExpancesService = createApi({
           },
         }),
     }),
-    deleteExpances : builder.mutation<any,{id : number}>({
-        query: ({id}) =>({
-          url:`${endpoints.DELETE_EXPANCES}/6/debit/1`,
+    deleteExpances : builder.mutation<any,{apartmentID:number,id : number}>({
+        query: ({apartmentID,id}) =>({
+          url:`${endpoints.DELETE_EXPANCES}/${apartmentID}/debit/${id}`,
           method: 'DELETE',
           credentials: 'include',
         })
     }),
-    updateDebitHistory: builder.mutation<any, {}>({
-        query: payload => ({
-          url: `${endpoints.UPDATE_DEBIT_HISTORY}/{id}`,
+    updateDebitHistory: builder.mutation<any, {id:Number,payload:any}>({
+        query: ({payload,id}) => ({
+          url: `${endpoints.UPDATE_DEBIT_HISTORY}/${id}`,
           method: 'PUT',
           body: payload,
           header: {
@@ -61,9 +65,9 @@ export const ExpancesService = createApi({
 
 export const {
   useLazyGetAllExpancesQuery,
-  useGetExpancesByIdQuery,
-  useGetExpancesPDFQuery,
+  useLazyGetExpancesByIdQuery,
+  useLazyGetExpancesPDFQuery,
   useAddDebitHistoryMutation,
   useDeleteExpancesMutation,
   useUpdateDebitHistoryMutation,
-} = ExpancesService;
+} = expancesService;

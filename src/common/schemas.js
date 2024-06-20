@@ -9,17 +9,14 @@ export const onboardValidationSchema = Yup.object().shape({
     .required('Number of flats per block is required'),
   addressLine1: Yup.string().required('Address line 1 is required'),
 });
-export const  onBoardNewApartmentSchema = (values) => {
+export const onBoardNewApartmentSchema = (values) => {
   const errors = {};
 
   if (!values.name) {
     errors.name = 'Apartment name is required';
   }
-  if (!values.totalBlocks || values.totalBlocks <= 0) {
-    errors.totalBlocks = 'Total number of blocks is required and must be at least 1';
-  }
-  if (typeof values.isUnderConstruction === 'undefined') {
-    errors.isUnderConstruction = 'Construction status is required';
+  if (!values.totalFlats || values.totalFlats <= 0) {
+    errors.totalFlats = 'Total number of flats is required and must be at least 1';
   }
   if (!values.line1) {
     errors.line1 = 'Address Line 1 is required';
@@ -30,11 +27,8 @@ export const  onBoardNewApartmentSchema = (values) => {
   if (!values.postalCode) {
     errors.postalCode = 'Postal code is required';
   }
-  if (!values.locality) {
-    errors.locality = 'City is required';
-  }
-  if (!values.status) {
-    errors.status = 'Status is required';
+  if (!values.cityId) {
+    errors.cityId = 'City is required';
   }
   return errors;
 };

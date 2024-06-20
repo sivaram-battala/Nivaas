@@ -86,7 +86,7 @@ const MyAccount = ({navigation, dispatch, route}) => {
         <Text style={styles.manageFlatsConText}>Manage flats</Text>
         <View style={styles.manageFlatsSubCon}>
           <View>
-            {custDetails?.currentCustomerData?.flatDTO.length != 0 ? (
+            {(custDetails?.currentCustomerData?.flatDTO != [] || custDetails?.currentCustomerData?.flatDTO) && (
               <View style={styles.manageFlatsConHome}>
                 <Foundation
                   name="home"
@@ -95,7 +95,7 @@ const MyAccount = ({navigation, dispatch, route}) => {
                   style={{marginLeft: 3}}
                 />
                 <View>
-                  {custDetails?.currentCustomerData?.flatDTO.length > 1 ? (
+                  {custDetails?.currentCustomerData?.flatDTO?.length > 1 ? (
                     <TouchableOpacity
                       onPress={() => setFlatModalVisible(true)}
                       style={styles.flatItemCon}>
@@ -114,8 +114,6 @@ const MyAccount = ({navigation, dispatch, route}) => {
                   )}
                 </View>
               </View>
-            ) : (
-              null
             )}
             <TouchableOpacity onPress={() => navigation.navigate(allTexts.screenNames.selectCityOptions)}>
               <View style={styles.manageFlatsConAdd}>
@@ -134,7 +132,7 @@ const MyAccount = ({navigation, dispatch, route}) => {
         <Text style={styles.manageFlatsConText}>Manage Apartments</Text>
         <View style={styles.manageFlatsSubCon}>
           <View>
-            {custDetails?.currentCustomerData?.apartmentDTOs.length != 0 ? (
+            {(custDetails?.currentCustomerData?.apartmentDTOs) && (
               <View style={styles.manageFlatsConHome}>
                 <FontAwesome
                   name="building-o"
@@ -143,7 +141,7 @@ const MyAccount = ({navigation, dispatch, route}) => {
                   style={{marginLeft: 3}}
                 />
                 <View>
-                  {custDetails?.currentCustomerData?.apartmentDTOs.length > 1 ? (
+                  {custDetails?.currentCustomerData?.apartmentDTOs?.length > 1 ? (
                     <TouchableOpacity
                       onPress={() => setApartmentModalVisible(true)}
                       style={styles.flatItemCon}>
@@ -161,8 +159,6 @@ const MyAccount = ({navigation, dispatch, route}) => {
                   )}
                 </View>
               </View>
-            ) : (
-              null
             )}
             <TouchableOpacity onPress={() => navigation.navigate(allTexts.screenNames.newApartmentOnBoard)}>
               <View style={styles.manageFlatsConAdd}>

@@ -374,7 +374,6 @@ const getLoginDetails = () => {
                 <HomeStack />
               )}
         </ApplicationContext.Provider>
-        // <HomeStack />
   );
 };
 

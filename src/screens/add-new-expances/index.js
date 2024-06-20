@@ -6,7 +6,7 @@ import {
   View,
 } from 'react-native';
 import React, {useState} from 'react';
-import {colors} from '../../common';
+import {allTexts, colors} from '../../common';
 import {
   CustomSelectDropdown,
   PrimaryButton,
@@ -17,15 +17,20 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import moment from 'moment';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {ExpancesValidation} from '../../common/schemas';
+import { useAddDebitHistoryMutation, useUpdateDebitHistoryMutation } from '../../redux/services/expansesServices';
+import { SnackbarComponent } from '../../common/customFunctions';
 
 const AddNewExpances = ({navigation,route}) => {
-  const routeData=route?.params;
+  const {id,mode}=route?.params;
+  console.log(id);
   const [selectedDate, setSelectedDate] = useState('');
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [transactionType, setTransactionType] = useState();
   const [description, setDescription] = useState('');
-  const [amount, setAmount] = useState('');
+  const [amount, setAmount] = useState(null);
   const [errors, setErrors] = useState({});
+  const [addDebitHistory] = useAddDebitHistoryMutation();
+  const [updateHistory] = useUpdateDebitHistoryMutation();
   const TypeOfTransactions = [
     {name: 'UTILITIES'},
     {name: 'SERVICES'},
@@ -59,16 +64,67 @@ const AddNewExpances = ({navigation,route}) => {
   };
 
   const handleSave = () => {
-    const validationErrors = ExpancesValidation(
-      selectedDate,
-      transactionType,
-      description,
-      amount,
-    );
-    setErrors(validationErrors);
-
-    if (Object.keys(validationErrors).length === 0) {
-      console.log('Expense data is valid and ready to be saved.');
+    if (mode === 'ADD') {
+      const validationErrors = ExpancesValidation(
+        selectedDate,
+        transactionType,
+        description,
+        amount,
+      );
+      setErrors(validationErrors);
+  
+      if (Object.keys(validationErrors).length === 0) {
+        const payload = {
+          transactionDate:selectedDate,
+          type:transactionType?.name,
+          description:description,
+          amount:amount,
+          apartmentId:id,
+        }
+        console.log(payload);
+        addDebitHistory(payload)
+          .unwrap()
+          .then((responce)=>{
+            console.log('ADD DEBIT HISTORY RESPONCE',responce);
+            SnackbarComponent({text:responce?.message || 'Expances Added',backgroundColor:colors.green})
+            navigation.navigate(allTexts.screenNames.expences)
+          }).catch((error)=>{
+            console.log('ERROR in adding History',error);
+            SnackbarComponent({text:error?.data?.error || 'Failed To Add Expances',backgroundColor:colors.red1})
+          })
+      }
+    } else {
+      console.log('update');
+      const validationErrors = ExpancesValidation(
+        selectedDate,
+        transactionType,
+        description,
+        amount,
+      );
+      setErrors(validationErrors);
+      if (Object.keys(validationErrors).length === 0) {
+        const updatepayload = {
+          id:id?.itemId,
+          payload :{
+            transactionDate:selectedDate,
+            type:transactionType?.name,
+            description:description,
+            amount:amount,
+            apartmentId:id?.aprtmentId,
+          }
+        }
+        console.log(updatepayload);
+        updateHistory(updatepayload)
+        .unwrap()
+        .then((responce)=>{
+          console.log('RESPONCE OF UPDATE HISTORY',responce);
+          SnackbarComponent({text:responce?.message || 'Expances Updated',backgroundColor:colors.green})
+          navigation.navigate(allTexts.screenNames.expences)
+        }).catch((error)=>{
+          console.log('ERROR IN UPDATING DEBIT HISTORY',error);
+          SnackbarComponent({text:error?.data?.error || 'failed To Update Expances',backgroundColor:colors.red1})
+        })
+      }
     }
   };
 
@@ -138,7 +194,7 @@ const AddNewExpances = ({navigation,route}) => {
         {errors.amount && <Text style={styles.errorText}>{errors.amount}</Text>}
         <View style={styles.button}>
           <PrimaryButton
-            text={'SAVE'}
+            text={(mode ==='ADD') ? 'ADD' : 'UPDATE'}
             bgColor={colors.primaryRedColor}
             onPress={handleSave}
           />

@@ -13,6 +13,7 @@ import { allTexts, colors } from '../../common';
 import { useSelector } from 'react-redux';
 import { useAddPrepaidMeterMutation } from '../../redux/services/prepaidMeterService';
 import { validatePrepaidMeterFields } from '../../common/schemas';
+import { SnackbarComponent } from '../../common/customFunctions';
 
 const AddPrepaidMeter = ({ navigation, route }) => {
   const routeData = route?.params || {};
@@ -42,12 +43,13 @@ const AddPrepaidMeter = ({ navigation, route }) => {
       .unwrap()
       .then(response => {
         console.log('ADD PREPAID METER RESPONSE======>', response);
-        navigation.navigate(allTexts.screenNames.apartment);
+        // SnackbarComponent({text: response,backgroundColor:colors.green});
+        navigation.navigate(allTexts.screenNames.prepaidMeter);
       })
       .catch(error => {
         console.log('ERROR IN add Prepaid Meter', error);
+        // SnackbarComponent({text: error,backgroundColor:colors.red1});
       });
-    navigation.navigate(allTexts.screenNames.prepaidMeter);
   };
 
   return (

@@ -58,7 +58,7 @@ export const allTexts = {
     emailPlace: 'Enter Your email',
   },
   paragraphs: {
-    discoverNivaas:'Discover Nivaas for buying,selling and renting homes and apartments,as well as scheduling apartment visits and accessing householdservices',
+    discoverNivaas:'Discover Nivaas for comprehensive apartment management with features like maintenance management, and a centralized dashboard for real-time monitoring. ',
     accessAll:'Access all importent announcements notices and cirulers here',
     itemPublished:'No item published yet from your society',
   },
@@ -122,4 +122,18 @@ export const allTexts = {
     expences:'Expences',
     addNewExpances:'AddNewExpances'
   },
+  months :[
+    {name: 'January', index: 0},
+    {name: 'February', index: 1},
+    {name: 'March', index: 2},
+    {name: 'April', index: 3},
+    {name: 'May', index: 4},
+    {name: 'June', index: 5},
+    {name: 'July', index: 6},
+    {name: 'August', index: 7},
+    {name: 'September', index: 8},
+    {name: 'October', index: 9},
+    {name: 'November', index: 10},
+    {name: 'December', index: 11},
+  ]
 };

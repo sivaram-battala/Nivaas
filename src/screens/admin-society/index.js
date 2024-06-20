@@ -7,6 +7,7 @@ import { allTexts, colors } from '../../common'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
+import IconNameCard from '../../components/icon-name-card'
 const AdminSociety = ({navigation}) => {
   return (
     <View style={styles.mainCon}>
@@ -15,6 +16,7 @@ const AdminSociety = ({navigation}) => {
       </View>
       <View>
         <View style={styles.apartmentServicesCon}>
+          {/* <IconNameCard navigation={navigation} icon={MaterialCommunityIcons} iconName='speedometer' screenName={allTexts.screenNames.prepaidMeter} title='Prepaid Meters'/> */}
           <Pressable onPress={()=>navigation.navigate(allTexts.screenNames.prepaidMeter)}>
           <View style={styles.eachService}>
             <MaterialCommunityIcons name='speedometer' size={25} color={colors.primaryRedColor}/>

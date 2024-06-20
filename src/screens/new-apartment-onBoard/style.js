@@ -10,7 +10,10 @@ export const styles = StyleSheet.create({
     padding: 20,
   },
   eachFieledCon:{
-    marginVertical:window.height*0.01,
+    marginTop:window.height*0.02,
+  },
+  DropdownFieledCon:{
+    marginTop:-window.height*0.02,
   },
   fieldName:{
     color:colors.black,

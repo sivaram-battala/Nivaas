@@ -9,6 +9,8 @@ import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useUserOnBoardingMutation} from '../../redux/services/cityServices';
 import RadioGroup from 'react-native-radio-buttons-group';
+import { SnackbarComponent } from '../../common/customFunctions';
+
 
 const UserOnBoardingForm = ({navigation, route}) => {
   const userData = route?.params || {};
@@ -29,11 +31,13 @@ const UserOnBoardingForm = ({navigation, route}) => {
       .unwrap()
       .then(responce => {
         console.log(responce, 'onboarding responce');
+        SnackbarComponent({text: responce?.message || 'Flat Onboarded Successfully',backgroundColor:colors.green});
+        navigation.navigate(allTexts.screenNames.home,{city:userData?.cityValue,apartment:userData?.apartmentValue,flat:userData?.flatValue,flatId: userData?.flatId});
       })
       .catch(error => {
         console.log('error in OnBoarding request', error);
+        SnackbarComponent({text:'Failed To Onboard Flat',backgroundColor:colors.red1});
       });
-    navigation.navigate(allTexts.screenNames.home,{city:userData?.cityValue,apartment:userData?.apartmentValue,flat:userData?.flatValue,flatId: userData?.flatId});
   };
   const radioButtons = useMemo(
     () => [
@@ -53,11 +57,11 @@ const UserOnBoardingForm = ({navigation, route}) => {
   return (
     <View style={styles.mainContainer}>
       <View style={{ height: 50, marginTop: statusBarHeight }}>
-        <TopBarCard2 back={true} txt={'Confirm'} navigation={navigation} />
+        <TopBarCard2 back={true} txt={'Home Details'} navigation={navigation} />
       </View>
       <View style={styles.detailsCon}>
         <Text style={{color: colors.black, fontSize: 16, fontWeight: '500'}}>
-          Apartment
+          Home Details
         </Text>
         <View style={styles.eachDetailsCon}>
           <SimpleLineIcons name="location-pin" size={18} color={colors.black} />
