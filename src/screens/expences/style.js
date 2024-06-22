@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { colors } from "react-native-elements";
+import { colors } from "../../common";
 
 export const styles = StyleSheet.create({
     mainCon: {
@@ -28,17 +28,38 @@ export const styles = StyleSheet.create({
         // paddingHorizontal: '10%',
         marginHorizontal: '5%',
       },
+      SwipeText:{
+        marginHorizontal:'5%',
+        marginTop:'5%'
+      },
       header: {
         flexDirection: 'row',
         backgroundColor: colors.gray3,
         borderBottomWidth: 1,
         borderBottomColor: colors.gray2,
         marginHorizontal: '5%',
-        marginTop: '5%',
+      },
+      NoexpanceTextCon:{
+        alignItems:'center'
+      },
+      NoexpanceText:{
+        margin:'10%',
+        fontSize:15,
+        fontWeight:'500',
+        color:colors.red1
       },
       downloadButton:{
         marginHorizontal:'5%',
-        marginTop:'2%'
+        marginVertical:'5%',
+        flexDirection:'row',
+        justifyContent:'center'
+      },
+      clickHereText:{
+        fontWeight:'500',
+        color:colors.primaryRedColor
+      },
+      downloadText:{
+        color:colors.black
       },
       eachHeader: {
         width: '31%',

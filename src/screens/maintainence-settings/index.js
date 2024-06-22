@@ -1,14 +1,14 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
   StyleSheet,
   FlatList,
   TextInput,
+  ScrollView,
 } from 'react-native';
-import { ScrollView } from 'react-native-virtualized-view'
-import {allTexts, colors} from '../../common';
-import {statusBarHeight} from '../../utils/config/config';
+import { allTexts, colors } from '../../common';
+import { statusBarHeight } from '../../utils/config/config';
 import {
   CustomDropdown,
   CustomSelectDropdown,
@@ -16,42 +16,40 @@ import {
   PrimaryButton,
   TopBarCard2,
 } from '../../components';
-import {useSelector} from 'react-redux';
-import {CheckBox} from 'react-native-elements';
-import {useLazyGetAparmentPrepaidMetersQuery} from '../../redux/services/prepaidMeterService';
-import SelectDropdown from 'react-native-select-dropdown';
-import {useNotifyOnMutation} from '../../redux/services/maintainenceService';
+import { useSelector } from 'react-redux';
+import { CheckBox } from 'react-native-elements';
+import { useLazyGetAparmentPrepaidMetersQuery } from '../../redux/services/prepaidMeterService';
+import { useNotifyOnMutation } from '../../redux/services/maintainenceService';
 import { ApprovedApartments, SnackbarComponent } from '../../common/customFunctions';
 
-const MaintainenceSettings = ({navigation}) => {
-  const customerDetails = useSelector(state => state.currentCustomer);
+const MaintainenceSettings = ({ navigation }) => {
+  const customerDetails = useSelector((state) => state.currentCustomer);
   const [loader, setloader] = useState();
   const [apartmentData, setApartmentData] = useState([]);
-  const [selectedApartment, setSelectedApartment] = useState({id: '',name: ''});
+  const [selectedApartment, setSelectedApartment] = useState({ id: '', name: '' });
   const [prepaidMetersData, setPrepaidMetersData] = useState([]);
   const [checkedMeters, setCheckedMeters] = useState([]);
-  const prepaidIdArray = checkedMeters.map(item => item.id);
-  console.log(checkedMeters);
+  const prepaidIdArray = checkedMeters.map((item) => item.id);
   const [selectedDate, setSelectedDate] = useState(null);
   const [value, setValue] = useState('');
   const [getApartmentPrepaidMetersList] = useLazyGetAparmentPrepaidMetersQuery();
   const [maintainenceSave] = useNotifyOnMutation();
 
-  const handleCheckboxToggle = id => {
-    const updatedData = prepaidMetersData.map(item =>
-      item.id === id ? {...item, checked: !item.checked} : item,
+  const handleCheckboxToggle = (id) => {
+    const updatedData = prepaidMetersData.map((item) =>
+      item.id === id ? { ...item, checked: !item.checked } : item
     );
     setPrepaidMetersData(updatedData);
 
     const updatedCheckedMeters = updatedData
-      .filter(item => item.checked)
-      .map(item => ({id: item.id, name: item.name}));
+      .filter((item) => item.checked)
+      .map((item) => ({ id: item.id, name: item.name }));
     setCheckedMeters(updatedCheckedMeters);
   };
 
   const generateDates = (month, year) => {
     const date = new Date(year, month, 0).getDate();
-    return Array.from({length: date}, (_, i) => ({
+    return Array.from({ length: date }, (_, i) => ({
       id: i + 1,
       name: (i + 1).toString().padStart(2, '0'),
     }));
@@ -60,7 +58,7 @@ const MaintainenceSettings = ({navigation}) => {
   const currentYear = new Date().getFullYear();
   const dropDownData = generateDates(currentMonth, currentYear);
 
-  const renderItem = ({item}) => (
+  const renderItem = ({ item }) => (
     <View style={styles.checkboxContainer}>
       <CheckBox
         title={item?.name}
@@ -71,7 +69,7 @@ const MaintainenceSettings = ({navigation}) => {
     </View>
   );
 
-  const handlePrepaidMetersList = apartmentId => {
+  const handlePrepaidMetersList = (apartmentId) => {
     setloader(true);
     const payload = {
       apartmentId,
@@ -80,17 +78,18 @@ const MaintainenceSettings = ({navigation}) => {
     };
     getApartmentPrepaidMetersList(payload)
       .unwrap()
-      .then(response => {
+      .then((response) => {
         setloader(false);
         setPrepaidMetersData(
-          response?.data.map(meter => ({
+          response?.data.map((meter) => ({
             ...meter,
             checked: false,
-          })),
+          }))
         );
       })
-      .catch(error => {
+      .catch((error) => {
         console.log('error in Apartment PrepaidMetersList=====>', error);
+        SnackbarComponent({text:'Cheak Your NETWORK',backgroundColor:colors.red1})
       });
   };
 
@@ -104,19 +103,19 @@ const MaintainenceSettings = ({navigation}) => {
     console.log(maintainencePayload);
     maintainenceSave(maintainencePayload)
       .unwrap()
-      .then(responce => {
-        console.log('RESPONCE OF MAINTAINENCE SAVE====>', responce);
-        SnackbarComponent({text: responce?.message || 'Saved Successfully',backgroundColor:colors.green});
+      .then((response) => {
+        console.log('RESPONSE OF MAINTAINENCE SAVE====>', response);
+        SnackbarComponent({ text: response?.message || 'Saved Successfully', backgroundColor: colors.green });
         navigation.navigate(allTexts.screenNames.adminSociety);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log('ERROR IN MAINTAINENCE SAVE====>', error);
-        SnackbarComponent({text: error?.data?.error || 'Error In Saving Maintainence',backgroundColor:colors.red1});
+        SnackbarComponent({ text: error?.data?.error || 'Error In Saving Maintainence', backgroundColor: colors.red1 });
       });
   };
 
   useEffect(() => {
-    ApprovedApartments({customerDetails:customerDetails,setApartmentData:setApartmentData})
+    ApprovedApartments({customerDetails:customerDetails,setApartmentData:setApartmentData,setSelectedApartment:setSelectedApartment})
   }, [customerDetails]);
 
   useEffect(() => {
@@ -127,8 +126,8 @@ const MaintainenceSettings = ({navigation}) => {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.mainCon}>
-      <View style={{height: 50, marginTop: statusBarHeight}}>
-        <TopBarCard2 back={true} navigation={navigation} txt={'Maintainence'} />
+      <View style={{ height: 50, marginTop: statusBarHeight }}>
+        <TopBarCard2 back={true} navigation={navigation} txt={'Maintenance'} />
       </View>
       <View style={styles.headerCon}>
         <View style={styles.dropDown}>
@@ -137,7 +136,7 @@ const MaintainenceSettings = ({navigation}) => {
             showLabel={false}
             data={apartmentData}
             value={selectedApartment.id}
-            onChange={(id, name) => setSelectedApartment({id, name})}
+            onChange={(id, name) => setSelectedApartment({ id, name })}
             labelField="name"
             valueField="id"
           />
@@ -146,7 +145,7 @@ const MaintainenceSettings = ({navigation}) => {
           <CustomSelectDropdown
             data={dropDownData}
             onSelect={(selectedItem) => setSelectedDate(selectedItem?.name)}
-            selectedItem={{name: selectedDate}}
+            selectedItem={{ name: selectedDate }}
             placeholder={'NOTIFY ON'}
           />
         </View>
@@ -154,7 +153,7 @@ const MaintainenceSettings = ({navigation}) => {
       <View style={styles.flatlistCon}>
         <TextInput
           style={styles.input}
-          placeholder="Enter maintainence Charge"
+          placeholder="Enter maintenance Charge"
           value={value}
           onChangeText={setValue}
           keyboardType="numeric"
@@ -167,11 +166,13 @@ const MaintainenceSettings = ({navigation}) => {
           <FlatList
             data={prepaidMetersData}
             renderItem={renderItem}
-            keyExtractor={item => item.id.toString()}
+            keyExtractor={(item) => item.id.toString()}
             contentContainerStyle={styles.container}
           />
         )}
-        {loader ? ('') : (
+        {loader ? (
+          ''
+        ) : (
           <View style={styles.buttonCon}>
             <PrimaryButton
               text={'SAVE'}
@@ -256,7 +257,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 16,
     fontWeight: '500',
-    color: colors.black,
+    color: colors.red1,
   },
   dropdownItemIconStyle: {
     fontSize: 28,

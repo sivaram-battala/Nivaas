@@ -120,7 +120,8 @@ export const allTexts = {
     notification:"Notification",
     adminFlatSettings:'AdminFlatSettings',
     expences:'Expences',
-    addNewExpances:'AddNewExpances'
+    addNewExpances:'AddNewExpances',
+    coAdmin:'CoAdmin',
   },
   months :[
     {name: 'January', index: 0},

@@ -28,7 +28,7 @@ import MeterDetailsModal from '../../components/MeterDetailsModal';
 import EditMeterModal from '../../components/EditMeterModal';
 import AddConsumptionUnitsModal from '../../components/AddConsumptionModal';
 import { styles } from './style';
-import { ApprovedApartments } from '../../common/customFunctions';
+import { ApprovedApartments, SnackbarComponent } from '../../common/customFunctions';
 
 const PrepaidMeter = ({navigation}) => {
   const dispatch = useDispatch();
@@ -69,6 +69,8 @@ const PrepaidMeter = ({navigation}) => {
         })
         .catch(error => {
           console.log('error in Apartment PrepaidMetersList=====>', error);
+          SnackbarComponent({text:'Cheak Your NETWORK',backgroundColor:colors.red1})
+          setLoader(false);
         });
     }
   };
@@ -164,7 +166,7 @@ const PrepaidMeter = ({navigation}) => {
   );
 
   useEffect(() => {
-    ApprovedApartments({customerDetails:customerDetails,setApartmentData:setApartmentData})
+    ApprovedApartments({customerDetails:customerDetails,setApartmentData:setApartmentData,setSelectedApartment:setSelectedApartment})
   }, [customerDetails]);
 
   useEffect(() => {

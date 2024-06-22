@@ -3,9 +3,6 @@ import { NIVAAS_URL} from '../../api/api';
 import {RootState} from '../store';
 import { endpoints } from '../../api';
 
-
-// Define a service using a base URL and expected endpoints
-
 export const myAccountService = createApi({
   reducerPath: 'myAccountService',
   baseQuery: fetchBaseQuery({
@@ -23,9 +20,9 @@ export const myAccountService = createApi({
     getCurrentCustomer : builder.query<any,{}>({
       query: () => `${endpoints.NIVAAS_CURRENT_CUSTOMER}`
     }),
-    postProfilePic: builder.mutation<any, {}>({
+    addCoadmin: builder.mutation<any, {}>({
       query: payload => ({
-        url: endpoints.NIVAAS_PROFILE_PIC,
+        url: endpoints.ADD_CO_ADMIN,
         method: 'POST',
         body: payload,
         header: {
@@ -46,8 +43,38 @@ export const myAccountService = createApi({
   }),
 });
 
+export const profileService = createApi({
+  reducerPath: 'profileService',
+  baseQuery: fetchBaseQuery({
+    baseUrl: NIVAAS_URL,
+    prepareHeaders: (headers, {getState, endpoint}) => {
+      const token = (getState() as RootState).auth.token;
+      if (token && endpoint !== 'refresh') {
+        headers.set('Authorization', `Bearer ${token}`);
+      }
+      return headers;
+    },
+  }), 
+  endpoints: builder => ({
+    postProfilePic: builder.mutation<any, {}>({
+      query: formdata => ({
+        url: endpoints.NIVAAS_PROFILE_PIC,
+        method: 'POST',
+        body: formdata,
+      }),
+    }),
+  }),
+});
+
+
+
+
 export const {
   useLazyGetCurrentCustomerQuery,
-  usePostProfilePicMutation,
-  useUserDetailsMutation
+  useAddCoadminMutation,
+  useUserDetailsMutation,
 } = myAccountService;
+
+export const {
+  usePostProfilePicMutation,
+} = profileService;

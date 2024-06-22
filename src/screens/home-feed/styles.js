@@ -32,19 +32,26 @@ export const styles = StyleSheet.create({
   iconsCon:{
     flexDirection:'row',
 },
+profileImage:{
+  height:30,
+  width:30,
+  borderRadius:50,
+  marginLeft:10
+},
 icons:{
     color:colors.black,
     marginLeft:10
 },
   subConOne:{
     marginTop:'20%',
-    height:'50%',
+    height:'auto',
     alignItems:'center',
     backgroundColor:colors.yellowOne,
     marginHorizontal:window.width*0.06,
     padding:'6%',
     borderRadius:10,
-    elevation:3
+    elevation:3,
+    overflow:'hidden'
   },
   textCon:{
     backgroundColor:colors.white,
@@ -65,7 +72,7 @@ icons:{
   },
   subConTwo:{
     height:'28%',
-    marginTop:'5%',
+    marginVertical:'5%',
     alignItems:'center',
     backgroundColor:colors.yellowOne,
     marginHorizontal:window.width*0.06,
@@ -81,12 +88,20 @@ icons:{
   },
   description:{
     marginHorizontal:window.width*0.04,
-    marginTop:10,
+    marginTop:'2%',
     marginLeft:'10%'
   },
   descriptionTwo:{
     marginHorizontal:window.width*0.04,
-    marginTop:10,
+    marginTop:'2%',
+  },
+  ImageSlideCon:{
+    marginVertical:'10%',
+    height: 180,
+    marginHorizontal:window.width*0.06,
+    elevation:5,
+    borderRadius:10,
+    overflow:'hidden'
   },
   refreshButton: {
     flexDirection: 'row',

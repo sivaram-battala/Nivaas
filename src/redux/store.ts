@@ -9,9 +9,8 @@ import { cityService } from './services/cityServices';
 import citiesdataSlice from './slices/citiesdataSlice';
 import apartmentsDataSlice from './slices/apartmentsSlice';
 import flatsDataSlice from './slices/flatsSlice';
-import profileSlice from './slices/profileSlice';
 import prepaidMetersSlice from './slices/prepaidMetersSlice';
-import { myAccountService } from './services/myAccountService';
+import { myAccountService, profileService } from './services/myAccountService';
 import currentCustomerSlice from './slices/currentCustomerSlice';
 import { prepaidMeterService } from './services/prepaidMeterService';
 import apartmentPrepaidMetersList from './slices/apartmentPrepaidMetersList';
@@ -24,7 +23,6 @@ const rootReducers = combineReducers({
   cityData:citiesdataSlice,
   apartmentsData:apartmentsDataSlice,
   flatsData:flatsDataSlice,
-  profilepicture:profileSlice,
   prepaidMeter:prepaidMetersSlice,
   currentCustomer:currentCustomerSlice,
   apartmentPrepaidMeter:apartmentPrepaidMetersList,
@@ -34,6 +32,7 @@ const rootReducers = combineReducers({
   [prepaidMeterService.reducerPath]:prepaidMeterService.reducer,
   [maintainenceService.reducerPath]:maintainenceService.reducer,
   [expancesService.reducerPath]:expancesService.reducer,
+  [profileService.reducerPath]:profileService.reducer,
 });
 const persistConfig = {
   key: 'root',
@@ -55,6 +54,7 @@ export const store = configureStore({
       prepaidMeterService.middleware,
       maintainenceService.middleware,
       expancesService.middleware,
+      profileService.middleware,
     ),
 });
 

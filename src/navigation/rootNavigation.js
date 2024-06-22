@@ -31,6 +31,7 @@ import {
   AdminFlatSettings,
   Expences,
   AddNewExpances,
+  CoAdmin,
 } from '../screens';
 import { createStackNavigator } from '@react-navigation/stack';
 import ApplicationContext from '../utils/context-api/Context';
@@ -89,6 +90,7 @@ const rootNavigation = () => {
       adminFlatSettings,
       expences,
       addNewExpances,
+      coAdmin,
     },
   } = allTexts;
 
@@ -327,6 +329,13 @@ const rootNavigation = () => {
             headerShown: false,
           }}
         />
+        <Stack.Screen
+          name={coAdmin}
+          component={CoAdmin}
+          options={{
+            headerShown: false,
+          }}
+        />
       </Stack.Navigator>
     );
   };
@@ -347,7 +356,6 @@ const rootNavigation = () => {
   const Stack = createStackNavigator();
   const [loginDetails, setLoginDetails] = useState(null);
   const [userDetails, setUserDetails] = useState({});
-//Redux hooks
 const authState = useAppSelector(state => state.auth);
 
 const getLoginDetails = () => {
@@ -355,11 +363,9 @@ const getLoginDetails = () => {
 };
 
   useEffect(() => {
-    // Auth();
     getLoginDetails();
-    // reelsData(0,30)
   }, []);
-  
+
   return (
         <ApplicationContext.Provider
           value={{

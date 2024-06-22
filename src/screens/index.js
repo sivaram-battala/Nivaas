@@ -32,6 +32,7 @@ import SelectCityOptions from './select-options';
 import AdminFlatSettings from './admin-flats-settings';
 import Expences from './expences';
 import AddNewExpances from './add-new-expances';
+import CoAdmin from './co-admin';
 export {
   Signin,
   Splash,
@@ -67,4 +68,5 @@ export {
   AdminFlatSettings,
   Expences,
   AddNewExpances,
+  CoAdmin,
 };

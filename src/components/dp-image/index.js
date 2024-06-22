@@ -1,21 +1,29 @@
 import React, {useState} from 'react';
-import {
-  Image,
-  StyleSheet,
-  Alert,
-  TouchableOpacity,
-} from 'react-native';
+import {Image, StyleSheet, Alert, TouchableOpacity, View} from 'react-native';
 import {launchImageLibrary} from 'react-native-image-picker';
 import ImageCropPicker from 'react-native-image-crop-picker';
-import {setProfilePicture} from '../../redux/slices/profileSlice';
 import {useDispatch, useSelector} from 'react-redux';
-import { usePostProfilePicMutation } from '../../redux/services/myAccountService';
+import {colors} from '../../common';
+import {SnackbarComponent} from '../../common/customFunctions';
+import {usePostProfilePicMutation} from '../../redux/services/myAccountService';
+import {setprofilePic} from '../../redux/slices/currentCustomerSlice';
+import { Loader } from '../loader';
 
-const DpImage = () => {
+const DpImage = ({customerId}) => {
+  const [loader, setLoader] = useState(false);
   const [uploadImage] = usePostProfilePicMutation();
   const dispatch = useDispatch();
-  const picture = useSelector(state => state.profilepicture);
+  const profilePic = useSelector(state => state.currentCustomer.profilePicture);
 
+  const getImageObj = img => {
+    let newUri = Platform.OS === 'ios' ? img : img?.replace('file://', 'file:');
+    let imageObj = {
+      uri: newUri,
+      name: `${Date.now()}.jpg`,
+      type: 'image/jpeg',
+    };
+    return imageObj;
+  };
   const selectImage = () => {
     const options = {
       mediaType: 'photo',
@@ -41,53 +49,54 @@ const DpImage = () => {
       cropping: true,
     })
       .then(image => {
-        dispatch(setProfilePicture(image.path));
         handleUpload(image.path);
       })
       .catch(error => {
         console.log('Error cropping image: ', error);
-        Alert.alert('Error', 'Failed to crop image');
+        SnackbarComponent({
+          text: 'Failed To Crop Image',
+          backgroundColor: colors.red1,
+        });
       });
   };
 
-  const handleUpload = async (uri) => {
-    const formData = new FormData();
-    formData.append('image', {
-      uri,
-      name: 'profile.jpg',
-      type: 'image/jpeg',
-    });
-    try {
-      const response = await uploadImage(formData).unwrap();
-      console.log('Image uploaded successfully', response);
-      dispatch(setProfilePicture(response.imageUrl));
-    } catch (error) {
-      console.error('Error uploading image', error);
-      // Alert.alert('Upload Error', 'There was an error uploading the image.');
-    }
+  const handleUpload = async uri => {
+    let img = getImageObj(uri);
+    const formdata = new FormData();
+    formdata.append('profilePicture', img);
+    console.log(formdata._parts);
+    setLoader(true);
+    uploadImage(formdata)
+      .unwrap()
+      .then(responce => {
+        setLoader(false);
+        console.log('Image uploaded successfully', responce?.url);
+        SnackbarComponent({
+          text: responce?.message || 'Image Uploaded Successfully',
+          backgroundColor: colors.green,
+        });
+        dispatch(setprofilePic(responce?.url));
+      })
+      .catch(error => {
+        console.error('Error uploading image', error);
+        SnackbarComponent({
+          text: 'Image Not Uploaded',
+          backgroundColor: colors.red1,
+        });
+      });
   };
-
-  // const handleUpdate = async (uri) => {
-  //   const formData = new FormData();
-  //   formData.append('image', {
-  //     uri,
-  //     name: 'profile.jpg',
-  //     type: 'image/jpeg',
-  //   });
-
-  //   try {
-  //     const response = await updateImage({ id: picture.id, formData }).unwrap();
-  //     console.log('Image updated successfully', response);
-  //     dispatch(setProfilePicture(response.imageUrl));
-  //   } catch (error) {
-  //     console.error('Error updating image', error);
-  //     Alert.alert('Update Error', 'There was an error updating the image.');
-  //   }
-  // };
 
   return (
     <TouchableOpacity style={styles.profileImage} onPress={selectImage}>
-      <Image source={{uri: picture?.setProfilePicture}} style={styles.image} />
+      {
+        loader ? (
+          <View style={styles.loader}>
+            <Loader marginTop={"20%"} color={colors.primaryRedColor} size={'small'} />
+          </View>
+        ) : (
+          <Image source={{uri: profilePic || ''}} style={styles.image} />
+        )
+      }
     </TouchableOpacity>
   );
 };
@@ -104,6 +113,10 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 50,
   },
+  loader:{    
+    alignItems:'center',
+    justifyContent:"center"
+  }
 });
 
 export default DpImage;

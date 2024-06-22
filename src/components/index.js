@@ -23,6 +23,9 @@ import CompleteProfileModal from './completeProfile-modal';
 import CustomSelectDropdown from './Custom-SelectDropDown';
 import EditOnBoarderFlatDetailsModal from './edit-onboardedFlat-DetailsModal';
 import HomeComponent from './homeComponent';
+import ManageflatsModal from './manageFlatsmodal';
+import ManageApartmentsModal from './ManageApartmentsModal';
+import ImageSlider from './image-slider';
 export {
   Loader,
   SearchBar,
@@ -50,4 +53,7 @@ export {
   CustomSelectDropdown,
   EditOnBoarderFlatDetailsModal,
   HomeComponent,
+  ManageflatsModal,
+  ManageApartmentsModal,
+  ImageSlider,
 };

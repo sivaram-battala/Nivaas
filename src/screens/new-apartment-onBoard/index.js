@@ -47,11 +47,11 @@ const NewApartmentOnBoard = ({ navigation }) => {
         .unwrap()
         .then(response => {
           console.log('New Apartment onboarding', response);
-          SnackbarComponent({text:response,backgroundColor:colors.green})
+          SnackbarComponent({text:response?.message || 'OnBoarding Request Sent',backgroundColor:colors.green})
         })
         .catch(error => {
           console.log('Error in New Apartment onboarding', error);
-          SnackbarComponent({text:error,backgroundColor:colors.red1})
+          SnackbarComponent({text:error || 'Failed To Send Onboard Request',backgroundColor:colors.red1})
         });
       navigation.navigate(allTexts.screenNames.home);
     } else {
@@ -117,6 +117,7 @@ const NewApartmentOnBoard = ({ navigation }) => {
               onChangeText={setNumBlocks}
               value={numBlocks}
               placeholder='Enter Number Of Flats'
+              keyboardType='numeric'
             />
             {errors.totalFlats && (
               <Text style={styles.errorText}>{errors.totalFlats}</Text>

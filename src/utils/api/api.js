@@ -1,4 +1,4 @@
-import axios from 'axios';
+// import axios from 'axios';
 import base64 from 'react-native-base64';
 import {
   getAuthTokenDetails,

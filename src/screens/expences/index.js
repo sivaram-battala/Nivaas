@@ -28,12 +28,15 @@ import {
   useLazyGetExpancesPDFQuery,
 } from '../../redux/services/expansesServices';
 import RNFS from 'react-native-fs';
-import { ApprovedApartments, SnackbarComponent } from '../../common/customFunctions';
-import { styles } from './style';
+import {
+  ApprovedApartments,
+  SnackbarComponent,
+} from '../../common/customFunctions';
+import {styles} from './style';
 
 const Expences = ({navigation}) => {
   const customerDetails = useSelector(state => state.currentCustomer);
-  const [loader,setLoader] = useState(false);
+  const [loader, setLoader] = useState(false);
   const [apartmentData, setApartmentData] = useState([]);
   const [selectedApartment, setSelectedApartment] = useState({id: '',name: ''});
   const [selectedYear, setSelectedYear] = useState();
@@ -70,7 +73,7 @@ const Expences = ({navigation}) => {
   };
 
   const handlegetAllExpances = id => {
-    setLoader(true)
+    setLoader(true);
     const payload = {
       apartmentID: id,
       year: selectedYear,
@@ -80,26 +83,27 @@ const Expences = ({navigation}) => {
     getAllExpancesQuery(payload)
       .unwrap()
       .then(responce => {
-        console.log('RESPONCE OF GETALLEXPANCES', responce);
+        // console.log('RESPONCE OF GETALLEXPANCES', responce);
         setExpancesData(responce);
-        setLoader(false)
+        setLoader(false);
       })
       .catch(error => {
         console.log('ERROR IN GETALLEXPANCES', error);
       });
   };
-  const handleExpanceById =()=>{
-    const payload={
-      id:selectedApartment?.id
-    }
+  const handleExpanceById = () => {
+    const payload = {
+      id: selectedApartment?.id,
+    };
     getExpacesByID(payload)
       .unwrap()
-      .then((responce)=>{
-        console.log('RESPOCE OF GET EXPANVES BY ID',responce);
-      }).catch((error)=>{
-        console.log('ERROR IN GET EXPANCE BY ID',error);
+      .then(responce => {
+        console.log('RESPOCE OF GET EXPANVES BY ID', responce);
       })
-  }
+      .catch(error => {
+        console.log('ERROR IN GET EXPANCE BY ID', error);
+      });
+  };
 
   const handlegetExpancePDF = async () => {
     try {
@@ -107,9 +111,9 @@ const Expences = ({navigation}) => {
         apartmentID: selectedApartment?.id,
         year: selectedYear,
         month: selectedMonth?.index,
-      }
+      };
       const response = await getExpancesPDF(payload).unwrap();
-      const { DownloadDirectoryPath } = RNFS;
+      const {DownloadDirectoryPath} = RNFS;
       const filePath = `${DownloadDirectoryPath}/expenses_${payload?.year}_${payload?.month}.pdf`;
       const reader = new FileReader();
       reader.readAsDataURL(response);
@@ -118,21 +122,29 @@ const Expences = ({navigation}) => {
         RNFS.writeFile(filePath, base64data, 'base64')
           .then(() => {
             // Alert.alert('Success', 'File downloaded successfully!', [{ text: 'OK' }]);
-            SnackbarComponent({text:'PDF Downloaded Successfully',backgroundColor:colors.green})
+            SnackbarComponent({
+              text: 'PDF Downloaded Successfully',
+              backgroundColor: colors.green,
+            });
           })
-          .catch((err) => {
+          .catch(err => {
             console.error('Download error:', err);
             // Alert.alert('Error', 'File download failed.', [{ text: 'OK' }]);
-            SnackbarComponent({text:'Failed To Download PDF',backgroundColor:colors.red1})
+            SnackbarComponent({
+              text: 'Failed To Download PDF',
+              backgroundColor: colors.red1,
+            });
           });
       };
     } catch (err) {
       console.error('Download error:', err);
       // Alert.alert('Error', 'File download failed.', [{ text: 'OK' }]);
-      SnackbarComponent({text:'Failed To Download PDF',backgroundColor:colors.red1})
+      SnackbarComponent({
+        text: 'Failed To Download PDF',
+        backgroundColor: colors.red1,
+      });
     }
   };
-  
 
   const handleDelete = id => {
     const payload = {
@@ -144,12 +156,18 @@ const Expences = ({navigation}) => {
       .unwrap()
       .then(responce => {
         // console.log('RESPONCE OF DELETE EXPANSIONS', responce);
-        SnackbarComponent({text:'Deleted Successfully',backgroundColor:colors.red1})
+        SnackbarComponent({
+          text: 'Deleted Successfully',
+          backgroundColor: colors.red1,
+        });
         handlegetAllExpances(selectedApartment?.id);
       })
       .catch(error => {
         console.log('ERROR IN DELETE EXPANSIONS', error);
-        SnackbarComponent({text:'Failed to Delete',backgroundColor:colors.red1})
+        SnackbarComponent({
+          text: 'Failed to Delete',
+          backgroundColor: colors.red1,
+        });
       });
   };
 
@@ -160,7 +178,7 @@ const Expences = ({navigation}) => {
   };
   const handleEdit = item => {
     navigation.navigate(allTexts.screenNames.addNewExpances, {
-      id: {itemId:item?.id,aprtmentId:selectedApartment?.id},
+      id: {itemId: item?.id, aprtmentId: selectedApartment?.id},
       mode: 'UPDATE',
     });
   };
@@ -179,7 +197,7 @@ const Expences = ({navigation}) => {
   }, []);
 
   useEffect(() => {
-    ApprovedApartments({customerDetails:customerDetails,setApartmentData:setApartmentData})
+    ApprovedApartments({customerDetails:customerDetails,setApartmentData:setApartmentData,setSelectedApartment:setSelectedApartment})
   }, [customerDetails]);
 
   useEffect(() => {
@@ -188,18 +206,19 @@ const Expences = ({navigation}) => {
     }
   }, [selectedApartment]);
 
-  const renderItem = data =>
-      <Pressable onPress={() => handleEdit(data.item)} style={styles.rowFront}>
-        <View style={styles.eachHeader}>
-          <Text style={styles.dataCell}>{data?.item?.type}</Text>
-        </View>
-        <View style={styles.eachHeader}>
-          <Text style={styles.dataCell}>{data?.item?.description}</Text>
-        </View>
-        <View style={styles.eachHeader}>
-          <Text style={styles.dataCell}>{data?.item?.amount}</Text>
-        </View>
-      </Pressable>
+  const renderItem = data => (
+    <Pressable onPress={() => handleEdit(data.item)} style={styles.rowFront}>
+      <View style={styles.eachHeader}>
+        <Text style={styles.dataCell}>{data?.item?.type}</Text>
+      </View>
+      <View style={styles.eachHeader}>
+        <Text style={styles.dataCell}>{data?.item?.description}</Text>
+      </View>
+      <View style={styles.eachHeader}>
+        <Text style={styles.dataCell}>{data?.item?.amount}</Text>
+      </View>
+    </Pressable>
+  );
   const renderHiddenItem = (data, rowMap) => (
     <View style={styles.rowBack}>
       <Button
@@ -253,47 +272,56 @@ const Expences = ({navigation}) => {
           placeholder="SELECT MONTH"
         />
       </View>
-      {
-        loader ? (
-          <View>
-            <Loader color={colors.primaryRedColor} size={'large'} />
-          </View>
-        ) : (
-          selectedApartment?.id ? (
-            <View>
-              <View style={styles.header}>
-                <View style={styles.eachHeader}>
-                  <Text style={styles.headerCell}>Transaction Date</Text>
-                </View>
-                <View style={styles.eachHeader}>
-                  <Text style={styles.headerCell}>Transaction Type</Text>
-                </View>
-                <View style={styles.eachHeader}>
-                  <Text style={styles.headerCell}>Amount</Text>
-                </View>
-              </View>
-              <SwipeListView
-                data={expancesData}
-                renderItem={renderItem}
-                renderHiddenItem={renderHiddenItem}
-                rightOpenValue={-75}
-                previewRowKey={'0'}
-                previewOpenValue={-40}
-                previewOpenDelay={3000}
-              />
-              <View style={styles.downloadButton}>
-                <PrimaryButton text={'DOWNLOAD PDF'} bgColor={colors.primaryRedColor} onPress={handlegetExpancePDF}/>
-              </View>
+      {loader ? (
+        <View>
+          <Loader color={colors.primaryRedColor} size={'large'} />
+        </View>
+      ) : selectedApartment?.id ? (
+        <View>
+          <Text style={styles.SwipeText}>{'<< Swipe Right to delete Expance'}</Text>
+          <View style={styles.header}>
+            <View style={styles.eachHeader}>
+              <Text style={styles.headerCell}>Transaction Date</Text>
             </View>
+            <View style={styles.eachHeader}>
+              <Text style={styles.headerCell}>Transaction Type</Text>
+            </View>
+            <View style={styles.eachHeader}>
+              <Text style={styles.headerCell}>Amount</Text>
+            </View>
+          </View>
+          <SwipeListView
+            data={expancesData}
+            renderItem={renderItem}
+            renderHiddenItem={renderHiddenItem}
+            rightOpenValue={-75}
+            previewRowKey={'0'}
+            previewOpenValue={-40}
+            previewOpenDelay={3000}
+          />
+          {/* <View style={styles.downloadButton}>
+                <PrimaryButton text={'DOWNLOAD PDF'} bgColor={colors.primaryRedColor} onPress={handlegetExpancePDF}/>
+              </View> */}
+          {expancesData?.length === 0 ? (
+            <View style={styles.NoexpanceTextCon}><Text style={styles.NoexpanceText}>No Expenses Recorded Here Add Below.</Text></View>
           ) : (
-            <View style={{alignItems: 'center', marginVertical: '5%'}}>
-              <Text style={styles.errorText}>
-                Select Any Apartment To Get Expances
+            <View style={styles.downloadButton}>
+              <TouchableOpacity onPress={handlegetExpancePDF}>
+                <Text style={styles.clickHereText}>CLICK HERE </Text>
+              </TouchableOpacity> 
+              <Text style={styles.downloadText}>
+                To Download Expances In PDF Format
               </Text>
             </View>
-          )
-        )
-      }
+          )}
+        </View>
+      ) : (
+        <View style={{alignItems: 'center', marginVertical: '5%'}}>
+          <Text style={styles.errorText}>
+            Select Any Apartment To Get Expances
+          </Text>
+        </View>
+      )}
       <View style={styles.addButton}>
         <PrimaryButton
           text={'ADD EXPANCES'}

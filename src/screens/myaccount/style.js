@@ -75,7 +75,7 @@ export const styles = StyleSheet.create({
   },
   renderCon: {
     flexDirection: 'row',
-    marginLeft:'5%'
+    marginLeft:'5%',
   },
   statusactiveText: {
     color: colors.green,

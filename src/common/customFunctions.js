@@ -10,7 +10,7 @@ export const SnackbarComponent = ({text, backgroundColor, height}) => {
   });
 };
 
-export const ApprovedApartments = ({customerDetails,setApartmentData}) => {
+export const ApprovedApartments = ({customerDetails,setApartmentData,setSelectedApartment}) => {
   if (customerDetails?.currentCustomerData?.apartmentDTOs) {
     const approvedApartments = customerDetails.currentCustomerData.apartmentDTOs
       .filter(apartment => apartment?.adminApproved)
@@ -19,6 +19,9 @@ export const ApprovedApartments = ({customerDetails,setApartmentData}) => {
         name: apartment?.jtApartmentDTO?.name,
       }));
     setApartmentData(approvedApartments);
+    // if (approvedApartments.length === 1) {
+      // setSelectedApartment(approvedApartments[0]);
+    // }
   }
 };
 
