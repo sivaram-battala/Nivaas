@@ -10,8 +10,8 @@ const CustomSelectDropdown = ({ data, onSelect, selectedItem, placeholder }) => 
         data={data}
         onSelect={onSelect}
         defaultButtonText={placeholder}
-        buttonTextAfterSelection={(selectedItem) => selectedItem.name}
-        rowTextForSelection={(item) => item.name}
+        buttonTextAfterSelection={(selectedItem) => selectedItem?.name}
+        rowTextForSelection={(item) => item?.name}
         defaultValue={selectedItem}
         renderButton={selectedItem => (
           <ScrollView style={styles.dropdownButtonStyle}>
@@ -27,7 +27,7 @@ const CustomSelectDropdown = ({ data, onSelect, selectedItem, placeholder }) => 
               ...(isSelected && { backgroundColor: colors.primaryRedColor }),
             }}
           >
-            <Text style={styles.dropdownItemTxtStyle}>{item.name}</Text>
+            <Text style={styles.dropdownItemTxtStyle}>{item?.name}</Text>
           </View>
         )}
         showsVerticalScrollIndicator={false}

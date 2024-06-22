@@ -136,7 +136,7 @@ const PrepaidMeter = ({navigation}) => {
   };
 
   useEffect(() => {
-    ApprovedApartments({customerDetails:customerDetails,setApartmentData:setApartmentData})
+    ApprovedApartments({customerDetails:customerDetails,setApartmentData:setApartmentData,setSelectedApartment:setSelectedApartment})
   }, [customerDetails]);
 
   useEffect(() => {

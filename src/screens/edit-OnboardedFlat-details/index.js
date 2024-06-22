@@ -78,8 +78,8 @@ const EditOnboardedFlatDetails = ({navigation}) => {
       flatId: flatID,
       payload: {
         flatNo: formData?.flatNo,
-        ownerPhoneNo: formData?.ownerName,
-        ownerName: formData?.ownerPhoneNo,
+        ownerPhoneNo: formData?.ownerPhoneNo,
+        ownerName: formData?.ownerName,
       },
     };
     updateOnboardedFlatDetails(flatPayload)

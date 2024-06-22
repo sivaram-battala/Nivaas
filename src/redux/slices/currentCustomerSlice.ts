@@ -5,11 +5,13 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 export interface AuthState {
  isLoading:boolean;
  currentCustomerData:any;
+ profilePicture:any;
 }
 
 const initialState: AuthState = {
     isLoading:false,
     currentCustomerData:null,
+    profilePicture:null,
 };
 
 export const currentCustomerSlice = createSlice({
@@ -20,10 +22,13 @@ export const currentCustomerSlice = createSlice({
         state.isLoading = true;
         state.currentCustomerData = action.payload;
     },
+    setprofilePic:(state,action:PayloadAction<any>)=>{
+      state.profilePicture = action.payload
+    }
   },
 });
 
-export const { setcurrentCustomerData} =
+export const { setcurrentCustomerData,  setprofilePic} =
   currentCustomerSlice.actions;
 
 export default currentCustomerSlice.reducer;

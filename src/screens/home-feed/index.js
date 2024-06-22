@@ -5,15 +5,16 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {allTexts, colors} from '../../common';
 import {CompleteProfileModal, CustomSneakBar, HomeComponent, Loader, PrimaryButton} from '../../components';
 import {useLazyGetCurrentCustomerQuery, useUserDetailsMutation} from '../../redux/services/myAccountService';
-import {setcurrentCustomerData} from '../../redux/slices/currentCustomerSlice';
+import {setcurrentCustomerData, setprofilePic} from '../../redux/slices/currentCustomerSlice';
 import {styles} from './styles';
 import { setcitiesData } from '../../redux/slices/citiesdataSlice';
 import { useLazyGetCityListQuery } from '../../redux/services/cityServices';
 import { NetworkInfo, SnackbarComponent } from '../../common/customFunctions';
 import messaging from '@react-native-firebase/messaging';
+import RNRestart from 'react-native-restart';
 
 const Home = ({navigation}) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); 
   const [loder, setLoder] = useState(false);
   const [refresh, setRefresh] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
@@ -37,9 +38,10 @@ const Home = ({navigation}) => {
         setLoder(false);
         setCurrentCustomerData(response);
         dispatch(setcurrentCustomerData(response));
-        const hasFlat = response?.flatDTO && response.flatDTO.length > 0;
+        dispatch(setprofilePic(response?.profilePicture))
+        const hasFlat = response?.flatDTO && response?.flatDTO?.length > 0;
         const hasApartment =
-          response?.apartmentDTOs && response.apartmentDTOs.length > 0;
+          response?.apartmentDTOs && response?.apartmentDTOs?.length > 0;
         if (hasFlat || hasApartment) {
           SetIsOneFlatOnboarded(true);
         } else {
@@ -54,6 +56,7 @@ const Home = ({navigation}) => {
       })
       .catch(error => {
         console.log('error in currentCustomer===>', error);
+        SnackbarComponent({text:'Cheak Your Internet',backgroundColor:colors.red1})
       });
   };
 
@@ -108,6 +111,7 @@ const Home = ({navigation}) => {
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
+    RNRestart.Restart();
     setTimeout(() => {
       setRefreshing(false);
     }, 2000);

@@ -154,7 +154,7 @@ const SocietyDues = ({navigation}) => {
         <TopBarCard2 back={true} txt={'Society Dues'} navigation={navigation} />
       </View>
       {customerDetails?.currentCustomerData?.roles?.some(
-        role => role === 'ROLE_APARTMENT_ADMIN',
+        role => role === 'ROLE_APARTMENT_ADMIN.',
       ) ? (
         <View>
           <View style={styles.dropdownContainer}>
@@ -225,7 +225,7 @@ const SocietyDues = ({navigation}) => {
                   valueField="id"
                 />
               </View>
-              <View style={{width:'45%',height:100}}>
+              <View style={{width:'45%'}}>
                 <CustomDropdown
                   label="Flat"
                   data={flatData}

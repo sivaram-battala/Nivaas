@@ -6,7 +6,7 @@ export const endpoints = {
   NIVAAS_PROFILE_PIC:'api/customer/upload',
   NIVAAS_CITY:'jtcity/list',
   NIVAAS_APARTMENT:'jtapartment/nearByApartments',
-  NIVAAS_FLAT:'jtflat/flats/available',
+  NIVAAS_FLAT:'jtflat/apartment/flats',
   GET_POSTALCODES:'jtpostalcode/list',
   NIVAAS_ONBOARD : 'onboarding/flat/request',
   NIVAAS_NEW_APARTMENT_ONBOARD:'jtapartment/save',
@@ -25,5 +25,16 @@ export const endpoints = {
   ADD_DEBIT_HISTORY:'apartment/debit-history',
   DELETE_EXPANCES:'apartment/debit-history/apartment',
   UPDATE_DEBIT_HISTORY:'apartment/debit-history',
+  ADD_CO_ADMIN:'jtapartment/add/co-admin',
 };
 
+// export const getcurrentCustomerdata = () =>{
+//   currentCustomer()
+//       .unwrap()
+//       .then(response => {
+//         console.log("CURRENT CUSTOMERrrrrrrrrrrrr ===>",response);
+//       })
+//       .catch(error => {
+//         console.log('error in currentCustomerrrrr===>', error);
+//       });
+// }

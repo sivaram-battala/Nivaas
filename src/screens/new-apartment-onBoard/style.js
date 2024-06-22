@@ -39,7 +39,7 @@ export const styles = StyleSheet.create({
   },
   input: {
     height: 50,
-    borderColor: colors.gray,
+    borderColor: colors.black,
     borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 8,
@@ -54,7 +54,7 @@ export const styles = StyleSheet.create({
 },
   dropdown: {
     height: 40,
-    borderColor: colors.gray,
+    borderColor: colors.black,
     borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 8,
