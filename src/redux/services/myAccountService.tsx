@@ -30,6 +30,9 @@ export const myAccountService = createApi({
         },
       }),
     }),
+    getFlatOwners : builder.query<any,{apartmentID:Number,pageNo:Number,pageSize:Number}>({
+      query: ({apartmentID,pageNo,pageSize}) => `${endpoints.GET_FLAT_OWNERS}/${apartmentID}/flat-owners?pageNo=${pageNo}&pageSize=${pageSize}`
+    }),
     userDetails: builder.mutation<any, {}>({
       query: payload => ({
         url: endpoints.USER_DETAILS,
@@ -72,6 +75,7 @@ export const profileService = createApi({
 export const {
   useLazyGetCurrentCustomerQuery,
   useAddCoadminMutation,
+  useLazyGetFlatOwnersQuery,
   useUserDetailsMutation,
 } = myAccountService;
 

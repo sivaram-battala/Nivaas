@@ -131,7 +131,7 @@ const AddNewExpances = ({navigation,route}) => {
   return (
     <View style={styles.mainCon}>
       <View style={{height: 50, marginTop: statusBarHeight}}>
-        <TopBarCard2 back={true} txt={'Add Expances'} navigation={navigation} />
+        <TopBarCard2 back={true} txt={'Add Expences'} navigation={navigation} />
       </View>
       <View style={styles.dateDropDownCon}>
         <View style={{width:'47%'}}>
@@ -194,7 +194,7 @@ const AddNewExpances = ({navigation,route}) => {
         {errors.amount && <Text style={styles.errorText}>{errors.amount}</Text>}
         <View style={styles.button}>
           <PrimaryButton
-            text={(mode ==='ADD') ? 'ADD' : 'UPDATE'}
+            text={(mode ==='ADD') ? 'ADD EXPENCE' : 'UPDATE'}
             bgColor={colors.primaryRedColor}
             onPress={handleSave}
           />

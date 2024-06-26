@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLazyGetApartmentListQuery, useLazyGetCityListQuery, useLazyGetFlatsListQuery } from '../../redux/services/cityServices';
 import { setcitiesData } from '../../redux/slices/citiesdataSlice';
 import { setapartmentData } from '../../redux/slices/apartmentsSlice';
+import { SnackbarComponent } from '../../common/customFunctions';
 
 const SelectCityOptions = ({ navigation }) => {
   const [cityValue, setCityValue] = useState({ id: null, name: null });
@@ -60,6 +61,7 @@ const SelectCityOptions = ({ navigation }) => {
       })
       .catch(error => {
         console.log('error in apartments data========>', error);
+        // SnackbarComponent({text: 'Failed To Load Apartment Data',backgroundColor: colors.red1});
       });
   }
 

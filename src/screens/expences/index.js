@@ -9,7 +9,7 @@ import {
   Pressable,
   Modal,
 } from 'react-native';
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {allTexts, colors, window} from '../../common';
 import {
   CustomDropdown,
@@ -33,6 +33,7 @@ import {
   SnackbarComponent,
 } from '../../common/customFunctions';
 import {styles} from './style';
+import { useFocusEffect } from '@react-navigation/native';
 
 const Expences = ({navigation}) => {
   const customerDetails = useSelector(state => state.currentCustomer);
@@ -46,6 +47,7 @@ const Expences = ({navigation}) => {
   const [updatedText, setUpdatedText] = useState('');
   const [error, setError] = useState();
   const [expancesData, setExpancesData] = useState([]);
+  const [showText, setShowText] = useState(true);
 
   //rtk
   const [getAllExpancesQuery] = useLazyGetAllExpancesQuery();
@@ -91,20 +93,6 @@ const Expences = ({navigation}) => {
         console.log('ERROR IN GETALLEXPANCES', error);
       });
   };
-  const handleExpanceById = () => {
-    const payload = {
-      id: selectedApartment?.id,
-    };
-    getExpacesByID(payload)
-      .unwrap()
-      .then(responce => {
-        console.log('RESPOCE OF GET EXPANVES BY ID', responce);
-      })
-      .catch(error => {
-        console.log('ERROR IN GET EXPANCE BY ID', error);
-      });
-  };
-
   const handlegetExpancePDF = async () => {
     try {
       const payload = {
@@ -155,7 +143,7 @@ const Expences = ({navigation}) => {
     deleteExpances(payload)
       .unwrap()
       .then(responce => {
-        // console.log('RESPONCE OF DELETE EXPANSIONS', responce);
+        console.log('RESPONCE OF DELETE EXPANSIONS', responce);
         SnackbarComponent({
           text: 'Deleted Successfully',
           backgroundColor: colors.red1,
@@ -200,11 +188,26 @@ const Expences = ({navigation}) => {
     ApprovedApartments({customerDetails:customerDetails,setApartmentData:setApartmentData,setSelectedApartment:setSelectedApartment})
   }, [customerDetails]);
 
+  // useEffect(() => {
+  //   if (selectedApartment?.id) {
+  //     handlegetAllExpances(selectedApartment?.id);
+  //   }
+  // }, [selectedApartment]);
+  useFocusEffect(
+    useCallback(() => {
+      if (selectedApartment?.id) {
+        handlegetAllExpances(selectedApartment?.id);
+      }
+    }, [selectedApartment]),
+  );
   useEffect(() => {
-    if (selectedApartment?.id) {
-      handlegetAllExpances(selectedApartment?.id);
-    }
-  }, [selectedApartment]);
+    const timer = setTimeout(() => {
+      setShowText(false);
+    }, 3000);
+
+    // Clear the timeout if the component unmounts
+    return () => clearTimeout(timer);
+  }, []);
 
   const renderItem = data => (
     <Pressable onPress={() => handleEdit(data.item)} style={styles.rowFront}>
@@ -245,10 +248,10 @@ const Expences = ({navigation}) => {
   return (
     <View style={styles.mainCon}>
       <View style={{height: 50, marginTop: statusBarHeight}}>
-        <TopBarCard2 back={true} txt={'Expances'} navigation={navigation} />
+        <TopBarCard2 back={true} txt={'Expenses'} navigation={navigation} />
       </View>
       <View style={styles.dropDown}>
-        <CustomDropdown
+        {/* <CustomDropdown
           label="Apartment"
           showLabel={false}
           data={apartmentData}
@@ -256,7 +259,19 @@ const Expences = ({navigation}) => {
           onChange={(id, name) => setSelectedApartment({id, name})}
           labelField="name"
           valueField="id"
-        />
+        /> */}
+        {apartmentData?.length >= 1 && (
+          <View style={styles.singleApartmentCon}>
+           <CustomDropdown
+              label="Owner"
+              data={apartmentData}
+              value={selectedApartment}
+              onChange={(id, name) => setSelectedApartment({id, name})}
+              labelField="name"
+              valueField="id"
+            />
+          </View>
+        )}
       </View>
       <View style={styles.datePickerContainer}>
         <CustomSelectDropdown
@@ -276,9 +291,9 @@ const Expences = ({navigation}) => {
         <View>
           <Loader color={colors.primaryRedColor} size={'large'} />
         </View>
-      ) : selectedApartment?.id ? (
+      ) : (selectedApartment?.id && expancesData?.length !== 0) ? (
         <View>
-          <Text style={styles.SwipeText}>{'<< Swipe Right to delete Expance'}</Text>
+          <Text style={styles.SwipeText}>{'<< Swipe Right to delete Expense'}</Text>
           <View style={styles.header}>
             <View style={styles.eachHeader}>
               <Text style={styles.headerCell}>Transaction Date</Text>
@@ -302,29 +317,25 @@ const Expences = ({navigation}) => {
           {/* <View style={styles.downloadButton}>
                 <PrimaryButton text={'DOWNLOAD PDF'} bgColor={colors.primaryRedColor} onPress={handlegetExpancePDF}/>
               </View> */}
-          {expancesData?.length === 0 ? (
-            <View style={styles.NoexpanceTextCon}><Text style={styles.NoexpanceText}>No Expenses Recorded Here Add Below.</Text></View>
-          ) : (
             <View style={styles.downloadButton}>
               <TouchableOpacity onPress={handlegetExpancePDF}>
                 <Text style={styles.clickHereText}>CLICK HERE </Text>
               </TouchableOpacity> 
               <Text style={styles.downloadText}>
-                To Download Expances In PDF Format
+                To Download Expenses In PDF Format
               </Text>
             </View>
-          )}
         </View>
       ) : (
         <View style={{alignItems: 'center', marginVertical: '5%'}}>
           <Text style={styles.errorText}>
-            Select Any Apartment To Get Expances
+          No items to display at this time
           </Text>
         </View>
       )}
       <View style={styles.addButton}>
         <PrimaryButton
-          text={'ADD EXPANCES'}
+          text={'ADD EXPENSES'}
           bgColor={colors.primaryRedColor}
           onPress={handleNavigation}
         />

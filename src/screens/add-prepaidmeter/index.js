@@ -43,12 +43,12 @@ const AddPrepaidMeter = ({ navigation, route }) => {
       .unwrap()
       .then(response => {
         console.log('ADD PREPAID METER RESPONSE======>', response);
-        // SnackbarComponent({text: response,backgroundColor:colors.green});
+        SnackbarComponent({text: response?.message || 'Prepaid Meter Added',backgroundColor:colors.green});
         navigation.navigate(allTexts.screenNames.prepaidMeter);
       })
       .catch(error => {
         console.log('ERROR IN add Prepaid Meter', error);
-        // SnackbarComponent({text: error,backgroundColor:colors.red1});
+        SnackbarComponent({text: 'Error in Adding Prepaid Meter',backgroundColor:colors.red1});
       });
   };
 

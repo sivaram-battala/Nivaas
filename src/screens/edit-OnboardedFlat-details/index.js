@@ -95,9 +95,8 @@ const EditOnboardedFlatDetails = ({navigation}) => {
       });
     setModalVisible(false);
   };
-
   useEffect(() => {
-    ApprovedApartments({customerDetails:customerDetails,setApartmentData:setApartmentData})
+    ApprovedApartments({customerDetails:customerDetails,setApartmentData:setApartmentData,setSelectedApartment:setSelectedApartment})
   }, [customerDetails]);
 
   useEffect(() => {
@@ -115,14 +114,26 @@ const EditOnboardedFlatDetails = ({navigation}) => {
         />
       </View>
       <View style={styles.container}>
-        <CustomDropdown
+        {/* <CustomDropdown
           label="Apartment"
           data={apartmentData}
           value={selectedApartment}
           onChange={(id, name) => handleApartmentChange(id, name)}
           labelField="name"
           valueField="id"
-        />
+        /> */}
+        {apartmentData?.length >= 1 && (
+          <View>
+            <CustomDropdown
+              label="Owner"
+              data={apartmentData}
+              value={selectedApartment}
+              onChange={(id, name) => handleApartmentChange(id, name)}
+              labelField="name"
+              valueField="id"
+            />
+          </View>
+        )}
         <View style={styles.table}>
           <View style={[styles.tableRow, styles.tableHeader]}>
             <Text style={styles.tableHeaderCell}>Flat No</Text>
@@ -161,6 +172,11 @@ const EditOnboardedFlatDetails = ({navigation}) => {
                     </Text>
                   </View>
                 </TouchableOpacity>
+              )}
+              ListEmptyComponent={() => (
+                <Text style={styles.noDataText}>
+                  No items to display at this time
+                </Text>
               )}
             />
           )}
@@ -215,6 +231,12 @@ const styles = StyleSheet.create({
     width: 1,
     height: '100%',
     backgroundColor: colors.gray2,
+  },
+  noDataText: {
+    textAlign: 'center',
+    marginTop: 20,
+    fontSize: 16,
+    color: 'red',
   },
   modalOverlay: {
     flex: 1,

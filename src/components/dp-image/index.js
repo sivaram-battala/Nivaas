@@ -29,7 +29,6 @@ const DpImage = ({customerId}) => {
       mediaType: 'photo',
       quality: 1,
     };
-
     launchImageLibrary(options, response => {
       if (response.didCancel) {
         console.log('User cancelled image picker');
@@ -94,7 +93,7 @@ const DpImage = ({customerId}) => {
             <Loader marginTop={"20%"} color={colors.primaryRedColor} size={'small'} />
           </View>
         ) : (
-          <Image source={{uri: profilePic || ''}} style={styles.image} />
+          <Image source={{uri: profilePic || 'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png'}} style={styles.image} />
         )
       }
     </TouchableOpacity>

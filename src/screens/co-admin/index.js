@@ -2,40 +2,38 @@ import {StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {CustomDropdown, PrimaryButton, TopBarCard2} from '../../components';
 import {statusBarHeight} from '../../utils/config/config';
-import {colors} from '../../common';
+import {allTexts, colors} from '../../common';
 import {useSelector} from 'react-redux';
 import {
   ApprovedApartments,
   SnackbarComponent,
 } from '../../common/customFunctions';
-import {useAddCoadminMutation} from '../../redux/services/myAccountService';
+import {useAddCoadminMutation, useLazyGetFlatOwnersQuery} from '../../redux/services/myAccountService';
 
 const CoAdmin = ({navigation}) => {
   const customerDetails = useSelector(state => state.currentCustomer);
   const [apartmentData, setApartmentData] = useState([]);
-  const [selectedApartment, setSelectedApartment] = useState({
-    id: '',
-    name: '',
-  });
+  const [selectedApartment, setSelectedApartment] = useState({id: '',name: ''})
+  const [ownerdata, setOwnerdata] = useState([]);
+  const [selectedOwner, setSelectedOwner] = useState({id:'',name:''});
   //RTK
   const [addCoAdmin] = useAddCoadminMutation();
+  const [getFlatOwners] = useLazyGetFlatOwnersQuery();
 
   const handleApartmentChange = (id, name) => {
     setSelectedApartment({id, name});
   };
   const handleCoadmin = () => {
     const payload = {
-      apartmentId:
-        apartmentData?.length === 1
-          ? apartmentData[0]?.id
-          : selectedApartment?.id,
-      userId: 7,
+      apartmentId:selectedApartment?.id,
+      userId: selectedOwner?.id,
       userRole: 'ROLE_APARTMENT_ADMIN',
     };
     addCoAdmin(payload)
       .unwrap()
       .then(responce => {
         console.log('RESPONCE OF ADD_COADMIN', responce);
+        navigation.navigate(allTexts.screenNames.myAccount);
         SnackbarComponent({
           text: responce?.message || 'Co-Admin Request Sent To Owner',
           backgroundColor: colors.green,
@@ -49,56 +47,62 @@ const CoAdmin = ({navigation}) => {
         });
       });
   };
+  const handleflatowners = (id) =>{
+    const payload = {
+      apartmentID:id,
+      pageNo:0,
+      pageSize:20
+    }
+    console.log(payload);
+    getFlatOwners(payload)
+      .unwrap()
+      .then((responce)=>{
+        // console.log('RESPONCE OF FLAT OWNERS',responce);
+        setOwnerdata(responce?.data)
+      }).catch((error)=>{
+        console.log('ERROR IN FLAT OWNERS',error);
+      })
+  }
   useEffect(() => {
     ApprovedApartments({
       customerDetails: customerDetails,
       setApartmentData: setApartmentData,
+      setSelectedApartment:setSelectedApartment
     });
   }, [customerDetails]);
+  useEffect(() => {
+   if (selectedApartment?.id) {
+    handleflatowners(selectedApartment?.id)
+   }
+  }, [selectedApartment])
+  
   return (
     <View style={styles.mainCon}>
       <View style={{height: 50, marginTop: statusBarHeight}}>
-        <TopBarCard2 back={true} txt={'CO_ADMIN'} navigation={navigation} />
+        <TopBarCard2 back={true} txt={'CO-ADMIN'} navigation={navigation} />
       </View>
       <View>
-        {apartmentData?.length === 1 ? (
-          <View style={styles.singleApartmentCon}>
-            <Text style={styles.apartmentNameTitle}>
-              Apartment Name :{' '}
-              <Text style={styles.apartmentnameText}>
-                {apartmentData[0]?.name}
-              </Text>
-            </Text>
+        {apartmentData?.length >= 1 && (
+          <View style={styles.dropdownsCon}>
+            <View style={styles.eachDropdown}>
             <CustomDropdown
-              label="Owner"
+              label="Apartment"
               data={apartmentData}
               value={selectedApartment}
               onChange={(id, name) => handleApartmentChange(id, name)}
               labelField="name"
               valueField="id"
             />
-          </View>
-        ) : (
-          <View style={styles.dropdownsCon}>
-            <View style={styles.eachDropdown}>
-              <CustomDropdown
-                label="Apartment"
-                data={apartmentData}
-                value={selectedApartment}
-                onChange={(id, name) => handleApartmentChange(id, name)}
-                labelField="name"
-                valueField="id"
-              />
             </View>
             <View style={styles.eachDropdown}>
-              <CustomDropdown
-                label="Owner"
-                data={apartmentData}
-                value={selectedApartment}
-                onChange={(id, name) => handleApartmentChange(id, name)}
-                labelField="name"
-                valueField="id"
-              />
+            <CustomDropdown
+              label="Owner"
+              data={ownerdata}
+              value={selectedOwner}
+              onChange={(id, name) => setSelectedOwner({id, name})}
+              labelField="fullName"
+              valueField="id"
+            />
             </View>
           </View>
         )}

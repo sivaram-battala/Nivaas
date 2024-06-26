@@ -38,6 +38,15 @@ const Apartments = ({navigation}) => {
           <Pressable
             onPress={() =>
               navigation.navigate(allTexts.screenNames.societyDues)
+              // Alert.alert('Alert', 'Under Development', [
+              //   {
+              //     text: 'Cancel',
+              //     onPress: () => console.log('Cancel Pressed'),
+              //     style: 'cancel',
+              //   },
+              //   {text: 'OK', onPress: () => console.log('OK Pressed')},
+              // ])
+          
             }>
             <View style={styles.eachService}>
               <Image

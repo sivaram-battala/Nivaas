@@ -18,7 +18,7 @@ import {allTexts, colors} from '../../common';
 import {Formik} from 'formik';
 import {RegisterValidationSchema} from '../../common/schemas';
 import {styles} from './style';
-import {NewVerifyOTP, loginUser1} from '../../utils/api';
+// import {NewVerifyOTP, loginUser1} from '../../utils/api';
 import {PasswordField} from '../../components/inputfield';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Terms_And_Conditions} from '../../components';
@@ -126,7 +126,7 @@ const Signup = ({navigation}) => {
     } else {
       // console.log('ajshbx,jhabs', resOfEmail?.status, resOfMob?.status)
       try {
-        let response = await NewVerifyOTP(otpPayload);
+        // let response = await NewVerifyOTP(otpPayload);
         console.log('responce of otp', response?.data);
         const {
           data: {emailAddress, otp},

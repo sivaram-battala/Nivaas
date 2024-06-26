@@ -22,14 +22,15 @@ const AddConsumptionUnitsModal = ({unitsConsumed,addModalVisible, setAddModalVis
       <TextInput
         placeholder="Enter a Value"
         value={unitsConsumed}
-        onChangeText={text => handleconsumptionUnits(item.id, text)}
+        onChangeText={(text) => handleconsumptionUnits(item?.id, text)}
         keyboardType="numeric"
       />
     </View>
   );
 
   return (
-    <Modal
+    <KeyboardAwareScrollView>
+       <Modal
       animationType="fade"
       transparent={true}
       visible={addModalVisible}
@@ -56,10 +57,15 @@ const AddConsumptionUnitsModal = ({unitsConsumed,addModalVisible, setAddModalVis
                 data={flatdata}
                 renderItem={renderItem}
                 keyExtractor={item => item?.id}
+                ListEmptyComponent={() => (
+                  <Text style={styles.noDataText}>
+                    No items to display at this time
+                  </Text>
+                )}
               />
               <View style={styles.updateButton}>
                 <PrimaryButton
-                  text={'ADD'}
+                  text={'Add Consumption'}
                   onPress={handleUpdateConsumptionUnits}
                   bgColor={colors.primaryRedColor}
                 />
@@ -69,6 +75,7 @@ const AddConsumptionUnitsModal = ({unitsConsumed,addModalVisible, setAddModalVis
         </Pressable>
       </KeyboardAwareScrollView>
     </Modal>
+    </KeyboardAwareScrollView>
   );
 };
 
@@ -120,6 +127,12 @@ const styles = StyleSheet.create({
     flex: 1,
     fontWeight: 'bold',
     color: '#333',
+  },
+  noDataText: {
+    textAlign: 'center',
+    marginTop: 20,
+    fontSize: 16,
+    color: 'red',
   },
   row: {
     flexDirection: 'row',

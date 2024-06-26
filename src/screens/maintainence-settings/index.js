@@ -23,10 +23,10 @@ import { useNotifyOnMutation } from '../../redux/services/maintainenceService';
 import { ApprovedApartments, SnackbarComponent } from '../../common/customFunctions';
 
 const MaintainenceSettings = ({ navigation }) => {
-  const customerDetails = useSelector((state) => state.currentCustomer);
-  const [loader, setloader] = useState();
+  const customerDetails = useSelector(state => state.currentCustomer);
+  const [loader, setloader] = useState(false);
   const [apartmentData, setApartmentData] = useState([]);
-  const [selectedApartment, setSelectedApartment] = useState({ id: '', name: '' });
+  const [selectedApartment, setSelectedApartment] = useState({id: '',name: ''});
   const [prepaidMetersData, setPrepaidMetersData] = useState([]);
   const [checkedMeters, setCheckedMeters] = useState([]);
   const prepaidIdArray = checkedMeters.map((item) => item.id);
@@ -115,14 +115,14 @@ const MaintainenceSettings = ({ navigation }) => {
   };
 
   useEffect(() => {
-    ApprovedApartments({customerDetails:customerDetails,setApartmentData:setApartmentData,setSelectedApartment:setSelectedApartment})
-  }, [customerDetails]);
-
-  useEffect(() => {
     if (selectedApartment?.id) {
       handlePrepaidMetersList(selectedApartment?.id);
     }
-  }, [selectedApartment?.id]);
+  }, [selectedApartment]);
+
+  useEffect(() => {
+    ApprovedApartments({customerDetails:customerDetails,setApartmentData:setApartmentData,setSelectedApartment:setSelectedApartment})
+  }, [customerDetails]);
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.mainCon}>
@@ -131,15 +131,27 @@ const MaintainenceSettings = ({ navigation }) => {
       </View>
       <View style={styles.headerCon}>
         <View style={styles.dropDown}>
-          <CustomDropdown
-            label="Apartment"
-            showLabel={false}
-            data={apartmentData}
-            value={selectedApartment.id}
-            onChange={(id, name) => setSelectedApartment({ id, name })}
-            labelField="name"
-            valueField="id"
-          />
+        {/* <CustomDropdown
+          label="Apartment"
+          showLabel={false}
+          data={apartmentData}
+          value={selectedApartment?.id}
+          onChange={(id, name) => setSelectedApartment({id, name})}
+          labelField="name"
+          valueField="id"
+        /> */}
+        {apartmentData?.length >= 1 && (
+          <View>
+            <CustomDropdown
+              label="Apartment"
+              data={apartmentData}
+              value={selectedApartment}
+              onChange={(id, name) => setSelectedApartment({id, name})}
+              labelField="name"
+              valueField="id"
+            />
+          </View>
+        )}
         </View>
         <View style={styles.datePicker}>
           <CustomSelectDropdown
@@ -168,6 +180,11 @@ const MaintainenceSettings = ({ navigation }) => {
             renderItem={renderItem}
             keyExtractor={(item) => item.id.toString()}
             contentContainerStyle={styles.container}
+            ListEmptyComponent={() => (
+              <Text style={styles.noDataText}>
+                No items to display at this time
+              </Text>
+            )}
           />
         )}
         {loader ? (
@@ -213,6 +230,12 @@ const styles = StyleSheet.create({
   buttonCon: {
     marginHorizontal: '4%',
     marginVertical: '5%',
+  },
+  noDataText: {
+    textAlign: 'center',
+    marginTop: 20,
+    fontSize: 16,
+    color: 'red',
   },
   checkboxContainer: {
     marginHorizontal: '2%',

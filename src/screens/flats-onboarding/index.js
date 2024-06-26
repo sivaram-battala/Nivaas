@@ -33,13 +33,13 @@ const PrepaidMeter = ({navigation}) => {
   });
   const [errors, setErrors] = useState({});
   const [hasSubmitted, setHasSubmitted] = useState(false);
-  const [isTextFieldEnabled, setIsTextFieldEnabled] = useState(false);
+  // const [isTextFieldEnabled, setIsTextFieldEnabled] = useState(false);
   const [apartmentError, setApartmentError] = useState(false);
   const [createFlatByAptOwn] = useCreateFlatByaptOwnMutation();
 
   const handleNumFlatsChange = value => {
-    if (value > 1) {
-      setNumFlats(value);
+    setNumFlats(value)
+    if (numFlats !== 1) {
       const newFlatsDetails = Array.from({length: Number(value)}, () => ({
       flatNo: null,
       ownerPhoneNo: '',
@@ -139,11 +139,11 @@ const PrepaidMeter = ({navigation}) => {
     ApprovedApartments({customerDetails:customerDetails,setApartmentData:setApartmentData,setSelectedApartment:setSelectedApartment})
   }, [customerDetails]);
 
-  useEffect(() => {
-    if (selectedApartment?.id) {
-      setIsTextFieldEnabled(true);
-    }
-  }, [selectedApartment?.id]);
+  // useEffect(() => {
+  //   if (selectedApartment?.id) {
+  //     setIsTextFieldEnabled(true);
+  //   }
+  // }, [selectedApartment?.id]);
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.mainCon}>
@@ -158,7 +158,7 @@ const PrepaidMeter = ({navigation}) => {
         {currentFlatIndex === 0 ? (
           <View style={styles.fieldsCon}>
             <View style={styles.dropdown}>
-              <CustomDropdown
+              {/* <CustomDropdown
                 label="Apartment"
                 showLabel={false}
                 data={apartmentData}
@@ -166,14 +166,26 @@ const PrepaidMeter = ({navigation}) => {
                 onChange={(id, name) => setSelectedApartment({id, name})}
                 labelField="name"
                 valueField="id"
-              />
+              /> */}
+              {apartmentData?.length >= 1 && (
+          <View>
+            <CustomDropdown
+              label="Owner"
+              data={apartmentData}
+              value={selectedApartment}
+              onChange={(id, name) => setSelectedApartment({id, name})}
+              labelField="name"
+              valueField="id"
+            />
+          </View>
+        )}
               {apartmentError && (
                 <Text style={styles.errorText}>
                  Select Any Apartment Here
                 </Text>
               )}
             </View>
-            <Pressable
+            {/* <Pressable
               onPress={handleEditText}
               style={styles.inputContainerOne}>
               <TextInput
@@ -184,8 +196,17 @@ const PrepaidMeter = ({navigation}) => {
                 placeholder="Enter Number Of Flats"
                 editable={isTextFieldEnabled}
               />
-            </Pressable>
+            </Pressable> */}
+            <View style={styles.inputContainerOne}>
+            <TextInput
+                style={styles.input}
+                value={numFlats}
+                onChangeText={handleNumFlatsChange}
+                keyboardType="numeric"
+                placeholder="Enter Number Of Flats"
+              />
           </View>
+            </View>
         ) : null}
         {currentFlatIndex < numFlats && (
           <View style={styles.inputContainer}>
@@ -214,6 +235,7 @@ const PrepaidMeter = ({navigation}) => {
                 })
               }
               keyboardType="phone-pad"
+              maxLength={10}
             />
             {hasSubmitted && errors.ownerPhoneNo && (
               <Text style={styles.errorText}>{errors.ownerPhoneNo}</Text>

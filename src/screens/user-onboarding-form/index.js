@@ -43,14 +43,14 @@ const UserOnBoardingForm = ({navigation, route}) => {
     () => [
       {
         id: 'Renting',
-        label: 'Renting',
+        label: 'Renting/Tenant',
         value: 'Renting',
       },
-      {
-        id: 'FlatOwner',
-        label: 'Flat Owner',
-        value: 'FlatOwner',
-      },
+      // {
+      //   id: 'FlatOwner',
+      //   label: 'Flat Owner',
+      //   value: 'FlatOwner',
+      // },
     ],
     [],
   );

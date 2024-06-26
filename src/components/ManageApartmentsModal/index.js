@@ -19,7 +19,7 @@ const ManageApartmentsModal = ({
       <Text style={styles.apartmentModalText}>
         {item?.jtApartmentDTO?.name}
       </Text>
-      <Text style={[styles.apartmentModalText, {marginLeft: 20}]}>
+      <Text style={[styles.apartmentModalText, {marginLeft: '10%'}]}>
         {item?.adminApproved ? (
           <Text style={styles.statusactiveText}>Active</Text>
         ) : (
@@ -31,7 +31,7 @@ const ManageApartmentsModal = ({
   return (
     <View style={styles.manageFlatsSubCon}>
       <View>
-        {custDetails?.currentCustomerData?.apartmentDTOs && (
+        {(custDetails?.currentCustomerData?.apartmentDTOs?.length > 0 ) && (
           <View style={styles.manageFlatsConHome}>
             <FontAwesome
               name="building-o"
@@ -88,7 +88,7 @@ const ManageApartmentsModal = ({
                 size={30}
                 color={colors.black}
               />
-              <Text style={styles.manageFlatsConAddText}>{'Add CO_ADMIN'}</Text>
+              <Text style={styles.manageFlatsConAddText}>{'Add Co-Admin'}</Text>
             </View>
           </TouchableOpacity>
         )}
