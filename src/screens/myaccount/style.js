@@ -30,8 +30,8 @@ export const styles = StyleSheet.create({
     marginVertical: window.height * 0.01,
     paddingHorizontal: window.width * 0.12,
     paddingTop: '3%',
-    borderTopColor: colors.gray2,
-    borderTopWidth: 2,
+    borderTopColor: colors.gray3,
+    borderTopWidth: 7,
   },
   manageFlatsConText: {
     fontSize: 18,
@@ -99,15 +99,18 @@ export const styles = StyleSheet.create({
   },
   setting: {
     marginVertical: window.height * 0.01,
+    paddingVertical:10,
     paddingHorizontal: window.width * 0.13,
-    borderTopColor: colors.gray2,
-    borderTopWidth: 2,
+    borderTopColor: colors.gray3,
+    borderTopWidth: 7,
+    borderBottomColor: colors.gray3,
+    borderBottomWidth: 7,
   },
   settingHeader: {
     fontSize: 18,
     fontWeight: 'bold',
     color: colors.black,
-    marginVertical: 10,
+    // marginVertical: 10,
   },
   settingsubConOne: {
     flexDirection: 'row',
@@ -116,7 +119,7 @@ export const styles = StyleSheet.create({
   },
   generalSettingsOptionText: {
     fontSize: 16,
-    marginLeft: 10,
+    marginLeft: 15,
     color: colors.black,
   },
   nivas: {

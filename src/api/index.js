@@ -18,7 +18,8 @@ export const endpoints = {
   USER_DETAILS:'api/customer/userDetails',
   MAINTAINENCE_SAVE:'jtmaintanance/save',
   ADD_CONSUMED_UNITS:'/prepaid-usage/flat/update-consumed',
-  SOCIETY_DUES:'society/dues',
+  USER_SOCIETY_DUES:'society/dues/apartment',
+  ADMIN_SOCIETY_DUES:'society/dues/list',
   GET_EXPANCES:'apartment/debit-history/apartment',
   GET_EXPANCES_BY_ID:'apartment/debit-history',
   GET_EXPANCES_PDF:'report/apartment',
@@ -26,6 +27,7 @@ export const endpoints = {
   DELETE_EXPANCES:'apartment/debit-history/apartment',
   UPDATE_DEBIT_HISTORY:'apartment/debit-history',
   ADD_CO_ADMIN:'jtapartment/add/co-admin',
+  GET_FLAT_OWNERS:'jtflat',
 };
 
 // export const getcurrentCustomerdata = () =>{

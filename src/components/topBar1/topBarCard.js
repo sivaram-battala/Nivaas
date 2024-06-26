@@ -282,7 +282,7 @@ export const TopBarCard2 = ({
 };
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    backgroundColor: colors.white,
     flex: 1,
     height: 60,
     // elevation: 2,

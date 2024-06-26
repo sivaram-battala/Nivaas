@@ -18,7 +18,6 @@ import {
   loginUser1,
   NewRegistesrUser,
   getUserInfoNew,
-  NewVerifyOTP,
 } from '../../utils/api';
 import ApplicationContext from '../../utils/context-api/Context';
 import {statusBarHeight} from '../../utils/config/config';
@@ -89,30 +88,30 @@ const OTPScreen = ({navigation, route}) => {
     otpInput?.current?.setValue('');
   };
   const {setLoginDetails, setUserDetails} = useContext(ApplicationContext);
-  const ApiData = async () => {
-    let result = await getUserInfoNew();
-    // console.log('userdetaiks resilt', result?.data)
-    try {
-      if (result) {
-        saveUserDetails({
-          username: result?.data?.userName,
-          email: result.data?.email,
-          role: result?.data?.roles,
-          id: result?.data?.id,
-          primaryContact: result?.data?.primaryContact,
-        });
-        setUserDetails({
-          username: result?.data?.userName,
-          email: result?.data?.email,
-          role: result?.data?.roles,
-          id: result?.data?.id,
-          primaryContact: result?.data?.primaryContact,
-        });
-      }
-    } catch (error) {
-      console.log('error in get current customer details api', error);
-    }
-  };
+  // const ApiData = async () => {
+  //   let result = await getUserInfoNew();
+  //   // console.log('userdetaiks resilt', result?.data)
+  //   try {
+  //     if (result) {
+  //       saveUserDetails({
+  //         username: result?.data?.userName,
+  //         email: result.data?.email,
+  //         role: result?.data?.roles,
+  //         id: result?.data?.id,
+  //         primaryContact: result?.data?.primaryContact,
+  //       });
+  //       setUserDetails({
+  //         username: result?.data?.userName,
+  //         email: result?.data?.email,
+  //         role: result?.data?.roles,
+  //         id: result?.data?.id,
+  //         primaryContact: result?.data?.primaryContact,
+  //       });
+  //     }
+  //   } catch (error) {
+  //     console.log('error in get current customer details api', error);
+  //   }
+  // };
 
   const signinHandler = async otpOutPut => {
     if (otpOutPut?.length != 6) {
@@ -162,7 +161,7 @@ const OTPScreen = ({navigation, route}) => {
               }),
             );
             setLoginDetails(response.token);
-            ApiData();
+            // ApiData();
             saveLoginSessionDetails(response.tokenType, response.token);
             customerDetails()
               .unwrap()

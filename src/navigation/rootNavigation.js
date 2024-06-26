@@ -356,7 +356,7 @@ const rootNavigation = () => {
   const Stack = createStackNavigator();
   const [loginDetails, setLoginDetails] = useState(null);
   const [userDetails, setUserDetails] = useState({});
-const authState = useAppSelector(state => state.auth);
+  const authState = useAppSelector(state => state.auth);
 
 const getLoginDetails = () => {
   setLoginDetails(authState.token || null);

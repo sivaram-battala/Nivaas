@@ -20,9 +20,12 @@ export const maintainenceService = createApi({
     },
   }), 
   endpoints: builder => ({
-    getSocietyDues : builder.query<any,{pageNo:Number,pageSize:Number}>({
-      query: ({pageNo,pageSize}) => `${endpoints.SOCIETY_DUES}?pageNo=${pageNo}&pageSize=${pageSize}`
-    }),
+    getUserSocietyDues : builder.query<any,{apartmentId:Number,flatId:Number,year:Number,month:Number}>({
+      query: ({apartmentId,flatId,year,month}) => `${endpoints.USER_SOCIETY_DUES}/${apartmentId}/flat/${flatId}?year=${year}&month=${month}`
+    }), 
+    getAdminSocietyDues : builder.query<any,{apartmentId:Number,year:Number,month:Number,pageNo:Number,pageSize:Number}>({
+      query: ({apartmentId,year,month,pageNo,pageSize}) => `${endpoints.ADMIN_SOCIETY_DUES}/${apartmentId}/${year}/${month}?pageNo=${pageNo}&pageSize=${pageSize}`
+    }), 
     notifyOn: builder.mutation<any, {}>({
       query: payload => ({
         url: endpoints.MAINTAINENCE_SAVE,
@@ -57,7 +60,8 @@ export const maintainenceService = createApi({
 });
 
 export const {
-  useLazyGetSocietyDuesQuery,
+  useLazyGetUserSocietyDuesQuery,
+  useLazyGetAdminSocietyDuesQuery,
   useNotifyOnMutation,
   useCreateFlatByaptOwnMutation,
   useUpdateFlatDetailsMutation,

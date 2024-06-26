@@ -1,7 +1,8 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {FlatList, Text, View, Modal, TouchableOpacity} from 'react-native';
+import {FlatList, Text, View, Modal, TouchableOpacity, Share, Alert, Linking} from 'react-native';
 import {styles} from './style';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import {DpImage, ManageApartmentsModal, ManageflatsModal, TopBarCard2} from '../../components';
 import {statusBarHeight} from '../../utils/config/config';
 import {removeLoginSessionDetails} from '../../utils/preferences/localStorage';
@@ -9,6 +10,7 @@ import ApplicationContext from '../../utils/context-api/Context';
 import {allTexts, colors} from '../../common';
 import { useSelector } from 'react-redux';
 import { ScrollView } from 'react-native-virtualized-view'
+import { handleshare, sendSupportEmail } from '../../common/customFunctions';
 
 const MyAccount = ({navigation, dispatch, route}) => {
   const data = route.params;
@@ -16,7 +18,14 @@ const MyAccount = ({navigation, dispatch, route}) => {
   const {userDetails, setLoginDetails} = useContext(ApplicationContext);
   const [flatModalVisible, setFlatModalVisible] = useState(false);
   const [apartmentModalVisible, setApartmentModalVisible] = useState(false);
-
+  
+// const apartmentNames = custDetails?.apartmentDTOs?.map(apartment => apartment.jtApartmentDTO.name);
+// console.log(apartmentNames,'llllllllllllll');
+// const filteredFlats = custDetails?.flatDTO?.filter(flat => {
+//   const flatApartmentName = flat?.jtFlatDTO.apartmentDTO.name;
+//   return !apartmentNames.includes(flatApartmentName);
+// });
+// console.log(filteredFlats,'hello');
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
@@ -60,33 +69,33 @@ const MyAccount = ({navigation, dispatch, route}) => {
         <ManageApartmentsModal apartmentModalVisible={apartmentModalVisible} setApartmentModalVisible={setApartmentModalVisible} custDetails={custDetails} navigation={navigation}/>
       </View>
       <View style={styles.setting}>
-        <Text style={styles.settingHeader}>General settings</Text>
-        <View style={styles.generalSettingsOptions}>
-          <View style={styles.settingsubConOne}>
+        <Text style={styles.manageFlatsConText}>General settings</Text>
+        <View style={styles.manageFlatsSubCon}>
+          <TouchableOpacity onPress={sendSupportEmail} style={styles.settingsubConOne}>
             <AntDesign name="mail" size={25} color={colors.black} />
-            <Text style={styles.generalSettingsOptionText}>support</Text>
-          </View>
-          <View style={styles.settingsubConOne}>
+            <Text style={styles.generalSettingsOptionText}>Support</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={handleshare} style={styles.settingsubConOne}>
             <AntDesign name="sharealt" size={25} color={colors.black} />
             <Text style={styles.generalSettingsOptionText}>
-              Help your friend with Nivas
+              Help your friend with Nivaas
             </Text>
-          </View>
-          <TouchableOpacity>
+          </TouchableOpacity>
+          {/* <TouchableOpacity>
             <View style={styles.settingsubConOne}>
               <AntDesign name="user" size={25} color={colors.black} />
               <Text style={styles.generalSettingsOptionText}>
                 Account information
               </Text>
             </View>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TouchableOpacity
             onPress={async () => {
               await removeLoginSessionDetails();
               setLoginDetails(null);
             }}>
             <View style={styles.settingsubConOne}>
-              <AntDesign name="poweroff" size={23} color={colors.black} />
+              <MaterialCommunityIcons name="logout" size={25} color={colors.black} />
               <Text style={styles.generalSettingsOptionText}>Logout</Text>
             </View>
           </TouchableOpacity>

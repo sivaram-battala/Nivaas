@@ -28,7 +28,7 @@ const AdminSociety = ({navigation}) => {
           <Pressable onPress={()=>navigation.navigate(allTexts.screenNames.maintainenceSettings)}>
             <View style={styles.eachService}>
               <MaterialIcons name='settings-applications' size={25} color={colors.primaryRedColor}/>
-              <Text style={styles.eachText}>Maintainence Settings</Text>
+              <Text style={styles.eachText}>Maintenance Settings</Text>
             </View>
           </Pressable>
           <Pressable onPress={()=>navigation.navigate(allTexts.screenNames.adminFlatSettings)}>

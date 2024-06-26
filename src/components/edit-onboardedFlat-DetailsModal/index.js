@@ -34,6 +34,7 @@ const EditOnBoarderFlatDetailsModal = ({modalVisible,setModalVisible,setFormData
               }
               placeholder="Owner Phone No"
               keyboardType="phone-pad"
+              maxLength={10}
             />
             <TextInput
               style={styles.input}

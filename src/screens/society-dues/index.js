@@ -1,20 +1,26 @@
 import React, {useState, useEffect} from 'react';
 import {FlatList, StyleSheet, Text, View} from 'react-native';
 import { ScrollView } from 'react-native-virtualized-view'
-import {colors} from '../../common';
+import {allTexts, colors} from '../../common';
 import {TopBarCard2, CustomDropdown, PrimaryButton} from '../../components';
 import {statusBarHeight} from '../../utils/config/config';
 import {useSelector} from 'react-redux';
 import {CheckBox} from 'react-native-elements';
-import {useLazyGetSocietyDuesQuery} from '../../redux/services/maintainenceService';
+import { styles } from './style';
+import { useLazyGetAdminSocietyDuesQuery, useLazyGetUserSocietyDuesQuery } from '../../redux/services/maintainenceService';
 
 const SocietyDues = ({navigation}) => {
   const customerDetails = useSelector(state => state.currentCustomer);
   const [loader, setLoader] = useState(false);
   const [apartmentData, setApartmentData] = useState([]);
+  // console.log(apartmentData);
   const [selectedApartment, setSelectedApartment] = useState({id: '',name: ''});
+  const [userApartmentdata, setuserApartmentdata] = useState([]);
+  const [selectedUserAparment, setselectedUserAparment] = useState({id: '',flatNo: ''})
   const [flatData, SetFlatData] = useState([]);
-  const [selectedFlat, setSelectedFlat] = useState();
+  const [selectedFlat, setSelectedFlat] = useState({id: '',flatNo: ''});
+  const [selectedYear, setSelectedYear] = useState();
+  const [selectedMonth, setSelectedMonth] = useState();
   const adminDummyData = [
     {
       flatId: '1',
@@ -71,25 +77,50 @@ const SocietyDues = ({navigation}) => {
   const duedata = selectedFlatDues?.jsonData
     ? JSON.parse(selectedFlatDues?.jsonData)
     : null;
-  const [getSocietyDues] = useLazyGetSocietyDuesQuery();
+  const [getUserSocietyDues] = useLazyGetUserSocietyDuesQuery();
+  const [getAdminSocietyDues] = useLazyGetAdminSocietyDuesQuery();
 
-  const handleSocietydues = () => {
+  const handleUserSocietydues = (id) => {
     setLoader(true);
     const payload = {
-      pageNo: 0,
-      pageSize: 20,
+      apartmentId:selectedUserAparment?.id,
+      flatId:id,
+      year:selectedYear,
+      month:selectedMonth,
     };
-    getSocietyDues(payload)
+    console.log(payload,'payload');
+    getUserSocietyDues(payload)
       .unwrap()
       .then(responce => {
         setLoader(false);
-        console.log('SOCIETY DUES=====>', responce);
+        console.log('USER SOCIETY DUES=====>', responce);
         // setSocietyDuesData(responce?.societies);
       })
       .catch(error => {
-        console.log('ERROR IN SOCITY DUES', error);
+        console.log('ERROR IN USER SOCITY DUES', error);
       });
   };
+
+  const handleAdminSocietyDues =(id)=>{
+    setLoader(true);
+    const payload = {
+      apartmentId:id,
+      year:selectedYear,
+      month:selectedMonth,
+      pageNo:0,
+      pageSize:20,
+    };
+    // console.log(payload,'payload');
+    getAdminSocietyDues(payload)
+      .unwrap()
+      .then(responce => {
+        setLoader(false);
+        console.log('ADMIN SOCIETY DUES=====>', responce);
+      })
+      .catch(error => {
+        console.log('ERROR IN ADMIN SOCITY DUES', error);
+      });
+  }
   useEffect(() => {
     if (societyDuesData.length === 1) {
       // setSelectedFlat(societyDuesData[0]);
@@ -97,6 +128,9 @@ const SocietyDues = ({navigation}) => {
   }, [societyDuesData]);
 
   useEffect(() => {
+    const currentDate = new Date();
+    setSelectedMonth(currentDate.getMonth() + 1);
+    setSelectedYear(currentDate.getFullYear());
     if (customerDetails?.currentCustomerData?.apartmentDTOs) {
       const approvedApartments =
         customerDetails.currentCustomerData.apartmentDTOs
@@ -106,27 +140,37 @@ const SocietyDues = ({navigation}) => {
             name: apartment.jtApartmentDTO.name,
           }));
       setApartmentData(approvedApartments);
-      if (approvedApartments.length === 1) {
-        setSelectedApartment(approvedApartments[0]);
-      }
+      setSelectedApartment(approvedApartments[0]);
+    }
+    if (customerDetails?.currentCustomerData?.flatDTO) {
+      const approvedApartments = customerDetails.currentCustomerData.flatDTO
+        .map(flat => ({
+          id: flat?.jtFlatDTO?.apartmentDTO?.id,
+          flatNo: flat?.jtFlatDTO?.apartmentDTO?.name,
+        }));
+        setuserApartmentdata(approvedApartments);
+        setselectedUserAparment(approvedApartments[0])
     }
     if (customerDetails?.currentCustomerData?.flatDTO) {
       const approvedFlats = customerDetails.currentCustomerData.flatDTO
-        .filter(flat => flat.ownerApproved == false)
+        .filter(flat => flat.ownerApproved === false)
         .map(flat => ({
           id: flat?.jtFlatDTO?.id,
           flatNo: flat?.jtFlatDTO?.flatNo,
         }));
       SetFlatData(approvedFlats);
-      // if (approvedApartments.length === 1) {
-      //   setSelectedApartment(approvedApartments[0]);
-      // }
+      // setSelectedApartment(approvedApartments[0]);
     }
   }, [customerDetails]);
 
   useEffect(() => {
-    handleSocietydues();
-  }, []);
+    if (selectedFlat?.id) {
+      handleUserSocietydues(selectedFlat?.id);
+    }
+    if (selectedApartment?.id) {
+      handleAdminSocietyDues(selectedApartment?.id);
+    }
+  }, [selectedFlat,selectedApartment]);
 
   const handleCheckboxChange = flatId => {
     setAdminData(prevState =>
@@ -146,19 +190,20 @@ const SocietyDues = ({navigation}) => {
 
   const handleUpdate = () => {
     const selectedFlats = adminData.filter(flat => flat.checked);
-    console.log('Selected Flats:', selectedFlats);
+    // console.log('Selected Flats:', selectedFlats);
   };
   return (
     <ScrollView style={styles.mainCon}>
       <View style={{height: 50, marginTop: statusBarHeight}}>
         <TopBarCard2 back={true} txt={'Society Dues'} navigation={navigation} />
       </View>
-      {customerDetails?.currentCustomerData?.roles?.some(
-        role => role === 'ROLE_APARTMENT_ADMIN.',
-      ) ? (
+      { 
+      customerDetails?.currentCustomerData?.roles?.some(
+        role => role === 'ROLE_APARTMENT_ADMIN')
+       ? (
         <View>
           <View style={styles.dropdownContainer}>
-            <CustomDropdown
+            {/* <CustomDropdown
               label="Apartment"
               showLabel={false}
               data={apartmentData}
@@ -166,7 +211,19 @@ const SocietyDues = ({navigation}) => {
               onChange={(id, name) => setSelectedApartment({id, name})}
               labelField="name"
               valueField="id"
+            /> */}
+          {apartmentData?.length >= 1 && (
+          <View style={styles.singleApartmentCon}>
+           <CustomDropdown
+              label="Apartment"
+              data={apartmentData}
+              value={selectedApartment}
+              onChange={(id, name) => setSelectedApartment({id, name})}
+              labelField="name"
+              valueField="id"
             />
+          </View>
+        )}
           </View>
           <View style={styles.selectAllContainer}>
             <Text style={styles.selectAllText}>Select All</Text>
@@ -203,7 +260,7 @@ const SocietyDues = ({navigation}) => {
             />
             <View style={styles.button}>
               <PrimaryButton
-                text={'Update'}
+                text={'Mark As Paid'}
                 bgColor={colors.primaryRedColor}
                 onPress={handleUpdate}
               />
@@ -218,10 +275,10 @@ const SocietyDues = ({navigation}) => {
                 <CustomDropdown
                   label="Apartment"
                   showLabel={false}
-                  data={apartmentData}
-                  value={selectedApartment.id}
-                  onChange={(id, name) => setSelectedApartment({id, name})}
-                  labelField="name"
+                  data={userApartmentdata}
+                  value={selectedUserAparment?.id}
+                  onChange={(id, flatNo) => setselectedUserAparment({id, flatNo})}
+                  labelField="flatNo"
                   valueField="id"
                 />
               </View>
@@ -229,20 +286,21 @@ const SocietyDues = ({navigation}) => {
                 <CustomDropdown
                   label="Flat"
                   data={flatData}
-                  value={selectedFlat?.flatNo}
-                  onChange={(id, flatNo) => {
-                    const flat = societyDuesData.find(
-                      flat => flat.flatId === id,
-                    );
-                    setSelectedFlatDues(flat);
-                    setSelectedFlat({id, flatNo});
-                  }}
+                  value={selectedFlat?.id}
+                  // onChange={(id, flatNo) => {
+                  //   const flat = societyDuesData.find(
+                  //     flat => flat.flatId === id,
+                  //   );
+                  //   setSelectedFlatDues(flat);
+                  //   setSelectedFlat({id, flatNo});
+                  // }}
+                  onChange={(id, flatNo) => setSelectedFlat({id, flatNo})}
                   labelField="flatNo"
                   valueField="id"
                 />
               </View>
             </View>
-            <Text style={styles.textCon}>{selectedFlat?.flatNo}</Text>
+            {/* <Text style={styles.textCon}>{selectedFlat?.flatNo}</Text> */}
           </View>
           <View style={styles.container}>
             <View style={styles.header}>
@@ -264,6 +322,11 @@ const SocietyDues = ({navigation}) => {
                 </View>
               )}
               keyExtractor={item => item.id}
+              ListEmptyComponent={() => (
+                <Text style={styles.noDataText}>
+                  No items to display at this time
+                </Text>
+              )}
             />
           </View>
         </View>
@@ -273,74 +336,3 @@ const SocietyDues = ({navigation}) => {
 };
 
 export default SocietyDues;
-
-const styles = StyleSheet.create({
-  mainCon: {
-    height: '100%',
-    backgroundColor: colors.white,
-  },
-  dropdownContainer: {
-    marginHorizontal: '5%',
-    marginVertical: '5%',
-  },
-  selectAllContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginHorizontal: '5%',
-    marginLeft: '70%',
-    height: 50,
-  },
-  selectAllText: {
-    color: colors.black,
-    fontWeight: '500',
-  },
-  textCon: {
-    fontSize: 17,
-    fontWeight: '500',
-    color: colors.black,
-    marginTop: '1%',
-    marginHorizontal:'1%'
-  },
-  container: {
-    marginHorizontal: '5%',
-    marginBottom: '5%',
-  },
-  header: {
-    flexDirection: 'row',
-    backgroundColor: colors.gray3,
-    paddingVertical: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.gray2,
-  },
-  headerCell: {
-    flex: 1,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: colors.black,
-  },
-  selectStyle: {
-    flex: 1,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: colors.black,
-    marginRight: 5,
-  },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: colors.gray2,
-  },
-  cell: {
-    flex: 1,
-    textAlign: 'center',
-    color: colors.black,
-    paddingVertical: 10,
-  },
-  checkbox: {
-    flex: 1,
-  },
-  button: {
-    marginTop: 20,
-  },
-});
