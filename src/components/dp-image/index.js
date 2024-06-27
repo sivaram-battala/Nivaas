@@ -90,7 +90,7 @@ const DpImage = ({customerId}) => {
       {
         loader ? (
           <View style={styles.loader}>
-            <Loader marginTop={"20%"} color={colors.primaryRedColor} size={'small'} />
+            <Loader marginTop={"20%"} color={colors.primaryColor} size={'small'} />
           </View>
         ) : (
           <Image source={{uri: profilePic || 'https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTAxL3JtNjA5LXNvbGlkaWNvbi13LTAwMi1wLnBuZw.png'}} style={styles.image} />

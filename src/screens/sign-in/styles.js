@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
   description: {
     marginVertical: 4,
     textAlign: 'center',
-    fontFamily: fontFamily.popinMedium,
+    // fontFamily: fontFamily.popinMedium,
     color: colors.gray,
     textTransform: 'capitalize',
   },
@@ -40,13 +40,13 @@ export const styles = StyleSheet.create({
   navLinkText: {
     marginVertical: 10,
     textAlign: 'center',
-    fontFamily: fontFamily.popinBold,
+    // fontFamily: fontFamily.popinBold,
     color: colors.gray,
     textTransform: 'capitalize',
   },
   login: {
-    fontFamily: fontFamily.popinBold,
-    color: colors.primaryRedColor,
+    // fontFamily: fontFamily.popinBold,
+    color: colors.primaryColor,
     paddingLeft: 50,
   },
   signinTextContainer: {
@@ -62,7 +62,7 @@ export const styles = StyleSheet.create({
   signinText: {
     color: colors.black,
     textTransform: 'uppercase',
-    fontFamily: fontFamily.popinMedium,
+    // fontFamily: fontFamily.popinMedium,
     fontSize: 20,
   },
   forgotPassword: {
@@ -90,7 +90,7 @@ export const styles = StyleSheet.create({
   },
   expectOtp: {
     color: colors.green2,
-    fontFamily: fontFamily.popinRegular,
+    // fontFamily: fontFamily.popinRegular,
     fontSize: 10,
     alignSelf: 'center',
     marginBottom: 10,
@@ -105,6 +105,6 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     padding: 10,
     borderRadius: 5,
-    backgroundColor: colors.primaryRedColor
+    backgroundColor: colors.primaryColor
   },
 });

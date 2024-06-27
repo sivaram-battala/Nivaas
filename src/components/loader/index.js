@@ -6,7 +6,7 @@ import {styles} from './styles';
 export const Loader = ({color, size, dynmicStyle, marginTop}) => {
   return (
     <View style={[styles.container, dynmicStyle ,{marginTop: marginTop ? marginTop : "100%"}]}>
-      <ActivityIndicator size={size || 'large'} color={color || colors.primaryRedColor} />
+      <ActivityIndicator size={size || 'large'} color={color || colors.primaryColor} />
     </View>
   );
 };

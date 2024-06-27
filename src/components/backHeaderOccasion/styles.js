@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
   },
   title: {
     fontSize: fontSize.normal,
-    fontFamily: fontFamily.popinMedium,
+    // fontFamily: fontFamily.popinMedium,
     color: colors.black,
     marginLeft: 15,
   },

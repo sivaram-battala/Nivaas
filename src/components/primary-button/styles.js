@@ -19,7 +19,7 @@ export const textStyles = (textColor, fontSize) =>
     textTitle: {
       fontSize: fontSize || 14,
       color: textColor ? textColor : colors.white,
-      fontFamily: fontFamily.popinBold,
+      // fontFamily: fontFamily.popinBold,
       fontWeight:'bold'
       
     },

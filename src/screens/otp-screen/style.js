@@ -13,13 +13,13 @@ export const styles = StyleSheet.create({
   },
   heading: {
     color: colors.black,
-    fontFamily: fontFamily.popinMedium,
+    // fontFamily: fontFamily.popinMedium,
     fontSize: 20,
     textTransform: 'capitalize',
   },
   detail: {
-    color: colors.primaryRedColor,
-    fontFamily: fontFamily.popinLight,
+    color: colors.primaryColor,
+    // fontFamily: fontFamily.popinLight,
     fontSize: 12,
     textAlign: 'center',
   },
@@ -50,8 +50,8 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   expectOtp: {
-    color: colors.primaryRedColor,
-    fontFamily: fontFamily.popinRegular,
+    color: colors.primaryColor,
+    // fontFamily: fontFamily.popinRegular,
     fontSize: 10,
     alignSelf: 'center',
     marginBottom: 10,

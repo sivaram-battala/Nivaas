@@ -55,7 +55,7 @@ const MaidProfile = ({ navigation }) => {
             </View>
             <View style={styles.subContainerFive} >
                     <PrimaryButton
-                        bgColor={colors.primaryRedColor}
+                        bgColor={colors.primaryColor}
                         text={'Add to household'}
                         shadow={true}
                         textColor={"white"}

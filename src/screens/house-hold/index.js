@@ -12,7 +12,7 @@ const HouseHold = ({navigation}) => {
   return (
     <View style={styles.mainCon}>
       <View
-        style={{height: 50, marginTop: statusBarHeight}}>
+        style={{marginTop: statusBarHeight}}>
         <TopBarCard2 back={true} txt={'HouseHold'} navigation={navigation} />
       </View>
       <View style={styles.profie}>

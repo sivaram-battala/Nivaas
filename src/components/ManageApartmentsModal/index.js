@@ -19,7 +19,7 @@ const ManageApartmentsModal = ({
       <Text style={styles.apartmentModalText}>
         {item?.jtApartmentDTO?.name}
       </Text>
-      <Text style={[styles.apartmentModalText, {marginLeft: '10%'}]}>
+      <Text style={[styles.apartmentModalText, {marginLeft: '7%'}]}>
         {item?.adminApproved ? (
           <Text style={styles.statusactiveText}>Active</Text>
         ) : (

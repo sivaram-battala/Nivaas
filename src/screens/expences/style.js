@@ -56,7 +56,7 @@ export const styles = StyleSheet.create({
       },
       clickHereText:{
         fontWeight:'500',
-        color:colors.primaryRedColor
+        color:colors.primaryColor
       },
       downloadText:{
         color:colors.black

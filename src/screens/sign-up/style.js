@@ -17,16 +17,15 @@ export const styles = StyleSheet.create({
     marginTop: 20,
   },
   imageContainer: {
-    height: 170,
-    width: 180,
-    borderRadius:50,
+    height: 200,
+    width: 200,
     alignItems:'center'
   },
   templeLogo: {height: 200, width: 200, flex: 1,borderRadius:50},
   description: {
     marginVertical: 4,
     textAlign: 'center',
-    fontFamily: fontFamily.PoetsenOneRegular,
+    // fontFamily: fontFamily.PoetsenOneRegular,
     color: colors.red1,
     textTransform: 'capitalize',
     fontSize: 28,
@@ -44,13 +43,13 @@ export const styles = StyleSheet.create({
   alreadyTextContainer: {
     marginVertical: 4,
     textAlign: 'center',
-    fontFamily: fontFamily.popinBold,
+    // fontFamily: fontFamily.popinBold,
     color: colors.gray,
     textTransform: 'capitalize',
   },
   isLogin: {
-    fontFamily: fontFamily.popinBold,
-    color: colors.primaryRedColor,
+    // fontFamily: fontFamily.popinBold,
+    color: colors.primaryColor,
     paddingLeft: 50,
   },
   alreadyAcc: {
@@ -60,7 +59,7 @@ export const styles = StyleSheet.create({
     color: colors.black,
     alignSelf: 'flex-start',
     textTransform: 'uppercase',
-    fontFamily: fontFamily.popinMedium,
+    // fontFamily: fontFamily.popinMedium,
     fontSize: 20,
     marginLeft: 20,
   },

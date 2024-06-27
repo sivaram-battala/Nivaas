@@ -127,7 +127,7 @@ const SelectCityOptions = ({ navigation }) => {
 
   return (
     <View style={styles.mainCon}>
-      <View style={{ height: 50, marginTop: statusBarHeight }}>
+      <View style={{ height: 70, marginTop: statusBarHeight }}>
         <TopBarCard2 back={true} txt={'Add Your Home'} navigation={navigation} />
       </View>
       <KeyboardAwareScrollView>
@@ -160,7 +160,7 @@ const SelectCityOptions = ({ navigation }) => {
                     onPress={() =>
                       navigation.navigate(allTexts.screenNames.newApartmentOnBoard)
                     }>
-                    <Text style={{ color: colors.primaryRedColor, fontWeight: '500' }}>
+                    <Text style={{ color: colors.primaryColor, fontWeight: '500' }}>
                       +On Board
                     </Text>
                   </TouchableOpacity>
@@ -190,7 +190,7 @@ const SelectCityOptions = ({ navigation }) => {
             <Animated.View style={{ ...styles.buttonContainer, opacity: buttonOpacity }}>
               <PrimaryButton
                 onPress={() => handleData()}
-                bgColor={colors.primaryRedColor}
+                bgColor={colors.primaryColor}
                 radius={5}
                 text={'Next'}
                 shadow={true}

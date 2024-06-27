@@ -6,20 +6,14 @@ import { colors, window } from '../../common';
 const carouselItems = [
   {
     key: 1,
-    title: 'Title 1',
-    text: 'Description.\nSay something cool',
     image: require('../../utils/assets/images/ImageOne.jpg'),
   },
   {
     key: 2,
-    title: 'Title 2',
-    text: 'Other cool stuff',
     image: require('../../utils/assets/images/ImageTwo.jpeg'),
   },
   {
     key: 3,
-    title: 'Rocket guy',
-    text: "I'm already out of descriptions\n\nLorem ipsum bla bla bla",
     image: require('../../utils/assets/images/ImageSlider.png'),
   },
 ];
@@ -52,14 +46,14 @@ const styles = StyleSheet.create({
     resizeMode:'cover'
   },
   dot: {
-    backgroundColor: 'rgba(255,255,255,0.5)',
+    backgroundColor:colors.white,
     width: 10,
     height: 10,
     borderRadius: 5,
     margin: 3,
   },
   activeDot: {
-    backgroundColor:colors.primaryRedColor,
+    backgroundColor:colors.primaryColor,
     width: 10,
     height: 10,
     borderRadius: 5,

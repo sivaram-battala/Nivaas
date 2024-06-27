@@ -2,64 +2,17 @@ import {Dimensions} from 'react-native';
 
 const {width, height} = Dimensions.get('window');
 
-const fontSize = {
-  iconSize: 70,
-  title: 32,
-  h1: 30,
-  h2: 28,
-  h3: 26,
-  h4: 25,
-  h5: 24,
-  h6: 22,
-  xxlarge: 20,
-  xlarge: 19,
-  large: 18,
-  medium: 17,
-  average: 18.5,
-  normal: 16,
-  normalHalf: 15.5,
-  small: 15,
-  xsmall: 14,
-  xxsmall: 13,
-  tiny: 12,
-  xtiny: 11,
-  xxtiny: 10,
-  xxxtiny: 9,
-  xxxtinyH: 9.5,
-  big: 20,
-  xbig: 27,
-  xxbig: 29,
-};
-const fontFamily = {
-  semiBold: 'Lato-Semibold',
-  bold: 'Lato-Bold',
-  extraBold: 'Lato-Heavy',
-  medium: 'Lato-Medium',
-  regular: 'Lato-Regular',
-  thin: 'Lato-thin',
-  light: 'Lato-Light',
-  hairline: 'Lato-Hairline',
-  black: 'Lato-Black',
-  pangram: 'pangram',
-  popinRegular: 'Poppins-Regular',
-  popinBold: 'Poppins-Bold',
-  popinMedium: 'Poppins-Medium',
-  popinLight: 'Poppins-Light',
-  popinSemi: 'Poppins-SemiBold',
-  PoetsenOneRegular: 'PoetsenOne-Regular',
-  pacificoRegular: 'Pacifico-Regular',
-  yellowtailRegular: 'Yellowtail-Regular',
-  HelveticaNeue: 'Helvetica Neue',
-};
-
 const window = {
   width,
   height,
 };
-
+//#253a6d
+//#0089d5
+//F17171
+//FFF2E2
 // updated colors being used in all ober the project
 const colors = {
-  primaryRedColor: '#F17171',
+  primaryColor: '#253a6d',
   orangeColor2: 'rgba(255,160,1,0.5)',
   orangeColor3:"rgba(255, 160, 1, 0.4)",
   red1: '#FF2E01',
@@ -68,7 +21,7 @@ const colors = {
   red6: '#D30000',
   red5: 'rgba(211, 0, 0, 0.08)',
   yellowColor: '#FFE600',
-  yellowOne:'#FFF2E2',
+  yellowOne:'#e0e9ff',
   gold: '#FC9605',
   black: '#000',
   black2: '#686869',
@@ -94,4 +47,4 @@ const colors = {
 const timer = {
   loaderTime: 1000,
 };
-export {fontSize, timer, fontFamily, window, colors};
+export {timer, window, colors};

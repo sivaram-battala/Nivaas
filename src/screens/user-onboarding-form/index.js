@@ -56,7 +56,7 @@ const UserOnBoardingForm = ({navigation, route}) => {
   );
   return (
     <View style={styles.mainContainer}>
-      <View style={{ height: 50, marginTop: statusBarHeight }}>
+      <View style={{height:70,marginTop: statusBarHeight }}>
         <TopBarCard2 back={true} txt={'Home Details'} navigation={navigation} />
       </View>
       <View style={styles.detailsCon}>
@@ -95,7 +95,7 @@ const UserOnBoardingForm = ({navigation, route}) => {
         <View style={{marginTop: window.height * 0.15}}>
           <PrimaryButton
             onPress={() => handleOnBoarding(userData)}
-            bgColor={colors.primaryRedColor}
+            bgColor={colors.primaryColor}
             radius={30}
             text={'   On Board     '}
             shadow={true}

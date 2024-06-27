@@ -16,7 +16,7 @@ export const onBoardNewApartmentSchema = (values) => {
     errors.name = 'Apartment name is required';
   }
   if (!values.totalFlats || values.totalFlats <= 0) {
-    errors.totalFlats = 'Total number of flats is required and must be at least 1';
+    errors.totalFlats = 'Total number of flats must be at least 1';
   }
   if (!values.line1) {
     errors.line1 = 'Address Line 1 is required';

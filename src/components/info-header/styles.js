@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
   },
   nameText: {
     fontSize: fontSize.tiny,
-    fontFamily: fontFamily.popinRegular,
+    // fontFamily: fontFamily.popinRegular,
     color: colors.black,
   },
   locationContainer: {
@@ -45,7 +45,7 @@ export const styles = StyleSheet.create({
   locationText: {
     fontSize: 10,
     color: colors.black,
-    fontFamily: fontFamily.popinLight,
+    // fontFamily: fontFamily.popinLight,
     flex: 1,
   },
 });

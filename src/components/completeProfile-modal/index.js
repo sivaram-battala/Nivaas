@@ -48,9 +48,7 @@ const CompleteProfileModal = ({modalVisible, setModalVisible, onSave,id,fcmToken
       animationType="fade"
       transparent={true}
       visible={modalVisible}
-      onRequestClose={() => {
-        setModalVisible(!modalVisible);
-      }}>
+      onRequestClose={() => {}}>
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           <Text style={styles.modalTitle}>Complete Your Profile</Text>
@@ -72,7 +70,7 @@ const CompleteProfileModal = ({modalVisible, setModalVisible, onSave,id,fcmToken
             <PrimaryButton
               onPress={handleSave}
               text="Save"
-              bgColor={colors.primaryRedColor}
+              bgColor={colors.primaryColor}
               radius={30}
               shadow={true}
               textColor={colors.white}

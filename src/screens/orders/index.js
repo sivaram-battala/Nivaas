@@ -9,7 +9,7 @@ import {allTexts, colors} from '../../common';
 const Orders = ({navigation}) => {
   return (
     <View style={styles.mainCon}>
-      <View style={{height: 50, marginTop: statusBarHeight}}>
+      <View style={{marginTop: statusBarHeight}}>
         <TopBarCard2 back={true} txt={'Orders'} navigation={navigation} />
       </View>
       <View style={{alignItems: 'center', marginTop: '50%'}}>

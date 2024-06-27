@@ -29,7 +29,7 @@ const Notification = ({ navigation }) => {
         <View style={styles.topBar}>
           <TopBarCard2 back={true} navigation={navigation} txt={'Notifications'} />
           <TouchableOpacity style={styles.icon} onPress={() => setSearchVisible(true)}>
-            <Feather name='search' size={25} color={colors.black} />
+            <Feather name='search' size={25} color={colors.white} />
           </TouchableOpacity>
         </View>
       )}
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
   },
   topBar: {
-    height: 50,
+    height: 70,
     marginTop: statusBarHeight,
     flexDirection: 'row',
     alignItems: 'center',
@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   icon: {
     position: 'absolute',
     right: '3%',
-    bottom: 5,
+    bottom: '25%',
   },
   searchBar: {
     height: 50,

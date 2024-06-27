@@ -3,7 +3,7 @@ import {FlatList, Text, View, Modal, TouchableOpacity, Share, Alert, Linking} fr
 import {styles} from './style';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import {DpImage, ManageApartmentsModal, ManageflatsModal, TopBarCard2} from '../../components';
+import {DpImage, ManageApartmentsModal, ManageflatsModal, TermsAndConditionsModal, TopBarCard2} from '../../components';
 import {statusBarHeight} from '../../utils/config/config';
 import {removeLoginSessionDetails} from '../../utils/preferences/localStorage';
 import ApplicationContext from '../../utils/context-api/Context';
@@ -18,7 +18,11 @@ const MyAccount = ({navigation, dispatch, route}) => {
   const {userDetails, setLoginDetails} = useContext(ApplicationContext);
   const [flatModalVisible, setFlatModalVisible] = useState(false);
   const [apartmentModalVisible, setApartmentModalVisible] = useState(false);
-  
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const termsAndConditionsModal = () => {
+    setModalVisible(!isModalVisible);
+  };
 // const apartmentNames = custDetails?.apartmentDTOs?.map(apartment => apartment.jtApartmentDTO.name);
 // console.log(apartmentNames,'llllllllllllll');
 // const filteredFlats = custDetails?.flatDTO?.filter(flat => {
@@ -31,7 +35,7 @@ const MyAccount = ({navigation, dispatch, route}) => {
       showsVerticalScrollIndicator={false}
       style={styles.mainContainer}>
       <View
-        style={{height: 50, marginTop: statusBarHeight}}>
+        style={{marginTop: statusBarHeight}}>
         <TopBarCard2
           back={true}
           txt={'My Account'}
@@ -104,11 +108,12 @@ const MyAccount = ({navigation, dispatch, route}) => {
       <View style={styles.nivas}>
         <Text style={styles.nivasText}>NIVAAS</Text>
       </View>
-      <View style={styles.footer}>
+      <TouchableOpacity onPress={termsAndConditionsModal} style={styles.footer}>
         <Text style={styles.footerText}>Terms&Conditions</Text>
         <Text style={styles.footerText}>|</Text>
         <Text style={styles.footerText}>Privacy&policy</Text>
-      </View>
+      </TouchableOpacity>
+      <TermsAndConditionsModal isVisible={isModalVisible} onClose={termsAndConditionsModal} />
     </ScrollView>
   );
 };

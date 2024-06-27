@@ -34,27 +34,28 @@ const Splash = ({navigation}) => {
   };
 
   return (
-    <ImageBackground
-      resizeMode="cover"
-      style={styles.imgBackGround}
-      source={require('../../utils/assets/images/Nivaas-logo.jpg')}>
-      {/* <TouchableOpacity
-        style={{
-          flex: 1,
-          marginTop: '155%',
-          alignSelf: 'center',
-          marginLeft: '50%',
-        }}
-        onPress={() => navigation.replace(signin)}>
-        <Image
-          source={require('../../utils/assets/images/Nivaas-logo.jpg')}
-          style={{
-            height: 60,
-            width: 60,
-          }}
-        />
-      </TouchableOpacity> */}
-    </ImageBackground>
+    // <ImageBackground
+    //   resizeMode="cover"
+    //   style={styles.imgBackGround}
+    //   source={require('../../utils/assets/images/Nivaas-logo.png')}>
+    //   {/* <TouchableOpacity
+    //     style={{
+    //       flex: 1,
+    //       marginTop: '155%',
+    //       alignSelf: 'center',
+    //       marginLeft: '50%',
+    //     }}
+    //     onPress={() => navigation.replace(signin)}>
+    //     <Image
+    //       source={require('../../utils/assets/images/Nivaas-logo.jpg')}
+    //       style={{
+    //         height: 60,
+    //         width: 60,
+    //       }}
+    //     />
+    //   </TouchableOpacity> */}
+    // </ImageBackground>
+    null
   );
 };
 

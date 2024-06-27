@@ -5,7 +5,6 @@ export const styles = StyleSheet.create({
     mainCon:{
         height:'100%',
         backgroundColor:colors.white,
-        marginTop:window.height*0.025
     },
     topHeader:{
         marginVertical:window.height*0.04,
@@ -38,13 +37,24 @@ export const styles = StyleSheet.create({
         marginVertical:window.height*0.03,
     },
     eachService:{
+        // width:'93%',
+        // backgroundColor:colors.gray3,
+        // padding:10,
+        // borderRadius:10,
+        // marginHorizontal:window.width*0.03,
+        elevation:2,
+        // marginVertical:'5%',
+
         width:'93%',
-        backgroundColor:colors.gray3,
+        backgroundColor:colors.yellowOne,
+        // borderColor:colors.primaryColor,
+        // borderWidth:1,
         padding:10,
         borderRadius:10,
         marginHorizontal:window.width*0.03,
-        elevation:3,
-        marginVertical:'5%'
+        marginVertical:'5%',
+        // alignItems:'center'
+
     },
     eachText:{
         fontSize:14,

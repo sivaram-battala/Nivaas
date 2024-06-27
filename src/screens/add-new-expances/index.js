@@ -130,7 +130,7 @@ const AddNewExpances = ({navigation,route}) => {
 
   return (
     <View style={styles.mainCon}>
-      <View style={{height: 50, marginTop: statusBarHeight}}>
+      <View style={{height: 70, marginTop: statusBarHeight}}>
         <TopBarCard2 back={true} txt={'Add Expences'} navigation={navigation} />
       </View>
       <View style={styles.dateDropDownCon}>
@@ -139,7 +139,7 @@ const AddNewExpances = ({navigation,route}) => {
             <AntDesign
               name="calendar"
               size={30}
-              style={{color: colors.primaryRedColor, marginLeft: 5}}
+              style={{color: colors.primaryColor, marginLeft: 5}}
               onPress={showDatePicker}
             />
             <TextInput
@@ -195,7 +195,7 @@ const AddNewExpances = ({navigation,route}) => {
         <View style={styles.button}>
           <PrimaryButton
             text={(mode ==='ADD') ? 'ADD EXPENCE' : 'UPDATE'}
-            bgColor={colors.primaryRedColor}
+            bgColor={colors.primaryColor}
             onPress={handleSave}
           />
         </View>

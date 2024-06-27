@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     },
     backheader: {
-      // backgroundColor: colors.primaryRedColor,
+      // backgroundColor: colors.primaryColor,
       borderRadius: 5,
       paddingVertical:8,
     },
@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
     borderRadius: 100,
     alignContent: 'center',
     alignSelf: 'center',
-    backgroundColor:colors.primaryRedColor,
+    backgroundColor:colors.primaryColor,
   },
   notificationText:{
     fontSize: 20,

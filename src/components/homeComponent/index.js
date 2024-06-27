@@ -59,7 +59,7 @@ const HomeComponent = ({
             onPress={() =>
               navigation.navigate(allTexts.screenNames.selectCityOptions)
             }
-            bgColor={colors.primaryRedColor}
+            bgColor={colors.primaryColor}
             text={'+ ADD YOUR HOME'}
             shadow={true}
             textColor={colors.white}

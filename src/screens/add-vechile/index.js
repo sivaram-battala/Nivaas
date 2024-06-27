@@ -91,7 +91,7 @@ export const AddVehicle = ({navigation}) => {
         </View>
         <View style={styles.subContainerThree}>
           <PrimaryButton
-            bgColor={colors.primaryRedColor}
+            bgColor={colors.primaryColor}
             text={'Add Vehicle'}
             shadow={true}
             textColor={'white'}

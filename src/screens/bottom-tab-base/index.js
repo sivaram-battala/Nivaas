@@ -32,7 +32,7 @@ export default BottomTabBase = ({ navigation }) => {
       showsVerticalScrollIndicator={false}>
       {loader ? (
         <View style={{ flex: 1, marginTop: '3%' }}>
-          <Loader size={'large'} color={colors.primaryRedColor} />
+          <Loader size={'large'} color={colors.primaryColor} />
         </View>
       ) : (
         <Tab.Navigator
@@ -40,7 +40,7 @@ export default BottomTabBase = ({ navigation }) => {
           screenOptions={{
             tabBarStyle: { innerHeight: '5%' },
             tabBarHideOnKeyboard: true,
-            tabBarActiveTintColor:colors.primaryRedColor,
+            tabBarActiveTintColor:colors.primaryColor,
             tabBarShowLabel: false, 
             tabBarStyle: [ 
                 { display: "flex" },
@@ -56,7 +56,7 @@ export default BottomTabBase = ({ navigation }) => {
           //     flexDirection: 'row',
           //     alignSelf: 'center',
           //   },
-          //   activeTintColor: colors.primaryRedColor,
+          //   activeTintColor: colors.primaryColor,
           //   keyboardHidesTabBar: true,
           //   showLabel: false,
           // }}

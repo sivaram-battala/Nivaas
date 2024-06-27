@@ -91,7 +91,7 @@ const NewApartmentOnBoard = ({ navigation }) => {
     <KeyboardAwareScrollView
       showsVerticalScrollIndicator={false}
       style={styles.mainCon}>
-      <View style={{ height: 50, marginTop: statusBarHeight }}>
+      <View style={{marginTop: statusBarHeight }}>
         <TopBarCard2
           back={true}
           txt={'Apartment OnBoarding'}
@@ -183,7 +183,7 @@ const NewApartmentOnBoard = ({ navigation }) => {
           <View style={{ marginTop: window.height * 0.05 }}>
             <PrimaryButton
               onPress={handleSubmit}
-              bgColor={colors.primaryRedColor}
+              bgColor={colors.primaryColor}
               radius={5}
               text={'Send OnBoard Request'}
               shadow={true}

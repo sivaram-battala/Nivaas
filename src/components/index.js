@@ -10,7 +10,6 @@ import {RadioButton} from './RadioButton';
 import {PageHeader} from './PageHeader';
 import {TempleInput} from './InputText';
 import {BackHeaderNew} from './backHeaders';
-import {Terms_And_Conditions} from './terms-and-conditions';
 import {NotificationCard} from './notificationCard';
 import TextInput2 from './TextInput2';
 import {TopBarcard, TopBarCard2} from './topBar1/topBarCard';
@@ -26,6 +25,7 @@ import HomeComponent from './homeComponent';
 import ManageflatsModal from './manageFlatsmodal';
 import ManageApartmentsModal from './ManageApartmentsModal';
 import ImageSlider from './image-slider';
+import TermsAndConditionsModal from './terms-and-conditions';
 export {
   Loader,
   SearchBar,
@@ -39,7 +39,6 @@ export {
   PageHeader,
   TempleInput,
   BackHeaderNew,
-  Terms_And_Conditions,
   NotificationCard,
   TextInput2,
   TopBarcard,
@@ -56,4 +55,5 @@ export {
   ManageflatsModal,
   ManageApartmentsModal,
   ImageSlider,
+  TermsAndConditionsModal,
 };

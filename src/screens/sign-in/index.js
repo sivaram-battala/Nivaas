@@ -19,6 +19,7 @@ import NetInfo from '@react-native-community/netinfo';
 import {loginAction, userDataAction} from '../../redux/slices/authSlice.ts';
 import {useNivaastriggerotpMutation} from '../../redux/services/authService.tsx';
 import {otpTrigger} from '../../utils/api/index.js';
+import { SnackbarComponent } from '../../common/customFunctions.js';
 const Signin = ({navigation}) => {
   const [isConnected, setIsConnected] = useState(' ');
   const [mobNum, setMobNum] = useState('');
@@ -88,7 +89,7 @@ const Signin = ({navigation}) => {
       Snackbar.show({
         text: 'No Internet Connection',
         duration: Snackbar.LENGTH_INDEFINITE,
-        backgroundColor: colors.primaryRedColor,
+        backgroundColor: colors.primaryColor,
         action: {
           text: 'Reload',
           textColor: 'White',
@@ -126,7 +127,10 @@ const Signin = ({navigation}) => {
             });
           }
         })
-        .catch(error => console.log('error in trigger otp', error))
+        .catch((error) => {
+          console.log('error in trigger otp', error)
+          SnackbarComponent({text:'Servers Are Busy Try Again Later',backgroundColor:colors.red1})
+        })
     }
 
     

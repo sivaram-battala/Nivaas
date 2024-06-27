@@ -247,7 +247,7 @@ const Expences = ({navigation}) => {
 
   return (
     <View style={styles.mainCon}>
-      <View style={{height: 50, marginTop: statusBarHeight}}>
+      <View style={{height: 70, marginTop: statusBarHeight}}>
         <TopBarCard2 back={true} txt={'Expenses'} navigation={navigation} />
       </View>
       <View style={styles.dropDown}>
@@ -289,7 +289,7 @@ const Expences = ({navigation}) => {
       </View>
       {loader ? (
         <View>
-          <Loader color={colors.primaryRedColor} size={'large'} />
+          <Loader color={colors.primaryColor} size={'large'} />
         </View>
       ) : (selectedApartment?.id && expancesData?.length !== 0) ? (
         <View>
@@ -315,7 +315,7 @@ const Expences = ({navigation}) => {
             previewOpenDelay={3000}
           />
           {/* <View style={styles.downloadButton}>
-                <PrimaryButton text={'DOWNLOAD PDF'} bgColor={colors.primaryRedColor} onPress={handlegetExpancePDF}/>
+                <PrimaryButton text={'DOWNLOAD PDF'} bgColor={colors.primaryColor} onPress={handlegetExpancePDF}/>
               </View> */}
             <View style={styles.downloadButton}>
               <TouchableOpacity onPress={handlegetExpancePDF}>
@@ -336,7 +336,7 @@ const Expences = ({navigation}) => {
       <View style={styles.addButton}>
         <PrimaryButton
           text={'ADD EXPENSES'}
-          bgColor={colors.primaryRedColor}
+          bgColor={colors.primaryColor}
           onPress={handleNavigation}
         />
         {error && <Text style={styles.errorText}>{error}</Text>}
@@ -362,7 +362,7 @@ const Expences = ({navigation}) => {
               value={updatedText}
             />
             <View style={styles.modalButtonContainer}>
-              <PrimaryButton text={'UPDATE'} bgColor={colors.primaryRedColor} />
+              <PrimaryButton text={'UPDATE'} bgColor={colors.primaryColor} />
             </View>
           </View>
         </Pressable>

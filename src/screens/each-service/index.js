@@ -9,7 +9,7 @@ import { window } from '../../common'
 const EachService = ({navigation}) => {
   return (
     <ScrollView style={styles.mainCon}>
-      <View style={{height: 50, marginTop: statusBarHeight}}>
+      <View style={{marginTop: statusBarHeight}}>
         <TopBarCard2 back={true} txt={'EachService'} navigation={navigation} />
       </View>
       <View style={styles.dataCon}>

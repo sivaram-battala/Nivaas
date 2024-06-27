@@ -49,7 +49,7 @@ const EditMeterModal = ({editModalVisible,setEditModalVisible,editedMeter,setEdi
               </View>
               <PrimaryButton
                 text={'Save Changes'}
-                bgColor={colors.primaryRedColor}
+                bgColor={colors.primaryColor}
                 onPress={handleUpdatePrepaidMetersDetails}
               />
             </Pressable>
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   modalTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: colors.primaryRedColor,
+    color: colors.primaryColor,
   },
   inputContainer: {
     marginVertical: 20,

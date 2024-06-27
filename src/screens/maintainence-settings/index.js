@@ -64,7 +64,7 @@ const MaintainenceSettings = ({ navigation }) => {
         title={item?.name}
         checked={item?.checked}
         onPress={() => handleCheckboxToggle(item.id)}
-        checkedColor={colors.primaryRedColor}
+        checkedColor={colors.primaryColor}
       />
     </View>
   );
@@ -126,7 +126,7 @@ const MaintainenceSettings = ({ navigation }) => {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.mainCon}>
-      <View style={{ height: 50, marginTop: statusBarHeight }}>
+      <View style={{marginTop: statusBarHeight }}>
         <TopBarCard2 back={true} navigation={navigation} txt={'Maintenance'} />
       </View>
       <View style={styles.headerCon}>
@@ -172,7 +172,7 @@ const MaintainenceSettings = ({ navigation }) => {
         />
         {loader ? (
           <View>
-            <Loader color={colors.primaryRedColor} size={'large'} />
+            <Loader color={colors.primaryColor} size={'large'} />
           </View>
         ) : (
           <FlatList
@@ -193,7 +193,7 @@ const MaintainenceSettings = ({ navigation }) => {
           <View style={styles.buttonCon}>
             <PrimaryButton
               text={'SAVE'}
-              bgColor={colors.primaryRedColor}
+              bgColor={colors.primaryColor}
               onPress={handlesave}
             />
           </View>
@@ -251,7 +251,7 @@ const styles = StyleSheet.create({
   },
   dropdownButtonStyle: {
     height: 50,
-    backgroundColor: colors.primaryRedColor,
+    backgroundColor: colors.primaryColor,
     borderRadius: 5,
     flexDirection: 'row',
     justifyContent: 'center',

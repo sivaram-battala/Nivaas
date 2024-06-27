@@ -194,7 +194,7 @@ const SocietyDues = ({navigation}) => {
   };
   return (
     <ScrollView style={styles.mainCon}>
-      <View style={{height: 50, marginTop: statusBarHeight}}>
+      <View style={{marginTop: statusBarHeight}}>
         <TopBarCard2 back={true} txt={'Society Dues'} navigation={navigation} />
       </View>
       { 
@@ -230,7 +230,7 @@ const SocietyDues = ({navigation}) => {
             <CheckBox
               checked={selectAll}
               onPress={handleSelectAll}
-              checkedColor={colors.primaryRedColor}
+              checkedColor={colors.primaryColor}
             />
           </View>
           <View style={styles.container}>
@@ -252,7 +252,7 @@ const SocietyDues = ({navigation}) => {
                     <CheckBox
                       checked={item.checked}
                       onPress={() => handleCheckboxChange(item.flatId)}
-                      checkedColor={colors.primaryRedColor}
+                      checkedColor={colors.primaryColor}
                     />
                   </View>
                 </View>
@@ -261,7 +261,7 @@ const SocietyDues = ({navigation}) => {
             <View style={styles.button}>
               <PrimaryButton
                 text={'Mark As Paid'}
-                bgColor={colors.primaryRedColor}
+                bgColor={colors.primaryColor}
                 onPress={handleUpdate}
               />
             </View>

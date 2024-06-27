@@ -21,13 +21,13 @@ import {styles} from './style';
 // import {NewVerifyOTP, loginUser1} from '../../utils/api';
 import {PasswordField} from '../../components/inputfield';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {Terms_And_Conditions} from '../../components';
+// import {Terms_And_Conditions} from '../../components';
 export const NivaasIcon = () => (
   <View style={styles.imageContainer}>
     <Image
       resizeMode="contain"
       style={styles.templeLogo}
-      source={require('../../utils/assets/images/Nivaas-logo.jpg')}
+      source={require('../../utils/assets/images/Nivaas-logo.png')}
     />
   </View>
 );
@@ -52,7 +52,7 @@ const Signup = ({navigation}) => {
       Snackbar.show({
         text: 'No Internet Connection',
         duration: Snackbar.LENGTH_INDEFINITE,
-        backgroundColor: colors.primaryRedColor,
+        backgroundColor: colors.primaryColor,
         action: {
           text: 'Reload',
           textColor: 'White',
@@ -263,13 +263,13 @@ const Signup = ({navigation}) => {
                     size={30}
                     style={{
                       ...styles.checkIcon,
-                      color: isChecked ? colors.primaryRedColor : '#7a98fa',
+                      color: isChecked ? colors.primaryColor : '#7a98fa',
                     }}
                   />
                   <Text
                     style={{
                       ...styles.tc,
-                      color: isChecked ? colors.primaryRedColor : '#7a98fa',
+                      color: isChecked ? colors.primaryColor : '#7a98fa',
                     }}>
                     Terms & Conditions{' '}
                   </Text>
@@ -277,7 +277,7 @@ const Signup = ({navigation}) => {
                 <View style={styles.buttonContainer}>
                   {isChecked ? (
                     <PrimaryButton
-                      bgColor={colors.primaryRedColor}
+                      bgColor={colors.primaryColor}
                       loading={isSubmitting}
                       onPress={handleSubmit}
                       text={sigup}
@@ -309,14 +309,14 @@ const Signup = ({navigation}) => {
             );
           }}
         </Formik>
-        {tcModal && (
+        {/* {tcModal && (
           <Terms_And_Conditions
             isModal={tcModal}
             onPress={() => {
               setTcModal(false), setIsChecked(true);
             }}
           />
-        )}
+        )} */}
       </KeyboardAwareScrollView>
     </SafeAreaView>
   );

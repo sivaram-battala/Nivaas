@@ -34,7 +34,7 @@ const MeterDetailsModal = ({
               <Feather
                 name="edit"
                 size={20}
-                color={colors.primaryRedColor}
+                color={colors.primaryColor}
                 onPress={() => handleEditPress(selectedMeter)}
               />
             </Text>
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   modalTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: colors.primaryRedColor,
+    color: colors.primaryColor,
   },
   metersDetailsText: {
     color: colors.black,

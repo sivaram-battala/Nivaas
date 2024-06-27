@@ -3,7 +3,7 @@ import { colors, window } from "../../common";
 
 export const styles = StyleSheet.create({
   mainCon:{
-    paddingTop:window.height*0.06,
+    paddingTop:window.height*0.02,
     backgroundColor:colors.white,
     height:'100%'
   },
@@ -16,7 +16,11 @@ export const styles = StyleSheet.create({
     justifyContent:'space-between',
     alignItems:'center',
     marginTop:'5%',
-    marginHorizontal:window.width*0.08,
+    paddingHorizontal:window.width*0.08,
+    paddingVertical:window.height*0.06,
+    backgroundColor:colors.primaryColor,
+    borderBottomLeftRadius:15,
+    borderBottomRightRadius:15
   },
   usernameCon:{
     width:'78%',
@@ -25,7 +29,7 @@ export const styles = StyleSheet.create({
     overflow:'hidden'
   },
   username:{
-    color:colors.black,
+    color:colors.white,
     fontSize:20,
     fontFamily:'PlayfairDisplay-SemiBold'
   },
@@ -39,11 +43,11 @@ profileImage:{
   marginLeft:10
 },
 icons:{
-    color:colors.black,
+    color:colors.white,
     marginLeft:10
 },
   subConOne:{
-    marginTop:'20%',
+    marginTop:'15%',
     height:'auto',
     alignItems:'center',
     backgroundColor:colors.yellowOne,
@@ -107,11 +111,11 @@ icons:{
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop:'5%'
+    marginTop:'10%'
   },
   refreshText: {
     marginLeft: 5,
-    color: colors.primaryRedColor,
+    color: colors.primaryColor,
     fontWeight:'bold'
   },
 })

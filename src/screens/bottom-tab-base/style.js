@@ -20,31 +20,31 @@ export const styles = StyleSheet.create({
       alignItems: 'center',
       borderRadius: 100,
       justifyContent: 'center',
-      backgroundColor: 'white', 
+      backgroundColor:colors.white, 
       padding: 10,
       marginBottom: 20,
     },
     imageNormal:{
-      color:colors.black,
+      color:colors.gray,
       marginBottom:5
     },
     imageFocused:{
-      color:colors.primaryRedColor,
+      color:colors.primaryColor,
       marginBottom:5
     },
     iconTextCon:{
       alignItems:'center'
     },
     textNormal:{
-      color:colors.black,
+      color:colors.gray,
     },
     textFocused:{
-      color:colors.primaryRedColor,
+      color:colors.primaryColor,
     },
     imageContainer:{
       elevation:2,
       shadowColor: colors.black,
       borderWidth:1,
-      borderColor:colors.primaryRedColor,
+      borderColor:colors.primaryColor,
     },
   });

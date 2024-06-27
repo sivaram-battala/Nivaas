@@ -45,7 +45,7 @@ const EditOnBoarderFlatDetailsModal = ({modalVisible,setModalVisible,setFormData
             <View>
               <PrimaryButton
                 text={'UPDATE'}
-                bgColor={colors.primaryRedColor}
+                bgColor={colors.primaryColor}
                 onPress={handleFormSubmit}
               />
             </View>

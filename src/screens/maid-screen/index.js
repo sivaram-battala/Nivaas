@@ -9,7 +9,7 @@ import { allTexts, window } from '../../common'
 const Maid = ({navigation}) => {
   return (
     <ScrollView style={styles.mainCon}>
-      <View style={{height: 50, marginTop: statusBarHeight}}>
+      <View style={{marginTop: statusBarHeight}}>
         <TopBarCard2 back={true} txt={'Maid'} navigation={navigation} />
       </View>
       <View style={styles.dataCon}>

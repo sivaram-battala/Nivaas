@@ -129,7 +129,7 @@ export const styles = StyleSheet.create({
   nivasText: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: colors.black,
+    color: colors.primaryColor,
   },
   footer: {
     flexDirection: 'row',
