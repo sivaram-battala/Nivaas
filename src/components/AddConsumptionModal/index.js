@@ -67,7 +67,7 @@ const AddConsumptionUnitsModal = ({unitsConsumed,addModalVisible, setAddModalVis
                 <PrimaryButton
                   text={'Add Consumption'}
                   onPress={handleUpdateConsumptionUnits}
-                  bgColor={colors.primaryRedColor}
+                  bgColor={colors.primaryColor}
                 />
               </View>
             </View>
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
   modalTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: colors.primaryRedColor,
+    color: colors.primaryColor,
   },
   container2: {
     marginHorizontal: '5%',

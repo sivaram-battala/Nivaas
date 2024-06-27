@@ -18,7 +18,6 @@ export const styles = StyleSheet.create({
     },
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
-
     elevation: 3,
   },
   imgContainer: {
@@ -37,12 +36,12 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   nameText: {
-    fontFamily: fontFamily.popinBold,
+    // fontFamily: fontFamily.popinBold,
     color: colors.black,
     fontSize: 12,
   },
   followText: {
-    fontFamily: fontFamily.popinMedium,
+    // fontFamily: fontFamily.popinMedium,
     color: colors.green2,
     fontSize: 12,
   },
@@ -56,7 +55,7 @@ export const styles = StyleSheet.create({
   locationText: {
     fontSize: 10,
     color: colors.black,
-    fontFamily: fontFamily.popinMedium,
+    // fontFamily: fontFamily.popinMedium,
     flex: 1,
   },
 });

@@ -202,7 +202,7 @@ const OTPScreen = ({navigation, route}) => {
   return (
     <View style={styles.wrapper}>
       <StatusBar backgroundColor={'white'} />
-      <View style={{height: 60, marginTop: statusBarHeight}}>
+      <View style={{marginTop: statusBarHeight}}>
         <TopBarCard2
           back={true}
           txt={'Confirm OTP'}
@@ -220,7 +220,7 @@ const OTPScreen = ({navigation, route}) => {
         <OTPTextInput
           ref={otpInput}
           inputCount={6}
-          tintColor={colors.primaryRedColor}
+          tintColor={colors.primaryColor}
           textInputStyle={styles.textInput}
           containerStyle={{
             marginTop: 1,
@@ -237,7 +237,7 @@ const OTPScreen = ({navigation, route}) => {
             <PrimaryButton
               text={'Continue'}
               loading={loading}
-              bgColor={colors.primaryRedColor}
+              bgColor={colors.primaryColor}
               onPress={() => {
                 let otpOutPut = otpInput?.current?.state?.otpText
                   ?.toString()

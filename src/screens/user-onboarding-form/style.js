@@ -4,10 +4,10 @@ import { colors, window } from "../../common";
 
 export const styles = StyleSheet.create({
     mainContainer:{
-        width:window.width,
-        height:'100%',
+        // height:'100%',
+        flex:1,
         backgroundColor:colors.white,
-        paddingTop:window.height * 0.0001
+        // paddingTop:window.height * 0.0001
     },
     detailsCon:{
         backgroundColor:colors.gray0,

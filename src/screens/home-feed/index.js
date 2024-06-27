@@ -127,7 +127,7 @@ const Home = ({navigation}) => {
     handleCurrentCustomerData();
     handleCityData();
     NetworkInfo();
-    SnackbarComponent({text:'Refresh the page to get the latest updates',backgroundColor:colors.primaryRedColor})
+    SnackbarComponent({text:'Refresh the page to get the latest updates',backgroundColor:colors.primaryColor})
   }, [])
   
   useEffect(() => {
@@ -154,7 +154,7 @@ const Home = ({navigation}) => {
       <ScrollView
         contentContainerStyle={styles.scrollView}
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={[colors.primaryRedColor]}/>
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={[colors.primaryColor]}/>
         }>
       <CompleteProfileModal
         modalVisible={modalVisible}
@@ -165,7 +165,7 @@ const Home = ({navigation}) => {
       />
       {loder || refresh ? (
         <View>
-          {loder && <Loader color={colors.primaryRedColor} size={'large'} />}
+          {loder && <Loader color={colors.primaryColor} size={'large'} />}
           {refresh && (
             <TouchableOpacity
               style={styles.refreshButton}
@@ -173,15 +173,15 @@ const Home = ({navigation}) => {
               <FontAwesome
                 name="refresh"
                 size={20}
-                color={colors.primaryRedColor}
+                color={colors.primaryColor}
               />
               <Text style={styles.refreshText}>Refresh</Text>
             </TouchableOpacity>
           )}
         </View>
-      ) : (
+       ) : (
         <HomeComponent currentCustomerData={currentCustomerData} navigation={navigation} isOneFlatOnboarded={isOneFlatOnboarded}/>
-      )}
+       )}
       </ScrollView>
     </SafeAreaView>
   );

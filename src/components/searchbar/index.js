@@ -26,17 +26,17 @@ export const SearchBar = ({
     <View style={{...styles.iconContainer}}>
       <TextInput
         onChangeText={onTextChange}
-        placeholderTextColor={colors.primaryRedColor}
+        placeholderTextColor={colors.primaryColor}
         placeholder={placeHolder || 'Search temples'}
         style={{
           ...styles.field,
-          color: colors.primaryRedColor,
+          color: colors.primaryColor,
           width: width ? width : '93%',
         }}
         value={value}
         onSubmitEditing={onSubmit}
         autoCapitalize={false}
-        selectionColor={colors.primaryRedColor}
+        selectionColor={colors.primaryColor}
       />
       {loading && <Loader size={25} color={colors.green2} />}
 
@@ -50,7 +50,7 @@ export const SearchBar = ({
           <Feather
             onPress={onCrossPress}
             name="x-circle"
-            color={colors.primaryRedColor}
+            color={colors.primaryColor}
             size={20}
             style={{}}
           />

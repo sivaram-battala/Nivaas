@@ -188,7 +188,7 @@ const PrepaidMeter = ({navigation}) => {
       <View>
         <PrimaryButton
           text={'Add'}
-          bgColor={colors.primaryRedColor}
+          bgColor={colors.primaryColor}
           onPress={() => handleAddPress(item)}
         />
       </View>
@@ -209,7 +209,7 @@ const PrepaidMeter = ({navigation}) => {
  
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.mainCon}>
-      <View style={{height: 50, marginTop: statusBarHeight}}>
+      <View style={{marginTop: statusBarHeight}}>
         <TopBarCard2
           back={true}
           txt={'Prepaid Meter'}
@@ -242,7 +242,7 @@ const PrepaidMeter = ({navigation}) => {
       <View style={styles.container}>
         {loader ? (
           <View>
-            <Loader color={colors.primaryRedColor} size={'large'} />
+            <Loader color={colors.primaryColor} size={'large'} />
           </View>
         ) : (
           <FlatList
@@ -267,7 +267,7 @@ const PrepaidMeter = ({navigation}) => {
             <View style={styles.buttonCon}>
             <PrimaryButton
               text={'Add Prepaid Meter'}
-              bgColor={colors.primaryRedColor}
+              bgColor={colors.primaryColor}
               onPress={() =>
                 selectedApartment?.id
                   ? navigation.navigate(allTexts.screenNames.addPrepaidMeter, {
@@ -297,7 +297,7 @@ const PrepaidMeter = ({navigation}) => {
                   <Feather
                     name="edit"
                     size={20}
-                    color={colors.primaryRedColor}
+                    color={colors.primaryColor}
                     onPress={() => handleEditPress(selectedMeter)}
                   />
                 </Text>
@@ -361,7 +361,7 @@ const PrepaidMeter = ({navigation}) => {
               </View>
               <PrimaryButton
                 text={'Save Changes'}
-                bgColor={colors.primaryRedColor}
+                bgColor={colors.primaryColor}
                 onPress={handleUpdatePrepaidMetersDetails}
               />
             </Pressable>
@@ -400,7 +400,7 @@ const PrepaidMeter = ({navigation}) => {
                   <PrimaryButton
                     text={'Add Consumption'}
                     onPress={handleUpdateConsumptionUnits}
-                    bgColor={colors.primaryRedColor}
+                    bgColor={colors.primaryColor}
                   />
                 </View>
               </View>

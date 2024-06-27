@@ -11,7 +11,7 @@ const IconNameCard = ({navigation,Icon,iconName,screenName,title}) => {
         <Icon
           name={iconName}
           size={25}
-          color={colors.primaryRedColor}
+          color={colors.primaryColor}
         />
         <Text style={styles.eachText}>{title}</Text>
       </View>
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         width:'93%',
         backgroundColor:colors.gray3,
-        borderColor:colors.primaryRedColor,
+        borderColor:colors.primaryColor,
         borderWidth:1,
         padding:10,
         borderRadius:5,

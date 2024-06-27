@@ -38,9 +38,9 @@ export const styles = StyleSheet.create({
     eachService:{
         flexDirection:'row',
         width:'93%',
-        backgroundColor:colors.gray3,
-        borderColor:colors.primaryRedColor,
-        borderWidth:1,
+        backgroundColor:colors.yellowOne,
+        // borderColor:colors.primaryColor,
+        // borderWidth:1,
         padding:10,
         borderRadius:5,
         marginHorizontal:window.width*0.03,

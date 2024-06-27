@@ -110,7 +110,7 @@ const CoAdmin = ({navigation}) => {
       <View style={styles.singleApartmentCon}>
         <PrimaryButton
           text={'SUBMIT'}
-          bgColor={colors.primaryRedColor}
+          bgColor={colors.primaryColor}
           onPress={handleCoadmin}
         />
       </View>
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   apartmentnameText: {
-    color: colors.primaryRedColor,
+    color: colors.primaryColor,
     fontSize: 16,
     fontWeight: '500',
   },

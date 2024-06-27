@@ -82,7 +82,7 @@ export const TopBarcard = ({
               {img ? (
                 <Image source={{uri: img?.url}} height={40} width={40} />
               ) : (
-                <EvilIcons name="user" size={45} color={colors.primaryRedColor} />
+                <EvilIcons name="user" size={45} color={colors.primaryColor} />
               )}
             </TouchableOpacity>
           )}
@@ -109,7 +109,7 @@ export const TopBarcard = ({
               <MaterialIcons
                 name="cancel"
                 size={20}
-                color={colors.primaryRedColor}
+                color={colors.primaryColor}
               />
             </TouchableOpacity>
           )}
@@ -143,7 +143,7 @@ export const TopBarcard = ({
                 navigation.navigate(allTexts.screenNames.notification)
               }>
               <View>
-                <Feather name="bell" size={30} color={colors.primaryRedColor} />
+                <Feather name="bell" size={30} color={colors.primaryColor} />
                 {notificationsCount !== 0 && (
                   <>
                     <View style={styles.notificationsCount}>
@@ -161,7 +161,7 @@ export const TopBarcard = ({
               <Feather
                 name="shopping-bag"
                 size={30}
-                color={colors.primaryRedColor}
+                color={colors.primaryColor}
               />
             </TouchableOpacity>
           )}
@@ -216,7 +216,7 @@ export const TopBarCard2 = ({
                     data: bData,
                   };
               }}>
-              <AntDesign name='arrowleft' size={28} color={colors.black}/>
+              <AntDesign name='arrowleft' size={28} color={colors.white}/>
             </TouchableOpacity>
           )}
         </View>
@@ -226,7 +226,7 @@ export const TopBarCard2 = ({
               style={{
                 fontSize: 20,
                 fontWeight: 'bold',
-                color: colors.primaryRedColor,
+                color: colors.white,
                 textAlign: 'center',
                 fontFamily: 'Poppins-Medium',
                 fontWeight: 'Normal',
@@ -261,12 +261,12 @@ export const TopBarCard2 = ({
               <Feather
                 name="shopping-bag"
                 size={30}
-                color={colors.primaryRedColor}
+                color={colors.primaryColor}
               />
             </TouchableOpacity>
           )}
           {accountType && (
-            <TouchableOpacity onPress={onPressBag} style={{marginRight: '25%',backgroundColor:'black',alignItems:'center',borderRadius:10}}>
+            <TouchableOpacity onPress={onPressBag} style={{marginRight: '25%',alignItems:'center',borderRadius:10}}>
               <Text style={{color:'white',fontWeight:'500'}}>{accountType}</Text>
             </TouchableOpacity>
           )}
@@ -282,10 +282,10 @@ export const TopBarCard2 = ({
 };
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.white,
+    backgroundColor: colors.primaryColor,
     flex: 1,
-    height: 60,
-    // elevation: 2,
+    height: 70,
+    elevation: 2,
     shadowColor: '#000',
     shadowOpacity: 0.5,
     shadowRadius: 2,
@@ -293,6 +293,9 @@ const styles = StyleSheet.create({
       width: 1,
       height: 2,
     },
+    paddingBottom:5,
+    borderBottomLeftRadius:10,
+    borderBottomRightRadius:10,
   },
   header: {
     flex: 1,
@@ -314,7 +317,7 @@ const styles = StyleSheet.create({
 
   },
   joinText: {
-    color: colors.primaryRedColor,
+    color: colors.primaryColor,
     fontWeight: 'bold',
     fontSize: 18,
   },
@@ -351,7 +354,7 @@ const styles = StyleSheet.create({
   },
   notificationsCount: {
     borderWidth: 1,
-    borderColor: colors.primaryRedColor,
+    borderColor: colors.primaryColor,
     backgroundColor: 'white',
     borderRadius: 10,
     height: 18,
@@ -363,7 +366,7 @@ const styles = StyleSheet.create({
     left: 15,
   },
   notificationCountNumber: {
-    color: colors.primaryRedColor,
+    color: colors.primaryColor,
     fontSize: 10,
   },
 });

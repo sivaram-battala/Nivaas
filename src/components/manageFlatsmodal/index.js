@@ -23,7 +23,7 @@ const ManageflatsModal = ({
           {item?.jtFlatDTO?.apartmentDTO?.name}
         </Text>
       </View>
-      <Text style={[styles.flatModalText, {marginLeft: '10%'}]}>
+      <Text style={[styles.flatModalText, {marginLeft: '7%'}]}>
         {item?.adminApproved ? (
           <Text style={styles.statusactiveText}>Active</Text>
         ) : (

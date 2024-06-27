@@ -33,7 +33,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   welcome: {
-    fontFamily: fontFamily.popinLight,
+    // fontFamily: fontFamily.popinLight,
     baseText: fontSize.medium,
     color: colors.gray,
   },
@@ -45,7 +45,7 @@ export const styles = StyleSheet.create({
   },
   name: {
     color: colors.black,
-    fontFamily: fontFamily.popinMedium,
+    // fontFamily: fontFamily.popinMedium,
   },
   icon: {
     height: 20,

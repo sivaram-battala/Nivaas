@@ -24,7 +24,7 @@ const CustomSelectDropdown = ({ data, onSelect, selectedItem, placeholder }) => 
           <View
             style={{
               ...styles.dropdownItemStyle,
-              ...(isSelected && { backgroundColor: colors.primaryRedColor }),
+              ...(isSelected && { backgroundColor: colors.primaryColor }),
             }}
           >
             <Text style={styles.dropdownItemTxtStyle}>{item?.name}</Text>
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   dropdownButtonStyle: {
     width: '100%',
     height: 40,
-    backgroundColor: colors.primaryRedColor,
+    backgroundColor: colors.primaryColor,
     borderRadius: 5,
     justifyContent: 'center',
     alignItems: 'center',

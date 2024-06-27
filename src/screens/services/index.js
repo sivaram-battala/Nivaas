@@ -7,7 +7,7 @@ import {styles} from './style';
 const Services = ({navigation}) => {
   return (
     <ScrollView style={styles.mainCon} showsVerticalScrollIndicator={false}>
-      <View style={{height: 50, marginTop: statusBarHeight}}>
+      <View style={{marginTop: statusBarHeight}}>
         <TopBarCard2  txt={'Services'} />
       </View>
       <View style={styles.servicesCon}>

@@ -106,7 +106,7 @@ const EditOnboardedFlatDetails = ({navigation}) => {
   }, [selectedApartment?.id]);
   return (
     <View style={styles.mainCon}>
-      <View style={{height: 50, marginTop: statusBarHeight}}>
+      <View style={{height:70, marginTop: statusBarHeight}}>
         <TopBarCard2
           back={true}
           txt={'Edit Flat Details'}
@@ -144,7 +144,7 @@ const EditOnboardedFlatDetails = ({navigation}) => {
           </View>
           {loader ? (
             <View>
-              <Loader color={colors.primaryRedColor} size={'large'} />
+              <Loader color={colors.primaryColor} size={'large'} />
             </View>
           ) : (
             <FlatList

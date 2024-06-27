@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
 
   field: {
     color: colors.black,
-    fontFamily: fontFamily.popinRegular,
+    // fontFamily: fontFamily.popinRegular,
     fontSize: 16,
     height: 40,
     borderRadius:20,

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import {StatusBar} from 'react-native';
+import {StatusBar, useColorScheme} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
 import {Provider} from 'react-redux';
@@ -20,13 +20,14 @@ const App = () => {
     };
   }, []);
 
-  
   const checkToken = async () => {
     await messaging().requestPermission();
     const token = await messaging().getToken();
     // console.log('Device Token:', token);
   }
   checkToken();
+
+  const theme = useColorScheme();
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>

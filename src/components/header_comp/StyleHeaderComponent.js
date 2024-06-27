@@ -7,7 +7,7 @@ const StyleHeaderComponent = StyleSheet.create({
     width: '100%',
   },
   subContainerStyle: {
-    backgroundColor: colors.primaryRedColor,
+    backgroundColor: colors.primaryColor,
     flexDirection: 'row',
     width: '100%',
     paddingTop: '3%',

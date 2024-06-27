@@ -52,10 +52,10 @@ import {
         <View style={{marginTop:10,marginLeft:9,flexDirection:'row', alignItems:'center'}}>
             <BackHeaderNew onPress={()=>navigation.goBack()} />
         </View>
-        <Text style={{marginLeft:10, fontSize: 16, color: colors.primaryRedColor}}>
+        <Text style={{marginLeft:10, fontSize: 16, color: colors.primaryColor}}>
               {data.selectedCity}
         </Text>
-        <Text style={{marginLeft:10, fontSize: 16, color: colors.primaryRedColor}}>
+        <Text style={{marginLeft:10, fontSize: 16, color: colors.primaryColor}}>
               {data.selectedApartment}
         </Text>
         <SearchBar

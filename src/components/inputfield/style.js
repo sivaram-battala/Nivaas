@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     // marginBottom: 10,
   },
   title: {
-    fontFamily: fontFamily.popinMedium,
+    // fontFamily: fontFamily.popinMedium,
     color: colors.darkBrown,
     // textTransform: 'capitalize',
   },
@@ -19,13 +19,13 @@ export const styles = StyleSheet.create({
     borderColor: colors.gray,
     fontSize: 17,
     color: colors.black,
-    fontFamily: fontFamily.popinRegular,
+    // fontFamily: fontFamily.popinRegular,
     width: '100%',
   },
   error: {
-    color: colors.primaryRedColor,
+    color: colors.primaryColor,
     textTransform: 'capitalize',
-    fontFamily: fontFamily.popinRegular,
+    // fontFamily: fontFamily.popinRegular,
     fontSize: 12,
     marginTop: -8,
   },
@@ -39,7 +39,7 @@ export const styles = StyleSheet.create({
     width: undefined,
     flex: 1,
     borderRadius: 3,
-    color:colors.primaryRedColor
+    color:colors.primaryColor
   },
   imgContainer: {
     width: 57,
@@ -52,7 +52,7 @@ export const styles = StyleSheet.create({
   code: {
     paddingLeft: 2,
     color: colors.black,
-    fontFamily: fontFamily.popinLight,
+    // fontFamily: fontFamily.popinLight,
     fontSize: 15,
   },
 });

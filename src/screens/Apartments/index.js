@@ -27,7 +27,7 @@ const Apartments = ({navigation}) => {
         </View>
       </View> */}
       <View
-        style={{height: 50, marginTop: statusBarHeight}}>
+        style={{height: 70, marginTop: statusBarHeight}}>
         <TopBarCard2
           txt={'Apartments'}
         />

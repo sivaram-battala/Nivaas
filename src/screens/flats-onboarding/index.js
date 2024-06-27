@@ -147,7 +147,7 @@ const PrepaidMeter = ({navigation}) => {
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.mainCon}>
-      <View style={{height: 50, marginTop: statusBarHeight}}>
+      <View style={{marginTop: statusBarHeight}}>
         <TopBarCard2
           back={true}
           txt={'OnBoard Your New Flats'}
@@ -256,7 +256,7 @@ const PrepaidMeter = ({navigation}) => {
                 <View style={{width: '45%'}}>
                   <PrimaryButton
                     text={'Previous'}
-                    bgColor={colors.primaryRedColor}
+                    bgColor={colors.primaryColor}
                     onPress={handlePreviousFlat}
                   />
                 </View>
@@ -271,7 +271,7 @@ const PrepaidMeter = ({navigation}) => {
                       <Text>OnBoard Flat {currentFlatIndex + 2}</Text>
                     )
                   }
-                  bgColor={colors.primaryRedColor}
+                  bgColor={colors.primaryColor}
                   onPress={
                     currentFlatIndex === numFlats - 1
                       ? handleSubmit
@@ -301,7 +301,7 @@ const PrepaidMeter = ({navigation}) => {
             ))}
             <PrimaryButton
               text={'Submit'}
-              bgColor={colors.primaryRedColor}
+              bgColor={colors.primaryColor}
               onPress={handleSubmit}
             />
           </View>

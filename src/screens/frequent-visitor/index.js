@@ -55,7 +55,7 @@ const FrequentVisitor = ({navigation}) => {
           </View>
           <View style={styles.buttonCon}>
             <PrimaryButton
-              bgColor={colors.primaryRedColor}
+              bgColor={colors.primaryColor}
               radius={5}
               text={'Add Pet'}
               shadow={true}

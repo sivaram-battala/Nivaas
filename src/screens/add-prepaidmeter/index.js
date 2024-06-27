@@ -95,7 +95,7 @@ const AddPrepaidMeter = ({ navigation, route }) => {
           </View>
         </View>
         <TouchableOpacity style={styles.buttonCon}>
-          <PrimaryButton text={'SAVE'} bgColor={colors.primaryRedColor} onPress={handleAddPrepaidMeter} />
+          <PrimaryButton text={'SAVE'} bgColor={colors.primaryColor} onPress={handleAddPrepaidMeter} />
         </TouchableOpacity>
       </ScrollView>
     </View>
