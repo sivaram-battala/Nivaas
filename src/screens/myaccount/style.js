@@ -11,9 +11,8 @@ export const styles = StyleSheet.create({
   profie: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: window.height * 0.04,
+    marginVertical: window.height * 0.02,
     marginHorizontal: window.width * 0.04,
-    marginBottom: window.height * 0.02,
   },
   profieText: {
     fontSize: 20,
@@ -122,9 +121,19 @@ export const styles = StyleSheet.create({
     marginLeft: 15,
     color: colors.black,
   },
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   nivas: {
     alignItems: 'center',
-    marginVertical: 20,
+    marginTop: '2%',
+  },
+  nivaasLogo:{
+    height:55,
+    width:'50%'
   },
   nivasText: {
     fontSize: 24,
@@ -133,12 +142,16 @@ export const styles = StyleSheet.create({
   },
   footer: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
     marginHorizontal: '10%',
-    marginRight:'16%'
+    marginRight:'16%',
+    backgroundColor:colors.gray4,
+    padding:'2%',
+    borderRadius:5,
+    // marginTop: '4%',
   },
   footerText: {
-    fontSize: 14,
+    fontSize: 16,
     marginHorizontal: 5,
     color: colors.black,
   },
@@ -158,4 +171,13 @@ export const styles = StyleSheet.create({
   modalCloseIcon: {
     alignSelf: 'flex-end',
   },
+  VersionCon:{
+    marginVertical:'1%',
+    alignItems:'center'
+  },
+  VersionText:{
+    fontsize:16,
+    fontWeight:'500',
+    color:colors.black
+  }
 });

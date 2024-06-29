@@ -68,9 +68,7 @@ export const sendSupportEmail = () => {
   const email = 'nivaas.home@gmail.com';
   const subject = 'Nivaas';
   const body = 'Describe Your Issue Here : ';
-
   const mailtoUrl = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
   try {
     Linking.openURL(mailtoUrl);
   } catch (error) {
