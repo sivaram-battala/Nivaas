@@ -127,7 +127,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  nivas: {
+  nivaas: {
     alignItems: 'center',
     marginTop: '2%',
   },
@@ -135,7 +135,7 @@ export const styles = StyleSheet.create({
     height:55,
     width:'50%'
   },
-  nivasText: {
+  nivaasText: {
     fontSize: 24,
     fontWeight: 'bold',
     color: colors.primaryColor,

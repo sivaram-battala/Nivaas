@@ -123,8 +123,8 @@ const MyAccount = ({navigation, dispatch, route}) => {
           </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.nivas}>
-        {/* <Text style={styles.nivasText}>NIVAAS</Text> */}
+      <View style={styles.nivaas}>
+        {/* <Text style={styles.nivaasText}>NIVAAS</Text> */}
         <Image source={require('../../utils/assets/images/Nivaas-logo2.png')} style={styles.nivaasLogo}/>
       </View>
       <View style={styles.VersionCon}>

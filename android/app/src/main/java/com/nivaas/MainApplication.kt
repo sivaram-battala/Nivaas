@@ -1,4 +1,4 @@
-package com.nivas
+package com.nivaas
 
 import android.app.Application
 import com.facebook.react.PackageList
