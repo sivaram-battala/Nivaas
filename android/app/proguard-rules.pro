@@ -8,6 +8,6 @@
 #   http://developer.android.com/guide/developing/tools/proguard.html
 
 # Add any project specific keep options here:
--keep class com.nivas.** { *; }
+-keep class com.nivaas.** { *; }
 -keep class com.facebook.react.** { *; }
 -dontwarn com.facebook.react.**
