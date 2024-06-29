@@ -152,6 +152,7 @@ const Home = ({navigation}) => {
   return (
     <SafeAreaView style={styles.mainCon}>
       <ScrollView
+      showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scrollView}
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={[colors.primaryColor]}/>
@@ -163,10 +164,10 @@ const Home = ({navigation}) => {
         id={currentCustomerData?.id}
         fcmToken={fcmToken}
       />
-      {loder || refresh ? (
+      {/* {loder || refresh ? ( */}
         <View>
-          {loder && <Loader color={colors.primaryColor} size={'large'} />}
-          {refresh && (
+          {/* {loder && <Loader color={colors.primaryColor} size={'large'} />} */}
+          {/* {refresh && ( */}
             <TouchableOpacity
               style={styles.refreshButton}
               onPress={handleRefresh}>
@@ -177,11 +178,11 @@ const Home = ({navigation}) => {
               />
               <Text style={styles.refreshText}>Refresh</Text>
             </TouchableOpacity>
-          )}
+          {/* )} */}
         </View>
-       ) : (
+       {/* ) : ( */}
         <HomeComponent currentCustomerData={currentCustomerData} navigation={navigation} isOneFlatOnboarded={isOneFlatOnboarded}/>
-       )}
+       {/* )} */}
       </ScrollView>
     </SafeAreaView>
   );

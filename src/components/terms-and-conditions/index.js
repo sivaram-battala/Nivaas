@@ -10,6 +10,9 @@ import {
 } from 'react-native';
 import {colors} from '../../common';
 import {PrimaryButton} from '../primary-button';
+import { sendSupportEmail } from '../../common/customFunctions';
+import { TopBarCard2 } from '../topBar1/topBarCard';
+import { statusBarHeight } from '../../utils/config/config';
 
 const TermsAndConditionsModal = ({isVisible, onClose}) => {
   return (
@@ -69,12 +72,14 @@ const TermsAndConditionsModal = ({isVisible, onClose}) => {
             <Text style={styles.subTitleTwo}>2.Limitation of Liability:</Text>
             <Text style={styles.content}>In no event shall NIVAAS be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of profits, data, or use, arising out of or in any way connected with your use of the App.</Text>
             <Text style={styles.subTitleOne}>Help Center</Text>
-            <Text style={styles.content}>If you have any questions about these Terms, please contact us on (Contact Number & Email).</Text>
+            <Text style={styles.content}>If you have any questions about these Terms, please contact us on Email : <Text onPress={sendSupportEmail} style={styles.emailText}>nivaas.home@gmail.com</Text></Text>
+            <View style={styles.okButtonCon}>
             <PrimaryButton
               text={'OK'}
               bgColor={colors.primaryColor}
               onPress={onClose}
             />
+            </View>
           </ScrollView>
         </View>
       </View>
@@ -92,15 +97,14 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.white,
     padding: '5%',
-    borderRadius: 10,
-    height: '90%',
-    width: '90%',
+    height: '100%',
+    width: '100%',
   },
   title: {
     fontSize: 20,
     fontWeight: 'bold',
     marginVertical: 10,
-    marginHorizontal:'18%',
+    marginHorizontal:'20%',
     color: colors.primaryColor,
   },
   subTitleOne:{
@@ -121,6 +125,14 @@ const styles = StyleSheet.create({
     color:colors.black,
     fontSize:15,
   },
+  okButtonCon:{
+    marginHorizontal:'30%',
+    marginVertical:'5%'
+  },
+  emailText:{
+    textDecorationLine:'underline',
+    textDecorationColor:colors.primaryColor
+  }
 });
 
 export default TermsAndConditionsModal;

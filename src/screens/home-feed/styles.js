@@ -46,6 +46,23 @@ icons:{
     color:colors.white,
     marginLeft:10
 },
+notificationsCount: {
+  borderWidth: 1,
+  borderColor: colors.primaryColor,
+  backgroundColor: colors.white,
+  borderRadius: 10,
+  height: 18,
+  width: 18,
+  alignItems: 'center',
+  justifyContent: 'center',
+  position: 'absolute',
+  top: -5,
+  left: 20,
+},
+notificationCountNumber: {
+  color: colors.primaryColor,
+  fontSize: 10,
+},
   subConOne:{
     marginTop:'15%',
     height:'auto',
