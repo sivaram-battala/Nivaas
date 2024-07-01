@@ -136,8 +136,8 @@ const PrepaidMeter = ({navigation}) => {
   };
 
   useEffect(() => {
-    ApprovedApartments({customerDetails:customerDetails,setApartmentData:setApartmentData,setSelectedApartment:setSelectedApartment})
-  }, [customerDetails]);
+    ApprovedApartments({customerDetails:customerDetails?.customerOnboardReqData,setApartmentData:setApartmentData,setSelectedApartment:setSelectedApartment})
+  }, [customerDetails?.customerOnboardReqData]);
 
   // useEffect(() => {
   //   if (selectedApartment?.id) {

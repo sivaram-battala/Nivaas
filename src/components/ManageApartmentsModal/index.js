@@ -31,7 +31,7 @@ const ManageApartmentsModal = ({
   return (
     <View style={styles.manageFlatsSubCon}>
       <View>
-        {(custDetails?.currentCustomerData?.apartmentDTOs?.length > 0 ) && (
+        {(custDetails?.apartmentDTOs?.length > 0 ) && (
           <View style={styles.manageFlatsConHome}>
             <FontAwesome
               name="building-o"
@@ -40,13 +40,13 @@ const ManageApartmentsModal = ({
               style={{marginLeft: 3}}
             />
             <View>
-              {custDetails?.currentCustomerData?.apartmentDTOs?.length > 1 ? (
+              {custDetails?.apartmentDTOs?.length > 1 ? (
                 <TouchableOpacity
                   onPress={() => setApartmentModalVisible(true)}
                   style={styles.flatItemCon}>
                   <Text style={styles.flatText}>
                     {
-                      custDetails?.currentCustomerData?.apartmentDTOs[0]
+                      custDetails?.apartmentDTOs[0]
                         ?.jtApartmentDTO?.name
                     }
                   </Text>
@@ -54,7 +54,7 @@ const ManageApartmentsModal = ({
                 </TouchableOpacity>
               ) : (
                 <FlatList
-                  data={custDetails?.currentCustomerData?.apartmentDTOs}
+                  data={custDetails?.apartmentDTOs}
                   renderItem={renderApartmentItem}
                   keyExtractor={item => item.id.toString()}
                 />
@@ -77,7 +77,7 @@ const ManageApartmentsModal = ({
             </Text>
           </View>
         </TouchableOpacity>
-        {custDetails?.currentCustomerData?.apartmentDTOs?.some(
+        {custDetails?.apartmentDTOs?.some(
           apartment => apartment.adminApproved,
         ) && (
           <TouchableOpacity
@@ -109,7 +109,7 @@ const ManageApartmentsModal = ({
               <AntDesign name="close" size={25} color={colors.black} />
             </TouchableOpacity>
             <FlatList
-              data={custDetails?.currentCustomerData?.apartmentDTOs}
+              data={custDetails?.apartmentDTOs}
               renderItem={renderApartmentItem}
               keyExtractor={item => item.id.toString()}
             />

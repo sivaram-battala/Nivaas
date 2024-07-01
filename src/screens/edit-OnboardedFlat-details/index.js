@@ -49,7 +49,7 @@ const EditOnboardedFlatDetails = ({navigation}) => {
       .unwrap()
       .then(response => {
         setLoader(false);
-        // console.log(response?.data, 'RESPONCE OF FLAT DATA');
+        console.log(response?.data, 'RESPONCE OF FLAT DATA');
         const processedFlatData = response?.data.map(item => ({
           ...item,
           flatNo: String(item.flatNo),
@@ -58,6 +58,7 @@ const EditOnboardedFlatDetails = ({navigation}) => {
       })
       .catch(error => {
         console.log('error in flat data==========>', error);
+        SnackbarComponent({text:error?.data?.error || 'failed To Load FlatsData',backgroundColor:colors.red1})
       });
   };
 
@@ -96,8 +97,8 @@ const EditOnboardedFlatDetails = ({navigation}) => {
     setModalVisible(false);
   };
   useEffect(() => {
-    ApprovedApartments({customerDetails:customerDetails,setApartmentData:setApartmentData,setSelectedApartment:setSelectedApartment})
-  }, [customerDetails]);
+    ApprovedApartments({customerDetails:customerDetails?.customerOnboardReqData,setApartmentData:setApartmentData,setSelectedApartment:setSelectedApartment})
+  }, [customerDetails?.customerOnboardReqData]);
 
   useEffect(() => {
     if (selectedApartment?.id) {

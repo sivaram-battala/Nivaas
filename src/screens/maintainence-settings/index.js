@@ -29,21 +29,21 @@ const MaintainenceSettings = ({ navigation }) => {
   const [selectedApartment, setSelectedApartment] = useState({id: '',name: ''});
   const [prepaidMetersData, setPrepaidMetersData] = useState([]);
   const [checkedMeters, setCheckedMeters] = useState([]);
-  const prepaidIdArray = checkedMeters.map((item) => item.id);
+  const prepaidIdArray = checkedMeters?.map((item) => item.id);
   const [selectedDate, setSelectedDate] = useState(null);
   const [value, setValue] = useState('');
   const [getApartmentPrepaidMetersList] = useLazyGetAparmentPrepaidMetersQuery();
   const [maintainenceSave] = useNotifyOnMutation();
 
   const handleCheckboxToggle = (id) => {
-    const updatedData = prepaidMetersData.map((item) =>
+    const updatedData = prepaidMetersData?.map((item) =>
       item.id === id ? { ...item, checked: !item.checked } : item
     );
     setPrepaidMetersData(updatedData);
 
     const updatedCheckedMeters = updatedData
-      .filter((item) => item.checked)
-      .map((item) => ({ id: item.id, name: item.name }));
+      ?.filter((item) => item.checked)
+      ?.map((item) => ({ id: item.id, name: item.name }));
     setCheckedMeters(updatedCheckedMeters);
   };
 
@@ -81,7 +81,7 @@ const MaintainenceSettings = ({ navigation }) => {
       .then((response) => {
         setloader(false);
         setPrepaidMetersData(
-          response?.data.map((meter) => ({
+          response?.data?.map((meter) => ({
             ...meter,
             checked: false,
           }))
@@ -121,8 +121,8 @@ const MaintainenceSettings = ({ navigation }) => {
   }, [selectedApartment]);
 
   useEffect(() => {
-    ApprovedApartments({customerDetails:customerDetails,setApartmentData:setApartmentData,setSelectedApartment:setSelectedApartment})
-  }, [customerDetails]);
+    ApprovedApartments({customerDetails:customerDetails?.customerOnboardReqData,setApartmentData:setApartmentData,setSelectedApartment:setSelectedApartment})
+  }, [customerDetails?.customerOnboardReqData]);
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.mainCon}>

@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import { NIVAAS_URL} from '../../api/api';
+import { BASE_URL_CUSTOMER} from '../../api/api';
 import {RootState} from '../store';
 import { endpoints } from '../../api';
 
@@ -9,7 +9,7 @@ import { endpoints } from '../../api';
 export const cityService = createApi({
   reducerPath: 'cityService',
   baseQuery: fetchBaseQuery({
-    baseUrl: NIVAAS_URL,
+    baseUrl: BASE_URL_CUSTOMER,
     prepareHeaders: (headers, {getState, endpoint}) => {
       const token = (getState() as RootState).auth.token;
       if (token && endpoint !== 'refresh') {
@@ -21,16 +21,19 @@ export const cityService = createApi({
   }), 
   endpoints: builder => ({
     getCityList: builder.query<any, {page:Number,pageSize:Number}>({
-      query: ({page,pageSize}) => `${endpoints.NIVAAS_CITY}?page=${page}&pageSize=${pageSize}`,
+      query: ({page,pageSize}) => `${endpoints.GET_CITY}?page=${page}&pageSize=${pageSize}`,
     }),
     getApartmentList : builder.query<any,{cityId:Number}>({
-      query: ({cityId}) => `${endpoints.NIVAAS_APARTMENT}?cityId=${cityId}`
+      query: ({cityId}) => `${endpoints.GET_APARTMENT}?cityId=${cityId}`
     }),
     getFlatsList : builder.query<any,{flatId:Number,pageNo:Number,pageSize:Number}>({
-      query: ({flatId,pageNo,pageSize}) => `${endpoints.NIVAAS_FLAT}?apartmentId=${flatId}&pageNo=${pageNo}&pageSize=${pageSize}`
+      query: ({flatId,pageNo,pageSize}) => `${endpoints.GET_FLATS}?apartmentId=${flatId}&pageNo=${pageNo}&pageSize=${pageSize}`
     }),
     getPostalCodeList : builder.query<any,{pageNo:Number,pageSize:Number}>({
       query: ({pageNo,pageSize}) => `${endpoints.GET_POSTALCODES}?pageNo=${pageNo}&pageSize=${pageSize}`
+    }),
+    getCustomerOnboardRequests : builder.query<any,{}>({
+      query: () => `${endpoints.GET_CUSTOMER_ONBOARD_REQUESTS}`
     }),
     userOnBoarding: builder.mutation<any, {}>({
       query: (payload) => ({
@@ -41,7 +44,7 @@ export const cityService = createApi({
     }),
     newApartmentOnboarding: builder.mutation<any, {}>({
       query: (payload) => ({
-        url: endpoints.NIVAAS_NEW_APARTMENT_ONBOARD,
+        url: endpoints.NEW_APARTMENT_ONBOARD,
         method: 'POST',
         body: payload,
       }),
@@ -53,6 +56,7 @@ export const {
   useLazyGetCityListQuery,
   useLazyGetApartmentListQuery,
   useLazyGetFlatsListQuery,
+  useLazyGetCustomerOnboardRequestsQuery,
   useLazyGetPostalCodeListQuery,
   useUserOnBoardingMutation,
   useNewApartmentOnboardingMutation,

@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import {styles} from '../../screens/home-feed/styles';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import Fontisto from 'react-native-vector-icons/Fontisto';
 import {Image} from 'react-native';
 import {PrimaryButton} from '../primary-button';
 import {allTexts, colors} from '../../common';

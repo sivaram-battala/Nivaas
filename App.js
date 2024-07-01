@@ -23,7 +23,7 @@ const App = () => {
   const checkToken = async () => {
     await messaging().requestPermission();
     const token = await messaging().getToken();
-    console.log('Device Token:', token);
+    // console.log('Device Token:', token);
   }
   checkToken();
 

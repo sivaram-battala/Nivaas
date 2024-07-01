@@ -3,7 +3,7 @@ import {FlatList, Text, View, Modal, TouchableOpacity, Share, Alert, Linking, Im
 import {styles} from './style';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
-import {DpImage, ManageApartmentsModal, ManageflatsModal, TermsAndConditionsModal, TopBarCard2, TopBarcard} from '../../components';
+import {DpImage, ManageApartmentsModal, ManageflatsModal, TermsAndConditionsModal, TopBarCard2} from '../../components';
 import {statusBarHeight} from '../../utils/config/config';
 import {removeLoginSessionDetails} from '../../utils/preferences/localStorage';
 import ApplicationContext from '../../utils/context-api/Context';
@@ -15,6 +15,7 @@ import { handleshare, sendSupportEmail } from '../../common/customFunctions';
 const MyAccount = ({navigation, dispatch, route}) => {
   const data = route.params;
   const custDetails = useSelector(state=>state.currentCustomer);
+  console.log(custDetails);
   const {userDetails, setLoginDetails} = useContext(ApplicationContext);
   const [flatModalVisible, setFlatModalVisible] = useState(false);
   const [apartmentModalVisible, setApartmentModalVisible] = useState(false);
@@ -79,7 +80,7 @@ const MyAccount = ({navigation, dispatch, route}) => {
               }}>
               {data?.isOneFlatOnboarded && (
                 <Text style={styles.nivaasID}>
-                  Nivaas ID : {(custDetails?.currentCustomerData?.primaryContact)?.substring(0, 6)}
+                  Nivaas ID :{(custDetails?.customerOnboardReqData?.primaryContact)?.substring(0, 6)}
                 </Text>
               )}
             </View>
@@ -88,11 +89,11 @@ const MyAccount = ({navigation, dispatch, route}) => {
       </View>
       <View style={styles.manageFlatsCon}>
         <Text style={styles.manageFlatsConText}>Manage flats</Text>
-        <ManageflatsModal flatModalVisible={flatModalVisible} setFlatModalVisible={setFlatModalVisible} custDetails={custDetails} navigation={navigation}/>
+        <ManageflatsModal flatModalVisible={flatModalVisible} setFlatModalVisible={setFlatModalVisible} custDetails={custDetails?.customerOnboardReqData} navigation={navigation}/>
       </View>
       <View style={styles.manageFlatsCon}>
         <Text style={styles.manageFlatsConText}>Manage Apartments</Text>
-        <ManageApartmentsModal apartmentModalVisible={apartmentModalVisible} setApartmentModalVisible={setApartmentModalVisible} custDetails={custDetails} navigation={navigation}/>
+        <ManageApartmentsModal apartmentModalVisible={apartmentModalVisible} setApartmentModalVisible={setApartmentModalVisible} custDetails={custDetails?.customerOnboardReqData} navigation={navigation}/>
       </View>
       <View style={styles.setting}>
         <Text style={styles.manageFlatsConText}>General settings</Text>
@@ -136,7 +137,6 @@ const MyAccount = ({navigation, dispatch, route}) => {
         <Text style={[styles.footerText,{textDecorationLine:'underline'}]}>Privacy&policy</Text>
         <TermsAndConditionsModal isVisible={isModalVisible} onClose={termsAndConditionsModal} />
       </TouchableOpacity>
-      
     </ScrollView>
   );
 };

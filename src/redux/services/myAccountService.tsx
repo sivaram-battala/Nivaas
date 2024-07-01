@@ -1,12 +1,12 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import { NIVAAS_URL} from '../../api/api';
+import { BASE_URL_USER,BASE_URL_CUSTOMER} from '../../api/api';
 import {RootState} from '../store';
 import { endpoints } from '../../api';
 
 export const myAccountService = createApi({
   reducerPath: 'myAccountService',
   baseQuery: fetchBaseQuery({
-    baseUrl: NIVAAS_URL,
+    baseUrl: BASE_URL_CUSTOMER,
     prepareHeaders: (headers, {getState, endpoint}) => {
       const token = (getState() as RootState).auth.token;
       if (token && endpoint !== 'refresh') {
@@ -17,9 +17,6 @@ export const myAccountService = createApi({
     },
   }), 
   endpoints: builder => ({
-    getCurrentCustomer : builder.query<any,{}>({
-      query: () => `${endpoints.NIVAAS_CURRENT_CUSTOMER}`
-    }),
     addCoadmin: builder.mutation<any, {}>({
       query: payload => ({
         url: endpoints.ADD_CO_ADMIN,
@@ -33,23 +30,13 @@ export const myAccountService = createApi({
     getFlatOwners : builder.query<any,{apartmentID:Number,pageNo:Number,pageSize:Number}>({
       query: ({apartmentID,pageNo,pageSize}) => `${endpoints.GET_FLAT_OWNERS}/${apartmentID}/flat-owners?pageNo=${pageNo}&pageSize=${pageSize}`
     }),
-    userDetails: builder.mutation<any, {}>({
-      query: payload => ({
-        url: endpoints.USER_DETAILS,
-        method: 'PUT',
-        body: payload,
-        header: {
-          'Content-Type': 'application/json',
-        },
-      }),
-    }),
   }),
 });
 
 export const profileService = createApi({
   reducerPath: 'profileService',
   baseQuery: fetchBaseQuery({
-    baseUrl: NIVAAS_URL,
+    baseUrl: BASE_URL_USER,
     prepareHeaders: (headers, {getState, endpoint}) => {
       const token = (getState() as RootState).auth.token;
       if (token && endpoint !== 'refresh') {
@@ -61,7 +48,7 @@ export const profileService = createApi({
   endpoints: builder => ({
     postProfilePic: builder.mutation<any, {}>({
       query: formdata => ({
-        url: endpoints.NIVAAS_PROFILE_PIC,
+        url: endpoints.PROFILE_PIC,
         method: 'POST',
         body: formdata,
       }),
@@ -73,10 +60,8 @@ export const profileService = createApi({
 
 
 export const {
-  useLazyGetCurrentCustomerQuery,
   useAddCoadminMutation,
   useLazyGetFlatOwnersQuery,
-  useUserDetailsMutation,
 } = myAccountService;
 
 export const {

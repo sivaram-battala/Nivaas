@@ -367,20 +367,19 @@ const getLoginDetails = () => {
   }, []);
 
   return (
-        // <ApplicationContext.Provider
-        //   value={{
-        //     loginDetails,
-        //     setLoginDetails,
-        //     userDetails,
-        //     setUserDetails,
-        //   }}>
-        //       {loginDetails === null || loginDetails === '' ? (
-        //         <AuthStack />
-        //       ) : (
-        //         <HomeStack />
-        //       )}
-        // </ApplicationContext.Provider>
-        <HomeStack />
+        <ApplicationContext.Provider
+          value={{
+            loginDetails,
+            setLoginDetails,
+            userDetails,
+            setUserDetails,
+          }}>
+              {loginDetails === null || loginDetails === '' ? (
+                <AuthStack />
+              ) : (
+                <HomeStack />
+              )}
+        </ApplicationContext.Provider>
   );
 };
 

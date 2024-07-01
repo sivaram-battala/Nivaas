@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import { NIVAAS_URL} from '../../api/api';
+import { BASE_URL_CUSTOMER} from '../../api/api';
 import {RootState} from '../store';
 import { endpoints } from '../../api';
 
@@ -9,7 +9,7 @@ import { endpoints } from '../../api';
 export const maintainenceService = createApi({
   reducerPath: 'maintainenceService',
   baseQuery: fetchBaseQuery({
-    baseUrl: NIVAAS_URL,
+    baseUrl: BASE_URL_CUSTOMER,
     prepareHeaders: (headers, {getState, endpoint}) => {
       const token = (getState() as RootState).auth.token;
       if (token && endpoint !== 'refresh') {

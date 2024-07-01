@@ -10,10 +10,12 @@ import { statusBarHeight } from '../../utils/config/config';
 
 const Apartments = ({navigation}) => {
   const customerDetails = useSelector(state => state.currentCustomer);
+  // customerDetails?.currentCustomerData?.roles?.some(
+    //   apartment => apartment.adminApproved,
+    // )
   const handleAdmin = () => {
-    customerDetails?.currentCustomerData?.apartmentDTOs?.some(
-      apartment => apartment.adminApproved,
-    )
+    customerDetails?.customerOnboardReqData?.roles?.some(
+      role => role === 'ROLE_APARTMENT_ADMIN')
       ? navigation.navigate(allTexts.screenNames.adminSociety)
       : Alert.alert('Alert', 'Accessed Only For Admins');
   };

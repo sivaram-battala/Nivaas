@@ -56,6 +56,11 @@ const Notification = ({ navigation }) => {
         keyExtractor={item => item.id}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.contentContainer}
+        ListEmptyComponent={() => (
+          <Text style={styles.noDataText}>
+            No items to display at this time
+          </Text>
+        )}
       />
     </View>
   );
@@ -99,5 +104,11 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     paddingBottom: 20,
+  },
+  noDataText: {
+    textAlign: 'center',
+    marginTop: 20,
+    fontSize: 16,
+    color: 'red',
   },
 });
