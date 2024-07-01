@@ -91,6 +91,7 @@ const Expences = ({navigation}) => {
       })
       .catch(error => {
         console.log('ERROR IN GETALLEXPANCES', error);
+        SnackbarComponent({text:error?.data?.error || 'failed To Load Expances',backgroundColor:colors.red1})
       });
   };
   const handlegetExpancePDF = async () => {
@@ -185,8 +186,8 @@ const Expences = ({navigation}) => {
   }, []);
 
   useEffect(() => {
-    ApprovedApartments({customerDetails:customerDetails,setApartmentData:setApartmentData,setSelectedApartment:setSelectedApartment})
-  }, [customerDetails]);
+    ApprovedApartments({customerDetails:customerDetails?.customerOnboardReqData,setApartmentData:setApartmentData,setSelectedApartment:setSelectedApartment})
+  }, [customerDetails?.customerOnboardReqData]);
 
   // useEffect(() => {
   //   if (selectedApartment?.id) {

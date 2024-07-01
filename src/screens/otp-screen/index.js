@@ -202,7 +202,7 @@ const OTPScreen = ({navigation, route}) => {
   return (
     <View style={styles.wrapper}>
       <StatusBar backgroundColor={'white'} />
-      <View style={{marginTop: statusBarHeight}}>
+      <View style={{height:70,marginTop: statusBarHeight}}>
         <TopBarCard2
           back={true}
           txt={'Confirm OTP'}

@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {PrimaryButton} from '../../components';
 import {colors} from '../../common';
-import {useUserDetailsMutation} from '../../redux/services/myAccountService';
+import { useUserDetailsMutation } from '../../redux/services/authService';
 
 const CompleteProfileModal = ({modalVisible, setModalVisible, onSave,id,fcmToken}) => {
   const [name, setName] = useState('');

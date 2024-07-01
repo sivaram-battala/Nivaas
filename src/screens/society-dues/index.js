@@ -8,6 +8,7 @@ import {useSelector} from 'react-redux';
 import {CheckBox} from 'react-native-elements';
 import { styles } from './style';
 import { useLazyGetAdminSocietyDuesQuery, useLazyGetUserSocietyDuesQuery } from '../../redux/services/maintainenceService';
+import { ApprovedApartments } from '../../common/customFunctions';
 
 const SocietyDues = ({navigation}) => {
   const customerDetails = useSelector(state => state.currentCustomer);
@@ -131,19 +132,9 @@ const SocietyDues = ({navigation}) => {
     const currentDate = new Date();
     setSelectedMonth(currentDate.getMonth() + 1);
     setSelectedYear(currentDate.getFullYear());
-    if (customerDetails?.currentCustomerData?.apartmentDTOs) {
-      const approvedApartments =
-        customerDetails.currentCustomerData.apartmentDTOs
-          .filter(apartment => apartment.adminApproved)
-          .map(apartment => ({
-            id: apartment.jtApartmentDTO.id,
-            name: apartment.jtApartmentDTO.name,
-          }));
-      setApartmentData(approvedApartments);
-      setSelectedApartment(approvedApartments[0]);
-    }
-    if (customerDetails?.currentCustomerData?.flatDTO) {
-      const approvedApartments = customerDetails.currentCustomerData.flatDTO
+    ApprovedApartments({customerDetails:customerDetails?.customerOnboardReqData,setApartmentData:setApartmentData,setSelectedApartment:setSelectedApartment})
+    if (customerDetails?.customerOnboardReqData?.flatDTO) {
+      const approvedApartments = customerDetails.customerOnboardReqData.flatDTO
         .map(flat => ({
           id: flat?.jtFlatDTO?.apartmentDTO?.id,
           flatNo: flat?.jtFlatDTO?.apartmentDTO?.name,
@@ -151,8 +142,8 @@ const SocietyDues = ({navigation}) => {
         setuserApartmentdata(approvedApartments);
         setselectedUserAparment(approvedApartments[0])
     }
-    if (customerDetails?.currentCustomerData?.flatDTO) {
-      const approvedFlats = customerDetails.currentCustomerData.flatDTO
+    if (customerDetails?.customerOnboardReqData?.flatDTO) {
+      const approvedFlats = customerDetails.customerOnboardReqData.flatDTO
         .filter(flat => flat.ownerApproved === false)
         .map(flat => ({
           id: flat?.jtFlatDTO?.id,

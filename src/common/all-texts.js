@@ -1,20 +1,12 @@
 export const allTexts = {
   appVersion: {
-    version: '1.0',
+    version: '0.0.1',
   },
   buttonTexts: {
     // place all your button texts here
     start: 'Start Now',
     sigup: ' Sign Up',
     login: 'Log In',
-    follow: 'Follow',
-    unFollow: 'Following',
-    contactUs: 'Contact Us',
-    next: 'Next',
-    updatePassword: 'Update Password',
-    updateProfile: 'Update Profile',
-    add: 'Add',
-    addevents: 'Add Event',
   },
 
   headings: {

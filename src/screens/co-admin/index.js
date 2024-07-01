@@ -66,11 +66,11 @@ const CoAdmin = ({navigation}) => {
   }
   useEffect(() => {
     ApprovedApartments({
-      customerDetails: customerDetails,
+      customerDetails: customerDetails?.customerOnboardReqData,
       setApartmentData: setApartmentData,
       setSelectedApartment:setSelectedApartment
     });
-  }, [customerDetails]);
+  }, [customerDetails?.customerOnboardReqData]);
   useEffect(() => {
    if (selectedApartment?.id) {
     handleflatowners(selectedApartment?.id)
@@ -79,7 +79,7 @@ const CoAdmin = ({navigation}) => {
   
   return (
     <View style={styles.mainCon}>
-      <View style={{height: 50, marginTop: statusBarHeight}}>
+      <View style={{height: 70, marginTop: statusBarHeight}}>
         <TopBarCard2 back={true} txt={'CO-ADMIN'} navigation={navigation} />
       </View>
       <View>

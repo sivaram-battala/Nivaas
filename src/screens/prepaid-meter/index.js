@@ -50,7 +50,6 @@ const PrepaidMeter = ({navigation}) => {
   const [unitsConsumed, setUnitsConsumed] = useState();
   const [textInputData, setTextInputData] = useState([]);
   // console.log(textInputData);
- 
   const [getApartmentPrepaidMetersList] = useLazyGetAparmentPrepaidMetersQuery();
   const [updatePrepaidMeterDetails] = useUpdatePrepaidMeterMutation();
   const [updateConsumtionUnits] = useUpdateConsumedUnitsMutation();
@@ -132,7 +131,7 @@ const PrepaidMeter = ({navigation}) => {
     getflatdata(flatPayload)
       .unwrap()
       .then(response => {
-        const processedFlatData = response?.data.map(item => ({
+        const processedFlatData = response?.data?.map(item => ({
           ...item,
           flatNo: String(item.flatNo),
         }));
@@ -171,8 +170,8 @@ const PrepaidMeter = ({navigation}) => {
   );
   
   useEffect(() => {
-    ApprovedApartments({customerDetails:customerDetails,setApartmentData:setApartmentData,setSelectedApartment:setSelectedApartment})
-  }, [customerDetails]);
+    ApprovedApartments({customerDetails:customerDetails?.customerOnboardReqData,setApartmentData:setApartmentData,setSelectedApartment:setSelectedApartment})
+  }, [customerDetails?.customerOnboardReqData]);
  
   useEffect(() => {
     if (selectedApartment.id) {

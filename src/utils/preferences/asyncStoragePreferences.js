@@ -8,14 +8,14 @@ export const storeValue = async (key, value) => {
     return false;
   }
 };
-export const storeleafValue = async (key, value) => {
-  try {
-    await AsyncStorage.setItem(key, value.toString());
-    return true;
-  } catch (e) {
-    return false;
-  }
-};
+// export const storeleafValue = async (key, value) => {
+//   try {
+//     await AsyncStorage.setItem(key, value.toString());
+//     return true;
+//   } catch (e) {
+//     return false;
+//   }
+// };
 export const getValue = async key => {
   try {
     const value = await AsyncStorage.getItem(key);

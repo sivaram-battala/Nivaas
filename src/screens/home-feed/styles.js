@@ -3,7 +3,7 @@ import { colors, window } from "../../common";
 
 export const styles = StyleSheet.create({
   mainCon:{
-    paddingTop:window.height*0.02,
+    // paddingTop:window.height*0.02,
     backgroundColor:colors.white,
     height:'100%'
   },
@@ -49,7 +49,7 @@ icons:{
 notificationsCount: {
   borderWidth: 1,
   borderColor: colors.primaryColor,
-  backgroundColor: colors.white,
+  backgroundColor: colors.red6,
   borderRadius: 10,
   height: 18,
   width: 18,
@@ -57,14 +57,15 @@ notificationsCount: {
   justifyContent: 'center',
   position: 'absolute',
   top: -5,
-  left: 20,
+  left: 22,
 },
 notificationCountNumber: {
-  color: colors.primaryColor,
+  color: colors.white,
   fontSize: 10,
+  fontWeight:'500'
 },
   subConOne:{
-    marginTop:'15%',
+    marginTop:'13%',
     height:'auto',
     alignItems:'center',
     backgroundColor:colors.yellowOne,

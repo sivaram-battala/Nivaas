@@ -13,8 +13,8 @@ export const SnackbarComponent = ({text, backgroundColor, height}) => {
 };
 
 export const ApprovedApartments = ({customerDetails,setApartmentData,setSelectedApartment}) => {
-  if (customerDetails?.currentCustomerData?.apartmentDTOs) {
-    const approvedApartments = customerDetails.currentCustomerData.apartmentDTOs
+  if (customerDetails?.apartmentDTOs) {
+    const approvedApartments = customerDetails?.apartmentDTOs
       .filter(apartment => apartment?.adminApproved)
       .map(apartment => ({
         id: apartment?.jtApartmentDTO?.id,
@@ -73,5 +73,19 @@ export const sendSupportEmail = () => {
     Linking.openURL(mailtoUrl);
   } catch (error) {
     console.log(error);
+  }
+}
+
+export const NotificationCount = ({FilteredData,setNotificationsCount}) =>{
+  if (FilteredData?.length > 1000) {
+    setNotificationsCount('999+');
+  }
+  else if (FilteredData?.length > 100) {
+    setNotificationsCount('99+')
+  }
+   else if (FilteredData?.length > 10) {
+    setNotificationsCount('9+')
+  }else {
+    setNotificationsCount(FilteredData?.length);
   }
 }

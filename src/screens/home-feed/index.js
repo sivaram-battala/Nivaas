@@ -1,31 +1,58 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
-import {Image, StyleSheet, Text, View,TouchableOpacity, Alert,ScrollView,RefreshControl,SafeAreaView} from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Alert,
+  ScrollView,
+  RefreshControl,
+  SafeAreaView,
+} from 'react-native';
 import {useDispatch} from 'react-redux';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {allTexts, colors} from '../../common';
-import {CompleteProfileModal, CustomSneakBar, HomeComponent, Loader, PrimaryButton} from '../../components';
-import {useLazyGetCurrentCustomerQuery, useUserDetailsMutation} from '../../redux/services/myAccountService';
-import {setcurrentCustomerData, setprofilePic} from '../../redux/slices/currentCustomerSlice';
+import {
+  CompleteProfileModal,
+  CustomSneakBar,
+  HomeComponent,
+  Loader,
+  PrimaryButton,
+} from '../../components';
+import {
+  setCustomerOnboardRequestsData,
+  setcurrentCustomerData,
+  setprofilePic,
+} from '../../redux/slices/currentCustomerSlice';
 import {styles} from './styles';
-import { setcitiesData } from '../../redux/slices/citiesdataSlice';
-import { useLazyGetCityListQuery } from '../../redux/services/cityServices';
-import { NetworkInfo, SnackbarComponent } from '../../common/customFunctions';
+import {setcitiesData} from '../../redux/slices/citiesdataSlice';
+import {
+  useLazyGetCityListQuery,
+  useLazyGetCustomerOnboardRequestsQuery,
+} from '../../redux/services/cityServices';
+import {NetworkInfo, SnackbarComponent} from '../../common/customFunctions';
 import messaging from '@react-native-firebase/messaging';
 import RNRestart from 'react-native-restart';
+import {
+  useLazyGetCurrentCustomerQuery,
+  useUserDetailsMutation,
+} from '../../redux/services/authService';
 
 const Home = ({navigation}) => {
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch();
   const [loder, setLoder] = useState(false);
   const [refresh, setRefresh] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [currentCustomerData, setCurrentCustomerData] = useState(null);
   const [isOneFlatOnboarded, SetIsOneFlatOnboarded] = useState(false);
   const [cityData, setCityData] = useState();
-  const [isNewUser, setIsNewUser] = useState(false);
+  // const [isNewUser, setIsNewUser] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [fcmToken, setFcmToken] = useState(null);
   const [isInitialRender, setIsInitialRender] = useState();
   const [currentCustomer] = useLazyGetCurrentCustomerQuery();
+  const [customeronboardReq] = useLazyGetCustomerOnboardRequestsQuery();
   const [getCityList] = useLazyGetCityListQuery();
   const [postUserDetails] = useUserDetailsMutation();
 
@@ -38,7 +65,28 @@ const Home = ({navigation}) => {
         setLoder(false);
         setCurrentCustomerData(response);
         dispatch(setcurrentCustomerData(response));
-        dispatch(setprofilePic(response?.profilePicture))
+        dispatch(setprofilePic(response?.profilePicture));
+        if (response?.newUser === true) {
+          // setIsNewUser(true);
+          setModalVisible(true);
+        } else {
+          setModalVisible(false);
+        }
+      })
+      .catch(error => {
+        console.log('error in currentCustomer===>', error);
+        SnackbarComponent({
+          text: 'Cheak Your Internet',
+          backgroundColor: colors.red1,
+        });
+      });
+
+    customeronboardReq()
+      .unwrap()
+      .then(response => {
+        // setLoder(false);
+        console.log('RESPONCE OF CUSTOMER ONBOARD REQ',response);
+        dispatch(setCustomerOnboardRequestsData(response));
         const hasFlat = response?.flatDTO && response?.flatDTO?.length > 0;
         const hasApartment =
           response?.apartmentDTOs && response?.apartmentDTOs?.length > 0;
@@ -47,37 +95,34 @@ const Home = ({navigation}) => {
         } else {
           SetIsOneFlatOnboarded(false);
         }
-        if (response?.newUser) {
-          setIsNewUser(true);
-          setModalVisible(true);
-        }else{
-          setModalVisible(false);
-        }
       })
       .catch(error => {
-        console.log('error in currentCustomer===>', error);
-        SnackbarComponent({text:'Cheak Your Internet',backgroundColor:colors.red1})
+        console.log('error in Customer Onboard Req Data===>', error);
+        // SnackbarComponent({
+        //   text: 'Cheak Your Internet',
+        //   backgroundColor: colors.red1,
+        // });
       });
   };
 
   const handlefcmCall = () => {
-      if (currentCustomerData?.newUser === true) {
-        console.log('function called');
-        const payload = {
+    if (currentCustomerData?.newUser === true) {
+      console.log('function called');
+      const payload = {
         id: currentCustomerData?.id,
         fullName: currentCustomerData?.fullName || null,
-        email:currentCustomerData?.email || null,
-        token:fcmToken
+        email: currentCustomerData?.email || null,
+        token: fcmToken,
       };
       postUserDetails(payload)
         .unwrap()
-        .then((responce) => {
-          console.log("postUserDetails RESPONCE ======>",responce);
+        .then(responce => {
+          console.log('postUserDetails RESPONCE ======>', responce);
         })
         .catch(error => {
           console.log('ERROR In POSTING USERDETAILS===>', error);
         });
-      }
+    }
   };
 
   const handleCityData = () => {
@@ -101,7 +146,7 @@ const Home = ({navigation}) => {
     const token = await messaging().getToken();
     setFcmToken(token);
     // console.log('Device Token:', token);
-  }
+  };
   checkToken();
 
   const handleRefresh = () => {
@@ -127,24 +172,27 @@ const Home = ({navigation}) => {
     handleCurrentCustomerData();
     handleCityData();
     NetworkInfo();
-    SnackbarComponent({text:'Refresh the page to get the latest updates',backgroundColor:colors.primaryColor})
-  }, [])
-  
+    SnackbarComponent({
+      text: 'Refresh the page to get the latest updates',
+      backgroundColor: colors.primaryColor,
+    });
+  }, []);
+
   useEffect(() => {
     if (isInitialRender) {
       handlefcmCall();
     } else {
       setIsInitialRender(false);
     }
-  }, [fcmToken])
-  
+  }, [fcmToken]);
+
   useEffect(() => {
-    let timer=null;
+    let timer = null;
     if (loder) {
       timer = setTimeout(() => {
         setRefresh(true);
         setLoder(false);
-      }, 10000);
+      }, 7000);
     }
     return () => clearTimeout(timer);
   }, [loder]);
@@ -152,37 +200,45 @@ const Home = ({navigation}) => {
   return (
     <SafeAreaView style={styles.mainCon}>
       <ScrollView
-      showsVerticalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.scrollView}
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={[colors.primaryColor]}/>
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            colors={[colors.primaryColor]}
+          />
         }>
-      <CompleteProfileModal
-        modalVisible={modalVisible}
-        setModalVisible={setModalVisible}
-        onSave={handleSave}
-        id={currentCustomerData?.id}
-        fcmToken={fcmToken}
-      />
-      {/* {loder || refresh ? ( */}
-        <View>
-          {/* {loder && <Loader color={colors.primaryColor} size={'large'} />} */}
-          {/* {refresh && ( */}
-            <TouchableOpacity
-              style={styles.refreshButton}
-              onPress={handleRefresh}>
-              <FontAwesome
-                name="refresh"
-                size={20}
-                color={colors.primaryColor}
-              />
-              <Text style={styles.refreshText}>Refresh</Text>
-            </TouchableOpacity>
-          {/* )} */}
-        </View>
-       {/* ) : ( */}
-        <HomeComponent currentCustomerData={currentCustomerData} navigation={navigation} isOneFlatOnboarded={isOneFlatOnboarded}/>
-       {/* )} */}
+        <CompleteProfileModal
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+          onSave={handleSave}
+          id={currentCustomerData?.id}
+          fcmToken={fcmToken}
+        />
+        {loder || refresh ? (
+          <View>
+            {loder && <Loader color={colors.primaryColor} size={'large'} />}
+            {refresh && (
+              <TouchableOpacity
+                style={styles.refreshButton}
+                onPress={handleRefresh}>
+                <FontAwesome
+                  name="refresh"
+                  size={20}
+                  color={colors.primaryColor}
+                />
+                <Text style={styles.refreshText}>Refresh</Text>
+              </TouchableOpacity>
+            )}
+          </View>
+        ) : (
+          <HomeComponent
+            currentCustomerData={currentCustomerData}
+            navigation={navigation}
+            isOneFlatOnboarded={isOneFlatOnboarded}
+          />
+        )}
       </ScrollView>
     </SafeAreaView>
   );

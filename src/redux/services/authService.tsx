@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-import { NIVAAS_URL} from '../../api/api';
+import { BASE_URL_USER} from '../../api/api';
 import {RootState} from '../store';
 import { endpoints } from '../../api';
 
@@ -9,7 +9,7 @@ import { endpoints } from '../../api';
 export const authService = createApi({
   reducerPath: 'authService',
   baseQuery: fetchBaseQuery({
-    baseUrl: NIVAAS_URL,
+    baseUrl: BASE_URL_USER,
     prepareHeaders: (headers, {getState, endpoint}) => {
       const token = (getState() as RootState).auth.token;
       if (token && endpoint !== 'refresh') {
@@ -22,7 +22,7 @@ export const authService = createApi({
   endpoints: builder => ({
     nivaastriggerotp: builder.mutation<any, {}>({
       query: payload => ({
-        url: endpoints.NIVAAS_OTP_TRIGGER,
+        url: endpoints.OTP_TRIGGER,
         method: 'POST',
         body: payload,
         header: {
@@ -32,8 +32,21 @@ export const authService = createApi({
     }),
     nivaasSignin: builder.mutation<any, {}>({
       query: payload => ({
-        url: endpoints.NIVAAS_SIGN_IN,
+        url: endpoints.SIGN_IN,
         method: 'POST',
+        body: payload,
+        header: {
+          'Content-Type': 'application/json',
+        },
+      }),
+    }),
+    getCurrentCustomer : builder.query<any,{}>({
+      query: () => `${endpoints.CURRENT_CUSTOMER}`
+    }),
+    userDetails: builder.mutation<any, {}>({
+      query: payload => ({
+        url: endpoints.USER_DETAILS,
+        method: 'PUT',
         body: payload,
         header: {
           'Content-Type': 'application/json',
@@ -115,4 +128,6 @@ export const authService = createApi({
 export const {
   useNivaastriggerotpMutation,
   useNivaasSigninMutation,
+  useLazyGetCurrentCustomerQuery,
+  useUserDetailsMutation,
 } = authService;

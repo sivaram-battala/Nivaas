@@ -37,7 +37,7 @@ const ManageflatsModal = ({
   return (
     <View style={styles.manageFlatsSubCon}>
       <View>
-        {(custDetails?.currentCustomerData?.flatDTO?.length > 0) && (
+        {(custDetails?.flatDTO?.length > 0) && (
           <View style={styles.manageFlatsConHome}>
             <Foundation
               name="home"
@@ -46,18 +46,18 @@ const ManageflatsModal = ({
               style={{marginLeft: 3}}
             />
             <View>
-              {custDetails?.currentCustomerData?.flatDTO?.length > 1 ? (
+              {custDetails?.flatDTO?.length > 1 ? (
                 <TouchableOpacity
                   onPress={() => setFlatModalVisible(true)}
                   style={styles.flatItemCon}>
                   <Text style={styles.flatText}>
                     {
-                      custDetails?.currentCustomerData?.flatDTO[0]?.jtFlatDTO
+                      custDetails?.flatDTO[0]?.jtFlatDTO
                         ?.flatNo
                     }
                     ,
                     {
-                      custDetails?.currentCustomerData?.flatDTO[0]?.jtFlatDTO
+                      custDetails?.flatDTO[0]?.jtFlatDTO
                         ?.apartmentDTO?.name
                     }
                   </Text>
@@ -65,7 +65,7 @@ const ManageflatsModal = ({
                 </TouchableOpacity>
               ) : (
                 <FlatList
-                  data={custDetails?.currentCustomerData?.flatDTO}
+                  data={custDetails?.flatDTO}
                   renderItem={renderFlatItem}
                   keyExtractor={item => item.id.toString()}
                 />
@@ -105,7 +105,7 @@ const ManageflatsModal = ({
               <AntDesign name="close" size={25} color={colors.black} />
             </TouchableOpacity>
             <FlatList
-              data={custDetails?.currentCustomerData?.flatDTO}
+              data={custDetails?.flatDTO}
               renderItem={renderFlatItem}
               keyExtractor={item => item.id.toString()}
             />
